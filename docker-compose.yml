@@ -1,15 +1,31 @@
 version: "3.8"
 
 services:
-  myaichat: # Ajout du service pour le site web statique
-    image: nginx:alpine
-    container_name: myaichat
+  chatbot:
+    build:
+      context: ./chatbot
+      dockerfile: Dockerfile
+    container_name: chatbot
     restart: unless-stopped
     tty: true
     ports:
       - '8080:80'
     volumes:
-      - ./chatbot:/usr/share/nginx/myaichat
+      - ./chatbot:/usr/share/nginx/chatbot
+    networks:
+      - app-network
+
+  myaichat:
+    build:
+      context: ./myaichat
+      dockerfile: Dockerfile
+    container_name: myaichat
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '8081:80'
+    volumes:
+      - ./myaichat:/usr/share/nginx/myaichat
     networks:
       - app-network
 
@@ -63,18 +79,6 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: kouahofrancis@gmail.com
       PGADMIN_DEFAULT_PASSWORD: kouahofrancis
-    networks:
-      - app-network
-
-  chatbot: # Ajout du service pour le site web statique
-    image: nginx:alpine
-    container_name: chatbot
-    restart: unless-stopped
-    tty: true
-    ports:
-      - '8080:80'
-    volumes:
-      - ./chatbot:/usr/share/nginx/chatbot
     networks:
       - app-network
 
