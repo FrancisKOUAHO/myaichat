@@ -2,7 +2,7 @@
 FROM nginx:latest
 
 # Copiez les fichiers HTML statiques dans le répertoire du serveur web
-COPY . /usr/share/nginx/myaichat
+COPY . /var/www
 
 # Exposez le port 80 pour les requêtes HTTP
 EXPOSE 80
