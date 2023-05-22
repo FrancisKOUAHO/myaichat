@@ -50,6 +50,7 @@ services:
       - ./backend:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
+      - /etc/letsencrypt:/etc/letsencrypt
     networks:
       - app-network
 
