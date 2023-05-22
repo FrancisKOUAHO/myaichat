@@ -1,16 +1,15 @@
 version: "3.8"
 
 services:
-  aichat:
+  myaichat: # Ajout du service pour le site web statique
+    image: nginx:alpine
+    container_name: myaichat
+    restart: unless-stopped
+    tty: true
     ports:
-      - 3000:3000
-    build:
-      context: ./aichat
-      dockerfile: Dockerfile
-    restart: always
+      - '8080:80'
     volumes:
-      - ./aichat:/usr/src/app/aichat
-      - /usr/src/app/aichat/.next
+      - ./chatbot:/usr/share/nginx/myaichat
     networks:
       - app-network
 
@@ -75,7 +74,7 @@ services:
     ports:
       - '8080:80'
     volumes:
-      - ./chatbot:/usr/share/nginx/html
+      - ./chatbot:/usr/share/nginx/chatbot
     networks:
       - app-network
 
