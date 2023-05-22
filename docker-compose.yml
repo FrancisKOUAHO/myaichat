@@ -11,7 +11,7 @@ services:
     ports:
       - '8080:80'
     volumes:
-      - ./chatbot:/usr/share/nginx/html
+      - ./chatbot:/var/www
     networks:
       - app-network
 
@@ -25,7 +25,7 @@ services:
     ports:
       - '8081:80'
     volumes:
-      - ./myaichat:/usr/share/nginx/html
+      - ./myaichat:/var/www
     networks:
       - app-network
 
