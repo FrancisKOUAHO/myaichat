@@ -74,3 +74,4 @@
 172.18.0.1 - - [22/May/2023:16:07:52 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" "-"
 172.18.0.1 - - [22/May/2023:16:07:53 +0000] "GET / HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" "-"
 172.18.0.1 - - [22/May/2023:16:07:53 +0000] "GET / HTTP/1.1" 502 559 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" "-"
+172.18.0.1 - - [22/May/2023:16:15:21 +0000] "POST /api/auth/login HTTP/1.1" 502 157 "-" "insomnia/2023.2.2" "-"

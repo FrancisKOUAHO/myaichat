@@ -1295,3 +1295,4 @@
 2023/05/22 16:07:52 [error] 19#19: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: _, request: "GET / HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "localhost"
 2023/05/22 16:07:53 [error] 19#19: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: _, request: "GET / HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "localhost"
 2023/05/22 16:07:53 [error] 19#19: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: _, request: "GET / HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "localhost"
+2023/05/22 16:15:21 [error] 20#20: *5 connect() failed (111: Connection refused) while connecting to upstream, client: 172.18.0.1, server: _, request: "POST /api/auth/login HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "localhost"
