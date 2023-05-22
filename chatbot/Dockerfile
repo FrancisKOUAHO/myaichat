@@ -2,7 +2,7 @@
 FROM nginx:latest
 
 # Copiez les fichiers HTML statiques dans le répertoire du serveur web
-COPY ./path/vers/votre/site /usr/share/nginx/html
+COPY ./chatbot /usr/share/nginx/html
 
 # Exposez le port 80 pour les requêtes HTTP
 EXPOSE 80
