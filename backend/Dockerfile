@@ -1,25 +1,23 @@
+# Utilisez une image de base contenant PHP-FPM
 FROM php:8.1-fpm
 
-# Installe les dépendances nécessaires
+# Installez les dépendances nécessaires
 RUN apt-get update \
-    && apt-get install -y libpq-dev \
+    && apt-get install -y libpq-dev zip unzip \
     && docker-php-ext-install pdo pdo_pgsql
 
-# Copie le code source de votre application Laravel
+# Copiez le code source de votre application Laravel
 COPY . /var/www
 
-# Définit le répertoire de travail
+# Définissez le répertoire de travail
 WORKDIR /var/www
 
-# Installe les dépendances zip et unzip
-RUN apt-get update && apt-get install -y zip unzip
-
-# Installe les dépendances de Composer
+# Installez les dépendances de Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer install --no-interaction --no-scripts
+    && composer install --no-interaction --no-scripts --optimize-autoloader
 
-# Expose le port 9000 pour PHP-FPM
+# Exposez le port 9000 pour PHP-FPM
 EXPOSE 9000
 
-# Démarre PHP-FPM
+# Démarrez PHP-FPM
 CMD ["php-fpm"]
