@@ -1,0 +1,84 @@
+version: "3.8"
+
+services:
+  aichat:
+    ports:
+      - 3000:3000
+    build:
+      context: ./aichat
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./aichat:/usr/src/app/aichat
+      - /usr/src/app/aichat/.next
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: laravel_app_container
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./backend:/var/www
+    networks:
+      - app-network
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=aichat
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  webserver:
+    image: nginx:alpine
+    container_name: webserver_container
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./backend:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
+    networks:
+      - app-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgAdmin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: kouahofrancis@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: kouahofrancis
+    networks:
+      - app-network
+
+  chatbot: # Ajout du service pour le site web statique
+    image: nginx:alpine
+    container_name: chatbot
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '8080:80'
+    volumes:
+      - ./chatbot:/usr/share/nginx/html
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    external: true

@@ -1,0 +1,23 @@
+# Ignore Node.js related files and folders
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Ignore development/build-related files and folders
+/.next
+/out
+/.vercel
+/.now
+/.vercelignore
+/vercel.json
+
+# Ignore editor-specific files and folders
+.vscode
+.idea
+*.sublime-*
+
+# Ignore other common files
+.DS_Store
+.env
+.env.local
+.env.*.local
