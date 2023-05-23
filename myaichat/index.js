@@ -3788,7 +3788,7 @@
             exports.W_MOD_JS = exports.W_MOD_IX = exports.WILL_CHANGE = exports.WIDTH = exports.WF_PAGE = exports.TRANSLATE_Z = exports.TRANSLATE_Y = exports.TRANSLATE_X = exports.TRANSLATE_3D = exports.TRANSFORM = exports.SKEW_Y = exports.SKEW_X = exports.SKEW = exports.SIBLINGS = exports.SCALE_Z = exports.SCALE_Y = exports.SCALE_X = exports.SCALE_3D = exports.ROTATE_Z = exports.ROTATE_Y = exports.ROTATE_X = exports.RENDER_TRANSFORM = exports.RENDER_STYLE = exports.RENDER_PLUGIN = exports.RENDER_GENERAL = exports.PRESERVE_3D = exports.PLAIN_OBJECT = exports.PARENT = exports.OPACITY = exports.IX2_ID_DELIMITER = exports.IMMEDIATE_CHILDREN = exports.HTML_ELEMENT = exports.HEIGHT = exports.FONT_VARIATION_SETTINGS = exports.FLEX = exports.FILTER = exports.DISPLAY = exports.CONFIG_Z_VALUE = exports.CONFIG_Z_UNIT = exports.CONFIG_Y_VALUE = exports.CONFIG_Y_UNIT = exports.CONFIG_X_VALUE = exports.CONFIG_X_UNIT = exports.CONFIG_VALUE = exports.CONFIG_UNIT = exports.COMMA_DELIMITER = exports.COLOR = exports.COLON_DELIMITER = exports.CHILDREN = exports.BOUNDARY_SELECTOR = exports.BORDER_COLOR = exports.BAR_DELIMITER = exports.BACKGROUND_COLOR = exports.BACKGROUND = exports.AUTO = exports.ABSTRACT_NODE = void 0;
             var IX2_ID_DELIMITER = "|";
             exports.IX2_ID_DELIMITER = IX2_ID_DELIMITER;
-            var WF_PAGE = "data-wf-page";
+            var WF_PAGE = "data-wf-page.tsx";
             exports.WF_PAGE = WF_PAGE;
             var W_MOD_JS = "w-mod-js";
             exports.W_MOD_JS = W_MOD_JS;
@@ -12615,7 +12615,7 @@
                 var signFileUrl;
                 var chimpRegex = /list-manage[1-9]?.com/i;
                 var disconnected = _.debounce(function() {
-                    alert("Oops! This page has improperly configured forms. Please contact your website administrator to fix this issue.");
+                    alert("Oops! This page.tsx has improperly configured forms. Please contact your website administrator to fix this issue.");
                 }, 100);
                 api.ready = api.design = api.preview = function() {
                     init();

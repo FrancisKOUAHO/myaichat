@@ -1,9 +1,11 @@
 import { useState, FormEvent } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import showErrorAlert from "./components/utility/showErrorAlert";
 
-export default function Home() {
+const Home = () => {
+
   const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
@@ -14,7 +16,7 @@ export default function Home() {
   };
 
   const handleLoginClick = async () => {
-    await router.push("/dashboard");
+    await router.push("/dashboards");
     window.location.reload();
   };
 
@@ -111,3 +113,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

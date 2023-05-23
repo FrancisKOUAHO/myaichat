@@ -1,5 +1,4 @@
 import { useState, useEffect, createContext } from "react";
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/router";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";

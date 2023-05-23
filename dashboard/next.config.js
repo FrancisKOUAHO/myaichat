@@ -1,18 +1,4 @@
 /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   reactStrictMode: true,
-//   images: {
-//     domains: ['*'],
-//   },
-// }
+const nextConfig = {}
 
-// module.exports = nextConfig
-module.exports = {
-  images: {
-    domains: [
-      "localhost",
-      "crypto-experts-backend.herokuapp.com",
-      "www.gravatar.com",
-    ],
-  },
-};
+module.exports = nextConfig

@@ -13,7 +13,7 @@ interface SidebarProps {}
 
 const Sidebar: React.FC<SidebarProps> = () => {
   const router = useRouter();
-  const [selectedItem, setSelectedItem] = useState<string>("dashboard");
+  const [selectedItem, setSelectedItem] = useState<string>("dashboards");
 
   const handleLogout = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -45,16 +45,16 @@ const Sidebar: React.FC<SidebarProps> = () => {
         <div className="flex flex-col items-center items-center p-[20px]">
           <div
             className={`flex items-center w-full h-[45px] p-[10px] mb-[5px] ${isItemSelected(
-              "dashboard"
+              "dashboards"
             )}`}
-            onClick={() => handleItemClick("dashboard")}
+            onClick={() => handleItemClick("dashboards")}
           >
             <div>
               <DashboardIcon className="text-[22px] mr-[10px]" />
             </div>
             <div
               className={`text-[14px]  flex-1 cursor-pointer ${isItemSelected(
-                "dashboard"
+                "dashboards"
               )}`}
             >
               <span>Dashboard</span>
