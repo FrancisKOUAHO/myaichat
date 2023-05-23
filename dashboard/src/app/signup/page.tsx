@@ -23,19 +23,6 @@ const Page = () => {
 							</button>
 						</div>
 						<form className="mb-5">
-							{/*<div className="pb-5">
-              <label className="pb-[6px] text-black" htmlFor="name">
-                Name*
-              </label>
-              <input
-                type="name"
-                className="bg-white text-black text-xl border border-slate-300 rounded-md bg-black p-2 pl-5 w-full"
-                id="name"
-                placeholder="Enter your name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-              />
-            </div>*/}
 							<div className="pb-5">
 								<label className="block text-sm font-medium text-gray-700 text-gray-400 mb-1" htmlFor="email">
 									Email*
