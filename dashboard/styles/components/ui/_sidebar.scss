@@ -1,0 +1,61 @@
+@use '../../settings/index' as *;
+
+.c-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 230px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: $secondary-background-color; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding: 120px 20px;
+
+  a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    border-radius: 0.75rem;
+    padding-left: 1rem;
+    margin-bottom: 8px;
+    font-size: $x3-small;
+    color: $secondary-text-color;
+
+    &:hover {
+      background-color: $main-color;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.043);
+      transition: .2s all ease-in-out;
+    }
+
+    /* For testing */
+    &:focus {
+      background-color: $main-color;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.043);
+      color: $primary-color;
+      font-weight: $xw-400;
+    }
+
+    svg {
+      margin-right: 10px;
+      width: 25px;
+      height: 25px;
+      color: inherit;
+    }
+
+  }
+
+  /* To implement */
+  a.active {
+    background-color: $main-color;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.043);
+    color: $primary-color;
+    font-weight: $xw-500;
+  }
+
+}

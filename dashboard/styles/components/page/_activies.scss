@@ -1,0 +1,62 @@
+@use '../../settings/index' as *;
+
+.c-activities {
+  
+  &__title {
+    div:nth-child(1) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+
+      button {
+        width: 120px;
+        height: 30px;
+        font-size: 13px;
+      }
+
+      div:nth-child(1) {
+        position: relative;
+        width: 224px;
+        color: rgb(100 116 139);
+      }
+    }
+  }
+
+  &__container {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  &__navigation {
+    text-align: center;
+    margin: 30px 0;
+
+    ul {
+      display: inline-flex;
+
+      li{
+         button {
+           height: 40px;
+           padding-left: 20px;
+           padding-right: 20px;
+           background-color: white;
+           color: $primary-color;
+
+           :hover {
+             color: $primary-color;
+           }
+
+           &.active {
+             background-color:$primary-color;
+             color: white;
+           }
+         }
+      }
+    }
+  }
+
+}

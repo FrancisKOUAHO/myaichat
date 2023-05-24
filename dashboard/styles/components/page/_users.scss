@@ -1,0 +1,17 @@
+.c-users {
+
+  &__users {
+    div:nth-child(1) {
+      button {
+        font-size: 13px;
+        margin-bottom: 50px;
+      }
+    }
+
+    .container-card {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+  }
+}
