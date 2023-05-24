@@ -236,3 +236,4 @@
 172.19.0.1 - - [24/May/2023:22:03:38 +0000] "GET /api/auth/login/grHa0VsZhW98w2aBiY1V9jr0Q0XAJxYZpGAStHnjnEFFHkw8J24KTI6TgMJ0 HTTP/1.1" 200 343 "-" "insomnia/2023.2.2"
 172.19.0.1 - - [24/May/2023:22:10:57 +0000] "POST /api/auth/register HTTP/1.1" 201 125 "-" "insomnia/2023.2.2"
 172.19.0.1 - - [24/May/2023:22:11:15 +0000] "GET /api/auth/login/QkQ8vX0JN3oGEBkuP45pJ6vteLqFXVBrxkSax3402zo2P2HSxbeJrHP6CBhW HTTP/1.1" 200 426 "-" "insomnia/2023.2.2"
+172.19.0.1 - - [24/May/2023:22:22:50 +0000] "GET / HTTP/1.1" 500 1121914 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36"
