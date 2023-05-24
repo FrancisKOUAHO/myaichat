@@ -5,12 +5,13 @@ FROM php:8.1-fpm
 RUN apt-get update && apt-get install -y \
     libonig-dev \
     libzip-dev \
+    libpq-dev \
     zip \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Activer les extensions PHP requises
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
+RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl pdo_pgsql
 
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -23,6 +24,15 @@ COPY . /var/www
 
 # Installer les dépendances PHP avec Composer
 RUN composer install --optimize-autoloader --no-dev
+
+# Installer Laravel Sanctum
+RUN composer require laravel/sanctum
+
+# Publier les fichiers de configuration de Sanctum
+RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
+# Exécuter les migrations de Sanctum
+#RUN php artisan migrate
 
 # Définir les permissions des fichiers et dossiers de l'application
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache

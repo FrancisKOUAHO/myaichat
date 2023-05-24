@@ -3,64 +3,61 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
-    public function index(): JsonResponse
-    {
-        return response()->json(User::all());
-    }
-
     public function register(Request $request): JsonResponse
     {
         $fields = $request->validate([
-            'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
-            'password' => 'required|string'
         ]);
+
+        $verificationToken = Str::random(60);
 
         $user = User::create([
-            'name' => $fields['name'],
             'email' => $fields['email'],
-            'password' => bcrypt($fields['password']),
+            'verification_token' => $verificationToken,
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $this->sendLoginEmail($user);
 
-        $response = [
-            'user' => $user,
-            'token' => $token,
-        ];
-
-        return response()->json($response, 201);
+        return response()->json(['message' => 'Inscription réussie. Veuillez consulter votre boîte de réception pour vous connecter.'], 201);
     }
 
-    public function login(Request $request)
+    protected function sendLoginEmail(User $user): void
     {
-        $fields = $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string'
-        ]);
+        $loginUrl = route('login', ['token' => $user->verification_token]);
 
-        $user = User::where('email', $fields['email'])->first();
+        $emailContent = "Veuillez cliquer sur le lien suivant pour vous connecter à votre compte : $loginUrl";
 
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
+        Mail::raw($emailContent, function ($message) use ($user) {
+            $message->to($user->email)->subject('Lien de connexion');
+        });
+    }
+
+    public function login(Request $request, $token)
+    {
+        $user = User::where('verification_token', $token)->first();
+
+        if (!$user) {
             return response()->json([
-                'message' => 'Bad creds'
+                'message' => 'Jeton de connexion invalide'
             ], 401);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $user->email_verified_at = now();
+        $user->login_token = Str::random(60);
+        $user->save();
 
         $response = [
-            'user' => $user,
-            'token' => $token
+            'message' => 'Connecté avec succès.',
+            'user' => $user
         ];
 
-        return response()->json($response, 201);
-
+        return response()->json($response, 200);
     }
 }
