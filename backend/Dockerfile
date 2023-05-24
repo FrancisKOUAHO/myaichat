@@ -23,7 +23,7 @@ WORKDIR /var/www
 COPY . /var/www
 
 # Installer les dépendances PHP avec Composer
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install
 
 # Installer Laravel Sanctum
 RUN composer require laravel/sanctum
