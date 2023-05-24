@@ -1,0 +1,65 @@
+@use '../../settings/index' as *;
+
+.c-login {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+
+  .c-login-navbar {
+    position: absolute;
+  }
+
+  .c-login-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+    padding: $px-large;
+    background-color: $primary-color;
+
+    h2 {
+      color: $main-color;
+      font-size: $x3-large;
+      font-weight: $xw-400;
+      margin-top: $mt-30;
+      text-align: center;
+    }
+
+  }
+
+  .c-login-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    padding: 0 250px;
+
+    h1 {
+      color: $tertiary-text-color;
+      font-weight: $xw-500;
+      margin-bottom: $mb-30;
+    }
+
+    input[type=text] {
+      margin-bottom: $mb-15;
+    }
+
+    input[type=password] {
+      margin-bottom: $mb-15;
+    }
+
+    a {
+      align-self: flex-end;
+      margin-bottom: $mb-30;
+    }
+
+    button {
+      margin-bottom: $mb-60;
+    }
+
+  }
+}
