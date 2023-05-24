@@ -2,7 +2,6 @@
 
 import { FunctionComponent, useState } from "react";
 import LayoutCustomProps from "@/types/LayoutCustomProps";
-import '../styles/globals.css'
 import Sidebar from "@/components/sidebar";
 import PersonCircleIcon from "@/components/svg-icons/person-icon";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -18,7 +17,9 @@ const LayoutCustom : FunctionComponent<LayoutCustomProps> = ({children}) => {
 
 
 	return (
-		<div className="flex min-h-screen flex-row bg-[#e9f5f9]">
+		<div className="min-h-screen flex" style={{
+			backgroundColor: "#e9f5f9",
+		}}>
 			<Sidebar/>
 			<div className="w-full">
 				<header className="flex items-center justify-between p-4">
