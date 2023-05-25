@@ -28,6 +28,10 @@ RUN composer require league/flysystem-local
 # Installer les dépendances PHP avec Composer
 RUN composer install
 
+# Définir les permissions des fichiers et dossiers de l'application
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
 # Installer Swagger pour Laravel
 RUN composer require darkaonline/l5-swagger
 
@@ -49,6 +53,8 @@ RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvide
 # Définir les permissions des fichiers et dossiers de l'application
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
+RUN composer install
 
 # Exposer le port 9000 pour PHP-FPM
 EXPOSE 9000
