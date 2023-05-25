@@ -16,27 +16,23 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl pdo_pgsql
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Installer la dépendance flysystem-local
+RUN composer require league/flysystem-local
+
 # Définir le répertoire de travail
 WORKDIR /var/www
 
 # Copier les fichiers de l'application dans le conteneur
 COPY . /var/www
 
-# Installer la dépendance flysystem-local
-RUN composer require league/flysystem-local
-
 # Installer les dépendances PHP avec Composer
 RUN composer install
-
-# Définir les permissions des fichiers et dossiers de l'application
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 # Installer Swagger pour Laravel
 RUN composer require darkaonline/l5-swagger
 
 # Publier les fichiers de configuration Swagger
-RUN php artisan vendor:publish --provider="L5Swagger\L5SwaggerServiceProvider" --tag=config
+RUN php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 
 # Générer la documentation Swagger
 RUN php artisan l5-swagger:generate
@@ -52,9 +48,6 @@ RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvide
 
 # Définir les permissions des fichiers et dossiers de l'application
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
-
-RUN composer install
 
 # Exposer le port 9000 pour PHP-FPM
 EXPOSE 9000
