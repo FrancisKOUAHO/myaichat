@@ -25,6 +25,15 @@ COPY . /var/www
 # Installer les dépendances PHP avec Composer
 RUN composer install
 
+# Installer Swagger pour Laravel
+RUN composer require darkaonline/l5-swagger
+
+# Publier les fichiers de configuration Swagger
+RUN php artisan vendor:publish --provider="L5Swagger\L5SwaggerServiceProvider"
+
+# Générer la documentation Swagger
+RUN php artisan l5-swagger:generate
+
 # Installer Laravel Sanctum
 RUN composer require laravel/sanctum
 
