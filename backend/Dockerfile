@@ -48,6 +48,7 @@ RUN php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvide
 
 # Définir les permissions des fichiers et dossiers de l'application
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 # Exposer le port 9000 pour PHP-FPM
 EXPOSE 9000
