@@ -4,7 +4,7 @@ import CardProps from "@/types/CardProps";
 import { ButtonIcon } from "@/components/atoms/button/button";
 import {useAuth} from "@/context/AuthContext";
 
-const Card: FunctionComponent<CardProps> = ({ className, children }) => {
+export const Card: FunctionComponent<CardProps> = ({ className, children }) => {
     const { user } = useAuth();
     const isAdmin = user?.role === "admin";
     const isPartner = user?.role === "partner";
