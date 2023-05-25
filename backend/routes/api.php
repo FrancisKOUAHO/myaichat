@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ShopifyScraperController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/login/{token}', [AuthController::class, 'login'])->name('login');
+});
+
+Route::prefix('shopify')->group(function () {
+    Route::post('/scrape', [ShopifyScraperController::class, 'scrapeShopify']);
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
