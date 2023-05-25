@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * @OA\Info(
+ *     title="Titre de votre API",
+ *     version="1.0.0",
+ *     description="Description de votre API"
+ * )
+ */
+
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/login/{token}', [AuthController::class, 'login'])->name('login');

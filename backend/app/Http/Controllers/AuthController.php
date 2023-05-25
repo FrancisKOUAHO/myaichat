@@ -8,8 +8,26 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * @OA\Info(
+ *     title="Titre de votre API",
+ *     version="1.0.0",
+ *     description="Description de votre API"
+ * )
+ */
+
 class AuthController extends Controller
 {
+
+    /**
+     * @OA\Get(
+     *     path="/api/my-endpoint",
+     *     summary="Résumé de votre point de terminaison",
+     *     description="Description de votre point de terminaison",
+     *     @OA\Response(response="200", description="Réponse réussie")
+     * )
+     */
+
     public function register(Request $request): JsonResponse
     {
         $fields = $request->validate([
