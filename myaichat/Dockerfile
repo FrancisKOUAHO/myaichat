@@ -5,7 +5,7 @@ FROM nginx:latest
 COPY . /var/www
 
 # Exposez le port 80 pour les requêtes HTTP
-EXPOSE 8081
+EXPOSE 80
 
 # Commande par défaut à exécuter lorsque le conteneur démarre
 CMD ["nginx", "-g", "daemon off;"]
