@@ -16,6 +16,9 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl pdo_pgsql
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Installer la dépendance flysystem-local
+RUN composer require league/flysystem-local
+
 # Définir le répertoire de travail
 WORKDIR /var/www
 
@@ -29,7 +32,7 @@ RUN composer install
 RUN composer require darkaonline/l5-swagger
 
 # Publier les fichiers de configuration Swagger
-RUN php artisan vendor:publish --provider="L5Swagger\L5SwaggerServiceProvider"
+RUN php artisan vendor:publish --provider="L5Swagger\L5SwaggerServiceProvider" --tag=config
 
 # Générer la documentation Swagger
 RUN php artisan l5-swagger:generate
