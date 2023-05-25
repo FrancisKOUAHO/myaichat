@@ -98,7 +98,7 @@ services:
 #      - "3000:3000"
 #    volumes:
 #      - ./dashboard:/app
-#      - ./nginx/conf.d/dashboard.confdd:/etc/nginx/conf.d/default.conf
+#      - ./nginx/conf.d/dashboard.conf:/etc/nginx/conf.d/default.conf
 #    networks:
 #      - app-network
 
