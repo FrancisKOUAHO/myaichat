@@ -2,10 +2,11 @@ import {FunctionComponent} from "react";
 import {
 
   AiOutlineHome,
-  AiOutlineMessage,
-  AiOutlineProfile,
-  AiOutlineTag,
-  AiOutlineUser,
+  AiOutlineShop,
+  AiOutlineCreditCard,
+  AiOutlineComment,
+  AiOutlineFileSync,
+  AiOutlineFileSearch,
   AiOutlineMail,
   AiOutlineIssuesClose
 } from "react-icons/ai";
@@ -20,46 +21,45 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
       {
           <div className="c-sidebar">
             <p className="text-xs font-medium text-gray-400 pt-4 mb-2 pl-4">MAIN MENU</p>
-            <Link href={'/dashboard'} className="hover:text-indigo-500">
+            <Link href={'/dashboard'} className="hover:text-[#7a5eea]">
               <AiOutlineHome/>
               Dashboard
             </Link>
-            <Link href={'/dashboard/conversations'} className="hover:text-indigo-500">
-              <AiOutlineProfile/>
+            <Link href={'/dashboard/conversations'} className="hover:text-[#7a5eea]">
+              <AiOutlineComment/>
               Conversations
             </Link>
-            <Link href={'/dashboard/correction'} className="hover:text-indigo-500">
-              <AiOutlineUser/>
+            <Link href={'/dashboard/correction'} className="hover:text-[#7a5eea]">
+              <AiOutlineFileSearch/>
               Correction
             </Link>
-            <Link href={'/dashboard/analytics'} className="hover:text-indigo-500">
-              <AiOutlineTag/>
+            <Link href={'/dashboard/analytics'} className="hover:text-[#7a5eea]">
+              <AiOutlineFileSync/>
               Analytics
             </Link>
-            <Link href={'/dashboard/knowledge'} className="hover:text-indigo-500">
-              <AiOutlineMessage/>
+            <Link href={'/dashboard/knowledge'} className="hover:text-[#7a5eea]">
+              <AiOutlineShop/>
               Knowledge Base
             </Link>
             <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">PARAMÈTRES</p>
-            <Link href={'/dashboard/offres'} className="hover:text-indigo-500">
-              <AiOutlineMessage/>
+            <Link href={'/dashboard/offres'} className="hover:text-[#7a5eea]">
+              <AiOutlineCreditCard/>
               Offres
             </Link>
             <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">{"OBTENIR DE L'AIDE"}</p>
             <a href="mailto:support@zipchat.ai" target="_blank"
-               className="mb-2 text-slate-500 text-xs font-medium group cursor-pointer flex items-center hover:text-indigo-500">
+               className="mb-2 text-slate-500 text-xs group cursor-pointer flex items-center hover:text-[#7a5eea]">
               <AiOutlineMail/>
               support@zipchat.ai
             </a>
-            <div>
-              <button>
+
+              <a>
                 <div
-                    className="mb-4 text-slate-500 text-xs font-medium group cursor-pointer flex items-center hover:text-indigo-500 pl-4">
-                <AiOutlineIssuesClose className="w-[25px] h-[25px] mr-2.5"/>
+                    className="mb-2 text-xs group cursor-pointer flex items-center hover:text-[#7a5eea]">
+                <AiOutlineIssuesClose/>
                   Signaler un problème
                 </div>
-              </button>
-            </div>
+              </a>
           </div>
       }
     </>

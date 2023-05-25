@@ -4,6 +4,7 @@ import Input from "@/components/atoms/input/input";
 import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import {useAuth} from "@/context/AuthContext";
+import MyAiChat from "../../../public/MYAICHAT_white.png"
 
 const TopBar = () => {
   const { logout } = useAuth()
@@ -15,8 +16,7 @@ const TopBar = () => {
       <div className="c-above-topbar">
         <div className="c-above-topbar-left">
           <Link href={'/admin/dashboard'}>
-            <Image src="/LetsGo_white.png" alt="LetsGo Logo" width="35" height="100"/>
-            <span>Let&apos;s Go</span>
+              <Image src={MyAiChat} alt="LetsGo Logo" width="120" height="120"/>
           </Link>
         </div>
         <div className="c-above-topbar-right">
