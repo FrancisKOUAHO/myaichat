@@ -1,8 +1,6 @@
 # Étape de construction
 FROM node:16-alpine AS build
 
-WORKDIR /app
-
 # Copie des fichiers de package.json et yarn.lock
 COPY package*.json yarn.lock ./
 
@@ -10,7 +8,7 @@ COPY package*.json yarn.lock ./
 RUN yarn install
 
 # Copie du code source de l'application
-COPY . /var/www
+COPY . /app
 
 # Construction de l'application
 RUN yarn build
