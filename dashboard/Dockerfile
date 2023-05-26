@@ -26,12 +26,15 @@
 # Étape de construction
 FROM node:16-alpine AS build
 
+COPY package.json /app
+
 # Copie du code source de l'application
 WORKDIR /app
-COPY . /app
 
 # Installation des dépendances avec npm
 RUN npm install
+
+COPY . /app
 
 # Construction de l'application
 RUN npm run build
