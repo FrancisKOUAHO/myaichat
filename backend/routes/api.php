@@ -27,12 +27,14 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/login/{token}', [AuthController::class, 'login'])->name('login');
+    Route::get('/redirect', [AuthController::class, 'redirect']);
+    Route::get('/callback', [AuthController::class, 'callback']);
 });
 
 Route::prefix('shopify')->group(function () {
     Route::post('/scrape', [ShopifyScraperController::class, 'scrapeShopify']);
 
-});
+});;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
