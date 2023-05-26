@@ -28,9 +28,6 @@ FROM node:16-alpine AS build
 
 COPY package.json /app
 
-# Copie du code source de l'application
-WORKDIR /app
-
 # Installation des dépendances avec npm
 RUN npm install
 
