@@ -20,5 +20,15 @@ class User extends Authenticatable
         'verification_token',
         'login_token',
         'google_id',
+        'trial_start_date',
+        'has_paid',
+        'stripe_id',
+        'card_brand',
+        'card_last_four',
+        'trial_ends_at',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 }

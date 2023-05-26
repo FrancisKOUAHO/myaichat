@@ -18,6 +18,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('login_token')->nullable();
             $table->string('google_id')->unique()->nullable();
+            $table->timestamp('trial_start_date')->nullable();
+            $table->boolean('has_paid')->default(false);
+            $table->string('stripe_id')->nullable()->collation('utf8mb4_bin');
+            $table->string('card_brand')->nullable();
+            $table->string('card_last_four', 4)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

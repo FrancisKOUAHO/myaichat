@@ -323,18 +323,37 @@ body {
 		}
 
 		onSendButton(chatBox) {
-			let textField = chatBox.querySelector('input');
-			let text1 = textField.value;
-			if (text1 === "") {
-				return;
-			}
+			// Vérifier l'état de l'abonnement de l'utilisateur
+			fetch('YOUR_SERVER_URL/check_subscription', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					userId: 'USER_ID', // Remplacer par l'ID de l'utilisateur actuel
+				}),
+			})
+				.then(response => response.json())
+				.then(data => {
+					if (!data.isActive) {
+						// Si l'utilisateur n'a pas d'abonnement actif, affichez un message d'erreur et arrêtez la fonction
+						alert("Votre période d'essai est terminée. Veuillez vous abonner pour continuer à utiliser le chatbot.");
+						return;
+					}
 
-			let userMessage = { role: "user", content: text1 };
-			this.messages.push(userMessage);
-			this.updateChatText(chatBox);
+					// Sinon, continuez comme d'habitude
+					let textField = chatBox.querySelector('input');
+					let text1 = textField.value;
+					if (text1 === "") {
+						return;
+					}
 
-			let outboundMessages = [...this.messages];
-			let chatbotPrompt = `
+					let userMessage = { role: "user", content: text1 };
+					this.messages.push(userMessage);
+					this.updateChatText(chatBox);
+
+					let outboundMessages = [...this.messages];
+					let chatbotPrompt = `
         Vous êtes un chatbot de support client utile intégré sur un site web de location de voitures. Vous êtes capable de répondre aux questions sur le site web et son contenu.
         Vous êtes également capable de répondre aux questions sur les voitures disponibles à la location.
         
@@ -349,53 +368,58 @@ body {
         Fournissez des réponses courtes et concises.
         `;
 
-			outboundMessages.unshift({
-				role: 'system',
-				content: chatbotPrompt,
-			});
+					outboundMessages.unshift({
+						role: 'system',
+						content: chatbotPrompt,
+					});
 
-			const apiKey = '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';
+					const apiKey = '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';
 
-			let loader = document.createElement('div');
-			loader.className = 'loader';
+					let loader = document.createElement('div');
+					loader.className = 'loader';
 
-			let loaderText = document.createElement('div');
-			loaderText.className = 'loader-text';
-			loaderText.textContent = 'Chargement...';
+					let loaderText = document.createElement('div');
+					loaderText.className = 'loader-text';
+					loaderText.textContent = 'Chargement...';
 
-			let chatboxMessages = chatBox.querySelector('.chatbox__messages');
-			let emptyDiv = chatboxMessages.querySelector('div');
-			chatboxMessages.insertBefore(loader, emptyDiv.nextSibling);
+					let chatboxMessages = chatBox.querySelector('.chatbox__messages');
+					let emptyDiv = chatboxMessages.querySelector('div');
+					chatboxMessages.insertBefore(loader, emptyDiv.nextSibling);
 
-			fetch('https://api.openai.com/v1/chat/completions', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${apiKey}`
-				},
-				body: JSON.stringify({
-					model: "gpt-3.5-turbo",
-					messages: outboundMessages
-				}),
-			})
-				.then(response => response.json())
-				.then(data => {
-					let botMessage = { role: "assistant", content: data.choices[0].message.content };
-					this.messages.push(botMessage);
-					this.updateChatText(chatBox);
+					fetch('https://api.openai.com/v1/chat/completions', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${apiKey}`
+						},
+						body: JSON.stringify({
+							model: "gpt-3.5-turbo",
+							messages: outboundMessages
+						}),
+					})
+						.then(response => response.json())
+						.then(data => {
+							let botMessage = { role: "assistant", content: data.choices[0].message.content };
+							this.messages.push(botMessage);
+							this.updateChatText(chatBox);
 
-					loader.remove();
+							loader.remove();
+							textField.value = '';
+						})
+						.catch((error) => {
+							console.error('Error:', error);
+							this.updateChatText(chatBox);
+
+							loader.remove();
+							textField.value = '';
+						});
+
 					textField.value = '';
+
 				})
 				.catch((error) => {
 					console.error('Error:', error);
-					this.updateChatText(chatBox);
-
-					loader.remove();
-					textField.value = '';
 				});
-
-			textField.value = '';
 		}
 
 		updateChatText(chatBox) {

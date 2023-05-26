@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopifyScraperController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +35,20 @@ Route::prefix('auth')->group(function () {
 Route::prefix('shopify')->group(function () {
     Route::post('/scrape', [ShopifyScraperController::class, 'scrapeShopify']);
 
-});;
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('/check-trial-status', [AuthController::class, 'checkTrialStatus']);
+});
+
+Route::prefix('subscriptions')->group(function () {
+    Route::post('/create', [SubscriptionController::class, 'create']);
+    Route::get('/plans', [SubscriptionController::class, 'getPlans']);
+    Route::get('/check', [SubscriptionController::class, 'checkSubscription']);
+});
+
 

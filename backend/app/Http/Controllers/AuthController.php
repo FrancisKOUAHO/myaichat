@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
+use Carbon\Carbon;
+
 
 /**
  * @OA\Info(
@@ -39,6 +41,7 @@ class AuthController extends Controller
         $user = User::create([
             'email' => $fields['email'],
             'verification_token' => $verificationToken,
+            'trial_start_date' => now(),
         ]);
 
         $this->sendLoginEmail($user);
@@ -77,5 +80,17 @@ class AuthController extends Controller
         ];
 
         return response()->json($response, 200);
+    }
+
+    public function checkTrialStatus(Request $request)
+    {
+        $user = User::find($request->user()->id);
+        $trialStart = new Carbon($user->trial_start_date);
+
+        if ($trialStart->diffInDays(Carbon::now()) > 14 && !$user->has_paid) {
+            return response()->json(['access' => 'denied']);
+        }
+
+        return response()->json(['access' => 'granted']);
     }
 }
