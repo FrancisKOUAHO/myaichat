@@ -8,9 +8,13 @@ import {Card} from "../../components/atoms/card/card";
 import { Tab, Disclosure } from '@headlessui/react';
 import Image from "next/image";
 import Shopify from "../../public/shopify.png";
+
 import Theme from "../../public/themes.jpg";
 import Edit from "../../public/edit.jpg";
 import Liquid from "../../public/liquid.jpg";
+import Parametre from "../../public/parametre.jpg";
+import Commande from "../../public/commande.jpg";
+import PaiementPage from "../../public/paiementPage.jpg";
 
 const Page = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -340,23 +344,87 @@ const Page = () => {
       </div>
 
       <Modal isOpen={isOpenWidget} closeModal={closeModalWidget}>
-        <div className=" max-w-xl px-20 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+        <div className=" max-w-xl px-8 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
           <div onClick={closeModalWidget} className="flex justify-start space-x-4">
             <button className="text-gray-600 focus:outline-none hover:text-gray-700">
               <AiOutlineCloseCircle/>
             </button>
           </div>
+          <div className="flex flex-wrap mt-4">
+            <div className="w-full text-left px-4">
+               <span className="text-[20px] text-center font-medium leading-6 text-gray-900">
+              {"Ces instructions s'adressent uniquement aux utilisateurs de Shopify"}
+            </span>
+              <p className="mb-2 mt-6">
+                1. Copiez le code suivant
+              </p>
+              <code >
+                zazoazkazljzlajzlazjalzjal
+              </code>
+
+              <p className="mb-2 mt-6">
+                {"2. Allez dans shopify > Theme."}
+              </p>
+              <Image className="m-auto pt-3 mb-8" src={Theme} alt={''} width={300} height={250}/>
+            </div>
+            <div className="w-full text-left px-4">
+              <p className="mb-2 mt-2">
+                {"3. Cliquez sur \"Code\"."}
+              </p>
+              <Image className="m-auto pt-3 mb-8" src={Edit} alt={''} width={300} height={250}/>
+            </div>
+            <div className="w-full text-left px-4">
+              <p className="mb-2">
+                {"4. Ouvrez le fichier 'theme.liquid'"}
+              </p>
+              <code className="mt-4">
+                {"Collez le code entre les balises <head>MyAichat Script </head>"}
+              </code>
+              <Image className="m-auto pt-3" src={Liquid} alt={''} width={300} height={250}/>
+            </div>
+          </div>
         </div>
       </Modal>
-
       <Modal isOpen={isOpenShopify} closeModal={closeModalShopify}>
-        <div className=" max-w-xl px-20 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
-          <div onClick={closeModalShopify} className="flex justify-start space-x-4">
+        <div className=" max-w-xl px-8 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+          <div onClick={closeModalWidget} className="flex justify-start space-x-4">
             <button className="text-gray-600 focus:outline-none hover:text-gray-700">
-              <AiOutlineCloseCircle/>
+              <AiOutlineCloseCircle />
             </button>
           </div>
-          Voldi
+          <div className="flex flex-wrap mt-4">
+            <div className="w-full text-left px-4">
+               <span className="text-[20px] text-center font-medium leading-6 text-gray-900">
+              {"Ces instructions s'adressent uniquement aux utilisateurs de Shopify"}
+            </span>
+              <p className="mb-2 mt-6">
+                1. Copiez le code suivant
+              </p>
+              <code >
+                zazoazkazljzlajzlazjalzjal
+              </code>
+
+              <p className="mb-2 mt-6">
+                {"2. Allez dans shopify > parametres."}
+              </p>
+              <Image className="m-auto pt-3 mb-8" src={Parametre} alt={''} width={300} height={250}/>
+            </div>
+            <div className="w-full text-left px-4">
+              <p className="mb-2 mt-2">
+                {"3. Cliquez sur \"Page de paiement\"."}
+              </p>
+              <Image className="m-auto pt-3 mb-8" src={PaiementPage} alt={''} width={300} height={250}/>
+            </div>
+            <div className="w-full text-left px-4">
+              <p className="mb-2">
+                {"4. Faites défiler la page jusqu'à ce que vous trouviez l'état de la page \"page de statut de commande\"."}
+              </p>
+              <code className="mt-4">
+                {"Collez le code dans  \"Scripts supplémentaires\" et clique sur sauvegarder"}
+              </code>
+              <Image className="m-auto pt-3" src={Commande} alt={''} width={300} height={250}/>
+            </div>
+          </div>
         </div>
       </Modal>
     </LayoutCustom>
