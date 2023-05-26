@@ -4491,6 +4491,7 @@ a {
     align-items: center;
     padding: 24px;
     display: flex;
+    margin-top: 7rem;
 }
 
 .text-30 {
@@ -4687,7 +4688,7 @@ a {
 
 .column-6 {
     width: 100%;
-    height: 600px;
+    height: 659px;
     max-width: 325px;
     grid-column-gap: 24px;
     grid-row-gap: 24px;
