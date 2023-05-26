@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
+
 
 class AuthController extends Controller
 {
@@ -82,4 +83,46 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Email verified. You can now log in.'], 200);
     }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->user();
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Google login failed'], 401);
+        }
+
+        // Check if user already exists in our database
+        $existingUser = User::where('email', $googleUser->getEmail())->first();
+
+        if ($existingUser) {
+            // If user already exists, simply return that user.
+            $user = $existingUser;
+        } else {
+            // If user does not exist, create a new user record
+            $newUser = new User;
+            $newUser->email = $googleUser->getEmail();
+            $newUser->google_id = $googleUser->getId();
+            $newUser->email_verified_at = now();
+            $newUser->save();
+
+            $user = $newUser;
+        }
+
+        // Generate a personal access token for the user.
+        // This token will be used for subsequent API requests.
+        $token = $user->createToken('API Token')->plainTextToken;
+
+        // Return a JSON response with the user details and the token.
+        return response()->json([
+            'user' => $user,
+            'token' => $token
+        ]);
+    }
+
 }
