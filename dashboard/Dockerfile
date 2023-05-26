@@ -1,38 +1,21 @@
-# Étape de construction
-FROM node:16-alpine AS build
+FROM node:18-alpine
 
-# Définition du répertoire de travail
-WORKDIR /app
+ENV PORT 3000
 
-# Copie des fichiers package.json et yarn.lock pour installer les dépendances
-COPY package*.json yarn.lock ./
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-# Installation des dépendances
-RUN yarn install
+# Installing dependencies
+COPY package*.json /usr/src/app/
+RUN npm install
 
-# Copie de tous les fichiers du répertoire actuel vers le répertoire de travail
-COPY . /app
+# Copying source files
+COPY . /usr/src/app
 
-# Construction de l'application
-RUN yarn build
-
-# Étape de production
-FROM node:16-alpine
-
-# Définition du répertoire de travail
-WORKDIR /app
-
-# Copie des fichiers package.json et yarn.lock pour installer les dépendances en production
-COPY package*.json yarn.lock ./
-
-# Installation des dépendances en production
-RUN yarn install --production
-
-# Copie du répertoire .next depuis l'étape de construction vers le répertoire de travail
-COPY --from=build /app/.next ./.next
-
-# Exposition du port 3000 (ajuster si nécessaire)
+# Building app
+RUN npm run build
 EXPOSE 3000
 
-# Commande de démarrage de l'application
-CMD ["yarn", "start"]
+# Running the app
+CMD ["npm", "start"]
