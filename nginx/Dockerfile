@@ -1,4 +1,4 @@
-FROM nginx:1.21.3-alpine
+FROM nginx:latest
 
 COPY ./conf.d/myaichat.conf /etc/nginx/conf.d
 COPY ./conf.d/backend.conf /etc/nginx/conf.d
