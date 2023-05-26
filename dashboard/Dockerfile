@@ -1,38 +1,36 @@
-# Étape de construction
-FROM node:16-alpine AS build
+FROM node:18-alpine AS deps
 
-# Définition du répertoire de travail
 WORKDIR /app
 
-# Copie des fichiers package.json et yarn.lock pour installer les dépendances
-COPY package*.json yarn.lock ./
+COPY package.json package-lock.json ./
+RUN npm install --production
 
-# Installation des dépendances
-RUN yarn install
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
 
-# Copie de tous les fichiers du répertoire actuel vers le répertoire de travail
-COPY . /app
+ENV NEXT_TELEMETRY_DISABLED 1
 
-# Construction de l'application
-RUN yarn build
+RUN npm run build
 
-# Étape de production
-FROM node:16-alpine
-
-# Définition du répertoire de travail
+FROM node:18-alpine AS runner
 WORKDIR /app
 
-# Copie des fichiers package.json et yarn.lock pour installer les dépendances en production
-COPY package*.json yarn.lock ./
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 
-# Installation des dépendances en production
-RUN yarn install --production
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# Copie du répertoire .next depuis l'étape de construction vers le répertoire de travail
-COPY --from=build /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
-# Exposition du port 3000 (ajuster si nécessaire)
+USER nextjs
+
 EXPOSE 3000
 
-# Commande de démarrage de l'application
-CMD ["yarn", "start"]
+ENV PORT 3000
+
+CMD ["npm", "start"]
