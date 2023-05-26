@@ -12,7 +12,7 @@ RUN composer install \
     --prefer-dist \
     --optimize-autoloader
 
-FROM webdevops/php-nginx:8.1-alpine
+FROM webdevops/php-nginx:8.2
 
 ENV WEB_DOCUMENT_ROOT /app/public
 ENV PHP_POST_MAX_SIZE 128M
