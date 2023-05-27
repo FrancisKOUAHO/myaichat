@@ -5,17 +5,17 @@ import Sidebar from "@/components/atoms/sidebar/sidebar";
 
 const LayoutCustom: FunctionComponent<LayoutCustomProps> = ({children}) => {
 
-  return (
-    <>
-      <TopBar/>
-      <div className="flex overflow-hidden ml-64 mr-8">
-        <Sidebar/>
-        <main className="w-full">
-          {children}
-        </main>
-      </div>
-    </>
-  )
+    return (
+        <>
+            <TopBar/>
+            <div className="flex overflow-hidden ml-64 mr-8">
+                <Sidebar/>
+                <main className="w-full">
+                    {children}
+                </main>
+            </div>
+        </>
+    )
 }
 
 export default LayoutCustom

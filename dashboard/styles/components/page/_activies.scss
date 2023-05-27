@@ -1,7 +1,7 @@
 @use '../../settings/index' as *;
 
 .c-activities {
-  
+
   &__title {
     div:nth-child(1) {
       display: flex;
@@ -38,23 +38,23 @@
     ul {
       display: inline-flex;
 
-      li{
-         button {
-           height: 40px;
-           padding-left: 20px;
-           padding-right: 20px;
-           background-color: white;
-           color: $primary-color;
+      li {
+        button {
+          height: 40px;
+          padding-left: 20px;
+          padding-right: 20px;
+          background-color: white;
+          color: $primary-color;
 
-           :hover {
-             color: $primary-color;
-           }
+          :hover {
+            color: $primary-color;
+          }
 
-           &.active {
-             background-color:$primary-color;
-             color: white;
-           }
-         }
+          &.active {
+            background-color: $primary-color;
+            color: white;
+          }
+        }
       }
     }
   }

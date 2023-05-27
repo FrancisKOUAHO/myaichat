@@ -1,4 +1,4 @@
-Exemple : 
+Exemple :
 
 ButtonProps.ts
 

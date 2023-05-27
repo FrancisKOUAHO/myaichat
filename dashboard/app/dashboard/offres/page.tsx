@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react";
-import {AiOutlinePlus,AiOutlineFolderAdd} from "react-icons/ai";
 import LayoutCustom from "@/layouts/layoutCustom";
 
 const Page = () => {
@@ -14,8 +13,10 @@ const Page = () => {
                             Sélectionner une offre
                         </p>
                     </div>
-                    <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
-                        <div className=" bg-white max-w-[268px] rounded-3xl p-8 ring-1 ring-gray-200 hover:ring-indigo-600 hover:ring-2">
+                    <div
+                        className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
+                        <div
+                            className=" bg-white max-w-[268px] rounded-3xl p-8 ring-1 ring-gray-200 hover:ring-indigo-600 hover:ring-2">
                             <div className="flex items-center justify-between gap-x-4">
                                 <h3 id="tier-startup"
                                     className="text-lg font-semibold leading-8 text-indigo-600">Starter</h3>
@@ -32,7 +33,7 @@ const Page = () => {
                                         type="submit">
                                     <span>{"S'abonner"}</span>
                                 </button>
-                                </form>
+                            </form>
                             <div className="text-sm text-indigo-500 font-medium mt-1 text-center">
                                 {"Commencer 7 jours d'essai gratuit"}
                             </div>
@@ -165,7 +166,8 @@ const Page = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className="max-w-[268px] rounded-3xl p-8 ring-gray-200 bg-white ring-1 hover:ring-indigo-600 hover:ring-2">
+                        <div
+                            className="max-w-[268px] rounded-3xl p-8 ring-gray-200 bg-white ring-1 hover:ring-indigo-600 hover:ring-2">
                             <div className="flex items-center justify-between gap-x-4">
                                 <h3 id="tier-startup"
                                     className="text-lg font-semibold leading-8 text-indigo-600">Pro</h3>

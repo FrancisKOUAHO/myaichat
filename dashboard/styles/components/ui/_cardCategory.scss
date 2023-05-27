@@ -1,20 +1,20 @@
 @use '../../settings/index' as *;
 
-.c-cardCategory{
+.c-cardCategory {
   grid-column: span 12 / span 12;
 
-  .card-Image{
+  .card-Image {
     position: absolute;
     object-fit: cover;
     top: 0;
     width: 100%;
     height: 100%;
-    box-shadow: 0 0 0 2px #fff, 1px 1px 5px rgba(0,0,0,.32);
+    box-shadow: 0 0 0 2px #fff, 1px 1px 5px rgba(0, 0, 0, .32);
     border-radius: 9999px;
     max-width: 100%;
   }
 
-  table{
+  table {
     text-indent: 0;
     border-color: inherit;
     text-align: left;
@@ -23,22 +23,22 @@
     width: 100%;
     margin-top: -0.5rem;
 
-    thead{
-      .tr-content{
-        vertical-align: middle!important;
+    thead {
+      .tr-content {
+        vertical-align: middle !important;
         z-index: 49;
         position: relative;
       }
 
-      td{
+      td {
         vertical-align: middle;
         padding: 0.75rem 1.25rem;
         --tw-shadow: 20px 3px 20px #0000000b;
         --tw-shadow-colored: 20px 3px 20px var(--tw-shadow-color);
-        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),var(--tw-ring-shadow, #0000),var(--tw-shadow);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, #0000), var(--tw-shadow);
       }
 
-      .td-first{
+      .td-first {
         border-bottom-width: 0px;
         border-top-left-radius: 0.375rem;
         border-bottom-left-radius: 0.375rem;
@@ -46,35 +46,37 @@
         background-color: rgb(255 255 255 / var(--tw-bg-opacity));
         width: 10rem;
 
-        .td-flex{
+        .td-flex {
           display: flex;
 
-          .div-zoomin{
+          .div-zoomin {
             width: 2.5rem;
             height: 2.5rem;
             position: relative;
           }
         }
       }
-      .td-second{
+
+      .td-second {
         width: auto;
         --tw-bg-opacity: 1;
         background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 
-        .a-second{
+        .a-second {
           font-weight: 500;
           white-space: nowrap;
           color: inherit;
           text-decoration: inherit;
         }
       }
-      .td-third{
+
+      .td-third {
         text-align: center;
         --tw-bg-opacity: 1;
         background-color: rgb(255 255 255 / var(--tw-bg-opacity));
         border-bottom-width: 0px;
 
-        .a-third{
+        .a-third {
           --tw-text-opacity: 1;
           color: rgb(100 116 139 / var(--tw-text-opacity));
           align-items: center;
@@ -84,13 +86,14 @@
         }
 
       }
-      .td-beforelast{
+
+      .td-beforelast {
         --tw-bg-opacity: 1;
         background-color: rgb(255 255 255 / var(--tw-bg-opacity));
         border-bottom-width: 0px;
         width: 10rem;
 
-        .td-beforelast-button{
+        .td-beforelast-button {
           --tw-text-opacity: 1;
           color: rgb(var(--color-danger) / var(--tw-text-opacity));
           justify-content: center;
@@ -99,7 +102,8 @@
         }
 
       }
-      .td-last{
+
+      .td-last {
         border-top-right-radius: 0.375rem;
         border-bottom-right-radius: 0.375rem;
         --tw-bg-opacity: 1;
@@ -108,12 +112,12 @@
         width: 14rem;
         position: relative;
 
-        .td-last-button{
+        .td-last-button {
           align-items: center;
           justify-content: center;
           display: flex;
 
-          .a-last-button{
+          .a-last-button {
             align-items: center;
             display: flex;
             margin-right: 0.75rem;
@@ -121,7 +125,7 @@
             text-decoration: inherit;
           }
 
-          .a-last-button-2{
+          .a-last-button-2 {
             align-items: center;
             display: flex;
             text-decoration: inherit;
@@ -130,9 +134,9 @@
       }
     }
 
-    .thead-1{
-      tr{
-        th{
+    .thead-1 {
+      tr {
+        th {
           font-weight: 500;
           padding: 0.75rem 1.25rem;
           border-bottom-width: 0;
@@ -140,7 +144,7 @@
           text-align: center;
         }
 
-        .th-last{
+        .th-last {
           text-align: center;
         }
       }

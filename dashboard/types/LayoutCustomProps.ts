@@ -1,7 +1,7 @@
 import React from "react";
 
 type LayoutCustomProps = {
-  children?: React.ReactNode
+    children?: React.ReactNode
 };
 
 export default LayoutCustomProps;

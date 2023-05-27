@@ -1,31 +1,31 @@
 @use '../../settings/index' as *;
 
-.c-modal-form{
-  .container-form{
+.c-modal-form {
+  .container-form {
     justify-content: center;
     display: flex;
     gap: 45px;
     margin: 40px 0;
 
-    .content-input{
+    .content-input {
       grid-column: span 6 / span 6;
       margin-top: 20px;
 
-      label{
+      label {
         display: inline-block;
         margin-bottom: 0.5rem;
         font-size: 14px;
       }
-   }
+    }
   }
 
-  .content-button{
+  .content-button {
     display: flex;
     gap: 10px;
     justify-content: flex-end;
 
 
-    Button{
+    Button {
       height: 37.45px;
       width: 80px;
     }
