@@ -2,33 +2,46 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\MagicLinkEmail;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    // ...
+
     protected $fillable = [
         'email',
-        'verification_token',
-        'login_token',
-        'google_id',
-        'trial_start_date',
-        'has_paid',
-        'stripe_id',
-        'card_brand',
-        'card_last_four',
-        'trial_ends_at',
+        'magic_link_token',
+        'magic_link_token_expires_at',
+    ];
+
+    protected $hidden = [
+        'magic_link_token',
+        'magic_link_token_expires_at',
     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'magic_link_token_expires_at' => 'datetime',
     ];
+
+    public function sendMagicLinkEmail()
+    {
+        // Envoi de l'email contenant le lien magique
+        Mail::to($this->email)->send(new MagicLinkEmail($this));
+    }
+
+    public function generateMagicLinkToken()
+    {
+        $this->magic_link_token = Str::random(60);
+        $this->magic_link_token_expires_at = now()->addMinutes(30);
+        $this->save();
+    }
 }

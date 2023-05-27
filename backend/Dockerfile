@@ -1,3 +1,4 @@
+# Stage 1: Install dependencies with composer
 FROM composer:2.2.6 as vendor
 
 COPY database/ database/
@@ -12,6 +13,7 @@ RUN composer install \
     --prefer-dist \
     --optimize-autoloader
 
+# Stage 2: Set up Nginx and PHP environment
 FROM webdevops/php-nginx:8.2
 
 ENV WEB_DOCUMENT_ROOT /app/public
@@ -26,8 +28,11 @@ WORKDIR /app
 COPY . .
 COPY --from=vendor /app/vendor/ /app/vendor/
 
+# Install the PostgreSQL PDO extension
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    && docker-php-ext-install pdo_pgsql
 
 RUN mkdir -p storage/framework/sessions  storage/framework/views storage/framework/cache
 RUN chmod -R 777 storage bootstrap/cache
 RUN chown -R application:application .
-RUN php artisan l5-swagger:generate
