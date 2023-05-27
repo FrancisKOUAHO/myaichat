@@ -59,20 +59,20 @@ services:
       local_bridge:
         ipv4_address: 172.20.2.3
 
-#  dashboard:
-#    build:
-#      context: ./dashboard
-#      dockerfile: Dockerfile
-#    container_name: dashboard
-#    depends_on:
-#      - webserver
-#    restart: unless-stopped
-#    ports:
-#      - "3030:3030"
-#    tty: true
-#    networks:
-#      local_bridge:
-#        ipv4_address: 172.20.2.4
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: dashboard
+    depends_on:
+      - webserver
+    restart: unless-stopped
+    ports:
+      - "3030:3030"
+    tty: true
+    networks:
+      local_bridge:
+        ipv4_address: 172.20.2.4
 
 networks:
   local_bridge:
