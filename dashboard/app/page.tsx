@@ -1,9 +1,23 @@
 'use client'
 
 import React from "react";
+import { useMutation } from "@tanstack/react-query";
+import { api } from "@/config/api";
 
 
-export default function Home() {
+const Home = () => {
+
+	const loginMutation = useMutation((email) =>
+		api.post('request-login-link', {email})
+	);
+
+	const handleSubmit = (event: any) => {
+		event.preventDefault();
+		const {email} = event.target.elements;
+		console.log(email.value)
+		loginMutation.mutate(email.value);
+	};
+
 	const [isLoading, setIsLoading] = React.useState(false);
 
 	return (
@@ -24,7 +38,7 @@ export default function Home() {
 								Connexion avec Google
 							</button>
 						</div>
-						<form className="mb-5">
+						<form className="mb-5" onSubmit={handleSubmit}>
 							<div className="pb-5">
 								<label className="block text-sm font-medium text-gray-700 text-gray-400 mb-1" htmlFor="email">
 									Email
@@ -37,25 +51,13 @@ export default function Home() {
 									placeholder="Email"
 								/>
 							</div>
-							<div className="pb-5">
-								<label className="block text-sm font-medium text-gray-700 text-gray-400 mb-1" htmlFor="password">
-									Mot de passe
-								</label>
-								<input
-									type="password"
-									className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-									id="password"
-									name="password"
-									placeholder="Password"
-								/>
-							</div>
 							<div>
 								<button
 									type="submit"
 									className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-3"
 									style={{backgroundColor: "#7F56D9"}}
 								>
-									{isLoading ? "Loading..." : "Se connecter"}
+									{loginMutation.isLoading ? "Loading..." : "Se connecter"}
 								</button>
 							</div>
 							<div className="text-xs text-gray-400 mt-1 text-center mt-5">
@@ -75,3 +77,6 @@ export default function Home() {
 	);
 
 }
+
+
+export default Home;

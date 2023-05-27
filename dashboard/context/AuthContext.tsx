@@ -1,92 +1,39 @@
-"use client"
-
-import {createContext, ReactNode, useContext, useEffect, useState,} from 'react';
-
-import { useRouter}  from "next/navigation";
-import {api} from "@/config/api";
+import { createContext, ReactNode, useContext, useState } from 'react';
+import axios from 'axios';
 
 export const AuthContext = createContext<any>({});
 
 export const useAuth = () => useContext(AuthContext);
 
-export const AuthContextProvider = ({children}: { children: ReactNode }) => {
-  const router = useRouter();
+export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
+  const [token, setToken] = useState<string | null>(null);
 
-
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState<any>(null);
-  const [message, setMessage] = useState<string>('');
-
-  const login = async (email: string, password: string) => {
+  const login = async (token: string) => {
     try {
-      const response = await api.post('/auth/login', {
-        email,
-        password,
-      });
-
+      const response = await axios.get(`/api/login-with-token/${token}`);
 
       if (response.status === 200) {
-        localStorage.setItem('token', response.data.token);
-        setToken(response.data.token);
-        const token = localStorage.getItem('token');
-        if (token) {
-          setToken(token);
-          await me(token);
-        }
+        localStorage.setItem('token', response.data.user.login_token);
+        setToken(response.data.user.login_token);
       }
     } catch (error: any) {
-      setMessage(error.response.data.message)
+      console.log('error', error);
     }
   };
 
-  const me = async (token: any) => {
+  const requestLoginLink = async (email: string) => {
     try {
-      const response = await api.get('/auth/me', {
-        headers: {
-          Accept: 'application/json',
-          Context_Type: 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post('/api/request-login-link', { email });
       if (response.status === 200) {
-        setUser(response.data);
-
-        if (response.data.role === 'admin') {
-          router.push('/admin/dashboard')
-        } else if (response.data.role === 'partner') {
-          router.push('/partner/dashboard')
-        }
+        console.log(response.data.message);
       }
     } catch (error: any) {
-      setMessage(error.response.data.message)
+      console.log('error', error);
     }
   };
-  const register = async (email: File | string, password: File | string) => {
-    const { data: response } = await api.post('auth/register', {
-      email,
-      password,
-    });
-
-    return response.data;
-  };
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    setToken(null);
-    setUser(null);
-    router.push('/')
-  };
-
-  useEffect(() => {
-    /*const token = localStorage.getItem('token');
-    if (token) {
-      setToken(token);
-      me(token);
-    }*/
-  }, []);
 
   return (
-    <AuthContext.Provider value={{ login, register, logout, user, message }}>
+    <AuthContext.Provider value={{ login, requestLoginLink }}>
       {children}
     </AuthContext.Provider>
   );
