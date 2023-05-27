@@ -67,6 +67,8 @@ services:
     depends_on:
       - webserver
     restart: unless-stopped
+    ports:
+      - "3030:3030"
     tty: true
     networks:
       local_bridge:
