@@ -1,7 +1,3 @@
-import React from "react";
-
-type SidebarProps = {
-
-};
+type SidebarProps = {};
 
 export default SidebarProps;

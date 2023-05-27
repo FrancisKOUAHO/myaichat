@@ -1,24 +1,24 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import {useAuth} from "@/context/AuthContext";
 
 export const IsAuthorized = async (role: string) => {
-  const {user} = useAuth();
-  const router = useRouter();
+    const {user} = useAuth();
+    const router = useRouter();
 
-  if (!process.browser) {
-    return false;
-  }
+    if (!process.browser) {
+        return false;
+    }
 
-  const getUserRole = user?.role
+    const getUserRole = user?.role
 
-  if (!getUserRole || getUserRole !== role) {
-    await router.push('/')
-    return false;
-  }
+    if (!getUserRole || getUserRole !== role) {
+        await router.push('/')
+        return false;
+    }
 
 
-  return true;
+    return true;
 };
 

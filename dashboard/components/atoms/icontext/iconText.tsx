@@ -1,8 +1,8 @@
-import { AiOutlineTeam, AiOutlineEuroCircle, AiOutlineCheckSquare } from "react-icons/ai";
-import { FunctionComponent, useState } from "react";
+import {AiOutlineCheckSquare, AiOutlineEuroCircle, AiOutlineTeam} from "react-icons/ai";
+import {FunctionComponent, useState} from "react";
 import IconTextProps from "@/types/iconTextProps";
 
-const IconText: FunctionComponent<IconTextProps> = ({ title, price, numberOfPlaces, status}) => {
+const IconText: FunctionComponent<IconTextProps> = ({title, price, numberOfPlaces, status}) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const handleToggleExpand = () => {
         setIsExpanded(!isExpanded);
@@ -21,15 +21,15 @@ const IconText: FunctionComponent<IconTextProps> = ({ title, price, numberOfPlac
                 </h2>
             </div>
             <div>
-                <AiOutlineEuroCircle className="all-icon" />
+                <AiOutlineEuroCircle className="all-icon"/>
                 <p>Prix : <span>{price}</span></p>
             </div>
             <div>
-                <AiOutlineTeam className="all-icon" />
+                <AiOutlineTeam className="all-icon"/>
                 <p>Place disponible : <span>{numberOfPlaces}</span></p>
             </div>
             <div>
-                <AiOutlineCheckSquare className="all-icon" />
+                <AiOutlineCheckSquare className="all-icon"/>
                 <p>Statut : <span>{status}</span></p>
             </div>
         </div>
