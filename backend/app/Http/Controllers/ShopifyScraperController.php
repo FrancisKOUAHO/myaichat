@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class ShopifyScraperController extends Controller
 {
-    public function scrapeShopify(Request $request): \Illuminate\Http\JsonResponse
+    public function scrapeShopify(Request $request): JsonResponse
     {
         $rootDomain = $request->input('url');
         $productListUrl = $rootDomain . "/products.json";
