@@ -16,36 +16,6 @@ services:
       local_bridge:
         ipv4_address: 172.20.2.0
 
-  db:
-    image: postgres:latest
-    container_name: postgres
-    restart: always
-    volumes:
-      - ./database:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=mysecretpassword
-      - POSTGRES_DB=aichat
-    ports:
-      - "5432:5432"
-    networks:
-      local_bridge:
-        ipv4_address: 172.20.2.1
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgAdmin
-    ports:
-      - "5050:5050"
-    depends_on:
-      - db
-    environment:
-      PGADMIN_DEFAULT_EMAIL: kouahofrancis@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: kouahofrancis
-    networks:
-      local_bridge:
-        ipv4_address: 172.20.2.2
-
   backend:
     build:
       context: ./backend
