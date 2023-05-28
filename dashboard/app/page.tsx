@@ -1,11 +1,29 @@
 'use client'
 
 import React from "react";
+import { useMutation } from "@tanstack/react-query";
+import { api } from "@/config/api";
+import { useRouter } from 'next/navigation';
 import { useAuth } from "@/context/AuthContext";
 
 
+
 const Home = () => {
-	const { loginMutation } = useAuth();
+	const router = useRouter();
+	const { setUser, setToken } = useAuth();
+
+	const loginMutation = useMutation((email) =>
+			api.post('auth/magic-link', {email}),
+		{
+			onSuccess: (data) => {
+				console.log('data', data)
+				router.push('/checkmail')
+			},
+			onError: (error) => {
+				console.log('error', error);
+			},
+		}
+	);
 
 	const handleSubmit = (event: any) => {
 		event.preventDefault();

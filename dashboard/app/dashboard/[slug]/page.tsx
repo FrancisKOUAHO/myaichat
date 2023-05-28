@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   AiOutlineCloseCircle,
   AiOutlineCloudServer,
@@ -13,60 +13,66 @@ import {
   AiOutlineRollback
 } from "react-icons/ai";
 import LayoutCustom from "@/layouts/layoutCustom";
-import {Modal} from "../../components/atoms/modal/modal";
-import {Card} from "../../components/atoms/card/card";
 import {Disclosure, Tab} from '@headlessui/react';
 import Image from "next/image";
-import Shopify from "../../public/shopify.png";
+import Shopify from "../../../public/shopify.png";
 
-import Theme from "../../public/themes.jpg";
-import Edit from "../../public/edit.jpg";
-import Liquid from "../../public/liquid.jpg";
-import Parametre from "../../public/parametre.jpg";
-import Commande from "../../public/commande.jpg";
-import PaiementPage from "../../public/paiementPage.jpg";
+import Theme from "../../../public/themes.jpg";
+import Edit from "../../../public/edit.jpg";
+import Liquid from "../../../public/liquid.jpg";
+import Parametre from "../../../public/parametre.jpg";
+import Commande from "../../../public/commande.jpg";
+import PaiementPage from "../../../public/paiementPage.jpg";
+import Modal from "@/components/atoms/modal/modal";
+import Card from "@/components/atoms/card/card";
+import { useRouter } from 'next/navigation';
+import { useMutation } from "@tanstack/react-query";
+import { api } from "@/config/api";
+import { useAuth } from "@/context/AuthContext";
 
-const Page = () => {
-    const [isOpen, setIsOpen] = useState(false);
+
+const Page = ({ params }: { params: { slug: any } }) => {
+  const { user, setUser } = useAuth();
+  const router = useRouter();
+
+  const verifyToken = useMutation((token: string) =>
+      api.get(`auth/magic-link/${token}`),
+    {
+      onSuccess: (data): void => {
+        setUser(data.data.user);
+        // Assuming the server returns an authToken when the magic link token is verified.
+        localStorage.setItem('authToken', data.data.authToken);
+      },
+      onError: (error): void => {
+        router.push('/')
+      }
+    }
+  );
+
+  useEffect((): void => {
+    // Only verify the token if there's no authToken in localStorage.
+    if (!localStorage.getItem('authToken')) {
+      verifyToken.mutate(params.slug);
+    }
+  }, []);
+
+  const [isOpen, setIsOpen] = useState(false);
     const [isOpenWidget, setIsOpenWidget] = useState(false);
     const [isOpenShopify, setIsOpenShopify] = useState(false);
     const [isCardVisible, setCardVisible] = useState(true);
     const [selectedTab, setSelectedTab] = useState(0);
     const [isOpenMyChatBots, setIsOpenMyChatBots] = useState(true);
 
-    const handleTabClick = (index: number) => {
-        setSelectedTab(index);
-    }
-
-    const openModal = () => {
-        setIsOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-
-    //Modal Widget
-    const openModalWidget = () => {
-        setIsOpenWidget(true);
-    };
-
-    const closeModalWidget = () => {
-        setIsOpenWidget(false);
-    };
-
-    //Modal Shopify
-    const openModalShopify = () => {
-        setIsOpenShopify(true);
-    };
-
-    const closeModalShopify = () => {
-        setIsOpenShopify(false);
-    };
+    const handleTabClick = (index: number) => setSelectedTab(index);
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
+    const openModalWidget = () => setIsOpenWidget(true);
+    const closeModalWidget = () => setIsOpenWidget(false);
+    const openModalShopify = () => setIsOpenShopify(true);
+    const closeModalShopify = () => setIsOpenShopify(false);
 
     const tabClasses = (index: number) =>
         `inline-block w-full p-4 rounded-tl-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`;
-
 
     return (
         <LayoutCustom>
