@@ -17,6 +17,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('magic_link_token')->nullable();
             $table->timestamp('magic_link_token_expires_at')->nullable();
+            $table->string('auth_token')->nullable(); // Nouvelle colonne auth_token
             $table->rememberToken();
             $table->timestamps();
         });

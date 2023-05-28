@@ -27,21 +27,25 @@ class AuthController extends Controller
             ]
         );
 
+        // Générer un token Passport
+        $authToken = $user->createToken('Magic Link Token')->plainTextToken;
+
         // Envoi de l'email
-        $this->sendLoginEmail($user);
+        $this->sendLoginEmail($user, $authToken);
 
         $response = [
             'user' => $user,
-            'message' => 'Veuillez consulter votre boîte de réception pour vous connecter.'
+            'message' => 'Veuillez consulter votre boîte de réception pour vous connecter.',
+            'auth_token' => $authToken,
         ];
 
         return response()->json($response, 200);
     }
 
-    protected function sendLoginEmail(User $user): void
+    protected function sendLoginEmail(User $user, string $authToken): void
     {
         // Inclure le jeton en tant que paramètre dans l'URL du tableau de bord
-        $dashboardUrl = 'http://localhost:3030/dashboard/' . $user->magic_link_token . '/?token=' . $user->magic_link_token;
+        $dashboardUrl = 'http://localhost:3030/dashboard' . '/?magic_link_token=' . $user->magic_link_token . '/?token=' . $authToken;
 
         $emailContent = "Veuillez cliquer sur le lien suivant pour vous connecter et accéder à votre tableau de bord : $dashboardUrl";
 
@@ -61,12 +65,6 @@ class AuthController extends Controller
             // Connecter l'utilisateur
             auth()->login($user);
 
-            // Générer un token Passport
-            $authToken = $user->createToken('Magic Link Token')->accessToken;
-
-            // Sauvegarder le token actuel avant la réinitialisation
-            $currentToken = $user->magic_link_token;
-
             // Réinitialiser les tokens
             $user->magic_link_token = null;
             $user->magic_link_token_expires_at = null;
@@ -75,7 +73,6 @@ class AuthController extends Controller
             $response = [
                 'message' => 'Connecté avec succès.',
                 'user' => $user,
-                'authToken' => $authToken,  // Renvoyer le nouveau token d'authentification
             ];
 
             return response()->json($response, 200);

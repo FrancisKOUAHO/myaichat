@@ -4,31 +4,29 @@ import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { useRouter } from 'next/navigation';
-import { useAuth } from "@/context/AuthContext";
 
 
 
 const Home = () => {
 	const router = useRouter();
-	const { setUser, setToken } = useAuth();
 
-	const loginMutation = useMutation((email) =>
+	const loginMutation = useMutation((email: void) =>
 			api.post('auth/magic-link', {email}),
 		{
 			onSuccess: (data) => {
 				console.log('data', data)
-				router.push('/checkmail')
+				localStorage.setItem('auth_token', data.data.auth_token);
+					router.push('/checkmail')
 			},
-			onError: (error) => {
+			onError: (error): void => {
 				console.log('error', error);
 			},
 		}
 	);
 
-	const handleSubmit = (event: any) => {
+	const handleSubmit = (event: any): void => {
 		event.preventDefault();
 		const {email} = event.target.elements;
-		console.log(email.value)
 		loginMutation.mutate(email.value);
 	};
 

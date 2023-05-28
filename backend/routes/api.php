@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopifyScraperController;
-use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,18 +22,13 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('/callback', [AuthController::class, 'callback']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {});
-
 Route::prefix('shopify')->group(function () {
     Route::post('/scrape', [ShopifyScraperController::class, 'scrapeShopify']);
+
 });
 
-Route::prefix('subscriptions')->group(function () {
-    Route::post('/create', [SubscriptionController::class, 'create']);
-    Route::get('/plans', [SubscriptionController::class, 'getPlans']);
-    Route::get('/check', [SubscriptionController::class, 'checkSubscription']);
-    Route::get('/check-trial-status', [AuthController::class, 'checkTrialStatus']);
-});
+Route::middleware('auth:sanctum')->group(function () {});
+
 
 
 

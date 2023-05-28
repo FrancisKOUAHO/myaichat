@@ -20,7 +20,7 @@ services:
     build:
       context: backend
       dockerfile: Dockerfile
-    container_name: laravel_app_container
+    container_name: backend
     depends_on:
       - webserver
     restart: unless-stopped

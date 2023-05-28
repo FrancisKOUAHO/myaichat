@@ -19,7 +19,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
         <>
             {
                 <div className="c-sidebar">
-                    <p className="text-xs font-medium text-gray-400 pt-4 mb-2 pl-4">MAIN MENU</p>
+                    <p className="text-xs font-medium text-gray-400 pt-4 mb-2 pl-4">Dashboard</p>
                     <Link href={'/dashboard'} className="hover:text-[#7a5eea]">
                         <AiOutlineHome/>
                         Dashboard
@@ -49,7 +49,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
                     <a href="mailto:support@myaichat.io" target="_blank"
                        className="mb-2 text-slate-500 text-xs group cursor-pointer flex items-center hover:text-[#7a5eea]">
                         <AiOutlineMail/>
-                        support@zipchat.ai
+                        contact@myaichat.io
                     </a>
 
                     <a>
