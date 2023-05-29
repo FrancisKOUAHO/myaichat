@@ -262,7 +262,7 @@ body {
                 </div>
                 <div class="chatbox__content--header">
                     <h4 class="chatbox__heading--header">Chat support</h4>
-                    <p class="chatbox__description--header">Je m'appelle TKIO</p>
+                    <p class="chatbox__description--header">Je m'appelle MYAICHAT</p>
                 </div>
             </div>
             <div class="chatbox__messages">
@@ -298,14 +298,14 @@ body {
 		}
 
 		display() {
-			const { openButton, chatBox, sendButton } = this.args;
+			const {openButton, chatBox, sendButton} = this.args;
 
 			openButton.addEventListener('click', () => this.toggleState(chatBox));
 
 			sendButton.addEventListener('click', () => this.onSendButton(chatBox));
 
 			const node = chatBox.querySelector('input');
-			node.addEventListener("keyup", ({ key }) => {
+			node.addEventListener("keyup", ({key}) => {
 				if (key === "Enter") {
 					this.onSendButton(chatBox);
 				}
@@ -348,24 +348,76 @@ body {
 						return;
 					}
 
-					let userMessage = { role: "user", content: text1 };
+					let userMessage = {role: "user", content: text1};
 					this.messages.push(userMessage);
 					this.updateChatText(chatBox);
 
 					let outboundMessages = [...this.messages];
 					let chatbotPrompt = `
-        Vous êtes un chatbot de support client utile intégré sur un site web de location de voitures. Vous êtes capable de répondre aux questions sur le site web et son contenu.
-        Vous êtes également capable de répondre aux questions sur les voitures disponibles à la location.
         
-        Utilisez ces métadonnées du service de location de voitures pour répondre aux questions des clients :
-       
+        Vous êtes un chatbot de support client utile intégré sur un site web de support client dédié à l'optimisation des ventes et à l'amélioration de l'expérience client. Je suis là pour répondre à vos questions et vous aider à booster vos ventes grâce à notre chatbot.
+
+				Notre chatbot offre de nombreux avantages pour votre entreprise :
+				
+				Guide d'Achat Personnalisé: Notre chatbot est capable de comprendre vos clients et de recommander des produits pertinents en fonction de leurs besoins et préférences.
+				
+				Disponibilité 24/7: Notre chatbot est disponible à tout moment pour aider vos clients, que ce soit le jour ou la nuit.
+				
+				Gestion des commandes: En plus de gérer les commandes, notre chatbot interagit avec les clients en fournissant des informations de commande en temps réel et en facilitant les retours.
+				
+				Analyse de données: Notre chatbot collecte et analyse les données pour améliorer en permanence l'expérience utilisateur, vous aidant ainsi à optimiser vos ventes.
+				
+			Utilisez ces métadonnées du service de support client pour répondre aux questions des clients :
         
-        Incluez uniquement les liens au format Markdown.
-        Exemple : 'Vous pouvez consulter nos voitures disponibles ici'.
-        En dehors des liens, utilisez du texte normal.
-        
-        Refusez toute réponse qui n'a rien à voir avec le service de location de voitures ou son contenu.
-        Fournissez des réponses courtes et concises.
+        Essayez n'importe quel plan gratuitement pendant 14 jours. Annulez à tout moment.
+
+Starter
+€39 /mois
+Commencer 14 jours d'essai gratuit
+
+500 réponses/mois
+
+1 000 pages web stockées
+
+2 Chatbots
+
+Support standard
+
+Formation à l'IA
+
+Pro
+€99 /mois
+Commencer 14 jours d'essai gratuit
+
+3,000 réponses/mois
+
+15,000 pages web stockées
+
+10 chatbots
+
+Membres illimités
+
+Support prioritaire
+
+Formation à l'IA
+
+Growth
+€79 /mois
+Commencer 14 jours d'essai gratuit
+
+1,500 réponses/mois
+
+5 000 pages web stockées
+
+5 Chatbots
+
+Membres illimités
+
+Support prioritaire
+
+Formation à l'IA
+				
+				Si vous souhaitez en savoir plus sur la manière dont notre chatbot peut vous aider à augmenter vos ventes et à offrir une expérience client personnalisée, n'hésitez pas à poser vos questions. Je suis là pour vous fournir des réponses claires et concises.
         `;
 
 					outboundMessages.unshift({
@@ -399,7 +451,7 @@ body {
 					})
 						.then(response => response.json())
 						.then(data => {
-							let botMessage = { role: "assistant", content: data.choices[0].message.content };
+							let botMessage = {role: "assistant", content: data.choices[0].message.content};
 							this.messages.push(botMessage);
 							this.updateChatText(chatBox);
 
