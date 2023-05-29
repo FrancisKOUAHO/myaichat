@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -79,6 +81,20 @@ class AuthController extends Controller
             return response()->json([
                 'message' => "Jeton de connexion invalide ou expiré: $token"
             ], 401);
+        }
+    }
+
+    public function sendUserIdToChatbot(Request $request)
+    {
+        $userId = auth()->id();
+
+        // Vérification de la réponse de la requête
+        if (!is_null($userId)) {
+            // Requête réussie
+            return response()->json(['userId' => $userId], 200);
+        } else {
+            // Erreur lors de la requête
+            return response()->json(['message' => 'Impossible de récupérer l\'ID de l\'utilisateur.'], 500);
         }
     }
 }

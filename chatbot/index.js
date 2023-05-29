@@ -262,7 +262,7 @@ body {
                 </div>
                 <div class="chatbox__content--header">
                     <h4 class="chatbox__heading--header">Chat support</h4>
-                    <p class="chatbox__description--header">Je m'appelle MYAICHAT</p>
+                    <p class="chatbox__description--header">Je m'appelle Myaichat</p>
                 </div>
             </div>
             <div class="chatbox__messages">
@@ -323,14 +323,16 @@ body {
 		}
 
 		onSendButton(chatBox) {
+			let userId = getUserIdFromSession();
+			console.log('userId', userId);
 			// Vérifier l'état de l'abonnement de l'utilisateur
-			fetch('YOUR_SERVER_URL/check_subscription', {
+			fetch('http://127.0.0.1:8000/api/subscription/check_subscription', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
-					userId: 'USER_ID', // Remplacer par l'ID de l'utilisateur actuel
+					userId: userId, // Remplacer par l'ID de l'utilisateur actuel
 				}),
 			})
 				.then(response => response.json())
@@ -473,7 +475,6 @@ Formation à l'IA
 					console.error('Error:', error);
 				});
 		}
-
 		updateChatText(chatBox) {
 			let html = '';
 			this.messages.slice().reverse().forEach(function (item) {
@@ -489,6 +490,19 @@ Formation à l'IA
 		}
 	}
 
+	function getUserIdFromSession() {
+		fetch('http://localhost:8000/api/sendUserIdToChatbot')
+			.then(response => response.json())
+			.then(data => {
+				const userId = data.userId;
+				console.log('ID de l\'utilisateur:', userId);
+			})
+			.catch(error => {
+				console.error('Erreur lors de la récupération de l\'ID de l\'utilisateur:', error);
+			});
+	}
+
 	const chatboxInstance = new Chatbox();
 	chatboxInstance.display();
+	getUserIdFromStorage();
 }

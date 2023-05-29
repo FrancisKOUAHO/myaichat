@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopifyScraperController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,8 +28,8 @@ Route::prefix('shopify')->group(function () {
 
 });
 
-Route::middleware('auth:sanctum')->group(function () {});
+Route::prefix('subscription')->group(function () {
+    Route::post('/check_subscription', [SubscriptionController::class, 'checkSubscription']);
+});
 
-
-
-
+Route::get('/sendUserIdToChatbot', [AuthController::class, 'sendUserIdToChatbot']);
