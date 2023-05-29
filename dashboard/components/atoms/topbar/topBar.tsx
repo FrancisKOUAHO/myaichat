@@ -7,21 +7,22 @@ import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import {useAuth} from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png"
-import { useEffect, useState } from "react";
+import { serialize } from "cookie";
 
 const TopBar = () => {
     const { logout, user } = useAuth()
 
-    const [info, setInfo] = useState(null);
+    const userId = user.id;
 
-    useEffect(() => {
-        if (typeof window !== 'undefined' && window.localStorage) {
-            const storedUser = localStorage.getItem('user');
-            const getUser = storedUser ? JSON.parse(storedUser) : null;
-            setInfo(getUser);
-        }
-    }, []);
+    const setCookie = (name: string, value: string) => {
+        // Définir le cookie avec l'ID de l'utilisateur
+        document.cookie = serialize(name, value, {
+            path: "/", // Spécifiez le chemin approprié pour votre application
+            maxAge: 60 * 60 * 24 * 7, // Durée de vie du cookie (7 jours dans cet exemple)
+        });
+    };
 
+    setCookie("userId", userId);
     return (
         <nav className="c-topbar">
             <div className="c-below-topbar">
@@ -40,7 +41,7 @@ const TopBar = () => {
                     <div className="c-profile-avatar">
                         <Dropdown list={[
                             {
-                                label: `${ info }`,
+                                label: `${ user.email }`,
                                 link: '/booking',
                                 icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
                             },
