@@ -32,26 +32,8 @@ import { useAuth } from "@/context/AuthContext";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 const Page = () => {
-	const {user, setUser} = useAuth();
-
+	const { user } = useAuth();
 	const router: AppRouterInstance = useRouter();
-
-	const verifyToken = useMutation((token: string) =>
-		api.get(`auth/magic-link/${token}`)
-			.then(response => console.log('response', response))
-	);
-
-	useEffect(() => {
-		if (!localStorage.getItem('authToken')) {
-			const token = new URLSearchParams(window.location.search).get('token');
-			console.log('token', token)
-			if (token) {
-				verifyToken.mutate(token);
-			} else {
-				router.push('/');
-			}
-		}
-	}, []);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenWidget, setIsOpenWidget] = useState(false);
@@ -69,7 +51,7 @@ const Page = () => {
 	const closeModalShopify = () => setIsOpenShopify(false);
 
 	const tabClasses = (index: number) =>
-		`inline-block w-full p-4 rounded-tl-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`;
+		`inline-block w-full p-4 rounded-tl-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`
 
 	return (
 		<LayoutCustom>

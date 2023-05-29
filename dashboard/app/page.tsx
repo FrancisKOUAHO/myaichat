@@ -3,7 +3,7 @@
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 
 
@@ -16,6 +16,7 @@ const Home = () => {
 			onSuccess: (data) => {
 				console.log('data', data)
 				localStorage.setItem('auth_token', data.data.auth_token);
+				localStorage.setItem('magic_link_token', data.data.user.magic_link_token);
 					router.push('/checkmail')
 			},
 			onError: (error): void => {

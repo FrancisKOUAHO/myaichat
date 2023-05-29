@@ -7,7 +7,10 @@ import {useAuth} from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png"
 
 const TopBar = () => {
-    const {logout} = useAuth()
+    const { logout, user } = useAuth()
+
+    const storedUser = localStorage.getItem('user');
+    const getUser = storedUser ? JSON.parse(storedUser) : user
 
     return (
         <nav className="c-topbar">
@@ -27,7 +30,7 @@ const TopBar = () => {
                     <div className="c-profile-avatar">
                         <Dropdown list={[
                             {
-                                label: 'Francis KOUAHO',
+                                label: `${ getUser.email ? getUser.email : getUser.name}`,
                                 link: '/booking',
                                 icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
                             },

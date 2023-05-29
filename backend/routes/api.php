@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('/magic-link', [AuthController::class, 'requestLoginLink']);
-    Route::get('/magic-link/{token}', [AuthController::class, 'loginWithToken']);
+    Route::post('/magic-link/{token}', [AuthController::class, 'loginWithToken']);
     Route::get('/redirect', [AuthController::class, 'redirect']);
     Route::get('/callback', [AuthController::class, 'callback']);
 });

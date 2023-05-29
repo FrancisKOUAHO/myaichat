@@ -45,11 +45,9 @@ class AuthController extends Controller
     protected function sendLoginEmail(User $user, string $authToken): void
     {
         // Inclure le jeton en tant que paramètre dans l'URL du tableau de bord
-        $dashboardUrl = 'http://localhost:3030/dashboard' . '/?magic_link_token=' . $user->magic_link_token . '/?token=' . $authToken;
+        $dashboardUrl = 'http://localhost:3030/verify' . '/?magic_link_token=' . $user->magic_link_token;
 
-        $emailContent = "Veuillez cliquer sur le lien suivant pour vous connecter et accéder à votre tableau de bord : $dashboardUrl";
-
-        Mail::raw($emailContent, function ($message) use ($user) {
+        Mail::raw($dashboardUrl, function ($message) use ($user) {
             $message->to($user->email)->subject('Lien de connexion');
         });
     }
