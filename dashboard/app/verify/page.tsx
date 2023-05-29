@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
+import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 
 const VerifyTokenPage = () => {
 	const router = useRouter();
@@ -34,8 +35,11 @@ const VerifyTokenPage = () => {
 	}, [token, router]);
 
 	return (
-		<div>
-			<h2>Verification en cours...</h2>
+		<div className="flex min-h-full flex-col text-center justify-center  sm:px-6 lg:p-8 p-8 h-[100vh] bg-gradient-to-r from-indigo-600 to-indigo-200">
+			<div className="m-auto justify-center">
+				<LoadingSpinner
+				/>
+			</div>
 		</div>
 	);
 };
