@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import {AiOutlineBell, AiOutlineUser} from "react-icons/ai";
 import Input from "@/components/atoms/input/input";
@@ -5,12 +7,20 @@ import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import {useAuth} from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png"
+import { useEffect, useState } from "react";
 
 const TopBar = () => {
     const { logout, user } = useAuth()
 
-    const storedUser = localStorage.getItem('user');
-    const getUser = storedUser ? JSON.parse(storedUser) : user
+    const [info, setInfo] = useState(null);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            const storedUser = localStorage.getItem('user');
+            const getUser = storedUser ? JSON.parse(storedUser) : null;
+            setInfo(getUser);
+        }
+    }, []);
 
     return (
         <nav className="c-topbar">
@@ -30,7 +40,7 @@ const TopBar = () => {
                     <div className="c-profile-avatar">
                         <Dropdown list={[
                             {
-                                label: `${ getUser.email ? getUser.email : getUser.name}`,
+                                label: `${ info }`,
                                 link: '/booking',
                                 icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
                             },

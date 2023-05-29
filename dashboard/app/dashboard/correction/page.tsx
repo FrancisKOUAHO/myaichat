@@ -6,7 +6,9 @@ import LayoutCustom from "@/layouts/layoutCustom";
 const Page = () => {
     return (
         <LayoutCustom>
-
+            <>
+              <h1>Correction</h1>
+            </>
         </LayoutCustom>
     )
 }

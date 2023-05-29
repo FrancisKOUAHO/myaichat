@@ -10,7 +10,7 @@ import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
 import AuthContextProvider from "@/context/AuthContext";
 
 
-export default function RootLayout({children}: { children: React.ReactNode }) {
+const RootLayout = ({children}: { children: React.ReactNode }) => {
     const [queryClient] = useState(() => new QueryClient(
         {
             defaultOptions: {
@@ -41,3 +41,5 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         </html>
     )
 }
+
+export default RootLayout

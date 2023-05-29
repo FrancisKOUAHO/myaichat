@@ -8,7 +8,6 @@ const Page = () => {
     return (
         <LayoutCustom>
             <div className="w-full overflow-y-auto">
-                {/*<h2>{"Bilan d'affaires"}</h2>*/}
                 <div className="p-40 mx-auto">
                     <div className="text-center">
                         <AiOutlineFolderAdd className="mx-auto h-12 w-12 text-gray-400 "/>
