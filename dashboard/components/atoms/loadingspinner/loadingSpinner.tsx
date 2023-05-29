@@ -1,13 +1,14 @@
 import {NextPage} from 'next'
-import {Triangle} from 'react-loader-spinner'
+import {LineWave} from 'react-loader-spinner'
 
 const LoadingSpinner: NextPage = () => {
     return (
-        <Triangle
-            height='80'
-            width='80'
+        <LineWave
+            height='200'
+            width='200'
             wrapperClass='c-loading-spinner'
-            ariaLabel='Loading triangle spinner'
+            color="white"
+            ariaLabel="line-wave"
             visible={true}
         />
     );
