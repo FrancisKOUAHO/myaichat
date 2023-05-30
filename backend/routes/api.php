@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopifyScraperController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -21,12 +22,23 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/magic-link/{token}', [AuthController::class, 'loginWithToken']);
     Route::get('/redirect', [AuthController::class, 'redirect']);
     Route::get('/callback', [AuthController::class, 'callback']);
+    Route::get('/users/{user}/posts', [PostController::class, 'getUserPosts']);
 });
 
 Route::prefix('shopify')->group(function () {
     Route::post('/scrape', [ShopifyScraperController::class, 'scrapeShopify']);
-
 });
+
+
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('/users/{user}/posts', [PostController::class, 'getUserPosts']);
+    Route::get('/posts', [PostController::class, 'index']);
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/posts/{post}', [PostController::class, 'show']);
+    Route::put('/posts/{post}', [PostController::class, 'update']);
+    Route::delete('/posts/{post}', [PostController::class, 'destroy']);
+});
+
 
 Route::prefix('subscription')->group(function () {
     Route::post('/check_subscription', [SubscriptionController::class, 'checkSubscription']);

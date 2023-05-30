@@ -44,4 +44,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->magic_link_token_expires_at = now()->addMinutes(30);
         $this->save();
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
