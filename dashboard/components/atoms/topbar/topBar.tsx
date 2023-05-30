@@ -11,7 +11,6 @@ import MyAiChat from "../../../public/MYAICHAT_white.png"
 const TopBar = () => {
     const { logout, user } = useAuth()
 
-
     return (
         <nav className="c-topbar">
             <div className="c-below-topbar">
@@ -30,7 +29,7 @@ const TopBar = () => {
                     <div className="c-profile-avatar">
                         <Dropdown list={[
                             {
-                                label: `${ user.email }`,
+                                label: ``,
                                 link: '/booking',
                                 icon: <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
                             },
