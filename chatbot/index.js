@@ -323,39 +323,18 @@ body {
 		}
 
 		onSendButton(chatBox) {
-			let userId = getUserIdFromSession();
-			console.log('userId', userId);
-			// Vérifier l'état de l'abonnement de l'utilisateur
-			fetch('http://127.0.0.1:8000/api/subscription/check_subscription', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					userId: userId, // Remplacer par l'ID de l'utilisateur actuel
-				}),
-			})
-				.then(response => response.json())
-				.then(data => {
-					if (!data.isActive) {
-						// Si l'utilisateur n'a pas d'abonnement actif, affichez un message d'erreur et arrêtez la fonction
-						alert("Votre période d'essai est terminée. Veuillez vous abonner pour continuer à utiliser le chatbot.");
-						return;
-					}
+			let textField = chatBox.querySelector('input');
+			let text1 = textField.value;
+			if (text1 === "") {
+				return;
+			}
 
-					// Sinon, continuez comme d'habitude
-					let textField = chatBox.querySelector('input');
-					let text1 = textField.value;
-					if (text1 === "") {
-						return;
-					}
+			let userMessage = { role: "user", content: text1 };
+			this.messages.push(userMessage);
+			this.updateChatText(chatBox);
 
-					let userMessage = {role: "user", content: text1};
-					this.messages.push(userMessage);
-					this.updateChatText(chatBox);
-
-					let outboundMessages = [...this.messages];
-					let chatbotPrompt = `
+			let outboundMessages = [...this.messages];
+			let chatbotPrompt = `
         
         Vous êtes un chatbot de support client utile intégré sur un site web de support client dédié à l'optimisation des ventes et à l'amélioration de l'expérience client. Je suis là pour répondre à vos questions et vous aider à booster vos ventes grâce à notre chatbot.
 
@@ -422,59 +401,55 @@ Formation à l'IA
 				Si vous souhaitez en savoir plus sur la manière dont notre chatbot peut vous aider à augmenter vos ventes et à offrir une expérience client personnalisée, n'hésitez pas à poser vos questions. Je suis là pour vous fournir des réponses claires et concises.
         `;
 
-					outboundMessages.unshift({
-						role: 'system',
-						content: chatbotPrompt,
-					});
+			outboundMessages.unshift({
+				role: 'system',
+				content: chatbotPrompt,
+			});
 
-					const apiKey = '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';
+			const apiKey = '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';
 
-					let loader = document.createElement('div');
-					loader.className = 'loader';
+			let loader = document.createElement('div');
+			loader.className = 'loader';
 
-					let loaderText = document.createElement('div');
-					loaderText.className = 'loader-text';
-					loaderText.textContent = 'Chargement...';
+			let loaderText = document.createElement('div');
+			loaderText.className = 'loader-text';
+			loaderText.textContent = 'Chargement...';
 
-					let chatboxMessages = chatBox.querySelector('.chatbox__messages');
-					let emptyDiv = chatboxMessages.querySelector('div');
-					chatboxMessages.insertBefore(loader, emptyDiv.nextSibling);
+			let chatboxMessages = chatBox.querySelector('.chatbox__messages');
+			let emptyDiv = chatboxMessages.querySelector('div');
+			chatboxMessages.insertBefore(loader, emptyDiv.nextSibling);
 
-					fetch('https://api.openai.com/v1/chat/completions', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'Authorization': `Bearer ${apiKey}`
-						},
-						body: JSON.stringify({
-							model: "gpt-3.5-turbo",
-							messages: outboundMessages
-						}),
-					})
-						.then(response => response.json())
-						.then(data => {
-							let botMessage = {role: "assistant", content: data.choices[0].message.content};
-							this.messages.push(botMessage);
-							this.updateChatText(chatBox);
+			fetch('https://api.openai.com/v1/chat/completions', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${apiKey}`
+				},
+				body: JSON.stringify({
+					model: "gpt-3.5-turbo",
+					messages: outboundMessages
+				}),
+			})
+				.then(response => response.json())
+				.then(data => {
+					let botMessage = { role: "assistant", content: data.choices[0].message.content };
+					this.messages.push(botMessage);
+					this.updateChatText(chatBox);
 
-							loader.remove();
-							textField.value = '';
-						})
-						.catch((error) => {
-							console.error('Error:', error);
-							this.updateChatText(chatBox);
-
-							loader.remove();
-							textField.value = '';
-						});
-
+					loader.remove();
 					textField.value = '';
-
 				})
 				.catch((error) => {
 					console.error('Error:', error);
+					this.updateChatText(chatBox);
+
+					loader.remove();
+					textField.value = '';
 				});
+
+			textField.value = '';
 		}
+
 		updateChatText(chatBox) {
 			let html = '';
 			this.messages.slice().reverse().forEach(function (item) {
@@ -490,19 +465,7 @@ Formation à l'IA
 		}
 	}
 
-	function getUserIdFromSession() {
-		fetch('http://localhost:8000/api/sendUserIdToChatbot')
-			.then(response => response.json())
-			.then(data => {
-				const userId = data.userId;
-				console.log('ID de l\'utilisateur:', userId);
-			})
-			.catch(error => {
-				console.error('Erreur lors de la récupération de l\'ID de l\'utilisateur:', error);
-			});
-	}
-
 	const chatboxInstance = new Chatbox();
 	chatboxInstance.display();
-	getUserIdFromStorage();
+
 }

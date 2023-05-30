@@ -1,8 +1,15 @@
-import { NextResponse } from 'next/server';
-import { CookieValueTypes, getCookie } from "cookies-next";
+import { NextResponse, } from 'next/server';
+import { cookies } from "next/headers";
 
-export async function GET(request: Request) {
-    const userId: CookieValueTypes = getCookie('userId');
 
-    return NextResponse.json({ userId: userId });
+export async function GET(req: Request) {
+
+	let Cookie;
+
+	Cookie = cookies().get('userId')?.value
+
+	return NextResponse.json({
+		myCookie: parseInt(<string>Cookie)
+	});
+
 }

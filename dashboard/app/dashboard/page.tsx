@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
 	AiOutlineCloseCircle,
 	AiOutlineCloudServer,
@@ -26,13 +26,14 @@ import PaiementPage from "../../public/paiementPage.jpg";
 import Modal from "@/components/atoms/modal/modal";
 import Card from "@/components/atoms/card/card";
 import { useRouter } from 'next/navigation';
-import { useMutation } from "@tanstack/react-query";
-import { api } from "@/config/api";
 import { useAuth } from "@/context/AuthContext";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import useWebSocket from 'react-use-websocket';
+
+
 
 const Page = () => {
-	const { user } = useAuth();
+	const {user} = useAuth();
 	const router: AppRouterInstance = useRouter();
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +53,7 @@ const Page = () => {
 
 	const tabClasses = (index: number) =>
 		`inline-block w-full p-4 rounded-tl-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`
+
 
 	return (
 		<LayoutCustom>

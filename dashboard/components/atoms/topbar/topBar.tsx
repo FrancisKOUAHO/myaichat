@@ -7,22 +7,11 @@ import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import {useAuth} from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png"
-import { serialize } from "cookie";
 
 const TopBar = () => {
     const { logout, user } = useAuth()
 
-    const userId = user.id;
 
-    const setCookie = (name: string, value: string) => {
-        // Définir le cookie avec l'ID de l'utilisateur
-        document.cookie = serialize(name, value, {
-            path: "/", // Spécifiez le chemin approprié pour votre application
-            maxAge: 60 * 60 * 24 * 7, // Durée de vie du cookie (7 jours dans cet exemple)
-        });
-    };
-
-    setCookie("userId", userId);
     return (
         <nav className="c-topbar">
             <div className="c-below-topbar">
