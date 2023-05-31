@@ -208,8 +208,7 @@ const Page = () => {
 											<Tab.Group>
 												<div
 													className="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-													<Tab.List
-														className="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex">
+													<Tab.List className="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex">
 														<Tab onClick={() => handleTabClick(0)}
 																 className={tabClasses(0)}>Instructions
 															pour le widget</Tab>
@@ -227,8 +226,7 @@ const Page = () => {
 													</Tab.List>
 													<Tab.Panels className="border-t border-gray-200 ">
 														<Tab.Panel className="bg-white rounded-lg md:p-8">
-															<button onClick={openModalWidget}
-																			className="inline-flex items-center rounded-md mb-2 px-3 py-2 text-[0.675rem] font-semibold text-black shadow-sm hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+															<button onClick={openModalWidget} className="inline-flex items-center rounded-md mb-2 px-3 py-2 text-[0.675rem] font-semibold text-black shadow-sm hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 																<Image src={Shopify} width="15" height="15" alt={''}
 																			 className="m-1"/>
 																Instructions Shopify

@@ -13,7 +13,6 @@ const VerifyTokenPage = () => {
 	const queryClient = useQueryClient();
 
 	const token = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get('magic_link_token') : null;
-
 	const verifyTokenMutation = useMutation(
 		() => api.post(`/auth/magic-link/${token}`).then((res) => res.data.user),
 		{
