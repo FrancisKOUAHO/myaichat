@@ -28,7 +28,9 @@ import Card from "@/components/atoms/card/card";
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/context/AuthContext";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
-import useWebSocket from 'react-use-websocket';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 
 
 
@@ -208,7 +210,8 @@ const Page = () => {
 											<Tab.Group>
 												<div
 													className="bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-													<Tab.List className="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex">
+													<Tab.List
+														className="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex">
 														<Tab onClick={() => handleTabClick(0)}
 																 className={tabClasses(0)}>Instructions
 															pour le widget</Tab>
@@ -226,7 +229,8 @@ const Page = () => {
 													</Tab.List>
 													<Tab.Panels className="border-t border-gray-200 ">
 														<Tab.Panel className="bg-white rounded-lg md:p-8">
-															<button onClick={openModalWidget} className="inline-flex items-center rounded-md mb-2 px-3 py-2 text-[0.675rem] font-semibold text-black shadow-sm hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+															<button onClick={openModalWidget}
+																			className="inline-flex items-center rounded-md mb-2 px-3 py-2 text-[0.675rem] font-semibold text-black shadow-sm hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 																<Image src={Shopify} width="15" height="15" alt={''}
 																			 className="m-1"/>
 																Instructions Shopify
@@ -243,10 +247,13 @@ const Page = () => {
 																			</Disclosure.Button>
 																			<Disclosure.Panel
 																				className="px-4 pt-4 pb-2 text-sm text-gray-500">
-																				<code>
-																					{'<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>'}
-																				</code>
+																				<SyntaxHighlighter style={atomDark}>
+																					{"<script>window.addEventListener(\'DOMContentLoaded\', function () { let script = document.createElement(\'script\'); script.src = \'https://ai.myaichat.io/index.js\'; script.onload = function () { initializeChatbox(\'chatbox-widget-container\'); }; document.head.appendChild(script); });</script>"}
+																				</SyntaxHighlighter>
 
+																				<SyntaxHighlighter style={atomDark}>
+																					{'<div id="chatbox-widget-container"></div>'}
+																				</SyntaxHighlighter>
 																			</Disclosure.Panel>
 																		</>
 																	)}
@@ -268,7 +275,7 @@ const Page = () => {
 																				<pre
 																					className="mb-4">{"Vous pouvez l'ajouter dans la section de l'en-tête / head  HTML."}</pre>
 																				<code>
-																					{"If the chatbot is not showing, try to reset your cache. You can also contact our support team."}
+																					{"Si le chatbot ne s'affiche pas, essayez de réinitialiser votre cache. Vous pouvez également contacter notre équipe d'assistance."}
 																				</code>
 																			</Disclosure.Panel>
 																		</>
@@ -292,18 +299,12 @@ const Page = () => {
 																	<div>
 																		<span className="font-medium">Attention !</span>
 																		{"Si vous avez besoin d'aide, veuillez nous contacter à l'adresse suivante"}
-																		<b className="font-medium">contact@myaichat.io</b>
+																		<b className="font-medium"> contact@myaichat.io</b>
 																	</div>
 																</div>
 															</div>
 														</Tab.Panel>
 														<Tab.Panel className="bg-white rounded-lg md:p-8">
-															<button onClick={openModalShopify}
-																			className="inline-flex items-center rounded-md mb-2 px-3 py-2 text-[0.675rem] font-semibold text-black shadow-sm hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-																<Image src={Shopify} width="15" height="15" alt={''}
-																			 className="m-1"/>
-																Instructions Shopify
-															</button>
 															<div className="mb-4 mt-4">
 																<Disclosure>
 																	{({open}) => (
@@ -317,9 +318,8 @@ const Page = () => {
 																			<Disclosure.Panel
 																				className="px-4 pt-4 pb-2 text-sm text-gray-500">
 																				<code>
-																					{' If kljlkjskskdskjdk' + '<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>'}
+																					azeeaz
 																				</code>
-
 																			</Disclosure.Panel>
 																		</>
 																	)}
@@ -360,7 +360,7 @@ const Page = () => {
 																	<div>
 																		<span className="font-medium">Attention !</span>
 																		{"Si vous avez besoin d'aide, veuillez nous contacter à l'adresse suivante"}
-																		<b className="font-medium">contact@myaichat.io</b>
+																		<b className="font-medium"> contact@myaichat.io</b>
 																	</div>
 																</div>
 															</div>
