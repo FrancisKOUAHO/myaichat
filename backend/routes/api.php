@@ -31,12 +31,12 @@ Route::prefix('shopify')->group(function () {
 
 
 Route::group(['prefix' => 'posts'], function () {
-    Route::get('/users/{user}/posts', [PostController::class, 'getUserPosts']);
-    Route::get('/posts', [PostController::class, 'index']);
-    Route::post('/posts', [PostController::class, 'store']);
-    Route::get('/posts/{post}', [PostController::class, 'show']);
-    Route::put('/posts/{post}', [PostController::class, 'update']);
-    Route::delete('/posts/{post}', [PostController::class, 'destroy']);
+    Route::get('{user}/posts', [PostController::class, 'getUserPosts']);
+    Route::get('posts', [PostController::class, 'index']);
+    Route::post('create', [PostController::class, 'store']);
+    Route::get('{post}', [PostController::class, 'show']);
+    Route::put('{post}', [PostController::class, 'update']);
+    Route::delete('{post}', [PostController::class, 'destroy']);
 });
 
 

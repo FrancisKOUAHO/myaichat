@@ -2,6 +2,7 @@ import {FunctionComponent} from "react";
 import LayoutCustomProps from "@/types/LayoutCustomProps";
 import TopBar from "@/components/atoms/topbar/topBar";
 import Sidebar from "@/components/atoms/sidebar/sidebar";
+import '../styles/_main.scss'
 
 const LayoutCustom: FunctionComponent<LayoutCustomProps> = ({children}) => {
 
