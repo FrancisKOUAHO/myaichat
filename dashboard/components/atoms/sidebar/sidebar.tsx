@@ -9,7 +9,8 @@ import {
     AiOutlineHome,
     AiOutlineIssuesClose,
     AiOutlineMail,
-    AiOutlineShop
+    AiOutlineShop,
+    AiOutlineSetting
 } from "react-icons/ai";
 import Link from "next/link";
 import SidebarProps from "@/types/SidebarProps";
@@ -41,6 +42,10 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
                     <Link href={'/dashboard/knowledge'} className="hover:text-[#7a5eea]">
                         <AiOutlineShop/>
                         Knowledge Base
+                    </Link>
+                    <Link href={'/dashboard/parametre'} className="hover:text-[#7a5eea]">
+                        <AiOutlineSetting/>
+                        Parametre
                     </Link>
                     <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">PARAMÈTRES</p>
                     <Link href={'/dashboard/offres'} className="hover:text-[#7a5eea]">
