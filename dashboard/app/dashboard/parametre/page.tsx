@@ -1,67 +1,208 @@
 "use client"
 
-import React from "react";
+import React, {Fragment, useState} from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
+import {AiOutlineDelete, AiOutlineEdit, AiOutlineEye} from "react-icons/ai";
+import {Dialog, Transition} from '@headlessui/react';
 
 const Page = () => {
+    const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
+    const [isOpenModifier, setIsOpenModifier] = useState(false);
+
+    const openModalVisualiser = () => setIsOpenVisualiser(true);
+    const closeModalVisualiser = () => setIsOpenVisualiser(false);
+    const openModalModifier = () => setIsOpenModifier(true);
+    const closeModalModifier = () => setIsOpenModifier(false);
+
     return (
         <LayoutCustom>
             <div className="w-full overflow-y-auto">
                 <div className="mt-[2%] w-full p-4 text-center bg-indigo-200  rounded-lg shadow sm:p-8">
                     <div className="flex items-center justify-between border-b border-gray-200">
-                        <span className="font-bold text-gray-900">My Chatbots</span>
+                        <span className="font-bold text-gray-900">Parametres de mes boutiques</span>
                     </div>
-                    <div className="flex items-center justify-center min-h-screen bg-gray-900">
-                        <div className="col-span-12">
-                            <div className="overflow-auto lg:overflow-visible ">
-                                <table className="table text-gray-400 border-separate space-y-6 text-sm">
-                                    <thead className="bg-gray-800 text-gray-500">
-                                    <tr>
-                                        <th className="p-3">Boutique</th>
-                                        <th className="p-3 text-left">Contenu</th>
-                                        <th className="p-3 text-left">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr className="bg-gray-800">
-                                        <td className="p-3">
-                                            <div className="flex align-items-center">
-                                                <img className="rounded-full h-12 w-12  object-cover"
-                                                     src="https://images.unsplash.com/photo-1613588718956-c2e80305bf61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80"
-                                                     alt="unsplash image" />
-                                                    <div className="ml-3">
-                                                        <div className="">Appple</div>
-                                                        <div className="text-gray-500">mail@rgmail.com</div>
-                                                    </div>
-                                            </div>
-                                        </td>
-                                        <td className="p-3">
-                                            Technology
-                                        </td>
-                                        <td className="p-3 font-bold">
-                                            200.00$
-                                        </td>
-                                        <td className="p-3">
-                                            <span className="bg-green-400 text-gray-50 rounded-md px-2">available</span>
-                                        </td>
-                                        <td className="p-3 ">
-                                            <a href="#" className="text-gray-400 hover:text-gray-100 mr-2">
-                                                <i className="material-icons-outlined text-base">visibility</i>
-                                            </a>
-                                            <a href="#" className="text-gray-400 hover:text-gray-100  mx-2">
-                                                <i className="material-icons-outlined text-base">edit</i>
-                                            </a>
-                                            <a href="#" className="text-gray-400 hover:text-gray-100  ml-2">
-                                                <i className="material-icons-round text-base">delete_outline</i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <div className="flex justify-between gap-8 p-6">
+                        <table className="table w-full text-gray-400 border-separate space-y-6 text-sm">
+                            <thead className="text-white mt-[2%] bg-indigo-200 rounded-lg">
+                            <tr className="bg-indigo-600">
+                                <th className="p-3">Boutique</th>
+                                <th className="p-3">Contenu</th>
+                                <th className="p-3">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody className="mt-[2%] bg-white" >
+                            <tr className="bg-white">
+                                <td className="p-3">
+                                    <div className="m-auto">
+                                        <dd className="text-gray-500 text-[0.775rem]">myshootbox.com</dd>
+                                    </div>
+                                </td>
+                                <td className="flex items-center justify-center p-3">
+                                    <dd className="text-gray-500 text-[0.775rem] overflow-hidden overflow-ellipsis whitespace-nowrap w-44 text-center">
+                                        proremlremfsdsdsdsdsdsdsdsddsdsdsdsddsdsdsdsdsdsds
+                                    </dd>
+                                </td>
+                                <td className="p-3 ">
+                                    <button onClick={openModalVisualiser}
+                                        className="mx-2 inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        <AiOutlineEye className="-ml-0.5 mr-1.5 h-5 w-5"/>
+                                        Visualiser
+                                    </button>
+                                    <Transition appear show={isOpenVisualiser} as={Fragment}>
+                                        <Dialog as="div" className="relative z-10" onClose={closeModalVisualiser}>
+                                            <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+                                                <div className="fixed inset-0 bg-black bg-opacity-25" />
+                                            </Transition.Child>
+                                            <div className="fixed inset-0 overflow-y-auto">
+                                                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                                    <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+                                                        <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                                            <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                                                                Contenu
+                                                            </Dialog.Title>
+                                                            <div className="mt-2 overflow-auto max-h-[50vh]">
+                                                                <p className="text-sm text-gray-500">
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
+                                                                    Your payment has been successfully submitted. We’ve sent
+                                                                    you an email with all of the details of your order.
 
+
+                                                                </p>
+                                                            </div>
+                                                            <div className="mt-4">
+                                                                <button type="button" className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" onClick={closeModalVisualiser}>
+                                                                    Fermer
+                                                                </button>
+                                                            </div>
+                                                        </Dialog.Panel>
+                                                    </Transition.Child>
+                                                </div>
+                                            </div>
+                                        </Dialog>
+                                    </Transition>
+                                    <button onClick={openModalModifier}
+                                        className="mx-2 inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        <AiOutlineEdit className="-ml-0.5 mr-1.5 h-5 w-5"/>
+                                        Modifier
+                                    </button>
+                                    <Transition appear show={isOpenModifier} as={Fragment}>
+                                        <Dialog as="div" className="relative z-10" onClose={closeModalModifier}>
+                                            <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+                                                <div className="fixed inset-0 bg-black bg-opacity-25" />
+                                            </Transition.Child>
+                                            <div className="fixed inset-0 overflow-y-auto">
+                                                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                                                    <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+                                                        <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                                            <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                                                                Contenu
+                                                            </Dialog.Title>
+                                                            <div className="mt-2 overflow-auto max-h-[50vh]">
+                                                                <textarea className="text-sm text-gray-500 w-full">
+                                                                    sfslkdsdklsjdls
+                                                                    dsldkjsdkljsdlksj
+                                                                    dskldjskldjslkdj
+                                                                    dslkjdskldjslkd
+                                                                </textarea>
+                                                            </div>
+                                                            <div className="mt-4 justify-between">
+                                                                <button type="button" className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" onClick={closeModalVisualiser}>
+                                                                    Fermer
+                                                                </button>
+                                                                <button type="button" className="mx-2 inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" onClick={closeModalVisualiser}>
+                                                                    Enregistrer
+                                                                </button>
+                                                            </div>
+                                                        </Dialog.Panel>
+                                                    </Transition.Child>
+                                                </div>
+                                            </div>
+                                        </Dialog>
+                                    </Transition>
+                                    <button
+                                        className=" ml-2 inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        <AiOutlineDelete
+                                            className="-ml-0.5 mr-1.5 h-5 w-5 "/>
+                                        Supprimer
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </LayoutCustom>

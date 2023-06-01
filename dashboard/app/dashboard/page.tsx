@@ -84,8 +84,7 @@ const Page = () => {
 								</div>
 							</div>
 							<Modal isOpen={isOpen} closeModal={closeModal}>
-								<div
-									className=" max-w-xl px-20 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+								<div className=" max-w-xl px-20 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
 									<div className="flex justify-start space-x-4">
 										<button onClick={closeModal}
 														className="text-gray-600 focus:outline-none hover:text-gray-700">
