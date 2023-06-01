@@ -19,7 +19,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'magic_link_token',
         'auth_token',
-        'subscription_active',
         'magic_link_token_expires_at',
     ];
 

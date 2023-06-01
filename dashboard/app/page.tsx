@@ -4,21 +4,28 @@ import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { useRouter } from "next/navigation";
-import { setCookie } from "cookies-next";
+import { setCookie } from "nookies";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 
 
 const Home = () => {
-	const router = useRouter();
+	const router: AppRouterInstance = useRouter();
 
 	const loginMutation = useMutation((email: void) =>
 			api.post('auth/magic-link', {email}),
 		{
 			onSuccess: (data) => {
 				console.log('data', data)
-				setCookie('magic_link_token', data.data.user.magic_link_token);
-				setCookie('auth_token', data.data.auth_token);
-					router.push('/checkmark')
+				setCookie(undefined, 'magic_link_token', data.data.token, {
+					maxAge: 30 * 24 * 60 * 60,
+					path: '/',
+				})
+				setCookie(undefined, 'auth_token', data.data.auth_token, {
+					maxAge: 30 * 24 * 60 * 60,
+					path: '/',
+				})
+				router.push('/checkmail')
 			},
 			onError: (error): void => {
 				console.log('error', error);
@@ -28,7 +35,7 @@ const Home = () => {
 
 	const handleSubmit = (event: any): void => {
 		event.preventDefault();
-		const {email} = event.target.elements;
+		const { email } = event.target.elements;
 		loginMutation.mutate(email.value);
 	};
 
@@ -87,7 +94,6 @@ const Home = () => {
 			</div>
 		</div>
 	);
-
 }
 
 

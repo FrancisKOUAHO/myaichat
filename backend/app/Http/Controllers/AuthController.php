@@ -13,6 +13,15 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    public function index(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'user' => $user,
+        ]);
+    }
+
     public function requestLoginLink(Request $request): JsonResponse
     {
         // Validation des champs

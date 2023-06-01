@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	AiOutlineCloseCircle,
 	AiOutlineCloudServer,
@@ -30,10 +30,13 @@ import { useAuth } from "@/context/AuthContext";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { api } from "@/config/api";
+import { parseCookies } from "nookies";
+import { AxiosResponse } from "axios/index";
 
 
 const Page = () => {
-	const {user} = useAuth();
+	const {setUser, logout, isAuthenticated} = useAuth();
 	const router: AppRouterInstance = useRouter();
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -51,9 +54,32 @@ const Page = () => {
 	const openModalShopify = () => setIsOpenShopify(true);
 	const closeModalShopify = () => setIsOpenShopify(false);
 
-	const tabClasses = (index: number) =>
-		`inline-block w-full p-4 rounded-tl-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`
 
+	const getUser = (): void => {
+		api.get('user', {
+			headers: {
+				'Authorization': `Bearer ${parseCookies()['auth_token']}`,
+				'Content-Type': 'application/json'
+			}
+		}).then((res: AxiosResponse): void => {
+			console.log("User: ", res.data);
+			setUser(res.data);
+		}).catch(error => {
+			console.error("Error fetching user: ", error);
+			logout();
+		});
+	}
+
+	const authToken = parseCookies()['auth_token'];
+
+	useEffect((): void => {
+		if (isAuthenticated()) {
+			getUser()
+		}
+	}, [authToken]);
+
+	const tabClasses = (index: number): string =>
+		`inline-block w-full p-4 rounded-tl-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`
 
 	return (
 		<LayoutCustom>

@@ -9,7 +9,7 @@ import {useAuth} from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png"
 
 const TopBar = () => {
-    const { logout, user } = useAuth()
+    const { logout } = useAuth()
 
     return (
         <nav className="c-topbar">
