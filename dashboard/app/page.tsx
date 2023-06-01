@@ -4,6 +4,7 @@ import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
 
 
 
@@ -15,9 +16,9 @@ const Home = () => {
 		{
 			onSuccess: (data) => {
 				console.log('data', data)
-				localStorage.setItem('auth_token', data.data.auth_token);
-				localStorage.setItem('magic_link_token', data.data.user.magic_link_token);
-					router.push('/checkmail')
+				setCookie('magic_link_token', data.data.user.magic_link_token);
+				setCookie('auth_token', data.data.auth_token);
+					router.push('/checkmark')
 			},
 			onError: (error): void => {
 				console.log('error', error);
@@ -35,7 +36,7 @@ const Home = () => {
 		<div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:p-8 p-8">
 			<div className="grid w-full ">
 				<div className="sm:mx-auto sm:w-full p-8 sm:max-w-md">
-					<img src='/logo.png' className='mx-auto h-12 w-auto'/>
+					<img src='/logo.png' className='mx-auto h-12 w-auto' alt='logo'/>
 					<h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Se connecter</h1>
 					<p className="mt-5 mb-5 text-center text-sm text-gray-600">
 						Bienvenue à nouveau ! Veuillez saisir vos coordonnées.
@@ -51,7 +52,7 @@ const Home = () => {
 						</div>
 						<form className="mb-5" onSubmit={handleSubmit}>
 							<div className="pb-5">
-								<label className="block text-sm font-medium text-gray-700 text-gray-400 mb-1" htmlFor="email">
+								<label className="block text-sm font-medium  mb-1" htmlFor="email">
 									Email
 								</label>
 								<input
