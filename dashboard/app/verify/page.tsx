@@ -7,16 +7,18 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import { setCookie } from "nookies";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { AxiosResponse } from "axios";
 
 const VerifyTokenPage = () => {
-	const router = useRouter();
+	const router: AppRouterInstance = useRouter();
 	const { setUser } = useAuth();
 	const queryClient = useQueryClient();
 
 	const token: any = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get('magic_link_token') : null;
 
 	const verifyTokenMutation = useMutation(
-		() => api.post(`/auth/magic-link/${token}`).then((res) => res.data.user),
+		() => api.post(`/auth/magic-link/${token}`).then((res: AxiosResponse) => res.data.user),
 		{
 			onSuccess: (user) => {
 				router.push('/dashboard');
@@ -24,9 +26,8 @@ const VerifyTokenPage = () => {
 		}
 	);
 
-	useEffect(() => {
+	useEffect((): void => {
 		if (token) {
-			console.log('IF token', token)
 			verifyTokenMutation.mutate();
 		} else {
 			router.push('/');

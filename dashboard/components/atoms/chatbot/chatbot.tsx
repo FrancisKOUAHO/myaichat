@@ -13,7 +13,7 @@ import Image from "next/image";
 import Shopify from "@/public/shopify.png";
 
 
-const Chatbot = (Props) => {
+const Chatbot = (Props: { setIsOpenMyChatBots: (arg0: boolean) => void; }) => {
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);

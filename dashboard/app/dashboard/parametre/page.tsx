@@ -21,7 +21,7 @@ const Page = () => {
 	const openModalModifier = () => setIsOpenModifier(true);
 	const closeModalModifier = () => setIsOpenModifier(false);
 
-	const userID: string = String(user.id);
+	const userID = String(user.id);
 
 	const fetchPost = async (userID: any) => {
 		const response: AxiosResponse = await api.get(`posts/${userID}/posts`);
@@ -41,25 +41,11 @@ const Page = () => {
 		}
 	);
 
-		const {status, data: posts, error} = useQuery({
-			queryKey: ['posts', userID],
-			queryFn: () => fetchPost(userID),
-			enabled: userID !== undefined
-		});
-
-	console.log('posts', posts?.data)
-
-	const deletePost = useMutation((data: any) =>
-			api.delete(`posts/${data}/posts`),
-		{
-			onSuccess: (data) => {
-				toast(`content envoyé a votre bot`, {position: toast.POSITION.BOTTOM_CENTER});
-			},
-			onError: (error): void => {
-				console.log('error', error);
-			},
-		}
-	);
+	const {status, data: posts, error} = useQuery({
+		queryKey: ['posts', userID],
+		queryFn: () => fetchPost(userID),
+		enabled: userID !== undefined
+	});
 
 	const handleSubmit = (event: any): void => {
 		event.preventDefault();
@@ -85,7 +71,7 @@ const Page = () => {
 							</thead>
 							<tbody className="mt-[2%] bg-white">
 							{
-								posts?.data && Array(posts.data).map((post: any) => {
+								posts && Array(posts.data).map((post: any) => {
 									return (
 										<>
 											<tr className="bg-white">
