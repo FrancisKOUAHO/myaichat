@@ -1,26 +1,33 @@
 "use client"
 
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Dialog, Transition } from '@headlessui/react';
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { toast } from "react-toastify";
 import { useAuth } from "@/context/AuthContext";
+import { AxiosResponse } from "axios";
 
 const Page = () => {
-	const {user} = useAuth();
+	const { user } = useAuth();
 
 	const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
 	const [isOpenModifier, setIsOpenModifier] = useState(false);
-	const [posts, setPosts] = useState([]);
 
 	const openModalVisualiser = () => setIsOpenVisualiser(true);
 	const closeModalVisualiser = () => setIsOpenVisualiser(false);
 	const openModalModifier = () => setIsOpenModifier(true);
 	const closeModalModifier = () => setIsOpenModifier(false);
 
+	const userID: string = String(user.id);
+
+	const fetchPost = async (userID: any) => {
+		const response: AxiosResponse = await api.get(`posts/${userID}/posts`);
+
+		return response;
+	};
 
 	const createPost = useMutation((data: any) =>
 			api.post('posts/create', data),
@@ -34,22 +41,16 @@ const Page = () => {
 		}
 	);
 
+		const {status, data: posts, error} = useQuery({
+			queryKey: ['posts', userID],
+			queryFn: () => fetchPost(userID),
+			enabled: userID !== undefined
+		});
 
-	const getPost = useMutation((data: any) =>
-			api.get(`posts/${data}/posts`),
-		{
-			onSuccess: (data) => {
-				setPosts(data.data);
-			},
-			onError: (error): void => {
-				console.log('error', error);
-			},
-		}
-	);
-
+	console.log('posts', posts?.data)
 
 	const deletePost = useMutation((data: any) =>
-			api.delete(`posts/${data}/posts`, data),
+			api.delete(`posts/${data}/posts`),
 		{
 			onSuccess: (data) => {
 				toast(`content envoyé a votre bot`, {position: toast.POSITION.BOTTOM_CENTER});
@@ -60,24 +61,11 @@ const Page = () => {
 		}
 	);
 
-
 	const handleSubmit = (event: any): void => {
 		event.preventDefault();
-		const { content } = event.target.elements;
+		const {content} = event.target.elements;
 		createPost.mutate({content: content.value, user_id: user.id});
 	};
-
-
-	const handleDelete = (id: any): void => {
-		deletePost.mutate(id);
-	}
-
-	useEffect(() => {
-		if (user) {
-			getPost.mutate(user.id);
-		}
-	}, []);
-
 
 	return (
 		<LayoutCustom>
@@ -97,7 +85,7 @@ const Page = () => {
 							</thead>
 							<tbody className="mt-[2%] bg-white">
 							{
-								posts && posts.map((post: any) => {
+								posts?.data && Array(posts.data).map((post: any) => {
 									return (
 										<>
 											<tr className="bg-white">
@@ -127,7 +115,8 @@ const Page = () => {
 															</Transition.Child>
 															<div className="fixed inset-0 overflow-y-auto">
 																<div className="flex min-h-full items-center justify-center p-4 text-center">
-																	<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95"
+																	<Transition.Child as={Fragment} enter="ease-out duration-300"
+																										enterFrom="opacity-0 scale-95"
 																										enterTo="opacity-100 scale-100" leave="ease-in duration-200"
 																										leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
 																		<Dialog.Panel
@@ -164,8 +153,10 @@ const Page = () => {
 																<div className="fixed inset-0 bg-black bg-opacity-25"/>
 															</Transition.Child>
 															<div className="fixed inset-0 overflow-y-auto">
-																<form onSubmit={handleSubmit} className="flex min-h-full items-center justify-center p-4 text-center">
-																	<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95"
+																<form onSubmit={handleSubmit}
+																			className="flex min-h-full items-center justify-center p-4 text-center">
+																	<Transition.Child as={Fragment} enter="ease-out duration-300"
+																										enterFrom="opacity-0 scale-95"
 																										enterTo="opacity-100 scale-100" leave="ease-in duration-200"
 																										leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
 																		<Dialog.Panel
@@ -199,9 +190,6 @@ const Page = () => {
 														</Dialog>
 													</Transition>
 													<button
-														onClick={() => {
-															handleDelete(user.id)
-														}}
 														className=" ml-2 inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 														<AiOutlineDelete
 															className="-ml-0.5 mr-1.5 h-5 w-5 "/>
