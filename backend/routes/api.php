@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopifyScraperController;
-use App\Http\Controllers\SubscriptionController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +29,6 @@ Route::prefix('shopify')->group(function () {
     Route::post('/scrape', [ShopifyScraperController::class, 'scrapeShopify']);
 });
 
-
 Route::group(['prefix' => 'posts'], function () {
     Route::get('{user}/posts', [PostController::class, 'getUserPosts']);
     Route::get('posts', [PostController::class, 'index']);
@@ -39,9 +38,9 @@ Route::group(['prefix' => 'posts'], function () {
     Route::delete('{post}', [PostController::class, 'destroy']);
 });
 
+Route::middleware('auth:sanctum')->group(function () {
 
-Route::prefix('subscription')->group(function () {
-    Route::post('/check_subscription', [SubscriptionController::class, 'checkSubscription']);
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
 });
-
-Route::get('/sendUserIdToChatbot', [AuthController::class, 'sendUserIdToChatbot']);

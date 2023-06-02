@@ -21,7 +21,6 @@ class PostController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validatedData = $request->validate([
-            'title' => 'required',
             'content' => 'required',
             'user_id' => 'required|exists:users,id',
         ]);
@@ -40,7 +39,6 @@ class PostController extends Controller
     public function update(Request $request, $id): JsonResponse
     {
         $validatedData = $request->validate([
-            'title' => 'required',
             'content' => 'required',
             'user_id' => 'required|exists:users,id',
         ]);

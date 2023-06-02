@@ -4,10 +4,13 @@ import React, {useState} from "react";
 import '../styles/_main.scss'
 import 'react-toastify/dist/ReactToastify.css';
 
-import {ToastContainer} from 'react-toastify';
 import {Hydrate, QueryClient, QueryClientProvider,} from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
 import AuthContextProvider from "@/context/AuthContext";
+
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const RootLayout = ({children}: { children: React.ReactNode }) => {
