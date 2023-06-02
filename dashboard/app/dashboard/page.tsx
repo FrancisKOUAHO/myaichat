@@ -36,7 +36,7 @@ import { AxiosResponse } from "axios/index";
 
 
 const Page = () => {
-	const {setUser, logout, isAuthenticated} = useAuth();
+	const { logout } = useAuth();
 	const router: AppRouterInstance = useRouter();
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -53,30 +53,6 @@ const Page = () => {
 	const closeModalWidget = () => setIsOpenWidget(false);
 	const openModalShopify = () => setIsOpenShopify(true);
 	const closeModalShopify = () => setIsOpenShopify(false);
-
-
-	const getUser = (): void => {
-		api.get('user', {
-			headers: {
-				'Authorization': `Bearer ${parseCookies()['auth_token']}`,
-				'Content-Type': 'application/json'
-			}
-		}).then((res: AxiosResponse): void => {
-			console.log("User: ", res.data);
-			setUser(res.data);
-		}).catch(error => {
-			console.error("Error fetching user: ", error);
-			logout();
-		});
-	}
-
-	const authToken = parseCookies()['auth_token'];
-
-	useEffect((): void => {
-		if (isAuthenticated()) {
-			getUser()
-		}
-	}, [authToken]);
 
 	const tabClasses = (index: number): string =>
 		`inline-block w-full p-4 rounded-tl-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`

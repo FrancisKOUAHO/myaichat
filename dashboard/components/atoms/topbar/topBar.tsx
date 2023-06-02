@@ -7,9 +7,36 @@ import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import {useAuth} from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png"
+import { api } from "@/config/api";
+import { parseCookies } from "nookies";
+import { AxiosResponse } from "axios";
+import { useEffect } from "react";
 
 const TopBar = () => {
-    const { logout } = useAuth()
+    const { logout, setUser, isAuthenticated } = useAuth()
+
+    const getUser = (): void => {
+        api.get('user', {
+            headers: {
+                'Authorization': `Bearer ${parseCookies()['auth_token']}`,
+                'Content-Type': 'application/json'
+            }
+        }).then((res: AxiosResponse): void => {
+            console.log("User: ", res.data);
+            setUser(res.data);
+        }).catch(error => {
+            console.error("Error fetching user: ", error);
+            logout();
+        });
+    }
+
+    const authToken = parseCookies()['auth_token'];
+
+    useEffect((): void => {
+        if (isAuthenticated()) {
+            getUser()
+        }
+    }, [authToken]);
 
     return (
         <nav className="c-topbar">
