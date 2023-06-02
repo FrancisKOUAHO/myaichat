@@ -1,57 +1,22 @@
 "use client"
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Dialog, Transition } from '@headlessui/react';
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { api } from "@/config/api";
-import { toast } from "react-toastify";
 import { useAuth } from "@/context/AuthContext";
-import { AxiosResponse } from "axios";
 
 const Page = () => {
 	const { user } = useAuth();
 
 	const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
 	const [isOpenModifier, setIsOpenModifier] = useState(false);
+	const [posts, setPosts] = useState<any>(null);
 
 	const openModalVisualiser = () => setIsOpenVisualiser(true);
 	const closeModalVisualiser = () => setIsOpenVisualiser(false);
 	const openModalModifier = () => setIsOpenModifier(true);
 	const closeModalModifier = () => setIsOpenModifier(false);
-
-	const userID = String(user.id);
-
-	const fetchPost = async (userID: any) => {
-		const response: AxiosResponse = await api.get(`posts/${userID}/posts`);
-
-		return response;
-	};
-
-	const createPost = useMutation((data: any) =>
-			api.post('posts/create', data),
-		{
-			onSuccess: (data) => {
-				toast(`content envoyé a votre bot`, {position: toast.POSITION.BOTTOM_CENTER});
-			},
-			onError: (error): void => {
-				console.log('error', error);
-			},
-		}
-	);
-
-	const {status, data: posts, error} = useQuery({
-		queryKey: ['posts', userID],
-		queryFn: () => fetchPost(userID),
-		enabled: userID !== undefined
-	});
-
-	const handleSubmit = (event: any): void => {
-		event.preventDefault();
-		const {content} = event.target.elements;
-		createPost.mutate({content: content.value, user_id: user.id});
-	};
 
 	return (
 		<LayoutCustom>
@@ -139,7 +104,7 @@ const Page = () => {
 																<div className="fixed inset-0 bg-black bg-opacity-25"/>
 															</Transition.Child>
 															<div className="fixed inset-0 overflow-y-auto">
-																<form onSubmit={handleSubmit}
+																<form
 																			className="flex min-h-full items-center justify-center p-4 text-center">
 																	<Transition.Child as={Fragment} enter="ease-out duration-300"
 																										enterFrom="opacity-0 scale-95"
