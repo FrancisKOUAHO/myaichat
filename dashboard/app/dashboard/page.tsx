@@ -40,6 +40,7 @@ const Page = () => {
 	const router: AppRouterInstance = useRouter();
 
 	const [isOpen, setIsOpen] = useState(false);
+	const [isOpenSecond, setIsOpenSecond] = useState(false);
 	const [isOpenWidget, setIsOpenWidget] = useState(false);
 	const [isOpenShopify, setIsOpenShopify] = useState(false);
 	const [isCardVisible, setCardVisible] = useState(true);
@@ -49,6 +50,8 @@ const Page = () => {
 	const handleTabClick = (index: number) => setSelectedTab(index);
 	const openModal = () => setIsOpen(true);
 	const closeModal = () => setIsOpen(false);
+	const openModalSecond = () => setIsOpenSecond(true);
+	const closeModalSecond = () => setIsOpenSecond(false);
 	const openModalWidget = () => setIsOpenWidget(true);
 	const closeModalWidget = () => setIsOpenWidget(false);
 	const openModalShopify = () => setIsOpenShopify(true);
@@ -140,7 +143,8 @@ const Page = () => {
 										</div>
 									</form>
 								</div>
-							</Modal></>
+							</Modal>
+						</>
 					) : (
 						<>
 							<div className="w-full overflow-y-auto">
@@ -150,12 +154,68 @@ const Page = () => {
 											className="mt-[2%] w-full p-4 text-center bg-indigo-200  rounded-lg shadow sm:p-8">
 											<div className="flex items-center justify-between border-b border-gray-200">
 												<span className="font-bold text-gray-900">My Chatbots</span>
-												<a href="#"
-													 className="text-white bg-indigo-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-													Créer un
-													nouveau chatbot
-												</a>
+												<button onClick={openModalSecond}
+														className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.775rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+													<AiOutlinePlus className="-ml-0.5 mr-1.5 h-5 w-5"/>
+													Créer un nouveau chatbot
+												</button>
 											</div>
+											<Modal  isOpen={isOpenSecond} closeModal={closeModalSecond}>
+												<div className=" max-w-xl px-20 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+													<div className="flex justify-start space-x-4">
+														<button onClick={closeModal}
+																className="text-gray-600 focus:outline-none hover:text-gray-700">
+															<AiOutlineCloseCircle/>
+														</button>
+													</div>
+													<form className="mx-auto">
+														<input type="hidden" name="authenticity_token"
+															   value="Stu6q1xrADvdThGxkoNr3gPfkU8INBlg8uP0bVRqS5wD31CwZCWUIb-a2J1zxyinHPdr54TIm8NeVuf8sFlnBg"
+															   autoComplete="off"/>
+														<div>
+															<div className="mx-auto flex h-12 w-12 items-center justify-center">
+																<Image
+																	src={Shopify} width="100" height="100" alt={''}/>
+															</div>
+															<div className="mt-3 text-center sm:mt-5">
+																<h3 className="text-base font-semibold leading-6 text-gray-900"
+																	id="modal-title">
+																	Connectons
+																	votre magasin !
+																</h3>
+																<div className="mt-2">
+																	<p className="text-sm text-gray-500">
+																		Nous parcourons les pages de votre site web et créons
+																		automatiquement un chatbot à partir de votre contenu.
+																		automatiquement un chatbot à partir de votre contenu.
+																	</p>
+																</div>
+															</div>
+															<div className="w-full mt-4">
+																<div className="sm:col-span-4">
+																	<div className="mt-2">
+																		<div
+																			className="mx-auto flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
+																			<input placeholder="myshop" name="shop"
+																				   autoComplete="off"
+																				   className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																				   type="text"/>
+																			<span
+																				className="flex select-none items-center pr-3 text-gray-500 sm:text-sm">.myshopify.com</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div className="w-full mt-10 justify-end flex">
+															<button name="button"
+																	className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+																Connecter
+															</button>
+														</div>
+													</form>
+												</div>
+											</Modal>
 											<div className="mt-[2%] bg-white rounded-lg ">
 												<div className="flex justify-between  gap-8 p-6 ">
 													<div className="m-auto">
