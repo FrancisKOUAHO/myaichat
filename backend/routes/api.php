@@ -36,7 +36,7 @@ Route::group(['prefix' => 'posts'], function () {
     Route::delete('{post}', [PostController::class, 'destroy']);
 });
 
-Route::group(['prefix' => 'shopify'], function () {
+Route::group(['prefix' => 'stores'], function () {
     Route::post('shopify-store', [ShopifyStoreController::class, 'store']);
     Route::get('/stores', [ShopifyStoreController::class, 'index']);
     Route::get('/stores/{id}', [ShopifyStoreController::class, 'show']);
