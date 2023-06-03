@@ -28,12 +28,12 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 Route::group(['prefix' => 'posts'], function () {
-    Route::get('{user}/posts', [PostController::class, 'getUserPosts']);
-    Route::get('posts', [PostController::class, 'index']);
-    Route::post('create', [PostController::class, 'store']);
-    Route::get('{post}', [PostController::class, 'show']);
-    Route::put('{post}', [PostController::class, 'update']);
-    Route::delete('{post}', [PostController::class, 'destroy']);
+    Route::get('/{user}/posts', [PostController::class, 'getUserPosts']);
+    Route::get('/posts', [PostController::class, 'index']);
+    Route::post('/create', [PostController::class, 'store']);
+    Route::get('/{post}', [PostController::class, 'show']);
+    Route::put('/{post}', [PostController::class, 'update']);
+    Route::delete('/{post}', [PostController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'stores'], function () {
