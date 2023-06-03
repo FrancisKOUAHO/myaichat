@@ -36,18 +36,7 @@ import { parseCookies } from "nookies";
 import { AxiosResponse } from "axios/index";
 import Chatbot from "@/components/atoms/chatbot/chatbot";
 import { postScrape } from "@/hook/useScrape";
-import { useMutation, useQuery } from "@tanstack/react-query";
-
-function getCookie(name: string | any[]) {
-  const cookies = document.cookie.split(";");
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith(name + "=")) {
-      return cookie.substring(name.length + 1);
-    }
-  }
-  return "";
-}
+import { useQuery } from "@tanstack/react-query";
 
 const Page = () => {
   const { logout } = useAuth();
@@ -76,47 +65,6 @@ const Page = () => {
       index === selectedTab ? "bg-indigo-100" : "bg-gray-50"
     }`;
 
-  const scrapeMutation = useMutation(
-    (data: any) => api.post("products/scrape", data),
-    {
-      onSuccess: (data: any) => {
-        console.log("data", data);
-      },
-      onError: (error): void => {
-        console.log("error", error);
-      },
-    }
-  );
-
-  const shopMutation = useMutation(
-    (data: any) => api.post("shopify/shopify-store", data),
-    {
-      onSuccess: (data) => {
-        console.log("data", data);
-      },
-      onError: (error): void => {
-        console.log("error", error);
-      },
-    }
-  );
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    const { url } = event.target.elements;
-    const userId: any = +getCookie("userId");
-    const requestData = {
-      url: url.value,
-      user_id: userId,
-    };
-    console.log("data", requestData);
-    scrapeMutation.mutateAsync(requestData);
-    handleSubmitShop(requestData);
-  };
-
-  const handleSubmitShop = (data: any) => {
-    shopMutation.mutateAsync(data);
-  };
-
   return (
     <LayoutCustom>
       <>
@@ -144,7 +92,7 @@ const Page = () => {
                         <AiOutlineCloseCircle />
                       </button>
                     </div>
-                    <form className="mx-auto" onSubmit={handleSubmit}>
+                    <form className="mx-auto">
                       <input
                         type="hidden"
                         name="authenticity_token"
@@ -185,8 +133,11 @@ const Page = () => {
                                   name="url"
                                   autoComplete="off"
                                   className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                  type="url"
+                                  type="text"
                                 />
+                                <span className="flex select-none items-center pr-3 text-gray-500 sm:text-sm">
+                                  .myshopify.com
+                                </span>
                               </div>
                             </div>
                           </div>

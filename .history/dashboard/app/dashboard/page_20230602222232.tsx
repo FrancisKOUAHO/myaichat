@@ -144,7 +144,7 @@ const Page = () => {
                         <AiOutlineCloseCircle />
                       </button>
                     </div>
-                    <form className="mx-auto" onSubmit={handleSubmit}>
+                    <form className="mx-auto">
                       <input
                         type="hidden"
                         name="authenticity_token"

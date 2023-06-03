@@ -6,20 +6,10 @@ import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Dialog, Transition } from "@headlessui/react";
 import { useAuth } from "@/context/AuthContext";
 import { useMutation } from "@tanstack/react-query";
-import { api } from "@/config/api";
-
-function getCookie(name: string | any[]) {
-  const cookies = document.cookie.split(";");
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith(name + "=")) {
-      return cookie.substring(name.length + 1);
-    }
-  }
-  return "";
-}
 
 const Page = () => {
+  const { user } = useAuth();
+
   const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
   const [isOpenModifier, setIsOpenModifier] = useState(false);
   const [posts, setPosts] = useState<any>(null);
@@ -31,7 +21,7 @@ const Page = () => {
   const closeModalModifier = () => setIsOpenModifier(false);
 
   const getScrapeMutation: any = useMutation(
-    (data: any) => api.get(`stores/user/${data}/stores`),
+    () => api.get("shopify/user/1/stores"),
     {
       onSuccess: (data: any) => {
         console.log("data", data);
@@ -43,9 +33,11 @@ const Page = () => {
     }
   );
 
+  console.log("ShopifyStore", ShopifyStore);
+
   useEffect(() => {
-    getScrapeMutation.mutate(getCookie("userId"));
-  }, []);
+    getScrapeMutation.mutate();
+  }, [getScrapeMutation]);
 
   return (
     <LayoutCustom>
@@ -66,21 +58,21 @@ const Page = () => {
                 </tr>
               </thead>
               <tbody className="mt-[2%] bg-white">
-                {ShopifyStore &&
-                  ShopifyStore.map((shop: any) => {
+                {posts &&
+                  Array(posts.data).map((post: any) => {
                     return (
                       <>
                         <tr className="bg-white">
                           <td className="p-3">
                             <div className="m-auto">
                               <dd className="text-gray-500 text-[0.775rem]">
-                                {shop.url}
+                                myshootbox.com
                               </dd>
                             </div>
                           </td>
                           <td className="flex items-center justify-center p-3">
                             <p className="text-gray-500 text-[0.775rem] overflow-hidden overflow-ellipsis whitespace-nowrap w-44 text-center">
-                              {shop.content}
+                              {post.content}
                             </p>
                           </td>
                           <td className="p-3 ">
@@ -132,7 +124,8 @@ const Page = () => {
                                         </Dialog.Title>
                                         <div className="mt-2 overflow-auto max-h-[50vh]">
                                           <p className="text-sm text-gray-500">
-                                            {shop.content}
+                                            {" "}
+                                            {post.content}{" "}
                                           </p>
                                         </div>
                                         <div className="mt-4">

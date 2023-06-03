@@ -43,6 +43,8 @@ const Page = () => {
     }
   );
 
+  console.log("ShopifyStore", ShopifyStore);
+
   useEffect(() => {
     getScrapeMutation.mutate(getCookie("userId"));
   }, []);

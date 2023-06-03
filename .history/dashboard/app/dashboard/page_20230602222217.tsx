@@ -144,7 +144,7 @@ const Page = () => {
                         <AiOutlineCloseCircle />
                       </button>
                     </div>
-                    <form className="mx-auto" onSubmit={handleSubmit}>
+                    <form className="mx-auto">
                       <input
                         type="hidden"
                         name="authenticity_token"
@@ -185,8 +185,11 @@ const Page = () => {
                                   name="url"
                                   autoComplete="off"
                                   className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                  type="url"
+                                  type="text"
                                 />
+                                <span className="flex select-none items-center pr-3 text-gray-500 sm:text-sm">
+                                  .myshopify.com
+                                </span>
                               </div>
                             </div>
                           </div>

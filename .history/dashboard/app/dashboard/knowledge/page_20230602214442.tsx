@@ -13,11 +13,29 @@ import { log } from "console";
 const Page = () => {
   const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
   const [isOpenModifier, setIsOpenModifier] = useState(false);
+  const [ShopifyStore, setShopifyStore] = useState<any[]>([]);
 
   const openModalVisualiser = () => setIsOpenVisualiser(true);
   const closeModalVisualiser = () => setIsOpenVisualiser(false);
   const openModalModifier = () => setIsOpenModifier(true);
   const closeModalModifier = () => setIsOpenModifier(false);
+
+  const getScrapeMutation: any = useMutation(
+    () => api.get("shopify/user/1/stores"),
+    {
+      onSuccess: (data: any) => {
+        console.log("data", data);
+        setShopifyStore(data.data);
+      },
+      onError: (error: any): void => {
+        console.log("error", error);
+      },
+    }
+  );
+
+  useEffect(() => {
+    getScrapeMutation.mutate();
+  }, [getScrapeMutation]);
 
   return (
     <LayoutCustom>

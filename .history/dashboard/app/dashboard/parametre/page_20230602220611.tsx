@@ -20,6 +20,8 @@ function getCookie(name: string | any[]) {
 }
 
 const Page = () => {
+  const { user } = useAuth();
+
   const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
   const [isOpenModifier, setIsOpenModifier] = useState(false);
   const [posts, setPosts] = useState<any>(null);
@@ -42,6 +44,8 @@ const Page = () => {
       },
     }
   );
+
+  console.log("ShopifyStore", ShopifyStore);
 
   useEffect(() => {
     getScrapeMutation.mutate(getCookie("userId"));
