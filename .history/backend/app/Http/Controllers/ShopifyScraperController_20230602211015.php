@@ -11,14 +11,14 @@ class ShopifyScraperController extends Controller
 {
 
     public function index(Request $request): JsonResponse
-    {
-        $userId = $request->user()->id;
-        $products = ShopifyProduct::where('user_id', $userId)->get();
-        return response()->json($products);
-    }
+{
+    $userId = $request->user()->id;
+    $products = ShopifyProduct::where('user_id', $userId)->get();
+    return response()->json($products);
+}
 
 
-    public function show($id): JsonResponse
+public function show($id): JsonResponse
     {
         $product = ShopifyProduct::find($id);
 

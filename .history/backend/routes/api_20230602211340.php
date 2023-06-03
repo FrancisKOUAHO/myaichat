@@ -38,25 +38,29 @@ Route::group(['prefix' => 'posts'], function () {
 
 Route::group(['prefix' => 'shopify'], function () {
     Route::post('shopify-store', [ShopifyStoreController::class, 'store']);
-    Route::get('/stores', [ShopifyStoreController::class, 'index']);
-    Route::get('/stores/{id}', [ShopifyStoreController::class, 'show']);
-    Route::post('/stores', [ShopifyStoreController::class, 'store']);
-    Route::put('/stores/{id}', [ShopifyStoreController::class, 'update']);
-    Route::delete('/stores/{id}', [ShopifyStoreController::class, 'destroy']);
-    Route::get('/user/{user_id}/stores', [ShopifyStoreController::class, 'getUserStores']);
+    Route::get('/stores', 'ShopifyStoreController@index');
+    Route::get('/stores/{id}', 'ShopifyStoreController@show');
+    Route::post('/stores', 'ShopifyStoreController@store');
+    Route::put('/stores/{id}', 'ShopifyStoreController@update');
+    Route::delete('/stores/{id}', 'ShopifyStoreController@destroy');
+    Route::get('/user/{user_id}/stores', 'ShopifyStoreController@getUserStores');
 });
+
+
 
 Route::group(['prefix' => 'products'], function () {
     Route::post('scrape', [ShopifyScraperController::class, 'scrapeShopify']);
-    Route::get('/products', [ShopifyProductController::class, 'index']);
-    Route::get('/products/{id}', [ShopifyProductController::class, 'show']);
-    Route::post('/products', [ShopifyProductController::class, 'store']);
-    Route::put('/products/{id}', [ShopifyProductController::class, 'update']);
-    Route::delete('/products/{id}', [ShopifyProductController::class, 'destroy']);
-    Route::get('/user/{user_id}/products', [ShopifyProductController::class, 'getUserProducts']);
+    Route::get('/products', 'ShopifyProductController@index');
+    Route::get('/products/{id}', 'ShopifyProductController@show');
+    Route::post('/products', 'ShopifyProductController@store');
+    Route::put('/products/{id}', 'ShopifyProductController@update');
+    Route::delete('/products/{id}', 'ShopifyProductController@destroy');
+    Route::get('/user/{user_id}/products', 'ShopifyProductController@getUserProducts');
 });
 
+
 Route::middleware('auth:sanctum')->group(function () {
+
     Route::get('/user', function (Request $request) {
         return $request->user();
     });

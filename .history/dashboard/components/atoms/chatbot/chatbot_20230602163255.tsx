@@ -28,7 +28,7 @@ const Chatbot = (Props: { setIsOpenMyChatBots: (arg0: boolean) => void; }) => {
 	const closeModal = () => setIsOpen(false);
 
 	const scrapeMutation = useMutation((data: any) =>
-			api.post('products/scrape', data),
+			api.post('shopify/scrape', data),
 		{
 			onSuccess: (data) => {
 				console.log('data', data)

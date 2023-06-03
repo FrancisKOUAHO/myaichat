@@ -6,11 +6,14 @@ import { api } from "@/config/api";
 import { useRouter } from "next/navigation";
 import { setCookie } from "nookies";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { useAuth } from "@/context/AuthContext";
 
 
 
 const Home = () => {
 	const router: AppRouterInstance = useRouter();
+
+	const { products } = useAuth();
 
 	const loginMutation = useMutation((email: void) =>
 			api.post('auth/magic-link', {email}),

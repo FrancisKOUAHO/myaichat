@@ -10,6 +10,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 	const [user, setUser] = useState<any>(null);
+	const [products, setProducts] = useState<any>(null);
 	const router = useRouter();
 
 	const logout = (): void => {
@@ -24,7 +25,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{user, setUser, isAuthenticated, logout}}>
+		<AuthContext.Provider value={{user, setUser, isAuthenticated, logout, setProducts, products}}>
 			{children}
 		</AuthContext.Provider>
 	);
