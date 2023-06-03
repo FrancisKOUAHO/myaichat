@@ -17,7 +17,7 @@ const Page = () => {
   const closeModalModifier = () => setIsOpenModifier(false);
 
   const getScrapeMutation: any = useMutation(
-    () => api.get("shopify/user/1/stores"),
+    (data: any) => api.get("shopify/user/1/stores", data),
     {
       onSuccess: (data: any) => {
         console.log("data", data);
