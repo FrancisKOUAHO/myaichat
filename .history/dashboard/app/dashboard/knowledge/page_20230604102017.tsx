@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { useQuery } from "@tanstack/react-query";
+import { fetchScrape } from "@/hook/useScrape";
+import { log } from "console";
 import { api } from "@/config/api";
 
 function getCookie(name: string | any[]) {
@@ -27,6 +29,8 @@ const Page = () => {
     api.get(`/products/user/${userId}/products`)
   );
 
+  console.log("scrapeData", scrapeData);
+
   return (
     <LayoutCustom>
       <div className="w-full overflow-y-auto">
@@ -39,37 +43,22 @@ const Page = () => {
               <thead className="text-white mt-[2%] bg-indigo-200 rounded-lg">
                 <tr className="bg-indigo-600">
                   <th className="p-3">Boutique</th>
-                  <th className="p-3">url du produit</th>
                   <th className="p-3">Status</th>
                 </tr>
               </thead>
               <tbody className="mt-[2%] bg-white">
-                {scrapeData &&
-                  scrapeData.data.map((product: any) => {
-                    return (
-                      <tr key={product.id}>
-                        <td className="p-3">
-                          <div className="flex align-items-center">
-                            <div className="ml-3">
-                              <div className="text-black">{product.title}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="p-3">
-                          <div className="flex align-items-center">
-                            <div className="ml-3">
-                              <div className="text-black">
-                                {product.full_url}
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="p-3">
-                          <span className="bg-green-600 rounded-full inline-block h-3 w-3"></span>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                <tr className="bg-white">
+                  <td className="p-3">
+                    <div className="m-auto">
+                      <dd className="text-gray-500 text-[0.775rem]">
+                        myshootbox.com
+                      </dd>
+                    </div>
+                  </td>
+                  <td className="p-3">
+                    <span className="bg-green-600 rounded-full inline-block h-3 w-3"></span>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

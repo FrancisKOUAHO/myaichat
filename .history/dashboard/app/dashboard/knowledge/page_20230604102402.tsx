@@ -27,6 +27,8 @@ const Page = () => {
     api.get(`/products/user/${userId}/products`)
   );
 
+  console.log("scrapeData", scrapeData);
+
   return (
     <LayoutCustom>
       <div className="w-full overflow-y-auto">
@@ -39,7 +41,6 @@ const Page = () => {
               <thead className="text-white mt-[2%] bg-indigo-200 rounded-lg">
                 <tr className="bg-indigo-600">
                   <th className="p-3">Boutique</th>
-                  <th className="p-3">url du produit</th>
                   <th className="p-3">Status</th>
                 </tr>
               </thead>
@@ -51,16 +52,7 @@ const Page = () => {
                         <td className="p-3">
                           <div className="flex align-items-center">
                             <div className="ml-3">
-                              <div className="text-black">{product.title}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="p-3">
-                          <div className="flex align-items-center">
-                            <div className="ml-3">
-                              <div className="text-black">
-                                {product.full_url}
-                              </div>
+                              <div className="">{product.title}</div>
                             </div>
                           </div>
                         </td>

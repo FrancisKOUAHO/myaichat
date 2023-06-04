@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopifyScraperController;
 use App\Http\Controllers\ShopifyStoreController;
-use App\Http\Controllers\ShopifyProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

@@ -27,6 +27,8 @@ const Page = () => {
     api.get(`/products/user/${userId}/products`)
   );
 
+  console.log("scrapeData", scrapeData);
+
   return (
     <LayoutCustom>
       <div className="w-full overflow-y-auto">
