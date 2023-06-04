@@ -28,32 +28,32 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
             Dashboard
           </Link>
           <Link
-            href="/dashboard/conversations"
+            href={"/dashboard/conversations"}
             className="hover:text-[#7a5eea]"
           >
             <AiOutlineComment />
             Conversations
           </Link>
-          <Link href="/dashboard/correction" className="hover:text-[#7a5eea]">
+          <Link href={"/dashboard/correction"} className="hover:text-[#7a5eea]">
             <AiOutlineFileSearch />
             Correction
           </Link>
-          <Link href="/dashboard/analytics" className="hover:text-[#7a5eea]">
+          <Link href={"/dashboard/analytics"} className="hover:text-[#7a5eea]">
             <AiOutlineFileSync />
             Analytics
           </Link>
-          <Link href="/dashboard/knowledge" className="hover:text-[#7a5eea]">
+          <Link href={"/dashboard/knowledge"} className="hover:text-[#7a5eea]">
             <AiOutlineShop />
             Knowledge Base
           </Link>
-          <Link href="/dashboard/parametre" className="hover:text-[#7a5eea]">
+          <Link href={"/dashboard/parametre"} className="hover:text-[#7a5eea]">
             <AiOutlineSetting />
             Parametre
           </Link>
           <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">
             PARAMÈTRES
           </p>
-          <Link href="/dashboard/offres" className="hover:text-[#7a5eea]">
+          <Link href={"/dashboard/offres"} className="hover:text-[#7a5eea]">
             <AiOutlineCreditCard />
             Offres
           </Link>
