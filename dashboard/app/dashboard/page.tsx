@@ -117,6 +117,18 @@ const Page = () => {
     shopMutation.mutateAsync(data);
   };
 
+  const fetchShopMutation = useMutation(
+    (data: any) => api.post("shopify/shopify-store", data),
+    {
+      onSuccess: (data) => {
+        console.log("data2", data);
+      },
+      onError: (error): void => {
+        console.log("error", error);
+      },
+    }
+  );
+
   return (
     <LayoutCustom>
       <>
