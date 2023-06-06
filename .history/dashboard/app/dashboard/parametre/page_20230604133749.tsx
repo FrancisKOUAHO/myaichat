@@ -4,6 +4,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Dialog, Transition } from "@headlessui/react";
+import { useAuth } from "@/context/AuthContext";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
 
@@ -21,6 +22,7 @@ function getCookie(name: string | any[]) {
 const Page = () => {
   const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
   const [isOpenModifier, setIsOpenModifier] = useState(false);
+  const [posts, setPosts] = useState<any>(null);
   const [ShopifyStore, setShopifyStore] = useState<any[]>([]);
 
   const openModalVisualiser = () => setIsOpenVisualiser(true);
