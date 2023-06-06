@@ -297,6 +297,22 @@ body {
 			this.messages = [];
 		}
 
+
+		getCookie(name) {
+			let cookieArr = document.cookie.split("; ");
+
+			for(let i = 0; i < cookieArr.length; i++) {
+				let cookiePair = cookieArr[i].split("=");
+
+				if(name == cookiePair[0]) {
+					return decodeURIComponent(cookiePair[1]);
+				}
+			}
+
+			// Retourner null si le cookie n'a pas été trouvé
+			return null;
+		}
+
 		display() {
 			const {openButton, chatBox, sendButton} = this.args;
 
@@ -334,120 +350,73 @@ body {
 			this.updateChatText(chatBox);
 
 			let outboundMessages = [...this.messages];
-			let chatbotPrompt = `
-        
-        Vous êtes un chatbot de support client utile intégré sur un site web de support client dédié à l'optimisation des ventes et à l'amélioration de l'expérience client. Je suis là pour répondre à vos questions et vous aider à booster vos ventes grâce à notre chatbot.
+			console.log("getCookie('userId');");
 
-				Notre chatbot offre de nombreux avantages pour votre entreprise :
-				
-				Guide d'Achat Personnalisé: Notre chatbot est capable de comprendre vos clients et de recommander des produits pertinents en fonction de leurs besoins et préférences.
-				
-				Disponibilité 24/7: Notre chatbot est disponible à tout moment pour aider vos clients, que ce soit le jour ou la nuit.
-				
-				Gestion des commandes: En plus de gérer les commandes, notre chatbot interagit avec les clients en fournissant des informations de commande en temps réel et en facilitant les retours.
-				
-				Analyse de données: Notre chatbot collecte et analyse les données pour améliorer en permanence l'expérience utilisateur, vous aidant ainsi à optimiser vos ventes.
-				
-			Utilisez ces métadonnées du service de support client pour répondre aux questions des clients :
-        
-        Essayez n'importe quel plan gratuitement pendant 14 jours. Annulez à tout moment.
+			let userId = this.getCookie('userId');
 
-Starter
-€39 /mois
-Commencer 14 jours d'essai gratuit
+			console.log(userId);
 
-500 réponses/mois
-
-1 000 pages web stockées
-
-2 Chatbots
-
-Support standard
-
-Formation à l'IA
-
-Pro
-€99 /mois
-Commencer 14 jours d'essai gratuit
-
-3,000 réponses/mois
-
-15,000 pages web stockées
-
-10 chatbots
-
-Membres illimités
-
-Support prioritaire
-
-Formation à l'IA
-
-Growth
-€79 /mois
-Commencer 14 jours d'essai gratuit
-
-1,500 réponses/mois
-
-5 000 pages web stockées
-
-5 Chatbots
-
-Membres illimités
-
-Support prioritaire
-
-Formation à l'IA
-				
-				Si vous souhaitez en savoir plus sur la manière dont notre chatbot peut vous aider à augmenter vos ventes et à offrir une expérience client personnalisée, n'hésitez pas à poser vos questions. Je suis là pour vous fournir des réponses claires et concises.
-        `;
-
-			outboundMessages.unshift({
-				role: 'system',
-				content: chatbotPrompt,
-			});
-
-			const apiKey = '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';
-
-			let loader = document.createElement('div');
-			loader.className = 'loader';
-
-			let loaderText = document.createElement('div');
-			loaderText.className = 'loader-text';
-			loaderText.textContent = 'Chargement...';
-
-			let chatboxMessages = chatBox.querySelector('.chatbox__messages');
-			let emptyDiv = chatboxMessages.querySelector('div');
-			chatboxMessages.insertBefore(loader, emptyDiv.nextSibling);
-
-			fetch('https://api.openai.com/v1/chat/completions', {
-				method: 'POST',
+			fetch(`http://127.0.0.1:8000/api/posts/${userId}/posts`, {
+				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${apiKey}`
-				},
-				body: JSON.stringify({
-					model: "gpt-3.5-turbo",
-					messages: outboundMessages
-				}),
-			})
-				.then(response => response.json())
-				.then(data => {
-					let botMessage = { role: "assistant", content: data.choices[0].message.content };
-					this.messages.push(botMessage);
-					this.updateChatText(chatBox);
+				}
+			}).then(response => response.json()).then(data => {
+				let chatbotPrompt = `
+				${data.content}
+				Si vous souhaitez en savoir plus sur la manière dont notre chatbot peut vous aider à augmenter vos ventes et à offrir une expérience client personnalisée,
+				 n'hésitez pas à poser vos questions.
+				 Je suis là pour vous fournir des réponses claires et concises.
+        `;
 
-					loader.remove();
-					textField.value = '';
-				})
-				.catch((error) => {
-					console.error('Error:', error);
-					this.updateChatText(chatBox);
-
-					loader.remove();
-					textField.value = '';
+				outboundMessages.unshift({
+					role: 'system',
+					content: chatbotPrompt,
 				});
 
-			textField.value = '';
+				const apiKey = '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';
+
+				let loader = document.createElement('div');
+				loader.className = 'loader';
+
+				let loaderText = document.createElement('div');
+				loaderText.className = 'loader-text';
+				loaderText.textContent = 'Chargement...';
+
+				let chatboxMessages = chatBox.querySelector('.chatbox__messages');
+				let emptyDiv = chatboxMessages.querySelector('div');
+				chatboxMessages.insertBefore(loader, emptyDiv.nextSibling);
+
+				fetch('https://api.openai.com/v1/chat/completions', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${apiKey}`
+					},
+					body: JSON.stringify({
+						model: "gpt-3.5-turbo",
+						messages: outboundMessages
+					}),
+				})
+					.then(response => response.json())
+					.then(data => {
+						let botMessage = { role: "assistant", content: data.choices[0].message.content };
+						this.messages.push(botMessage);
+						this.updateChatText(chatBox);
+
+						loader.remove();
+						textField.value = '';
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+						this.updateChatText(chatBox);
+
+						loader.remove();
+						textField.value = '';
+					});
+
+				textField.value = '';
+			});
 		}
 
 		updateChatText(chatBox) {

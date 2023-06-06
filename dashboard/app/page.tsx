@@ -19,11 +19,6 @@ const Home = () => {
 			api.post('auth/magic-link', {email}),
 		{
 			onSuccess: (data) => {
-				console.log('data', data)
-				setCookie(undefined, 'magic_link_token', data.data.token, {
-					maxAge: 30 * 24 * 60 * 60,
-					path: '/',
-				})
 				setCookie(undefined, 'auth_token', data.data.auth_token, {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',

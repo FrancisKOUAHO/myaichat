@@ -35,7 +35,6 @@ import { api } from "@/config/api";
 import { parseCookies } from "nookies";
 import { AxiosResponse } from "axios/index";
 import Chatbot from "@/components/atoms/chatbot/chatbot";
-import { postScrape } from "@/hook/useScrape";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 function getCookie(name: string | any[]) {
@@ -89,7 +88,7 @@ const Page = () => {
   );
 
   const shopMutation = useMutation(
-    (data: any) => api.post("shopify/shopify-store", data),
+    (data: any) => api.post("stores/shopify-store", data),
     {
       onSuccess: (data) => {
         console.log("data2", data);
@@ -108,7 +107,6 @@ const Page = () => {
       url: url.value,
       user_id: userId,
     };
-    console.log("data3", requestData);
     scrapeMutation.mutateAsync(requestData);
     handleSubmitShop(requestData);
   };
@@ -118,7 +116,7 @@ const Page = () => {
   };
 
   const fetchShopMutation = useMutation(
-    (data: any) => api.post("shopify/shopify-store", data),
+    (data: any) => api.post("stores/shopify-store", data),
     {
       onSuccess: (data) => {
         console.log("data2", data);

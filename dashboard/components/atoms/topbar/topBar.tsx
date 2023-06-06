@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png";
 import { api } from "@/config/api";
-import { parseCookies } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 import { AxiosResponse } from "axios";
 import { useEffect } from "react";
 
@@ -26,6 +26,10 @@ const TopBar = () => {
       .then((res: AxiosResponse): void => {
         console.log("User: ", res.data);
         setUser(res.data);
+        setCookie(undefined, 'userId', res.data.id, {
+          maxAge: 30 * 24 * 60 * 60,
+          path: '/',
+        })
       })
       .catch((error) => {
         console.error("Error fetching user: ", error);
