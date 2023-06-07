@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/config/api";
@@ -17,14 +17,23 @@ function getCookie(name: string | any[]) {
 }
 
 const Page = () => {
-  const userId: any = getCookie("userId");
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const userIdFromCookie: any = getCookie('userId');
+    setUserId(userIdFromCookie);
+  }, []);
 
   const {
     data: scrapeData,
     isLoading,
     isError,
-  } = useQuery(["userProducts", userId], () =>
-    api.get(`/products/user/${userId}/products`)
+  } = useQuery(
+    ['userProducts', userId],
+    () => api.get(`/products/user/${userId}/products`),
+    {
+      enabled: !!userId,
+    }
   );
 
   return (
