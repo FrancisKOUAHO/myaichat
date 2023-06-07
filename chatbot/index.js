@@ -24,7 +24,7 @@ body {
     --secondaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
     --primaryBoxShadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     --secondaryBoxShadow: 0px -10px 15px rgba(0, 0, 0, 0.1);
-    --primary: #581B98;
+    --primary: #000000;
 }
 
 /* CHATBOX
