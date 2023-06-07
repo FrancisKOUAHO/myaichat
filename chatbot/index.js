@@ -297,22 +297,6 @@ body {
 			this.messages = [];
 		}
 
-
-		getCookie(name) {
-			let cookieArr = document.cookie.split("; ");
-
-			for(let i = 0; i < cookieArr.length; i++) {
-				let cookiePair = cookieArr[i].split("=");
-
-				if(name == cookiePair[0]) {
-					return decodeURIComponent(cookiePair[1]);
-				}
-			}
-
-			// Retourner null si le cookie n'a pas été trouvé
-			return null;
-		}
-
 		display() {
 			const {openButton, chatBox, sendButton} = this.args;
 
@@ -351,7 +335,7 @@ body {
 
 			let outboundMessages = [...this.messages];
 
-			let userId = this.getCookie('userId');
+			let userId = localStorage.getItem('userId');
 
 			fetch(`https://api.myaichat.io/api/posts/${userId}/posts`, {
 				method: 'GET',

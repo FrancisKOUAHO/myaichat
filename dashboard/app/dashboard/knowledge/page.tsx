@@ -5,22 +5,12 @@ import LayoutCustom from "@/layouts/layoutCustom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/config/api";
 
-function getCookie(name: string | any[]) {
-  const cookies = document.cookie.split(";");
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith(name + "=")) {
-      return cookie.substring(name.length + 1);
-    }
-  }
-  return "";
-}
 
 const Page = () => {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    const userIdFromCookie: any = getCookie('userId');
+    const userIdFromCookie: any = localStorage.getItem("userId");
     setUserId(userIdFromCookie);
   }, []);
 

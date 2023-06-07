@@ -19,17 +19,13 @@ const TopBar = () => {
     api
       .get("user", {
         headers: {
-          Authorization: `Bearer ${parseCookies()["auth_token"]}`,
+          Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           "Content-Type": "application/json",
         },
       })
       .then((res: AxiosResponse): void => {
-        console.log("User: ", res.data);
         setUser(res.data);
-        setCookie(undefined, 'userId', res.data.id, {
-          maxAge: 30 * 24 * 60 * 60,
-          path: '/',
-        })
+        localStorage.setItem("userId", res.data.id);
       })
       .catch((error) => {
         console.error("Error fetching user: ", error);
@@ -37,7 +33,7 @@ const TopBar = () => {
       });
   };
 
-  const authToken = parseCookies()["auth_token"];
+  const authToken = localStorage.getItem("auth_token");
 
   useEffect((): void => {
     if (isAuthenticated()) {

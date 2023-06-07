@@ -17,8 +17,15 @@ class AuthController extends Controller
     {
         $user = $request->user();
 
+        $response = Http::get('http://127.0.0.1:8000/api/chatbot-info', [
+            'user_id' => $user->id,
+        ]);
+
+        $chatbotInfo = $response->json();
+
         return response()->json([
             'user' => $user,
+            'chatbotInfo' => $chatbotInfo,
         ]);
     }
 
@@ -58,6 +65,7 @@ class AuthController extends Controller
     {
         // Inclure le jeton en tant que paramètre dans l'URL du tableau de bord
         $dashboardUrl = 'http://localhost:3030/verify' . '/?magic_link_token=' . $user->magic_link_token;
+        //$dashboardUrl = 'https://api.myaichat.io/verify' . '/?magic_link_token=' . $user->magic_link_token;
 
         Mail::raw($dashboardUrl, function ($message) use ($user) {
             $message->to($user->email)->subject('Lien de connexion');
