@@ -78,7 +78,7 @@ const Page = () => {
 
   const handleCopyClick2 = async () => {
     try {
-      const code2 = document.getElementById('code2').textContent;
+      const code2: any = document.getElementById('code2')?.textContent;
       await copy(code2);
       setCopied2(true);
     } catch (err) {
