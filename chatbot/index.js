@@ -1,5 +1,4 @@
 function initializeChatbox(containerId) {
-	// Création des éléments HTML du chatbot
 	var chatboxContainer = document.getElementById(containerId);
 	var chatbox = document.createElement('div');
 	chatbox.classList.add('chatbox');
@@ -21,8 +20,8 @@ body {
 }
 
 *, html {
-    --primaryGradient: linear-gradient(93.12deg, #581B98 0.52%, #9C1DE7 100%);
-    --secondaryGradient: linear-gradient(268.91deg, #581B98 -2.14%, #9C1DE7 99.69%);
+    --primaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
+    --secondaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
     --primaryBoxShadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     --secondaryBoxShadow: 0px -10px 15px rgba(0, 0, 0, 0.1);
     --primary: #581B98;
