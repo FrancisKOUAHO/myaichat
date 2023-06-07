@@ -35,7 +35,7 @@ body {
     background: #eee;
     width: 300px;
     height: 350px;
-    z-index: -123456;
+    z-index: 99999;
     opacity: 0;
     transition: all .5s ease-in-out;
 }
@@ -43,7 +43,7 @@ body {
 /* CONTENT ISOPEN */
 .chatbox--active {
     transform: translateY(-40px);
-    z-index: 123456;
+    z-index: 99999;
     opacity: 1;
 
 }
@@ -224,6 +224,7 @@ body {
 }
 
 .loader {
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
@@ -246,8 +247,6 @@ body {
         opacity: 1;
     }
 }
-
-
 
 
 
