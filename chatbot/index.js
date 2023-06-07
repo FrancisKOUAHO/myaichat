@@ -350,13 +350,10 @@ body {
 			this.updateChatText(chatBox);
 
 			let outboundMessages = [...this.messages];
-			console.log("getCookie('userId');");
 
 			let userId = this.getCookie('userId');
 
-			console.log(userId);
-
-			fetch(`http://127.0.0.1:8000/api/posts/${userId}/posts`, {
+			fetch(`https://api.myaichat.io/api/posts/${userId}/posts`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
