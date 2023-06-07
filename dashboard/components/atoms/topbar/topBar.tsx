@@ -39,7 +39,7 @@ const TopBar = () => {
     if (isAuthenticated()) {
       getUser();
     }
-  }, [authToken]);
+  }, [authToken, getUser, isAuthenticated]);
 
   return (
     <nav className="c-topbar">
