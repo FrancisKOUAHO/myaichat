@@ -66,7 +66,7 @@ const Page = () => {
 
   const handleCopyClick1 = async () => {
     try {
-      const code1: any = document.getElementById('code1')?.textContent;
+      const code1 : any = document.getElementById('code1')?.textContent;
       await copy(code1);
       setCopied1(true);
     } catch (err) {
@@ -127,6 +127,17 @@ const Page = () => {
   const handleSubmitShop = (data: any) => {
     shopMutation.mutateAsync(data);
   };
+
+  const fetchShopMutation = useMutation(
+    (data: any) => api.post("stores/shopify-store", data),
+    {
+      onSuccess: (data) => {
+      },
+      onError: (error): void => {
+        console.log("error", error);
+      },
+    }
+  );
 
   const getScrapeMutation: any = useMutation(
     (data: any) => api.get(`stores/user/${data}/stores`),
