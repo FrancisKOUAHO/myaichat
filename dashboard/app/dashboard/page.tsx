@@ -38,17 +38,6 @@ import Chatbot from "@/components/atoms/chatbot/chatbot";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import copy from 'clipboard-copy';
 
-function getCookie(name: string | any[]) {
-  const cookies = document.cookie.split(";");
-  for (let i = 0; i < cookies.length; i++) {
-    const cookie = cookies[i].trim();
-    if (cookie.startsWith(name + "=")) {
-      return cookie.substring(name.length + 1);
-    }
-  }
-  return "";
-}
-
 const Page = () => {
   const { logout } = useAuth();
   const router: AppRouterInstance = useRouter();
@@ -60,6 +49,7 @@ const Page = () => {
   const [isCardVisible, setCardVisible] = useState(true);
   const [selectedTab, setSelectedTab] = useState(0);
   const [isOpenMyChatBots, setIsOpenMyChatBots] = useState(true);
+  const [ShopifyStore, setShopifyStore] = useState<any[]>([]);
 
   const handleTabClick = (index: number) => setSelectedTab(index);
   const openModal = () => setIsOpen(true);
@@ -128,7 +118,7 @@ const Page = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const { url } = event.target.elements;
-    const userId: any = +getCookie("userId");
+    const userId: any = localStorage.getItem("userId");
     const requestData = {
       url: url.value,
       user_id: userId,
@@ -154,6 +144,22 @@ const Page = () => {
   );
 
 
+  const getScrapeMutation: any = useMutation(
+    (data: any) => api.get(`stores/user/${data}/stores`),
+    {
+      onSuccess: (data: any) => {
+        console.log("data", data);
+        setShopifyStore(data.data);
+      },
+      onError: (error: any): void => {
+        console.log("error", error);
+      },
+    }
+  );
+
+  useEffect(() => {
+    getScrapeMutation.mutate(localStorage.getItem("userId"));
+  }, []);
 
   return (
     <LayoutCustom>
@@ -242,59 +248,57 @@ const Page = () => {
                   </div>
                 </Modal>
                 <div className="mt-[2%] bg-white rounded-lg ">
-                  <div className="flex justify-between  gap-8 p-6 ">
-                    <div className="m-auto">
-                      <dt className="mb-2 font-bold text-[0.775rem]">
-                        MyShootBox
-                      </dt>
-                      <dd className="text-gray-500 text-[0.775rem]">
-                        myshootbox.com
-                      </dd>
-                    </div>
-                    <div className="m-auto">
-                      <dd className="text-gray-500  text-[0.775rem]">
-                        Pages : 9
-                      </dd>
-                    </div>
-                    <div className="m-auto">
-                      <button className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        <AiOutlineEye className="-ml-0.5 mr-1.5 h-5 w-5" />
-                        Visualiser
-                      </button>
-                    </div>
-                    <div className="m-auto">
-                      <button
-                        id="installer-tab"
-                        onClick={() => setCardVisible(false)}
-                        className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      >
-                        <AiOutlineCloudServer className="-ml-0.5 mr-1.5 h-5 w-5" />
-                        Installer
-                      </button>
-                    </div>
-                    <div className="m-auto">
-                      <button className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        <AiOutlineEdit className="-ml-0.5 mr-1.5 h-5 w-5" />
-                        Personaliser
-                      </button>
-                    </div>
-                    <div className="m-auto">
-                      <dt className="mb-2  font-extrabold text-[0.775rem]">
-                        Active
-                      </dt>
-                      <label className="relative inline-flex items-center cursor-pointer">
-                        <input
-                          type="checkbox"
-                          value=""
-                          className="sr-only peer"
-                        />
-                        <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300  rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-indigo-600"></div>
-                      </label>
-                    </div>
-                    <div className="m-auto">
-                      <AiOutlineDelete className="-ml-0.5 mr-1.5 h-5 w-5 text-red-400" />
-                    </div>
-                  </div>
+									{
+                    ShopifyStore && ShopifyStore.map((item: any) => {
+                      return (
+                        <div className="flex justify-between  gap-8 p-6 ">
+                          <div className="m-auto">
+                            <dd className="text-black text-[0.775rem]">
+                              {item.url}
+                            </dd>
+                          </div>
+                          <div className="m-auto">
+                            <button className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                              <AiOutlineEye className="-ml-0.5 mr-1.5 h-5 w-5" />
+                              Visualiser
+                            </button>
+                          </div>
+                          <div className="m-auto">
+                            <button
+                              id="installer-tab"
+                              onClick={() => setCardVisible(false)}
+                              className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                              <AiOutlineCloudServer className="-ml-0.5 mr-1.5 h-5 w-5" />
+                              Installer
+                            </button>
+                          </div>
+                          <div className="m-auto">
+                            <button className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                              <AiOutlineEdit className="-ml-0.5 mr-1.5 h-5 w-5" />
+                              Personaliser
+                            </button>
+                          </div>
+                          <div className="m-auto">
+                            <dt className="mb-2  font-extrabold text-[0.775rem]">
+                              Active
+                            </dt>
+                            <label className="relative inline-flex items-center cursor-pointer">
+                              <input
+                                type="checkbox"
+                                value=""
+                                className="sr-only peer"
+                              />
+                              <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-green-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-300"></div>
+                            </label>
+                          </div>
+                          <div className="m-auto">
+                            <AiOutlineDelete className="-ml-0.5 mr-1.5 h-5 w-5 text-red-400" />
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
                 </div>
               </div>
             </Card>

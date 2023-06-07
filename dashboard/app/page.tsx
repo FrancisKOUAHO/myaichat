@@ -4,25 +4,16 @@ import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { useRouter } from "next/navigation";
-import { setCookie } from "nookies";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
-import { useAuth } from "@/context/AuthContext";
-
-
 
 const Home = () => {
 	const router: AppRouterInstance = useRouter();
-
-	const { products } = useAuth();
 
 	const loginMutation = useMutation((email: void) =>
 			api.post('auth/magic-link', {email}),
 		{
 			onSuccess: (data) => {
-				setCookie(undefined, 'auth_token', data.data.auth_token, {
-					maxAge: 30 * 24 * 60 * 60,
-					path: '/',
-				})
+				localStorage.setItem('auth_token', data.data.auth_token)
 				router.push('/checkmail')
 			},
 			onError: (error): void => {

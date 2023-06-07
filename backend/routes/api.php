@@ -57,6 +57,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/user/{user_id}/products', [ShopifyProductController::class, 'getUserProducts']);
 });
 
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
