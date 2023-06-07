@@ -36,6 +36,7 @@ import { parseCookies } from "nookies";
 import { AxiosResponse } from "axios/index";
 import Chatbot from "@/components/atoms/chatbot/chatbot";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import copy from 'clipboard-copy';
 
 const Page = () => {
   const { logout } = useAuth();
@@ -59,6 +60,31 @@ const Page = () => {
   const closeModalWidget = () => setIsOpenWidget(false);
   const openModalShopify = () => setIsOpenShopify(true);
   const closeModalShopify = () => setIsOpenShopify(false);
+
+  const [copied1, setCopied1] = useState(false);
+  const [copied2, setCopied2] = useState(false);
+
+  const handleCopyClick1 = async () => {
+    try {
+      // @ts-ignore
+      const code1 = document.getElementById('code1').textContent;
+      // @ts-ignore
+      await copy(code1);
+      setCopied1(true);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
+  const handleCopyClick2 = async () => {
+    try {
+      const code2 = document.getElementById('code2').textContent;
+      await copy(code2);
+      setCopied2(true);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
 
   const tabClasses = (index: number): string =>
     `inline-block w-full p-4 rounded-tl-lg focus:outline-none ${
@@ -337,17 +363,26 @@ const Page = () => {
                                   />
                                 </Disclosure.Button>
                                 <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                                  <SyntaxHighlighter style={atomDark}>
-                                    {
-                                      "<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
-                                    }
-                                  </SyntaxHighlighter>
-
-                                  <SyntaxHighlighter style={atomDark}>
-                                    {
-                                      '<div id="chatbox-widget-container"></div>'
-                                    }
-                                  </SyntaxHighlighter>
+                                  <div className="flex gap-10 ">
+                                    <SyntaxHighlighter style={atomDark} id="code1">
+                                      {
+                                        "<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
+                                      }
+                                    </SyntaxHighlighter>
+                                    <button onClick={handleCopyClick1} className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-[10%]">
+                                      {copied1 ? 'Copié!' : 'Copie'}
+                                    </button>
+                                  </div>
+                                  <div className="flex gap-10">
+                                    <SyntaxHighlighter style={atomDark} id="code2" className="w-full">
+                                      {
+                                        '<div id="chatbox-widget-container"></div>'
+                                      }
+                                    </SyntaxHighlighter>
+                                    <button onClick={handleCopyClick2} className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-[10%]">
+                                      {copied2 ? 'Copié!' : 'Copie'}
+                                    </button>
+                                  </div>
                                 </Disclosure.Panel>
                               </>
                             )}
