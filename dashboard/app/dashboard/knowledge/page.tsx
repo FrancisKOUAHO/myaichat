@@ -4,13 +4,14 @@ import React, { useEffect, useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/config/api";
+import { getCookie } from "cookies-next";
 
 
 const Page = () => {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    const userIdFromCookie: any = localStorage.getItem("userId");
+    const userIdFromCookie: any = getCookie("userId");
     setUserId(userIdFromCookie);
   }, []);
 

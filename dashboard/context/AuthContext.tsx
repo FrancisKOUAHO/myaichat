@@ -11,22 +11,23 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<any>(null);
   const [products, setProducts] = useState<any>(null);
+  const [userId, setUserId] = useState<any>(null);
   const router = useRouter();
 
   const logout = (): void => {
-    localStorage.removeItem("auth_token");
+    destroyCookie(null, "auth_token");
     router.push("/");
   };
 
   const isAuthenticated = () => {
-    const token  = localStorage.getItem("auth_token")
+    const token  = parseCookies()['auth_token'];
 
     return !!token;
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, isAuthenticated, logout, setProducts, products }}
+      value={{ user, setUser, isAuthenticated, logout, setProducts, products, setUserId }}
     >
       {children}
     </AuthContext.Provider>
