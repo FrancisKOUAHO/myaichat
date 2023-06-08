@@ -31,12 +31,12 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { api } from "@/config/api";
 import { useMutation } from "@tanstack/react-query";
+import io, { Socket } from 'socket.io-client';
 import copy from 'clipboard-copy';
 import getCookie from "@/utils/getCookie";
-import WebSocketComponent from "@/components/utility/WebSocketComponent";
 
 const Page = () => {
-	const {logout, setUserId} = useAuth();
+	const {logout, setUserId, userId} = useAuth();
 	const router: AppRouterInstance = useRouter();
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +47,8 @@ const Page = () => {
 	const [selectedTab, setSelectedTab] = useState(0);
 	const [isOpenMyChatBots, setIsOpenMyChatBots] = useState(true);
 	const [ShopifyStore, setShopifyStore] = useState<any[]>([]);
+	const [ws, setWs] = useState(null);
+
 
 	const handleTabClick = (index: number) => setSelectedTab(index);
 	const openModal = () => setIsOpen(true);
@@ -149,14 +151,40 @@ const Page = () => {
 	);
 
 	useEffect(() => {
-		getScrapeMutation.mutate(getCookie('auth_token'));
-		setUserId(getCookie("userId"));
+		const ws: any
+			= new WebSocket("ws://localhost:9999");
+
+		ws.onopen = () => {
+			console.log("Connected");
+
+			const storedUserId: any = getCookie("userId");
+
+			if(storedUserId){
+				ws.send(storedUserId);
+			}
+		};
+
+		ws.onmessage = (event: any) => {
+			if (event.data instanceof Blob) {
+				event.data.text().then((text: any) => {
+					console.log("Received:", text);
+				});
+			} else {
+				console.log("Received:", event.data);
+			}
+		};
+		setWs(ws);
+
+		return () => {
+			ws.close();
+		};
 	}, []);
+
+
 
 	return (
 		<LayoutCustom>
 			<>
-				<WebSocketComponent/>
 				<div className="w-full overflow-y-auto">
 					{isCardVisible ? (
 						<Card>

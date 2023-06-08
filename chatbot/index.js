@@ -273,24 +273,29 @@ body {
 		return null;
 	}
 
-	const socket = new WebSocket('ws://localhost:3030/api/websocket');
+	let USERID;
 
-	socket.addEventListener('open', () => {
-		console.log('Connexion WebSocket établie');
+	// Create WebSocket connection.
+	const socket = new WebSocket('ws://localhost:9999');
 
-		// Envoyer un message au serveur WebSocket
-		socket.send('Bonjour, serveur WebSocket !');
+// Connection opened
+	socket.addEventListener('open', function (event) {
+		console.log('Connected to WS Server')
 	});
 
-	socket.addEventListener('message', (event) => {
-		// Traiter les messages reçus du serveur WebSocket
-		console.log('Message reçu du serveur WebSocket :', event.data);
+// Listen for messages
+	socket.addEventListener('message', function (event) {
+		if(event.data instanceof Blob) {
+			var reader = new FileReader();
+			reader.onload = function() {
+				console.log('Message from server ', reader.result);
+				document.cookie = 'userId=' + reader.result;
+			};
+			reader.readAsText(event.data);
+		} else {
+			console.log('Message from server ', event.data);
+		}
 	});
-
-	socket.addEventListener('close', () => {
-		console.log('Connexion WebSocket fermée');
-	});
-
 
 	// Code JavaScript du chatbot
 	class Chatbox {
