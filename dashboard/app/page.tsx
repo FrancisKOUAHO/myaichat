@@ -14,7 +14,10 @@ const Home = () => {
 			api.post('auth/magic-link', {email}),
 		{
 			onSuccess: (data) => {
-				localStorage.setItem('auth_token', data.data.auth_token)
+				setCookie(undefined, 'auth_token', data.data.auth_token, {
+					maxAge: 30 * 24 * 60 * 60,
+					path: '/',
+				})
 				router.push('/checkmail')
 			},
 			onError: (error): void => {

@@ -6,6 +6,8 @@ import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Dialog, Transition } from "@headlessui/react";
 import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
+import { parseCookies } from "nookies";
+import { getCookie } from "cookies-next";
 
 const Page = () => {
 	const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
@@ -31,7 +33,7 @@ const Page = () => {
 	);
 
 	useEffect(() => {
-		getScrapeMutation.mutate(localStorage.getItem("userId"));
+		getScrapeMutation.mutate(getCookie("userId"));
 	}, []);
 
 	return (

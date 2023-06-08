@@ -15,12 +15,12 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   const logout = (): void => {
-    localStorage.removeItem("auth_token");
+    destroyCookie(null, "auth_token");
     router.push("/");
   };
 
   const isAuthenticated = () => {
-    const token  = localStorage.getItem("auth_token")
+    const token  = parseCookies()['auth_token'];
 
     return !!token;
   };

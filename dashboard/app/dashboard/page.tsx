@@ -37,6 +37,7 @@ import { AxiosResponse } from "axios/index";
 import Chatbot from "@/components/atoms/chatbot/chatbot";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import copy from 'clipboard-copy';
+import getCookie from "@/utils/getCookie";
 
 const Page = () => {
   const { logout, setUserId } = useAuth();
@@ -115,7 +116,7 @@ const Page = () => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const { url } = event.target.elements;
-    const userId: any = localStorage.getItem("userId");
+    const userId: any = +getCookie("userId");
     const requestData = {
       url: url.value,
       user_id: userId,
@@ -152,14 +153,8 @@ const Page = () => {
   );
 
   useEffect(() => {
-    getScrapeMutation.mutate(localStorage.getItem("userId"));
-    setUserId(localStorage.getItem("userId"));
-
-    setCookie(undefined, 'userId', `${localStorage.getItem("userId")}`, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-      domain: 'https://myaichat.io',
-    })
+    getScrapeMutation.mutate(getCookie('auth_token'));
+    setUserId(getCookie("userId"));
   }, []);
 
   return (
