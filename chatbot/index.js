@@ -273,6 +273,25 @@ body {
 		return null;
 	}
 
+	const socket = new WebSocket('ws://localhost:3030/api/websocket');
+
+	socket.addEventListener('open', () => {
+		console.log('Connexion WebSocket établie');
+
+		// Envoyer un message au serveur WebSocket
+		socket.send('Bonjour, serveur WebSocket !');
+	});
+
+	socket.addEventListener('message', (event) => {
+		// Traiter les messages reçus du serveur WebSocket
+		console.log('Message reçu du serveur WebSocket :', event.data);
+	});
+
+	socket.addEventListener('close', () => {
+		console.log('Connexion WebSocket fermée');
+	});
+
+
 	// Code JavaScript du chatbot
 	class Chatbox {
 		constructor() {

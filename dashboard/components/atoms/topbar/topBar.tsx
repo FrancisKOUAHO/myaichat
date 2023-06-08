@@ -14,7 +14,7 @@ import { setCookie } from "nookies";
 import { getCookie } from "cookies-next";
 
 const TopBar = () => {
-	const {logout, setUser, isAuthenticated} = useAuth();
+	const {logout, setUser, setUserId, isAuthenticated} = useAuth();
 	const [email, setEmail] = useState<string>("");
 
 	const getUser = (): void => {
@@ -32,6 +32,7 @@ const TopBar = () => {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',
 				})
+				setUserId(res.data.id);
 				setEmail(res.data.email);
 			})
 			.catch((error) => {
@@ -46,7 +47,7 @@ const TopBar = () => {
 		if (isAuthenticated()) {
 			getUser()
 		}
-	}, [isAuthenticated]);
+	}, []);
 
 	return (
 		<nav className="c-topbar">
