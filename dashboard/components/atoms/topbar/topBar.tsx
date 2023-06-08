@@ -27,11 +27,10 @@ const TopBar = () => {
 			})
 			.then((res: AxiosResponse): void => {
 				setUser(res.data);
+				console.log(res.data)
 				setCookie(undefined, 'userId', res.data.id, {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',
-					//domain: 'localhost'
-					domain: 'https://myaichat.io, https://ai.myaichat.io',
 				})
 				setEmail(res.data.email);
 			})
@@ -47,7 +46,7 @@ const TopBar = () => {
 		if (isAuthenticated()) {
 			getUser()
 		}
-	}, [authToken]);
+	}, []);
 
 	return (
 		<nav className="c-topbar">

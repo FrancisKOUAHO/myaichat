@@ -18,6 +18,10 @@ const Home = () => {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',
 				})
+				setCookie(undefined, 'userId', data.data.id, {
+					maxAge: 30 * 24 * 60 * 60,
+					path: '/',
+				})
 				router.push('/checkmail')
 			},
 			onError: (error): void => {
