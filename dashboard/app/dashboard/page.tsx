@@ -176,14 +176,6 @@ const Page = () => {
                 </div>
                 <Modal isOpen={isOpenSecond} closeModal={closeModalSecond}>
                   <div className=" max-w-xl px-20 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
-                    <div className="flex justify-start space-x-4">
-                      <button
-                        onClick={closeModal}
-                        className="text-gray-600 focus:outline-none hover:text-gray-700"
-                      >
-                        <AiOutlineCloseCircle />
-                      </button>
-                    </div>
                     <form className="mx-auto" onSubmit={handleSubmit}>
                       <input
                         type="hidden"
@@ -234,8 +226,15 @@ const Page = () => {
                       </div>
                       <div className="w-full mt-10 justify-end flex">
                         <button
+                            type="button"
+                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                            onClick={closeModalSecond}
+                        >
+                          Fermer
+                        </button>
+                        <button
                           type="submit"
-                          className="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                          className="inline-flex justify-center mx-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
                           Connecter
                         </button>
@@ -540,11 +539,17 @@ const Page = () => {
         <Modal isOpen={isOpenWidget} closeModal={closeModalWidget}>
           <div className=" max-w-xl px-8 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
             <div
-              onClick={closeModalWidget}
               className="flex justify-start space-x-4"
             >
-              <button className="text-gray-600 focus:outline-none hover:text-gray-700">
+{/*              <button className="text-gray-600 focus:outline-none hover:text-gray-700">
                 <AiOutlineCloseCircle />
+              </button>*/}
+              <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={closeModalWidget}
+              >
+                Fermer
               </button>
             </div>
             <div className="flex flex-wrap mt-4">
@@ -596,12 +601,16 @@ const Page = () => {
         </Modal>
         <Modal isOpen={isOpenShopify} closeModal={closeModalShopify}>
           <div className=" max-w-xl px-8 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
-            <div
-              onClick={closeModalWidget}
-              className="flex justify-start space-x-4"
-            >
-              <button className="text-gray-600 focus:outline-none hover:text-gray-700">
+            <div className="flex justify-start space-x-4">
+          {/*    <button className="text-gray-600 focus:outline-none hover:text-gray-700">
                 <AiOutlineCloseCircle />
+              </button>*/}
+              <button
+                  type="button"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  onClick={closeModalWidget}
+              >
+                Fermer
               </button>
             </div>
             <div className="flex flex-wrap mt-4">
