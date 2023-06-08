@@ -151,8 +151,8 @@ const Page = () => {
 	);
 
 	useEffect(() => {
-		const ws: any
-			= new WebSocket("ws://localhost:9999");
+		//const ws: any = new WebSocket("ws://localhost:9999");
+		const ws: any = new WebSocket("ws://connect.myaichat.io");
 
 		ws.onopen = () => {
 			console.log("Connected");
@@ -179,7 +179,6 @@ const Page = () => {
 			ws.close();
 		};
 	}, []);
-
 
 
 	return (
