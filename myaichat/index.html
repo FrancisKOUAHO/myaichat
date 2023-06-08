@@ -117,192 +117,433 @@ Il collecte et analyse les données pour améliorer constamment l&#x27;expérien
     <div class="section-7">
         <div class="hero-no-image">
             <div class="small-container-2">
+                <style>
+                    #tabList {
+                        width: 400px;
+                        padding: 1rem; /* Added for some space around the tab text */
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        text-align: center;
+                        color: #718096;
+                        border-left: 1px solid #edf2f7;
+                        border-right: 1px solid #edf2f7;
+                        border-radius: 0.5rem;
+                        display: flex;
+                        justify-content: space-around; /* Added to layout the tabs as in flex container */
+                    }
+
+                    .tab {
+                        display: inline-block;
+                        width: 100%;
+                        padding: 16px;
+                        border-radius: 12px 12px 0 0;
+                        outline: none;
+                        cursor: pointer;
+                    }
+
+                    .tab.selected {
+                        background-color: #E0E7FF; /* équivalent à bg-indigo-100 */
+                    }
+
+                    .tab:not(.selected) {
+                        background-color: #f9fafb; /* équivalent à bg-gray-50 */
+                    }
+                </style>
                 <div class="text-32"><span class="text-33">Plans tarifaires </span></div>
                 <div class="text-34">Essayez n&#x27;importe quel plan gratuitement pendant 14 jours. Annulez à tout
                     moment.
                 </div>
-                <div class="columns-3 f2wf-columns-2">
-                    <div class="column-6">
-                        <div class="intro-2">
-                            <div class="image-wrapper-3"><img
-                                    alt=""
-                                    class="pricing-1-2" height="80" loading="lazy" src="img/starter.png" width="80"/>
-                            </div>
-                            <div class="name-2">
-                                <div class="text-35">Starter</div>
-                            </div>
-                            <div class="pricing-2">
-                                <div class="text-37">€39 /mois</div>
-                            </div>
-                            <div class="description-4"></div>
-                            <a class="button-6" href="#">
-                                <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
-                            </a></div>
-                        <div class="separator-2"></div>
-                        <div class="features-3">
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
+                <div id="tabList" class="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg">
+                    <div onclick="handleTabClick(0)" class="tab selected" id="tab0">
+                        Mois
+                    </div>
+                    <div onclick="handleTabClick(1)" class="tab" id="tab1">
+                        Années
+                    </div>
+                </div>
+                <div id="content0" class="content">
+                    <div class="columns-3 f2wf-columns-2">
+                        <div class="column-6">
+                            <div class="intro-2">
+                                <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">500 réponses/mois</div>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/starter.png" width="80"/>
+                                </div>
+                                <div class="name-2">
+                                    <div class="text-35">Starter</div>
+                                </div>
+                                <div class="pricing-2">
+                                    <div class="text-37">€39 /mois</div>
+                                </div>
+                                <div class="description-4"></div>
+                                <a class="button-6" href="#">
+                                    <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
+                                </a></div>
+                            <div class="separator-2"></div>
+                            <div class="features-3">
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">500 réponses/mois</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">1 000 pages web stockées</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">2 Chatbots</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Support standard</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Formation à l&#x27;IA</div>
+                                </div>
                             </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
+                        </div>
+                        <div class="column-7">
+                            <div class="intro-2">
+                                <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">1 000 pages web stockées</div>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/pro.png" width="80"/></div>
+                                <div class="name-2">
+                                    <div class="text-40">Pro</div>
+                                </div>
+                                <div class="pricing-2">
+                                    <div class="_599-mo">€99 /mois</div>
+                                </div>
+                                <div class="description-4"></div>
+                                <a class="button-6" href="#">
+                                    <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
+                                </a></div>
+                            <div class="separator-2"></div>
+                            <div class="features-3">
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">3,000 réponses/mois</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">15,000 pages web stockées</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">10 chatbots</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">Membres illimités</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">Support prioritaire</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">Formation à l&#x27;IA</div>
+                                </div>
                             </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
+                        </div>
+                        <div class="column-8">
+                            <div class="intro-2">
+                                <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">2 Chatbots</div>
-                            </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">Support standard</div>
-                            </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">Formation à l&#x27;IA</div>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/growth.png" width="80"/>
+                                </div>
+                                <div class="name-2">
+                                    <div class="text-35">Growth</div>
+                                </div>
+                                <div class="pricing-2">
+                                    <div class="text-37">€79 /mois</div>
+                                </div>
+                                <div class="description-4"></div>
+                                <a class="button-6" href="#">
+                                    <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
+                                </a></div>
+                            <div class="separator-2"></div>
+                            <div class="features-4">
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">1,500 réponses/mois</div>
+                                </div>
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">5 000 pages web stockées</div>
+                                </div>
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">5 Chatbots</div>
+                                </div>
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Membres illimités</div>
+                                </div>
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Support prioritaire</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Formation à l&#x27;IA</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="column-7">
-                        <div class="intro-2">
-                            <div class="image-wrapper-3"><img
-                                    alt=""
-                                    class="pricing-1-2" height="80" loading="lazy" src="img/pro.png" width="80"/></div>
-                            <div class="name-2">
-                                <div class="text-40">Pro</div>
-                            </div>
-                            <div class="pricing-2">
-                                <div class="_599-mo">€99 /mois</div>
-                            </div>
-                            <div class="description-4"></div>
-                            <a class="button-6" href="#">
-                                <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
-                            </a></div>
-                        <div class="separator-2"></div>
-                        <div class="features-3">
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
+                </div>
+
+                <div id="content1" class="content" style="display: none;">
+                    <div class="columns-3 f2wf-columns-2">
+                        <div class="column-6">
+                            <div class="intro-2">
+                                <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item-3">3,000 réponses/mois</div>
-                            </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item-3">15,000 pages web stockées</div>
-                            </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item-3">10 chatbots</div>
-                            </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item-3">Membres illimités</div>
-                            </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item-3">Support prioritaire</div>
-                            </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item-3">Formation à l&#x27;IA</div>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/starter.png" width="80"/>
+                                </div>
+                                <div class="name-2">
+                                    <div class="text-35">Starter</div>
+                                </div>
+                                <div class="pricing-2">
+                                    <div class="text-37">€29 /mois</div>
+                                </div>
+                                <div class="text-12">total €348</div>
+                                <div class="description-4"></div>
+                                <a class="button-6" href="#">
+                                    <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
+                                </a></div>
+                            <div class="separator-2"></div>
+                            <div class="features-3">
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">500 réponses/mois</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">1 000 pages web stockées</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">2 Chatbots</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Support standard</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Formation à l&#x27;IA</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="column-8">
-                        <div class="intro-2">
-                            <div class="image-wrapper-3"><img
-                                    alt=""
-                                    class="pricing-1-2" height="80" loading="lazy" src="img/growth.png" width="80"/>
-                            </div>
-                            <div class="name-2">
-                                <div class="text-35">Growth</div>
-                            </div>
-                            <div class="pricing-2">
-                                <div class="text-37">€79 /mois</div>
-                            </div>
-                            <div class="description-4"></div>
-                            <a class="button-6" href="#">
-                                <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
-                            </a></div>
-                        <div class="separator-2"></div>
-                        <div class="features-4">
-                            <div class="pricing-feature-4">
-                                <div class="icon-3"><img
+                        <div class="column-7">
+                            <div class="intro-2">
+                                <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">1,500 réponses/mois</div>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/pro.png" width="80"/></div>
+                                <div class="name-2">
+                                    <div class="text-40">Pro</div>
+                                </div>
+                                <div class="pricing-2">
+                                    <div class="_599-mo">€59 /mois</div>
+                                </div>
+                                <div class="text-12">total €708</div>
+                                <div class="description-4"></div>
+                                <a class="button-6" href="#">
+                                    <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
+                                </a></div>
+                            <div class="separator-2"></div>
+                            <div class="features-3">
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">3,000 réponses/mois</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">15,000 pages web stockées</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">10 chatbots</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">Membres illimités</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">Support prioritaire</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item-3">Formation à l&#x27;IA</div>
+                                </div>
                             </div>
-                            <div class="pricing-feature-4">
-                                <div class="icon-3"><img
+                        </div>
+                        <div class="column-8">
+                            <div class="intro-2">
+                                <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">5 000 pages web stockées</div>
-                            </div>
-                            <div class="pricing-feature-4">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">5 Chatbots</div>
-                            </div>
-                            <div class="pricing-feature-4">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">Membres illimités</div>
-                            </div>
-                            <div class="pricing-feature-4">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">Support prioritaire</div>
-                            </div>
-                            <div class="pricing-feature-3">
-                                <div class="icon-3"><img
-                                        alt=""
-                                        class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
-                                        width="24"/></div>
-                                <div class="feature-item">Formation à l&#x27;IA</div>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/growth.png" width="80"/>
+                                </div>
+                                <div class="name-2">
+                                    <div class="text-35">Growth</div>
+                                </div>
+                                <div class="pricing-2">
+                                    <div class="text-37">€69 /mois</div>
+                                </div>
+                                <div class="text-12">total €828</div>
+                                <div class="description-4"></div>
+                                <a class="button-6" href="#">
+                                    <div class="text-39">Commencer 14 jours d&#x27;essai gratuit</div>
+                                </a></div>
+                            <div class="separator-2"></div>
+                            <div class="features-4">
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">1,500 réponses/mois</div>
+                                </div>
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">5 000 pages web stockées</div>
+                                </div>
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">5 Chatbots</div>
+                                </div>
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Membres illimités</div>
+                                </div>
+                                <div class="pricing-feature-4">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-4" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Support prioritaire</div>
+                                </div>
+                                <div class="pricing-feature-3">
+                                    <div class="icon-3"><img
+                                            alt=""
+                                            class="icon-wrapper-3" height="24" loading="lazy" src="img/Wrapper.svg"
+                                            width="24"/></div>
+                                    <div class="feature-item">Formation à l&#x27;IA</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            let selectedTab = 0;
+
+            function handleTabClick(index) {
+                document.getElementById(`tab${selectedTab}`).classList.remove('selected');
+                document.getElementById(`content${selectedTab}`).style.display = 'none';
+
+                selectedTab = index;
+
+                document.getElementById(`tab${selectedTab}`).classList.add('selected');
+                document.getElementById(`content${selectedTab}`).style.display = 'block';
+            }
+        </script>
     </div>
     <div class="testimonial-column-light-3">
         <div class="title-7">Témoignages</div>
