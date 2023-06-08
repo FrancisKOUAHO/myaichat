@@ -2,16 +2,16 @@
 <html lang="fr_FR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon site</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>My Aichat</title>
 </head>
 <body>
 <div id="chatbox-widget-container"></div>
 <script>
-	window.addEventListener('DOMContentLoaded', function() {
+	window.addEventListener('DOMContentLoaded', function () {
 		let script = document.createElement('script');
 		script.src = 'index.js';
-		script.onload = function() {
+		script.onload = function () {
 			initializeChatbox('chatbox-widget-container');
 		};
 		document.head.appendChild(script);
