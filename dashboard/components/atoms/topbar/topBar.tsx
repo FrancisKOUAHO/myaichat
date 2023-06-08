@@ -8,12 +8,12 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png";
 import { api } from "@/config/api";
-import { parseCookies, setCookie } from "nookies";
 import { AxiosResponse } from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const TopBar = () => {
   const { logout, setUser, isAuthenticated } = useAuth();
+  const [email, setEmail] = useState<string>("");
 
   const getUser = (): void => {
     api
@@ -26,6 +26,7 @@ const TopBar = () => {
       .then((res: AxiosResponse): void => {
         setUser(res.data);
         localStorage.setItem("userId", res.data.id);
+        setEmail(res.data.email);
       })
       .catch((error) => {
         console.error("Error fetching user: ", error);
@@ -39,14 +40,14 @@ const TopBar = () => {
     if (isAuthenticated()) {
       getUser();
     }
-  }, [authToken, getUser, isAuthenticated]);
+  }, [isAuthenticated]);
 
   return (
     <nav className="c-topbar">
       <div className="c-below-topbar"></div>
       <div className="c-above-topbar">
         <div className="c-above-topbar-left">
-          <Link href={"/admin/dashboard"}>
+          <Link href="/dashboard">
             <Image src={MyAiChat} alt="LetsGo Logo" width="120" height="120" />
           </Link>
         </div>
@@ -63,8 +64,7 @@ const TopBar = () => {
             <Dropdown
               list={[
                 {
-                  label: ``,
-                  link: "/booking",
+                  label: `${email}`,
                   icon: (
                     <AiOutlineUser className="text-white/70 w-100 h-100 text-2xl" />
                   ),

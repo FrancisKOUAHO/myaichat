@@ -32,14 +32,14 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { api } from "@/config/api";
-import { parseCookies } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 import { AxiosResponse } from "axios/index";
 import Chatbot from "@/components/atoms/chatbot/chatbot";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import copy from 'clipboard-copy';
 
 const Page = () => {
-  const { logout } = useAuth();
+  const { logout, setUserId } = useAuth();
   const router: AppRouterInstance = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -153,6 +153,13 @@ const Page = () => {
 
   useEffect(() => {
     getScrapeMutation.mutate(localStorage.getItem("userId"));
+    setUserId(localStorage.getItem("userId"));
+
+    setCookie(undefined, 'userId', `${localStorage.getItem("userId")}`, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+      domain: 'https://myaichat.io',
+    })
   }, []);
 
   return (

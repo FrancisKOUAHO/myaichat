@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
+import { setCookie } from "nookies";
 
 const Home = () => {
 	const router: AppRouterInstance = useRouter();
@@ -24,7 +25,7 @@ const Home = () => {
 
 	const handleSubmit = (event: any): void => {
 		event.preventDefault();
-		const { email } = event.target.elements;
+		const {email} = event.target.elements;
 		loginMutation.mutate(email.value);
 	};
 

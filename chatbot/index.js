@@ -262,6 +262,17 @@ body {
 	// Ajout du chatbot au conteneur spécifié
 	chatboxContainer.appendChild(chatbox);
 
+	function getCookieValue(cookieName) {
+		const cookies = document.cookie.split(';');
+		for (let i = 0; i < cookies.length; i++) {
+			const cookie = cookies[i].trim();
+			if (cookie.startsWith(`${cookieName}=`)) {
+				return cookie.substring(cookieName.length + 1);
+			}
+		}
+		return null;
+	}
+
 	// Code JavaScript du chatbot
 	class Chatbox {
 		constructor() {
@@ -316,7 +327,7 @@ body {
 
 			let outboundMessages = [...this.messages];
 
-			let userId = localStorage.getItem('userId');
+			let userId = getCookieValue('userId');
 
 			// Afficher le message de chargement
 			let loader = document.createElement('div');
