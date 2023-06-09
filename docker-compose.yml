@@ -12,7 +12,6 @@ services:
     volumes:
       - ./myaichat:/var/www/myaichat
       - ./chatbot:/var/www/chatbot
-      - ./connect:/var/www/connect
     networks:
       local_bridge:
         ipv4_address: 172.20.2.0
