@@ -1,25 +1,18 @@
 const WebSocket = require('ws');
+const express = require('express');
 const http = require('http');
 const cors = require('cors');
 
-const app = http.createServer((req, res) => {
-	// Set CORS headers
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Request-Method', '*');
-	res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-	res.setHeader('Access-Control-Allow-Headers', '*');
-	if (req.method === 'OPTIONS') {
-		res.writeHead(200);
-		res.end();
-		return;
-	}
-});
+const app = express();
+app.use(cors());
 
-const wss = new WebSocket.Server({ server: app });
+const server = http.createServer(app);
+
+const wss = new WebSocket.Server({ server });
 
 wss.on('connection', ws => {
 	ws.on('message', message => {
-		console.log('Received:', message.text());
+		console.log('Received:', message);
 		wss.clients.forEach(client => {
 			if (client.readyState === WebSocket.OPEN) {
 				client.send(message);
@@ -30,6 +23,10 @@ wss.on('connection', ws => {
 	ws.send('Hello! You are connected!');
 });
 
-app.listen(9999, () => {
-	console.log(`Server started on port 9999`);
+app.get('/', (req, res) => {
+	res.send('Welcome to the homepage!');
+});
+
+server.listen(9999, () => {
+	console.log('Server started on port 9999');
 });
