@@ -104,6 +104,7 @@ const Page = () => {
 		(data: any) => api.post("stores/shopify-store", data),
 		{
 			onSuccess: (data) => {
+				console.log("data", data);
 			},
 			onError: (error): void => {
 				console.log("error", error);
@@ -142,6 +143,7 @@ const Page = () => {
 		(data: any) => api.get(`stores/user/${data}/stores`),
 		{
 			onSuccess: (data: any) => {
+				console.log("data", data);
 				setShopifyStore(data.data);
 			},
 			onError: (error: any): void => {
@@ -149,7 +151,7 @@ const Page = () => {
 			},
 		}
 	);
-
+	
 	useEffect(() => {
 		//const ws: any = new WebSocket("ws://localhost:9999");
 		const ws: any = new WebSocket("wss://connect.myaichat.io", ['websocket']);
@@ -175,11 +177,12 @@ const Page = () => {
 		};
 		setWs(ws);
 
+		getScrapeMutation.mutateAsync(userId);
+
 		return () => {
 			ws.close();
 		};
 	}, []);
-
 
 	return (
 		<LayoutCustom>
