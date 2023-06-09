@@ -276,7 +276,7 @@ body {
 	let USERID;
 
 	// Create WebSocket connection.
-	//const socket = new WebSocket('ws://localhost:9999');
+	///const socket = new WebSocket('ws://localhost:9999');
 	const socket = new WebSocket('wss://connect.myaichat.io');
 
 // Connection opened
