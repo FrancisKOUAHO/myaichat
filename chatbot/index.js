@@ -258,7 +258,6 @@ body {
             <button><img alt="" src="https://i.goopics.net/hllj5f.jpg" width="50"/></button>
         </div>
     `;
-
 	// Ajout du chatbot au conteneur spécifié
 	chatboxContainer.appendChild(chatbox);
 
@@ -273,32 +272,55 @@ body {
 		return null;
 	}
 
-	let USERID;
-
 	// Create WebSocket connection.
-	///const socket = new WebSocket('ws://localhost:9999');
-	const socket = new WebSocket('wss://connect.myaichat.io', ['websocket']);
+	//const socket = new WebSocket('wss://connect.myaichat.io', ['websocket']);
+	const socket = new WebSocket('ws://localhost:9999', ['websocket']);
 
-// Connection opened
+	// Connection opened
 	socket.addEventListener('open', function (event) {
-		console.log('Connected to WS Server')
+		console.log('Connected to WS Server');
 	});
 
-// Listen for messages
+	// Listen for messages
 	socket.addEventListener('message', function (event) {
-		if(event.data instanceof Blob) {
+		if (event.data instanceof Blob) {
 			var reader = new FileReader();
-			reader.onload = function() {
-				console.log('Message from server ', reader.result);
+			reader.onload = function () {
+				console.log('Message from server', reader.result);
 				document.cookie = 'userId=' + reader.result;
+
+				// Récupérer la valeur de data.content
+				const data = JSON.parse(reader.result);
+				const prompt = data.content;
+				// Faites ce que vous souhaitez avec prompt
 			};
 			reader.readAsText(event.data);
 		} else {
-			console.log('Message from server ', event.data);
+			console.log('Message from server', event.data);
 		}
 	});
 
-	// Code JavaScript du chatbot
+	let userId = getCookieValue('userId');
+
+	// Utilisez l'ID de l'utilisateur dans le nom de fichier
+	const filePath = `./file_${userId}.txt`;
+
+	fetch(`https://api.myaichat.io/api/posts/${userId}/posts`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	})
+		.then(response => response.json())
+		.then(data => {
+			const content = data.content;
+			console.log('Success:', data);
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+
+
 	class Chatbox {
 		constructor() {
 			this.args = {
@@ -312,14 +334,14 @@ body {
 		}
 
 		display() {
-			const { openButton, chatBox, sendButton } = this.args;
+			const {openButton, chatBox, sendButton} = this.args;
 
 			openButton.addEventListener('click', () => this.toggleState(chatBox));
 
 			sendButton.addEventListener('click', () => this.onSendButton(chatBox));
 
 			const node = chatBox.querySelector('input');
-			node.addEventListener('keyup', ({ key }) => {
+			node.addEventListener('keyup', ({key}) => {
 				if (key === 'Enter') {
 					this.onSendButton(chatBox);
 				}
@@ -339,20 +361,19 @@ body {
 			}
 		}
 
+
 		onSendButton(chatBox) {
 			let textField = chatBox.querySelector('input');
 			let text1 = textField.value;
-			if (text1 === "") {
+			if (text1 === '') {
 				return;
 			}
 
-			let userMessage = { role: "user", content: text1 };
+			let userMessage = {role: 'user', content: text1};
 			this.messages.push(userMessage);
 			this.updateChatText(chatBox);
 
 			let outboundMessages = [...this.messages];
-
-			let userId = getCookieValue('userId');
 
 			// Afficher le message de chargement
 			let loader = document.createElement('div');
@@ -366,18 +387,13 @@ body {
 			chatboxMessages.appendChild(loader);
 			chatboxMessages.appendChild(loaderText);
 
-			fetch(`https://api.myaichat.io/api/posts/${userId}/posts`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				}
-			})
-				.then(response => response.json())
-				.then(data => {
+			fetch('./file.txt') // Remplacez par l'URL ou l'API pour récupérer le fichier
+				.then(response => response.text())
+				.then(content => {
 					let chatbotPrompt = `
-            ${data.content}
-            Je suis là pour vous fournir des réponses claires et concises.
-        `;
+				${content}
+				Je suis là pour vous fournir des réponses claires et concises.
+			`;
 
 					outboundMessages.unshift({
 						role: 'system',
@@ -390,16 +406,16 @@ body {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
-							'Authorization': `Bearer ${apiKey}`
+							'Authorization': `Bearer ${apiKey}`,
 						},
 						body: JSON.stringify({
-							model: "gpt-3.5-turbo",
-							messages: outboundMessages
+							model: 'gpt-3.5-turbo',
+							messages: outboundMessages,
 						}),
 					})
 						.then(response => response.json())
 						.then(data => {
-							let botMessage = { role: "assistant", content: data.choices[0].message.content };
+							let botMessage = {role: 'assistant', content: data.choices[0].message.content};
 							this.messages.push(botMessage);
 							this.updateChatText(chatBox);
 
@@ -408,7 +424,7 @@ body {
 							chatboxMessages.removeChild(loaderText);
 							textField.value = '';
 						})
-						.catch((error) => {
+						.catch(error => {
 							console.error('Error:', error);
 							this.updateChatText(chatBox);
 
@@ -417,24 +433,25 @@ body {
 							chatboxMessages.removeChild(loaderText);
 							textField.value = '';
 						});
-				})
-				.catch((error) => {
-					console.error('Error:', error);
+
+
 					this.updateChatText(chatBox);
 
 					// Supprimer le message de chargement
 					chatboxMessages.removeChild(loader);
 					chatboxMessages.removeChild(loaderText);
 					textField.value = '';
+				})
+				.catch(error => {
+					console.error('Error:', error);
 				});
 
-			textField.value = '';
-		}
 
+		}
 
 		updateChatText(chatBox) {
 			let html = '';
-			this.messages.slice().reverse().forEach(function (item) {
+			this.messages.slice().reverse().forEach(item => {
 				if (item.role === 'assistant') {
 					html += '<div class="messages__item messages__item--visitor">' + item.content + '</div>';
 				} else {
@@ -452,7 +469,7 @@ body {
 	// Ajoutez le message de bienvenue à this.messages
 	const welcomeMessage = {
 		role: 'assistant',
-		content: 'Bienvenue ! Comment puis-je vous aider ?'
+		content: 'Bienvenue ! Comment puis-je vous aider ?',
 	};
 	chatboxInstance.messages.push(welcomeMessage);
 

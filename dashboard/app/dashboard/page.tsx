@@ -31,7 +31,6 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { api } from "@/config/api";
 import { useMutation } from "@tanstack/react-query";
-import io, { Socket } from 'socket.io-client';
 import copy from 'clipboard-copy';
 import getCookie from "@/utils/getCookie";
 
@@ -151,17 +150,17 @@ const Page = () => {
 			},
 		}
 	);
-	
+
 	useEffect(() => {
-		//const ws: any = new WebSocket("ws://localhost:9999");
-		const ws: any = new WebSocket("wss://connect.myaichat.io", ['websocket']);
+		const ws: any = new WebSocket("ws://localhost:9999");
+		//const ws: any = new WebSocket("wss://connect.myaichat.io", ['websocket']);
 
 		ws.onopen = () => {
 			console.log("Connected");
 
 			const storedUserId: any = getCookie("userId");
 
-			if(storedUserId){
+			if (storedUserId) {
 				ws.send(storedUserId);
 			}
 		};
