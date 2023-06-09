@@ -284,8 +284,6 @@ body {
 		console.log('Connected to WS Server')
 	});
 
-	// test
-
 // Listen for messages
 	socket.addEventListener('message', function (event) {
 		if(event.data instanceof Blob) {
