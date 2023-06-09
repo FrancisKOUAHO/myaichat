@@ -8,7 +8,7 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ server, transports: ['websocket']});
 
 wss.on('connection', ws => {
 	ws.on('message', message => {
