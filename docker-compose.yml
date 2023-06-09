@@ -12,6 +12,7 @@ services:
     volumes:
       - ./myaichat:/var/www/myaichat
       - ./chatbot:/var/www/chatbot
+      - ./connect:/var/www/connect
     networks:
       local_bridge:
         ipv4_address: 172.20.2.0
@@ -49,9 +50,9 @@ services:
       context: ./connect
       dockerfile: Dockerfile
     container_name: connect
-    depends_on:
-      - webserver
     restart: unless-stopped
+    volumes:
+      - ./connect:/usr/src/app
     ports:
       - "9999:9999"
     tty: true
