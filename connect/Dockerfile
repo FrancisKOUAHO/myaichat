@@ -2,7 +2,7 @@
 FROM node:14
 
 # Create app directory in Docker
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 9999
 
 # Define the command to run your app using CMD which defines your runtime
-CMD [ "npm", "start" ]
+CMD [ "node", "index.js" ]

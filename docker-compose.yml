@@ -50,9 +50,9 @@ services:
       context: ./connect
       dockerfile: Dockerfile
     container_name: connect
+    depends_on:
+      - webserver
     restart: unless-stopped
-    volumes:
-      - ./connect:/usr/src/app
     ports:
       - "9999:9999"
     tty: true
