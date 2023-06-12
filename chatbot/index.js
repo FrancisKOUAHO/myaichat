@@ -300,27 +300,6 @@ body {
 		}
 	});
 
-	let userId = getCookieValue('userId');
-
-	// Utilisez l'ID de l'utilisateur dans le nom de fichier
-	const filePath = `./file_${userId}.txt`;
-
-	fetch(`https://api.myaichat.io/api/posts/${userId}/posts`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	})
-		.then(response => response.json())
-		.then(data => {
-			const content = data.content;
-			console.log('Success:', data);
-		})
-		.catch(error => {
-			console.error('Error:', error);
-		});
-
-
 	class Chatbox {
 		constructor() {
 			this.args = {
@@ -331,6 +310,24 @@ body {
 
 			this.state = false;
 			this.messages = [];
+		}
+
+		async fetchChatbotPrompt() {
+			let userId = getCookieValue('userId');
+			try {
+				let response = await fetch(`https://api.myaichat.io/api/posts/${userId}/posts`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				});
+				let data = await response.json();
+				console.log('Success:', data[0].content);
+				return `${data.content}
+        Je suis là pour vous fournir des réponses claires et concises.`;
+			} catch (error) {
+				console.error('Error:', error);
+			}
 		}
 
 		display() {
@@ -361,8 +358,7 @@ body {
 			}
 		}
 
-
-		onSendButton(chatBox) {
+		async onSendButton(chatBox) {
 			let textField = chatBox.querySelector('input');
 			let text1 = textField.value;
 			if (text1 === '') {
@@ -387,50 +383,48 @@ body {
 			chatboxMessages.appendChild(loader);
 			chatboxMessages.appendChild(loaderText);
 
-			let chatbotPrompt = `
-				${this.content}
-				Je suis là pour vous fournir des réponses claires et concises.
-			`;
+			this.fetchChatbotPrompt().then(async (chatbotPrompt) => {
+				console.log('chatbotPrompt', chatbotPrompt);
 
-			outboundMessages.unshift({
-				role: 'system',
-				content: chatbotPrompt,
-			});
-
-			const apiKey = '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';
-
-			fetch('https://api.openai.com/v1/chat/completions', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${apiKey}`,
-				},
-				body: JSON.stringify({
-					model: 'gpt-3.5-turbo',
-					messages: outboundMessages,
-				}),
-			})
-				.then(response => response.json())
-				.then(data => {
-					let botMessage = {role: 'assistant', content: data.choices[0].message.content};
-					this.messages.push(botMessage);
-					this.updateChatText(chatBox);
-
-					// Supprimer le message de chargement
-					chatboxMessages.removeChild(loader);
-					chatboxMessages.removeChild(loaderText);
-					textField.value = '';
-				})
-				.catch(error => {
-					console.error('Error:', error);
-					this.updateChatText(chatBox);
-
-					// Supprimer le message de chargement
-					chatboxMessages.removeChild(loader);
-					chatboxMessages.removeChild(loaderText);
-					textField.value = '';
+				outboundMessages.unshift({
+					role: 'system',
+					content: chatbotPrompt,
 				});
 
+				const apiKey = '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';
+
+				await fetch('https://api.openai.com/v1/chat/completions', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${apiKey}`,
+					},
+					body: JSON.stringify({
+						model: 'gpt-3.5-turbo',
+						messages: outboundMessages,
+					}),
+				})
+					.then(response => response.json())
+					.then(data => {
+						let botMessage = {role: 'assistant', content: data.choices[0].message.content};
+						this.messages.push(botMessage);
+						this.updateChatText(chatBox);
+
+						// Supprimer le message de chargement
+						chatboxMessages.removeChild(loader);
+						chatboxMessages.removeChild(loaderText);
+						textField.value = '';
+					})
+					.catch(error => {
+						console.error('Error:', error);
+						this.updateChatText(chatBox);
+
+						// Supprimer le message de chargement
+						chatboxMessages.removeChild(loader);
+						chatboxMessages.removeChild(loaderText);
+						textField.value = '';
+					});
+			});
 
 			this.updateChatText(chatBox);
 
