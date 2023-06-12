@@ -323,7 +323,7 @@ body {
 				});
 				let data = await response.json();
 				console.log('Success:', data[0].content);
-				return `${data.content}
+				return `${data[0].content}
         Je suis là pour vous fournir des réponses claires et concises.`;
 			} catch (error) {
 				console.error('Error:', error);
