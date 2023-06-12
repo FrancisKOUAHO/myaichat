@@ -399,6 +399,22 @@ body {
 
 				const apiKey = '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';
 
+				try {
+					await fetch('https://api.openai.com/v1/chat/completions', {
+						// Les paramètres de votre fetch...
+					})
+						.then(response => response.json())
+						.then(data => {
+							// Votre code de traitement de la réponse...
+						})
+						.catch(error => {
+							// Votre code de gestion des erreurs...
+						});
+				} finally {
+					// Quoi qu'il arrive (que la requête réussisse ou échoue), videz le champ de texte.
+					textField.value = '';
+				}
+
 				await fetch('https://api.openai.com/v1/chat/completions', {
 					method: 'POST',
 					headers: {
