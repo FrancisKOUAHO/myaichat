@@ -273,8 +273,8 @@ body {
 	}
 
 	// Create WebSocket connection.
-	//const socket = new WebSocket('wss://connect.myaichat.io', ['websocket']);
-	const socket = new WebSocket('ws://localhost:9999', ['websocket']);
+	const socket = new WebSocket('wss://connect.myaichat.io', ['websocket']);
+	//const socket = new WebSocket('ws://localhost:9999', ['websocket']);
 
 	// Connection opened
 	socket.addEventListener('open', function (event) {
