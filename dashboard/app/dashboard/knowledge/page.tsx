@@ -44,7 +44,9 @@ const Page = () => {
                 </tr>
               </thead>
               <tbody className="mt-[2%] bg-white">
-                {scrapeData &&
+                {
+                  isLoading ? <p>Loading...</p> :
+                  scrapeData &&
                   scrapeData.data.map((product: any) => {
                     return (
                       <tr key={product.id}>
