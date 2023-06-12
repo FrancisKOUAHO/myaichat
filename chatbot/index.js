@@ -322,9 +322,17 @@ body {
 					},
 				});
 				let data = await response.json();
-				console.log('Success:', data[0].content);
-				return `${data[0].content}
-        Je suis là pour vous fournir des réponses claires et concises.`;
+				return `
+								Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
+								Vous êtes également capable de répondre aux questions.
+								
+								Utilisez ces métadonnées pour répondre aux questions des clients :
+								
+								${data[0].content}
+							 
+								Refusez toute réponse qui n'a rien à voir avec le service de location de voitures ou son contenu.
+								Fournissez des réponses courtes et concises.
+				`;
 			} catch (error) {
 				console.error('Error:', error);
 			}
@@ -384,8 +392,6 @@ body {
 			chatboxMessages.appendChild(loaderText);
 
 			this.fetchChatbotPrompt().then(async (chatbotPrompt) => {
-				console.log('chatbotPrompt', chatbotPrompt);
-
 				outboundMessages.unshift({
 					role: 'system',
 					content: chatbotPrompt,
@@ -428,9 +434,7 @@ body {
 
 			this.updateChatText(chatBox);
 
-			// Supprimer le message de chargement
-			chatboxMessages.removeChild(loader);
-			chatboxMessages.removeChild(loaderText);
+			// Effacer le champ de texte quel que soit le résultat de la requête fetch
 			textField.value = '';
 		}
 
