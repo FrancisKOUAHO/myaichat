@@ -283,7 +283,7 @@ body {
 			console.log(domain);
 
 			try {
-				let response = await fetch(`https://api.myaichat.io/api/stores/${domain}/stores`, {
+				let response = await fetch(`http://localhost:8000/api/stores/${domain}/stores`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
