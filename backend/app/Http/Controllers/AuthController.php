@@ -13,22 +13,6 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function index(Request $request): JsonResponse
-    {
-        $user = $request->user();
-
-        $response = Http::get('http://127.0.0.1:8000/api/chatbot-info', [
-            'user_id' => $user->id,
-        ]);
-
-        $chatbotInfo = $response->json();
-
-        return response()->json([
-            'user' => $user,
-            'chatbotInfo' => $chatbotInfo,
-        ]);
-    }
-
     public function requestLoginLink(Request $request): JsonResponse
     {
         // Validation des champs

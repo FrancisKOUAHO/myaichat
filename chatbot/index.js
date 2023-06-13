@@ -261,45 +261,6 @@ body {
 	// Ajout du chatbot au conteneur spécifié
 	chatboxContainer.appendChild(chatbox);
 
-	function getCookieValue(cookieName) {
-		const cookies = document.cookie.split(';');
-		for (let i = 0; i < cookies.length; i++) {
-			const cookie = cookies[i].trim();
-			if (cookie.startsWith(`${cookieName}=`)) {
-				return cookie.substring(cookieName.length + 1);
-			}
-		}
-		return null;
-	}
-
-	// Create WebSocket connection.
-	const socket = new WebSocket('wss://connect.myaichat.io', ['websocket']);
-	//const socket = new WebSocket('ws://localhost:9999', ['websocket']);
-
-	// Connection opened
-	socket.addEventListener('open', function (event) {
-		console.log('Connected to WS Server');
-	});
-
-	// Listen for messages
-	socket.addEventListener('message', function (event) {
-		if (event.data instanceof Blob) {
-			var reader = new FileReader();
-			reader.onload = function () {
-				console.log('Message from server', reader.result);
-				document.cookie = 'userId=' + reader.result;
-
-				// Récupérer la valeur de data.content
-				const data = JSON.parse(reader.result);
-				const prompt = data.content;
-				// Faites ce que vous souhaitez avec prompt
-			};
-			reader.readAsText(event.data);
-		} else {
-			console.log('Message from server', event.data);
-		}
-	});
-
 	class Chatbox {
 		constructor() {
 			this.args = {
@@ -313,16 +274,23 @@ body {
 		}
 
 		async fetchChatbotPrompt() {
-			let userId = getCookieValue('userId');
+
+			const url = window.location.href;
+			const hostname = new URL(url).hostname;
+			const domain = hostname.replace("www.", "").split(".")[0];
+
+			console.log(domain);
+
 			try {
-				let response = await fetch(`https://api.myaichat.io/api/posts/${userId}/posts`, {
+				let response = await fetch(`https://api.myaichat.io/api/stores/${domain}/stores`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
 					},
 				});
-				let data = await response.json();
-				return `
+				if (response.ok) {
+					let data = await response.json();
+					return `
 								Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
 								Vous êtes également capable de répondre aux questions.
 								
@@ -333,6 +301,7 @@ body {
 								Refusez toute réponse qui n'a rien à voir avec le service de location de voitures ou son contenu.
 								Fournissez des réponses courtes et concises.
 				`;
+				}
 			} catch (error) {
 				console.error('Error:', error);
 			}

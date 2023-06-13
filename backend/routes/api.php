@@ -24,17 +24,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/magic-link/{token}', [AuthController::class, 'loginWithToken']);
     Route::get('/redirect', [AuthController::class, 'redirect']);
     Route::get('/callback', [AuthController::class, 'callback']);
-    Route::get('/users/{user}/posts', [PostController::class, 'getUserPosts']);
-});
-
-
-Route::group(['prefix' => 'posts'], function () {
-    Route::get('/{user}/posts', [PostController::class, 'getUserPosts']);
-    Route::get('/posts', [PostController::class, 'index']);
-    Route::post('/create', [PostController::class, 'store']);
-    Route::get('/{post}', [PostController::class, 'show']);
-    Route::put('/{post}', [PostController::class, 'update']);
-    Route::delete('/{post}', [PostController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'stores'], function () {
@@ -44,7 +33,8 @@ Route::group(['prefix' => 'stores'], function () {
     Route::post('/stores', [ShopifyStoreController::class, 'store']);
     Route::put('/stores/{id}', [ShopifyStoreController::class, 'update']);
     Route::delete('/stores/{id}', [ShopifyStoreController::class, 'destroy']);
-    Route::get('/user/{user_id}/stores', [ShopifyStoreController::class, 'getUserStores']);
+    Route::get('/{url}/stores', [ShopifyStoreController::class, 'getUrlStores']);
+    Route::get('/user/{userId}/stores', [ShopifyStoreController::class, 'getUserStores']);
 });
 
 Route::group(['prefix' => 'products'], function () {

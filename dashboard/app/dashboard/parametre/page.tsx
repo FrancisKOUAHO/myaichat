@@ -19,11 +19,11 @@ const Page = () => {
 	const openModalModifier = () => setIsOpenModifier(true);
 	const closeModalModifier = () => setIsOpenModifier(false);
 
-	const getScrapeMutation: any = useMutation(
+
+	const {isLoading, mutateAsync: getScrapeMutation}: any = useMutation(
 		(data: any) => api.get(`stores/user/${data}/stores`),
 		{
 			onSuccess: (data: any) => {
-				console.log("data", data);
 				setShopifyStore(data.data);
 			},
 			onError: (error: any): void => {
@@ -55,7 +55,9 @@ const Page = () => {
 							</tr>
 							</thead>
 							<tbody className="mt-[2%] bg-white">
-							{ShopifyStore &&
+							{
+								isLoading ? <p>Loading...</p> :
+								ShopifyStore &&
 								ShopifyStore.map((shop: any) => {
 									return (
 										<tr className="bg-white" key={shop.id}>

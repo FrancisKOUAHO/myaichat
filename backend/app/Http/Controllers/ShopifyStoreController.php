@@ -25,8 +25,8 @@ class ShopifyStoreController extends Controller
     public function store(Request $request): JsonResponse
     {
         $validatedData = $request->validate([
-            'url' => 'required|url',
-            'user_id' => 'required|integer'
+            'url' => 'required|string',
+            'user_id' => 'required|integer',
         ]);
 
         $store = ShopifyStore::create($validatedData);
@@ -39,8 +39,7 @@ class ShopifyStoreController extends Controller
         $store = ShopifyStore::findOrFail($id);
 
         $validatedData = $request->validate([
-            'url' => 'required|url',
-            'user_id' => 'required|integer'
+            'content' => 'required|string'
         ]);
 
         $store->update($validatedData);
@@ -57,9 +56,16 @@ class ShopifyStoreController extends Controller
         return response()->json('Le magasin a été supprimé avec succès');
     }
 
-    public function getUserStores($user_id): JsonResponse
+    public function getUrlStores($url): JsonResponse
     {
-        $stores = ShopifyStore::where('user_id', $user_id)->get();
+        $stores = ShopifyStore::where('url', $url)->get();
+
+        return response()->json($stores);
+    }
+
+    public function getUserStores($userID): JsonResponse
+    {
+        $stores = ShopifyStore::where('user_id', $userID)->get();
 
         return response()->json($stores);
     }

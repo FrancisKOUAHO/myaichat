@@ -124,18 +124,25 @@ const Page = () => {
 			user_id: userId,
 		};
 
-		scrapeMutation.mutateAsync(requestData);
-		handleSubmitShop(requestData);
-	};
+		const hostname = new URL(url.value).hostname;
+		const domain = hostname.replace("www.", "").split(".")[0];
 
-	const handleSubmitShop = (data: any) => {
-		shopMutation.mutateAsync(data);
+		console.log("domain", domain);
+
+		const createUrlData = {
+			url: domain,
+			user_id: userId,
+		};
+
+		scrapeMutation.mutateAsync(requestData);
+		shopMutation.mutateAsync(createUrlData);
 	};
 
 	const fetchShopMutation = useMutation(
 		(data: any) => api.post("stores/shopify-store", data),
 		{
 			onSuccess: (data) => {
+				console.log("data", data);
 			},
 			onError: (error): void => {
 				console.log("error", error);
@@ -156,38 +163,10 @@ const Page = () => {
 	);
 
 	useEffect(() => {
-		//const ws: any = new WebSocket("ws://localhost:9999");
-		const ws: any = new WebSocket("wss://connect.myaichat.io", ['websocket']);
-
-		ws.onopen = () => {
-			console.log("Connected");
-
-			const storedUserId: any = getCookie("userId");
-
-			if (storedUserId) {
-				ws.send(storedUserId);
-			}
-		};
-
-		ws.onmessage = (event: any) => {
-			if (event.data instanceof Blob) {
-				event.data.text().then((text: any) => {
-					console.log("Received:", text);
-				});
-			} else {
-				console.log("Received:", event.data);
-			}
-		};
-		setWs(ws);
-
-		const userId: any = getCookie("userId");
-
+		const userId = getCookie("userId");
 		getScrapeMutation(userId);
-
-		return () => {
-			ws.close();
-		};
 	}, []);
+
 
 	return (
 		<LayoutCustom>
