@@ -63,14 +63,33 @@ return [
             ]) : [],
         ],
 
+        // PRODUCTION
+
+        /*'pgsql' => [
+            'driver' => 'pgsql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', 'myaichat.cv89eqbidx3l.us-east-2.rds.amazonaws.com'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'myaichat'),
+            'username' => env('DB_USERNAME', 'myaichat'),
+            'password' => env('DB_PASSWORD', 'myaichat'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],*/
+
+        // DEVELOPMENT
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', 'myaichatdev.cv89eqbidx3l.us-east-2.rds.amazonaws.com'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'myaichatdev'),
+            'username' => env('DB_USERNAME', 'myaichatdev'),
+            'password' => env('DB_PASSWORD', 'myaichatdev'),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
