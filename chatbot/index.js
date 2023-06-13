@@ -156,6 +156,10 @@ body {
     max-width: 70%;
 }
 
+.messages__loading {
+	background: transparent;
+}
+
 .messages__item--visitor,
 .messages__item--typing {
     border-top-left-radius: 20px;
@@ -231,6 +235,54 @@ body {
     cursor: pointer;
 }
 
+/* Loader */
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.loader-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background-color: #000;
+  border-radius: 50%;
+  animation: loaderAnimation 1s infinite ease-in-out;
+}
+
+@keyframes loaderAnimation {
+  0%, 100% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+.loader-text {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+}
+
+anim-typewriter {
+    animation: typewriter 1s steps(40) 1 normal both;
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
 </style>
         <div class="chatbox__support">
             <div class="chatbox__header">
@@ -242,14 +294,7 @@ body {
                     <p class="chatbox__description--header">Je m'appelle Myaichat</p>
                 </div>
             </div>
-            <div class="chatbox__messages">
-                
-              <div class="messages__item messages__item--loading">
-                    <div class="loader">
-                        <div class="loader-text">Chargement...</div>
-                    </div>
-              </div>
-            </div>
+            <div class="chatbox__messages"></div>
             <div class="chatbox__footer">
                 <input placeholder="Ecrire un message..." type="text">
                 <button class="chatbox__send--footer send__button">Envoyer</button>
@@ -280,10 +325,9 @@ body {
 			const hostname = new URL(url).hostname;
 			const domain = hostname.replace("www.", "").split(".")[0];
 
-			console.log(domain);
 
 			try {
-				let response = await fetch(`http://localhost:8000/api/stores/${domain}/stores`, {
+				let response = await fetch(`https://api.myaichat.io/api/stores/${domain}/stores`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
@@ -343,23 +387,43 @@ body {
 				return;
 			}
 
-			let userMessage = {role: 'user', content: text1};
+			let userMessage = { role: 'user', content: text1 };
 			this.messages.push(userMessage);
 			this.updateChatText(chatBox);
 
 			let outboundMessages = [...this.messages];
 
 			// Afficher le message de chargement
+			let loadingMessage = document.createElement('div');
+			loadingMessage.className = 'messages__item messages__item--loading messages__loading';
+
+			let loaderContainer = document.createElement('div');
+			loaderContainer.className = 'loader-container';
+
 			let loader = document.createElement('div');
 			loader.className = 'loader';
 
-			let loaderText = document.createElement('div');
-			loaderText.className = 'loader-text';
-			loaderText.textContent = 'Chargement...';
+			for (let i = 0; i < 3; i++) {
+				let dot = document.createElement('div');
+				dot.className = 'loader-dot';
+				loader.appendChild(dot);
+			}
+
+			loaderContainer.appendChild(loader);
+			loadingMessage.appendChild(loaderContainer);
+
+// Insérer le message de chargement après le dernier message de l'utilisateur
+			let userMessageItems = chatBox.querySelectorAll('.messages__item.messages__item--visitor');
+			if (userMessageItems.length > 0) {
+				let lastUserMessageItem = userMessageItems[userMessageItems.length - 1];
+				lastUserMessageItem.insertAdjacentElement('afterend', loadingMessage);
+			} else {
+				chatBox.querySelector('.chatbox__messages').appendChild(loadingMessage);
+			}
+
 
 			let chatboxMessages = chatBox.querySelector('.chatbox__messages');
-			chatboxMessages.appendChild(loader);
-			chatboxMessages.appendChild(loaderText);
+			chatboxMessages.insertBefore(loadingMessage, chatboxMessages.firstChild);
 
 			this.fetchChatbotPrompt().then(async (chatbotPrompt) => {
 				outboundMessages.unshift({
@@ -370,55 +434,36 @@ body {
 				const apiKey = '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';
 
 				try {
-					await fetch('https://api.openai.com/v1/chat/completions', {
-						// Les paramètres de votre fetch...
-					})
-						.then(response => response.json())
-						.then(data => {
-							// Votre code de traitement de la réponse...
-						})
-						.catch(error => {
-							// Votre code de gestion des erreurs...
-						});
-				} finally {
-					// Quoi qu'il arrive (que la requête réussisse ou échoue), videz le champ de texte.
-					textField.value = '';
-				}
+					const response = await fetch('https://api.openai.com/v1/chat/completions', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${apiKey}`,
+						},
+						body: JSON.stringify({
+							model: 'gpt-3.5-turbo',
+							messages: outboundMessages,
+						}),
+					});
 
-				await fetch('https://api.openai.com/v1/chat/completions', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-						'Authorization': `Bearer ${apiKey}`,
-					},
-					body: JSON.stringify({
-						model: 'gpt-3.5-turbo',
-						messages: outboundMessages,
-					}),
-				})
-					.then(response => response.json())
-					.then(data => {
-						let botMessage = {role: 'assistant', content: data.choices[0].message.content};
+					if (response.ok) {
+						const data = await response.json();
+						let botMessage = { role: 'assistant', content: data.choices[0].message.content };
 						this.messages.push(botMessage);
 						this.updateChatText(chatBox);
-
-						// Supprimer le message de chargement
-						chatboxMessages.removeChild(loader);
-						chatboxMessages.removeChild(loaderText);
-						textField.value = '';
-					})
-					.catch(error => {
-						console.error('Error:', error);
+					} else {
+						console.error('Error:', response.status);
 						this.updateChatText(chatBox);
-
-						// Supprimer le message de chargement
-						chatboxMessages.removeChild(loader);
-						chatboxMessages.removeChild(loaderText);
-						textField.value = '';
-					});
+					}
+				} catch (error) {
+					console.error('Error:', error);
+					this.updateChatText(chatBox);
+				} finally {
+					// Supprimer le message de chargement
+					chatboxMessages.removeChild(loadingMessage);
+					textField.value = '';
+				}
 			});
-
-			this.updateChatText(chatBox);
 
 			// Effacer le champ de texte quel que soit le résultat de la requête fetch
 			textField.value = '';
@@ -426,12 +471,16 @@ body {
 
 		updateChatText(chatBox) {
 			let html = '';
-			this.messages.slice().reverse().forEach(item => {
+			this.messages.slice().reverse().forEach((item, index) => {
+				let messageClass = item.role === 'assistant' ? 'messages__item messages__item--visitor' : 'messages__item messages__item--operator';
+				let animationDelay = (index + 1) * 0.1 + 's'; // Délai d'animation
+
+				let messageContent = item.content;
 				if (item.role === 'assistant') {
-					html += '<div class="messages__item messages__item--visitor">' + item.content + '</div>';
-				} else {
-					html += '<div class="messages__item messages__item--operator">' + item.content + '</div>';
+					messageContent = '<span class="anim-typewriter" style="animation-delay: ' + animationDelay + '">' + messageContent + '</span>';
 				}
+
+				html += '<div class="' + messageClass + '">' + messageContent + '</div>';
 			});
 
 			const chatMessage = chatBox.querySelector('.chatbox__messages');
