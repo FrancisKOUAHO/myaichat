@@ -298,7 +298,7 @@ body {
 								
 								${data[0].content}
 							 
-								Refusez toute réponse qui n'a rien à voir avec le service de location de voitures ou son contenu.
+								Refusez toute réponse qui n'a rien à voir avec sur le site web ou son contenu.
 								Fournissez des réponses courtes et concises.
 				`;
 				}

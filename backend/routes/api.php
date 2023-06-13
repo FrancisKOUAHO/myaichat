@@ -31,7 +31,7 @@ Route::group(['prefix' => 'stores'], function () {
     Route::get('/stores', [ShopifyStoreController::class, 'index']);
     Route::get('/stores/{id}', [ShopifyStoreController::class, 'show']);
     Route::post('/stores', [ShopifyStoreController::class, 'store']);
-    Route::put('/stores/{id}', [ShopifyStoreController::class, 'update']);
+    Route::put('/{id}', [ShopifyStoreController::class, 'update']);
     Route::delete('/stores/{id}', [ShopifyStoreController::class, 'destroy']);
     Route::get('/{url}/stores', [ShopifyStoreController::class, 'getUrlStores']);
     Route::get('/user/{userId}/stores', [ShopifyStoreController::class, 'getUserStores']);

@@ -4,10 +4,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Dialog, Transition } from "@headlessui/react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "@/config/api";
-import { parseCookies } from "nookies";
 import { getCookie } from "cookies-next";
+import { toast } from "react-toastify";
 
 const Page = () => {
 	const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
@@ -20,10 +20,11 @@ const Page = () => {
 	const closeModalModifier = () => setIsOpenModifier(false);
 
 
-	const {isLoading, mutateAsync: getScrapeMutation}: any = useMutation(
+	const getScrapeMutation = useMutation(
 		(data: any) => api.get(`stores/user/${data}/stores`),
 		{
 			onSuccess: (data: any) => {
+				console.log("data", data.data)
 				setShopifyStore(data.data);
 			},
 			onError: (error: any): void => {
@@ -32,9 +33,41 @@ const Page = () => {
 		}
 	);
 
+	const updateStoreMutation = useMutation(
+		(data: { id: any, content: string }) => api.put(`stores/${data.id}`, { content: data.content }),
+		{
+			onSuccess: (data: any) => {
+				toast(`Boutique creer`, {position: toast.POSITION.BOTTOM_CENTER});
+			},
+			onError: (error: any) => {
+				console.log("error", error);
+			},
+		}
+	);
+
+	/*const { data: store, isLoading, isError, error } = useQuery(['store', ShopifyStore[0].id], () =>
+			api.get(`/stores/${ShopifyStore[0].id}`),
+		{
+			enabled: !!ShopifyStore[0].id,
+		}
+	);*/
+
+	const handleSubmit = (event: any) => {
+		event.preventDefault();
+		const {content} = event.target.elements;
+
+		updateStoreMutation.mutate({
+			id: ShopifyStore[0].id,
+			content: content.value
+		});
+
+		closeModalVisualiser();
+	};
+
 	useEffect(() => {
 		getScrapeMutation.mutate(getCookie("userId"));
 	}, []);
+
 
 	return (
 		<LayoutCustom>
@@ -56,7 +89,6 @@ const Page = () => {
 							</thead>
 							<tbody className="mt-[2%] bg-white">
 							{
-								isLoading ? <p>Loading...</p> :
 								ShopifyStore &&
 								ShopifyStore.map((shop: any) => {
 									return (
@@ -171,7 +203,7 @@ const Page = () => {
 															<div className="fixed inset-0 bg-black bg-opacity-25"/>
 														</Transition.Child>
 														<div className="fixed inset-0 overflow-y-auto">
-															<form className="flex min-h-full items-center justify-center p-4 text-center">
+															<form onSubmit={handleSubmit} className="flex min-h-full items-center justify-center p-4 text-center">
 																<Transition.Child
 																	as={Fragment}
 																	enter="ease-out duration-300"
