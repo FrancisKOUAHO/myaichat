@@ -122,7 +122,6 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     padding: 15px 20px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -134,7 +133,7 @@ body {
 }
 
 .chatbox__heading--header {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: white;
 }
 
@@ -202,7 +201,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 20px 20px;
-    background: var(--secondaryGradient);
+    background: #f9f9f9;
     box-shadow: var(--secondaryBoxShadow);
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
@@ -287,17 +286,18 @@ anim-typewriter {
         <div class="chatbox__support">
             <div class="chatbox__header">
                 <div class="chatbox__image--header">
-                    <img alt="cerf-logo" src="https://i.goopics.net/e3tj02.jpg" style="border-radius: 999px;" width="50">
+                    <img alt="cerf-logo" src="https://i.goopics.net/r6uvnn.jpg" style="border-radius: 999px;" width="50">
                 </div>
                 <div class="chatbox__content--header">
                     <h4 class="chatbox__heading--header">Chat support</h4>
-                    <p class="chatbox__description--header">Je m'appelle Myaichat</p>
                 </div>
             </div>
             <div class="chatbox__messages"></div>
             <div class="chatbox__footer">
-                <input placeholder="Ecrire un message..." type="text">
-                <button class="chatbox__send--footer send__button">Envoyer</button>
+                <input placeholder="Ecrire un meessage..." type="text">
+                <button class="chatbox__send--footer send__button">
+                		<img alt="" src="https://i.goopics.net/hvi6rl.png" style="display: block;" width="20"/>
+								</button>
             </div>
         </div>
         <div class="chatbox__button">
@@ -477,10 +477,10 @@ anim-typewriter {
 
 				let messageContent = item.content;
 				if (item.role === 'assistant') {
-					messageContent = '<span class="anim-typewriter" style="animation-delay: ' + animationDelay + '">' + messageContent + '</span>';
+					messageContent = '<span class="anim-typewriter" style="animation-delay: ' + animationDelay + '; font-size: 12px; word-break: break-all">' + messageContent + '</span>';
 				}
 
-				html += '<div class="' + messageClass + '">' + messageContent + '</div>';
+				html += '<div class="' + messageClass + '" style="font-size: 12px; word-break: break-all">' + messageContent + '</div>';
 			});
 
 			const chatMessage = chatBox.querySelector('.chatbox__messages');
