@@ -320,32 +320,44 @@ anim-typewriter {
 		}
 
 		async fetchChatbotPrompt() {
-
 			const url = window.location.href;
 			const hostname = new URL(url).hostname;
 			const domain = hostname.replace("www.", "").split(".")[0];
 
-
 			try {
-				let response = await fetch(`https://api.myaichat.io/api/stores/${domain}/stores`, {
+				const response1 = await fetch(`https://api.myaichat.io/api/stores/${domain}/stores`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
 					},
 				});
-				if (response.ok) {
-					let data = await response.json();
-					return `
-								Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
-								Vous êtes également capable de répondre aux questions.
-								
-								Utilisez ces métadonnées pour répondre aux questions des clients :
-								
-								${data[0].content}
-							 
-								Refusez toute réponse qui n'a rien à voir avec sur le site web ou son contenu.
-								Fournissez des réponses courtes et concises.
-				`;
+
+				if (response1.ok) {
+					const data1 = await response1.json();
+
+					const response2 = await fetch(`https://api.myaichat.io/api/products/${domain}`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					});
+
+					if (response2.ok) {
+						const data2 = await response2.json();
+
+						return `
+          Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
+          Vous êtes également capable de répondre aux questions.
+          
+          Utilisez ces métadonnées pour répondre aux questions des clients :
+          
+          ${data1[0].content}
+          ${data2}
+          
+          Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
+          Fournissez des réponses courtes et concises.
+        `;
+					}
 				}
 			} catch (error) {
 				console.error('Error:', error);
@@ -452,11 +464,9 @@ anim-typewriter {
 						this.messages.push(botMessage);
 						this.updateChatText(chatBox);
 					} else {
-						console.error('Error:', response.status);
 						this.updateChatText(chatBox);
 					}
 				} catch (error) {
-					console.error('Error:', error);
 					this.updateChatText(chatBox);
 				} finally {
 					// Supprimer le message de chargement

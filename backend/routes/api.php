@@ -45,6 +45,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::put('/products/{id}', [ShopifyProductController::class, 'update']);
     Route::delete('/products/{id}', [ShopifyProductController::class, 'destroy']);
     Route::get('/user/{user_id}/products', [ShopifyProductController::class, 'getUserProducts']);
+    Route::get('{url}', [ShopifyScraperController::class, 'getProductUrl']);
 });
 
 

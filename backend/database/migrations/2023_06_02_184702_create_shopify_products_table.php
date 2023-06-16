@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
+            $table->string('url');
             $table->string('full_url');
             $table->dateTime('publish_date');
             $table->dateTime('updated_date');

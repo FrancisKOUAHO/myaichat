@@ -79,6 +79,12 @@ class ShopifyScraperController extends Controller
         $url = $requestData['url'];
         $userId = $requestData['user_id'];
 
+
+        $url_parts = parse_url($url);
+        $hostname = $url_parts['host'];
+        $domain = str_ireplace('www.', '', explode('.', $hostname)[0]);
+
+
         $productListUrl = $url . "/products.json";
         $productList = [];
 
@@ -109,6 +115,7 @@ class ShopifyScraperController extends Controller
                 $newProduct->updated_date = $updatedDate;
                 $newProduct->vendor = $vendor;
                 $newProduct->product_type = $productType;
+                $newProduct->domain = $domain;
 
                 if ($newProduct->save()) {
                     $productList[] = $newProduct;
@@ -120,5 +127,12 @@ class ShopifyScraperController extends Controller
         }
 
         return response()->json($productList);
+    }
+
+    public function getProductUrl($url): JsonResponse
+    {
+        $stores = ShopifyProduct::where('url', $url)->get();
+
+        return response()->json($stores);
     }
 }

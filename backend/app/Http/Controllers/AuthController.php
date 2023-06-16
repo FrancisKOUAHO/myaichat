@@ -47,14 +47,14 @@ class AuthController extends Controller
 
     protected function sendLoginEmail(User $user, string $authToken): void
     {
-        // Inclure le jeton en tant que paramètre dans l'URL du tableau de bord
-        //$dashboardUrl = 'http://localhost:3030/verify' . '/?magic_link_token=' . $user->magic_link_token;
         $dashboardUrl = 'https://app.myaichat.io/verify' . '/?magic_link_token=' . $user->magic_link_token;
+        $messageBody = "Cliquez sur le lien ci-dessous pour vous connecter :\n\n" . $dashboardUrl;
 
-        Mail::raw($dashboardUrl, function ($message) use ($user) {
+        Mail::raw($messageBody, function ($message) use ($user) {
             $message->to($user->email)->subject('Lien de connexion');
         });
     }
+
 
     public function loginWithToken(Request $request, $token)
     {

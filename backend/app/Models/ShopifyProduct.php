@@ -12,6 +12,7 @@ class ShopifyProduct extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'url',
         'full_url',
         'publish_date',
         'updated_date',
