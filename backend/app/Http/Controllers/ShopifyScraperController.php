@@ -79,11 +79,9 @@ class ShopifyScraperController extends Controller
         $url = $requestData['url'];
         $userId = $requestData['user_id'];
 
-
         $url_parts = parse_url($url);
         $hostname = $url_parts['host'];
         $domain = str_ireplace('www.', '', explode('.', $hostname)[0]);
-
 
         $productListUrl = $url . "/products.json";
         $productList = [];
@@ -131,7 +129,7 @@ class ShopifyScraperController extends Controller
 
     public function getProductUrl($url): JsonResponse
     {
-        $stores = ShopifyProduct::where('url', $url)->get();
+        $stores = ShopifyProduct::where('domain', $url)->get();
 
         return response()->json($stores);
     }

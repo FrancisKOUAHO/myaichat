@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('title')->nullable();
-            $table->string('url')->nullable();
+            $table->string('domain')->nullable();
             $table->string('full_url')->nullable();
             $table->dateTime('publish_date');
             $table->dateTime('updated_date');
