@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('shopify_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('title');
-            $table->string('url');
-            $table->string('full_url');
+            $table->string('title')->nullable();
+            $table->string('url')->nullable();
+            $table->string('full_url')->nullable();
             $table->dateTime('publish_date');
             $table->dateTime('updated_date');
-            $table->string('vendor');
-            $table->string('product_type');
+            $table->string('vendor')->nullable();
+            $table->string('product_type')->nullable();
             $table->timestamps();
         });
     }
