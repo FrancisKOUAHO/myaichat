@@ -12,12 +12,6 @@ function initializeChatbox(containerId) {
     padding: 0;
 }
 
-body {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 400;
-    font-size: 100%;
-    background: #F1F1F1;
-}
 
 *, html {
     --primaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
