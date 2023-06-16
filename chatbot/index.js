@@ -289,7 +289,7 @@ anim-typewriter {
                     <img alt="cerf-logo" src="https://i.goopics.net/r6uvnn.jpg" style="border-radius: 999px;" width="50">
                 </div>
                 <div class="chatbox__content--header">
-                    <h4 class="chatbox__heading--header">Chat support</h4>
+                    <h4 class="chatbox__heading--header">Chat Support</h4>
                 </div>
             </div>
             <div class="chatbox__messages"></div>
