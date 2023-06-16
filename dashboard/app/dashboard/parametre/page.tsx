@@ -107,133 +107,65 @@ const Page = () => {
 												</p>
 											</td>
 											<td className="p-3 ">
-												<button
-													onClick={openModalVisualiser}
-													className="mx-2 inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-												>
+												<button onClick={openModalVisualiser} className="mx-2 inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 													<AiOutlineEye className="-ml-0.5 mr-1.5 h-5 w-5"/>
 													Visualiser
 												</button>
-												<Transition
-													appear
-													show={isOpenVisualiser}
-													as={Fragment}
-												>
-													<Dialog
-														as="div"
-														className="relative z-10"
-														onClose={closeModalVisualiser}
-													>
-														<Transition.Child
-															as={Fragment}
-															enter="ease-out duration-300"
-															enterFrom="opacity-0"
-															enterTo="opacity-100"
-															leave="ease-in duration-200"
-															leaveFrom="opacity-100"
-															leaveTo="opacity-0"
-														>
-															<div className="fixed inset-0 bg-black bg-opacity-25"/>
-														</Transition.Child>
+											{isOpenVisualiser && (
+													<Transition appear show={isOpenVisualiser} as={Fragment}>
 														<div className="fixed inset-0 overflow-y-auto">
 															<div className="flex min-h-full items-center justify-center p-4 text-center">
-																<Transition.Child
-																	as={Fragment}
-																	enter="ease-out duration-300"
-																	enterFrom="opacity-0 scale-95"
-																	enterTo="opacity-100 scale-100"
-																	leave="ease-in duration-200"
-																	leaveFrom="opacity-100 scale-100"
-																	leaveTo="opacity-0 scale-95"
-																>
-																	<Dialog.Panel
-																		className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-																		<Dialog.Title
-																			as="h3"
-																			className="text-lg font-medium leading-6 text-gray-900"
-																		>
+																<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+																	<div className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+																		<h3 className="text-lg font-medium leading-6 text-gray-900">
 																			Contenu
-																		</Dialog.Title>
+																		</h3>
 																		<div className="mt-2 overflow-auto max-h-[50vh]">
-																			<p className="text-sm text-gray-500">
-																				{shop.content}
-																			</p>
+																		  <span className="text-sm text-gray-500">
+																			{shop.content}
+																		  </span>
 																		</div>
 																		<div className="mt-4">
-																			<button
-																				type="button"
-																				className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-																				onClick={closeModalVisualiser}
-																			>
+																			<button type="button" className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2" onClick={closeModalVisualiser}>
 																				Fermer
 																			</button>
 																		</div>
-																	</Dialog.Panel>
+																	</div>
 																</Transition.Child>
 															</div>
 														</div>
-													</Dialog>
-												</Transition>
-												<button
-													onClick={openModalModifier}
-													className="mx-2 inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-												>
+													</Transition>
+												)}
+
+
+
+												<button onClick={openModalModifier} className="mx-2 inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 													<AiOutlineEdit className="-ml-0.5 mr-1.5 h-5 w-5"/>
 													Modifier
 												</button>
-												<Transition
-													appear
-													show={isOpenModifier}
-													as={Fragment}
-												>
-													<Dialog
-														as="div"
-														className="relative z-10"
-														onClose={closeModalModifier}
-													>
-														<Transition.Child
-															as={Fragment}
-															enter="ease-out duration-300"
-															enterFrom="opacity-0"
-															enterTo="opacity-100"
-															leave="ease-in duration-200"
-															leaveFrom="opacity-100"
-															leaveTo="opacity-0"
-														>
+												<Transition appear show={isOpenModifier} as={Fragment}>
+													<Dialog as="div" className="relative z-10" onClose={closeModalModifier}>
+														<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
 															<div className="fixed inset-0 bg-black bg-opacity-25"/>
 														</Transition.Child>
 														<div className="fixed inset-0 overflow-y-auto">
 															<form onSubmit={handleSubmit} className="flex min-h-full items-center justify-center p-4 text-center">
-																<Transition.Child
-																	as={Fragment}
-																	enter="ease-out duration-300"
-																	enterFrom="opacity-0 scale-95"
-																	enterTo="opacity-100 scale-100"
-																	leave="ease-in duration-200"
-																	leaveFrom="opacity-100 scale-100"
-																	leaveTo="opacity-0 scale-95"
-																>
+																<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
 																	<Dialog.Panel
 																		className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-																		<Dialog.Title
-																			as="h3"
-																			className="text-lg font-medium leading-6 text-gray-900"
-																		>
+																		<Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
 																			Contenu
 																		</Dialog.Title>
 																		<div className="mt-2 overflow-auto max-h-[50vh]">
-                                          <textarea
-																						className="text-sm text-black w-full border-2 border-black"
-																						placeholder="Décrivez votre boutique pour le bot afin qu'il puisse comprendre et communiquer efficacemente. re emplacement, vos horaires d'ouverture, vos politiques de livraison, et tout autre aspect de votre entreprise que vous jugez important. Plus le bot comprendra votre entreprise, plus il sera capable de fournir des informations précises et utiles à vos clients."
-																						rows={8}
-																						name="content"
-																					></textarea>
+                                          									<textarea className="text-sm text-black w-full border-2 border-black" placeholder="Décrivez votre boutique pour le bot afin qu'il puisse comprendre et communiquer efficacemente. re emplacement, vos horaires d'ouverture, vos politiques de livraison, et tout autre aspect de votre entreprise que vous jugez important. Plus le bot comprendra votre entreprise, plus il sera capable de fournir des informations précises et utiles à vos clients." rows={8} name="content">
+
+																			</textarea>
 																		</div>
 																		<div className="mt-4 justify-between">
 																			<button
 																				type="button"
 																				className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-																				onClick={closeModalVisualiser}
+																				onClick={closeModalModifier}
 																			>
 																				Fermer
 																			</button>

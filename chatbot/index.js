@@ -12,12 +12,6 @@ function initializeChatbox(containerId) {
     padding: 0;
 }
 
-body {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 400;
-    font-size: 100%;
-    background: #F1F1F1;
-}
 
 *, html {
     --primaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
@@ -289,7 +283,7 @@ anim-typewriter {
                     <img alt="cerf-logo" src="https://i.goopics.net/r6uvnn.jpg" style="border-radius: 999px;" width="50">
                 </div>
                 <div class="chatbox__content--header">
-                    <h4 class="chatbox__heading--header">Chat support</h4>
+                    <h4 class="chatbox__heading--header">Chat Support</h4>
                 </div>
             </div>
             <div class="chatbox__messages"></div>
