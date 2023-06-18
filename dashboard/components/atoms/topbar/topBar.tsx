@@ -27,7 +27,6 @@ const TopBar = () => {
 			})
 			.then((res: AxiosResponse): void => {
 				setUser(res.data);
-				console.log(res.data)
 				setCookie(undefined, 'userId', res.data.id, {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',

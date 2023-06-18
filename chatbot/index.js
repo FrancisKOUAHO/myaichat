@@ -319,7 +319,7 @@ anim-typewriter {
 			const domain = hostname.replace("www.", "").split(".")[0];
 
 			try {
-				const response1 = await fetch(`https://api.myaichat.io/api/stores/${domain}/stores`, {
+				const response1 = await fetch(`http://127.0.0.1:8000/api/stores/${domain}/stores`, {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
@@ -329,7 +329,7 @@ anim-typewriter {
 				if (response1.ok) {
 					const data1 = await response1.json();
 
-					const response2 = await fetch(`https://api.myaichat.io/api/products/${domain}`, {
+					const response2 = await fetch(`http://127.0.0.1:8000/api/products/${domain}`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',

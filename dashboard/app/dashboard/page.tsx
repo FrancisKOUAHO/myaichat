@@ -25,15 +25,20 @@ import PaiementPage from "../../public/paiementPage.jpg";
 import Modal from "@/components/atoms/modal/modal";
 import Card from "@/components/atoms/card/card";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { api } from "@/config/api";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import copy from 'clipboard-copy';
 import getCookie from "@/utils/getCookie";
 import { toast } from "react-toastify";
+import { AxiosResponse } from "axios";
+
+const fetchShopifyStore = async (userId: any) => {
+	const response: AxiosResponse = await api.get(`stores/user/${userId}/stores`);
+	return response;
+};
 
 const Page = () => {
 	const router: AppRouterInstance = useRouter();
@@ -45,7 +50,6 @@ const Page = () => {
 	const [isCardVisible, setCardVisible] = useState(true);
 	const [selectedTab, setSelectedTab] = useState(0);
 	const [isOpenMyChatBots, setIsOpenMyChatBots] = useState(true);
-	const [ShopifyStore, setShopifyStore] = useState<any[]>([]);
 	const [ws, setWs] = useState(null);
 
 
@@ -91,7 +95,6 @@ const Page = () => {
 		(data: any) => api.post("products/scrape", data),
 		{
 			onSuccess: (data: any) => {
-				console.log("data", data);
 				toast(`Boutique ajouté`, {position: toast.POSITION.BOTTOM_CENTER});
 				closeModalSecond();
 			},
@@ -105,7 +108,6 @@ const Page = () => {
 		(data: any) => api.post("stores/shopify-store", data),
 		{
 			onSuccess: (data) => {
-				console.log("data", data);
 				toast(`Boutique creer`, {position: toast.POSITION.BOTTOM_CENTER});
 			},
 			onError: (error): void => {
@@ -127,8 +129,6 @@ const Page = () => {
 		const hostname = new URL(url.value).hostname;
 		const domain = hostname.replace("www.", "").split(".")[0];
 
-		console.log("domain", domain);
-
 		const createUrlData = {
 			url: domain,
 			user_id: userId,
@@ -142,7 +142,7 @@ const Page = () => {
 		(data: any) => api.post("stores/shopify-store", data),
 		{
 			onSuccess: (data) => {
-				console.log("data", data);
+				useQueryClient().invalidateQueries(["shopifyStore"]);
 			},
 			onError: (error): void => {
 				console.log("error", error);
@@ -150,11 +150,11 @@ const Page = () => {
 		}
 	);
 
-	const {isLoading, mutateAsync: getScrapeMutation}: any = useMutation(
+	const getScrapeMutation = useMutation(
 		(data: any) => api.get(`stores/user/${data}/stores`),
 		{
 			onSuccess: (data: any) => {
-				setShopifyStore(data.data);
+				useQueryClient().invalidateQueries(["shopifyStore"]);
 			},
 			onError: (error: any): void => {
 				console.log("error", error);
@@ -162,11 +162,25 @@ const Page = () => {
 		}
 	);
 
+	const {data: shopifyStore, isLoading} = useQuery({
+		queryKey: ["shopifyStore"],
+		queryFn: () => fetchShopifyStore(+getCookie("userId")),
+	});
+
+	const deleteShopifyStoreMutation = useMutation({
+		mutationFn: (id: any) => api.delete(`stores/${id}`),
+		onSuccess: (data) => {
+			toast(`Boutique supprimé`, {position: toast.POSITION.BOTTOM_CENTER});
+		},
+		onError: (error): void => {
+			console.log("error", error);
+		}
+	});
+
 	useEffect(() => {
 		const userId = getCookie("userId");
-		getScrapeMutation(userId);
+		getScrapeMutation.mutateAsync(userId);
 	}, []);
-
 
 	return (
 		<LayoutCustom>
@@ -258,9 +272,9 @@ const Page = () => {
 								<div className="mt-[2%] bg-white rounded-lg ">
 									{
 										isLoading ? <p>Loading...</p> :
-											ShopifyStore && ShopifyStore.map((item: any) => {
+											shopifyStore && shopifyStore.data.map((item: any) => {
 												return (
-													<div className="flex justify-between  gap-8 p-6 ">
+													<div className="flex justify-between gap-8 p-6" key={item.id}>
 														<div className="m-auto">
 															<dd className="text-black text-[0.775rem]">
 																{item.url}
@@ -291,21 +305,8 @@ const Page = () => {
 															</button>
 														</div>
 														<div className="m-auto">
-															<dt className="mb-2  font-extrabold text-[0.775rem]">
-																Active
-															</dt>
-															<label className="relative inline-flex items-center cursor-pointer">
-																<input
-																	type="checkbox"
-																	value=""
-																	className="sr-only peer"
-																/>
-																<div
-																	className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-green-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-300"></div>
-															</label>
-														</div>
-														<div className="m-auto">
-															<AiOutlineDelete className="-ml-0.5 mr-1.5 h-5 w-5 text-red-400"/>
+															<AiOutlineDelete className="-ml-0.5 mr-1.5 h-5 w-5 text-red-400"
+																							 onClick={() => deleteShopifyStoreMutation.mutateAsync(item.id)}/>
 														</div>
 													</div>
 												)
@@ -567,9 +568,6 @@ const Page = () => {
 						<div
 							className="flex justify-start space-x-4"
 						>
-							{/*              <button className="text-gray-600 focus:outline-none hover:text-gray-700">
-                <AiOutlineCloseCircle />
-              </button>*/}
 							<button
 								type="button"
 								className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
@@ -628,9 +626,6 @@ const Page = () => {
 				<Modal isOpen={isOpenShopify} closeModal={closeModalShopify}>
 					<div className=" max-w-xl px-8 py-8 m-20 overflow-hidden bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
 						<div className="flex justify-start space-x-4">
-							{/*    <button className="text-gray-600 focus:outline-none hover:text-gray-700">
-                <AiOutlineCloseCircle />
-              </button>*/}
 							<button
 								type="button"
 								className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"

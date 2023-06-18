@@ -27,7 +27,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
             <AiOutlineHome />
             Dashboard
           </Link>
-          <Link
+         {/* <Link
             href="/dashboard/conversations"
             className="hover:text-[#7a5eea]"
           >
@@ -37,7 +37,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
           <Link href="/dashboard/correction" className="hover:text-[#7a5eea]">
             <AiOutlineFileSearch />
             Correction
-          </Link>
+          </Link>*/}
           <Link href="/dashboard/analytics" className="hover:text-[#7a5eea]">
             <AiOutlineFileSync />
             Analytics

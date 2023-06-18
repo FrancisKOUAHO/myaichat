@@ -4,37 +4,28 @@ import React, { Fragment, useEffect, useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Dialog, Transition } from "@headlessui/react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
+import { AxiosResponse } from "axios";
+
+const getScrapeMutation = async (data: any) => {
+	const response: AxiosResponse = await api.get(`stores/user/${data}/stores`);
+	return response;
+};
 
 const Page = () => {
 	const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
 	const [isOpenModifier, setIsOpenModifier] = useState(false);
-	const [ShopifyStore, setShopifyStore] = useState<any[]>([]);
 
 	const openModalVisualiser = () => setIsOpenVisualiser(true);
 	const closeModalVisualiser = () => setIsOpenVisualiser(false);
 	const openModalModifier = () => setIsOpenModifier(true);
 	const closeModalModifier = () => setIsOpenModifier(false);
 
-
-	const getScrapeMutation = useMutation(
-		(data: any) => api.get(`stores/user/${data}/stores`),
-		{
-			onSuccess: (data: any) => {
-				console.log("data", data.data)
-				setShopifyStore(data.data);
-			},
-			onError: (error: any): void => {
-				console.log("error", error);
-			},
-		}
-	);
-
 	const updateStoreMutation = useMutation(
-		(data: { id: any, content: string }) => api.put(`stores/${data.id}`, { content: data.content }),
+		(data: any) => api.put(`stores/${data.id}`, { content: data.content }),
 		{
 			onSuccess: (data: any) => {
 				toast(`Boutique creer`, {position: toast.POSITION.BOTTOM_CENTER});
@@ -45,29 +36,31 @@ const Page = () => {
 		}
 	);
 
-	/*const { data: store, isLoading, isError, error } = useQuery(['store', ShopifyStore[0].id], () =>
-			api.get(`/stores/${ShopifyStore[0].id}`),
-		{
-			enabled: !!ShopifyStore[0].id,
-		}
-	);*/
+	const {data: shopifyStore, isLoading} = useQuery({
+		queryKey:["shopifyStore", getCookie("userId")],
+		queryFn: () => getScrapeMutation(getCookie("userId")),
+		enabled: Boolean(getCookie("userId")),
+	});
 
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
 		const {content} = event.target.elements;
-
 		updateStoreMutation.mutate({
-			id: ShopifyStore[0].id,
+			id: shopifyStore && shopifyStore.data.id,
 			content: content.value
 		});
-
 		closeModalVisualiser();
 	};
 
-	useEffect(() => {
-		getScrapeMutation.mutate(getCookie("userId"));
-	}, []);
-
+	const deleteStoreMutation = useMutation({
+		mutationFn: (id: any) => api.delete(`stores/${id}`),
+		onSuccess: (data) => {
+			toast(`Boutique supprimé`, {position: toast.POSITION.BOTTOM_CENTER});
+		},
+		onError: (error): void => {
+			console.log("error", error);
+		}
+	});
 
 	return (
 		<LayoutCustom>
@@ -89,8 +82,7 @@ const Page = () => {
 							</thead>
 							<tbody className="mt-[2%] bg-white">
 							{
-								ShopifyStore &&
-								ShopifyStore.map((shop: any) => {
+								shopifyStore && shopifyStore.data.map((shop: any) => {
 									return (
 										<tr className="bg-white" key={shop.id}>
 											<td className="p-3">
@@ -136,9 +128,6 @@ const Page = () => {
 														</div>
 													</Transition>
 												)}
-
-
-
 												<button onClick={openModalModifier} className="mx-2 inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 													<AiOutlineEdit className="-ml-0.5 mr-1.5 h-5 w-5"/>
 													Modifier
@@ -183,6 +172,7 @@ const Page = () => {
 													</Dialog>
 												</Transition>
 												<button
+													onClick={() => deleteStoreMutation.mutate(shop.id)}
 													className=" ml-2 inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 													<AiOutlineDelete className="-ml-0.5 mr-1.5 h-5 w-5 "/>
 													Supprimer
