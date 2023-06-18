@@ -21,7 +21,7 @@ const Page = () => {
     isError,
   } = useQuery(
     ['userProducts', userId],
-    () => api.get(`/products/user/${userId}/products`),
+    () => api.get(`products/user/${userId}/products`),
     {
       enabled: !!userId,
     }
