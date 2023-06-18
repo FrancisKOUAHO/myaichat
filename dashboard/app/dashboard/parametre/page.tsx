@@ -4,7 +4,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import { Dialog, Transition } from "@headlessui/react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
@@ -16,6 +16,8 @@ const getScrapeMutation = async (data: any) => {
 };
 
 const Page = () => {
+	const queryClient: QueryClient = useQueryClient();
+
 	const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
 	const [isOpenModifier, setIsOpenModifier] = useState(false);
 
@@ -28,6 +30,7 @@ const Page = () => {
 		(data: any) => api.put(`stores/${data.id}`, { content: data.content }),
 		{
 			onSuccess: (data: any) => {
+				queryClient.invalidateQueries(["shopifyStore"]);
 				toast(`Boutique creer`, {position: toast.POSITION.BOTTOM_CENTER});
 			},
 			onError: (error: any) => {
@@ -55,6 +58,7 @@ const Page = () => {
 	const deleteStoreMutation = useMutation({
 		mutationFn: (id: any) => api.delete(`stores/${id}`),
 		onSuccess: (data) => {
+			queryClient.invalidateQueries(["shopifyStore"]);
 			toast(`Boutique supprimé`, {position: toast.POSITION.BOTTOM_CENTER});
 		},
 		onError: (error): void => {

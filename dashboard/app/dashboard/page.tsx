@@ -42,6 +42,7 @@ const fetchShopifyStore = async (userId: any) => {
 
 const Page = () => {
 	const router: AppRouterInstance = useRouter();
+	const queryClient = useQueryClient();
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenSecond, setIsOpenSecond] = useState(false);
@@ -142,7 +143,7 @@ const Page = () => {
 		(data: any) => api.post("stores/shopify-store", data),
 		{
 			onSuccess: (data) => {
-				useQueryClient().invalidateQueries(["shopifyStore"]);
+				queryClient.invalidateQueries(["shopifyStore"]);
 			},
 			onError: (error): void => {
 				console.log("error", error);
@@ -154,7 +155,7 @@ const Page = () => {
 		(data: any) => api.get(`stores/user/${data}/stores`),
 		{
 			onSuccess: (data: any) => {
-				useQueryClient().invalidateQueries(["shopifyStore"]);
+				queryClient.invalidateQueries(["shopifyStore"]);
 			},
 			onError: (error: any): void => {
 				console.log("error", error);
