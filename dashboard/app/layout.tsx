@@ -30,18 +30,18 @@ const RootLayout = ({children}: { children: React.ReactNode }) => {
 			<meta charSet="utf-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<link rel="icon" href="/favicon.ico"/>
-      <title>Myaichat</title>
-    </head>
+			<title>Myaichat</title>
+		</head>
 		<body className="bg-slate-100">
-		<AuthContextProvider>
-			<QueryClientProvider client={queryClient}>
-				<Hydrate>
-					{children}
-				</Hydrate>
-				<ToastContainer/>
-				<ReactQueryDevtools/>
-			</QueryClientProvider>
-		</AuthContextProvider>
+			<AuthContextProvider>
+				<QueryClientProvider client={queryClient}>
+					<Hydrate>
+						{children}
+					</Hydrate>
+					<ToastContainer/>
+					<ReactQueryDevtools/>
+				</QueryClientProvider>
+			</AuthContextProvider>
 		</body>
 		</html>
 	)

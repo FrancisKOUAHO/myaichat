@@ -35,18 +35,19 @@ const Page = () => {
             <span className="font-bold text-gray-900">Scrapping</span>
           </div>
           <div className="flex justify-between gap-8 p-6">
-            <table className="table w-full text-gray-400 border-separate space-y-6 text-sm">
-              <thead className="text-white mt-[2%] bg-indigo-200 rounded-lg">
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <table className="table w-full text-gray-400 border-separate space-y-6 text-sm">
+                <thead className="text-white mt-[2%] bg-indigo-200 rounded-lg">
                 <tr className="bg-indigo-600">
                   <th className="p-3">Boutique</th>
                   <th className="p-3">url du produit</th>
                   <th className="p-3">Status</th>
                 </tr>
-              </thead>
-              <tbody className="mt-[2%] bg-white">
-                {
-                  isLoading ? <p>Loading...</p> :
-                  scrapeData &&
+                </thead>
+                <tbody className="mt-[2%] bg-white">
+                {scrapeData &&
                   scrapeData.data.map((product: any) => {
                     return (
                       <tr key={product.id}>
@@ -72,8 +73,9 @@ const Page = () => {
                       </tr>
                     );
                   })}
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </div>
