@@ -40,12 +40,11 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
           </Link>*/}
           <Link href="/dashboard/analytics" className="hover:text-[#7a5eea]">
             <AiOutlineFileSync />
-            Analytics
+            Statistiques
           </Link>
           <Link href="/dashboard/knowledge" className="hover:text-[#7a5eea]">
             <AiOutlineShop />
-            Knowledge Base
-          </Link>
+            Base de connaissances          </Link>
           <Link href="/dashboard/parametre" className="hover:text-[#7a5eea]">
             <AiOutlineSetting />
             Parametre

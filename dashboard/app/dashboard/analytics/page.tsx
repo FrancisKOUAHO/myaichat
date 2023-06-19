@@ -11,38 +11,38 @@ const Page = () => {
                 <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-4 md:divide-x md:divide-y-0">
                     <div className="px-6 py-5 sm:p-8">
                         <dt className="text-base font-normal text-gray-900">ChatBot</dt>
-                        <dt className="text-xs font-normal text-gray-400 mt-1">Total ChatBots created</dt>
+                        <dt className="text-xs font-normal text-gray-400 mt-1">Nombre total de ChatBots créés</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                                 0
-                                <span className="ml-2 text-sm font-medium text-gray-500">of  1 </span>
+                                {/*<span className="ml-2 text-sm font-medium text-gray-500">of  1 </span>*/}
                             </div>
                         </dd>
                     </div>
                     <div className="px-6 py-5 sm:p-8">
-                        <dt className="text-base font-normal text-gray-900">Total replies</dt>
-                        <dt className="text-xs font-normal text-gray-400 mt-1">Total replies sent by your ChatBot(s)
+                        <dt className="text-base font-normal text-gray-900">Total des réponses</dt>
+                        <dt className="text-xs font-normal text-gray-400 mt-1">Total des réponses envoyées par votre (vos) ChatBot(s)
                         </dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                                 0
-                                <span className="ml-2 text-sm font-medium text-gray-500">out of 30 (this month)</span>
+                                <span className="ml-2 text-sm font-medium text-gray-500">sur 30 (ce mois-ci)</span>
                             </div>
                         </dd>
                     </div>
                     <div className="px-6 py-5 sm:p-8">
-                        <dt className="text-base font-normal text-gray-900">Total pages</dt>
-                        <dt className="text-xs font-normal text-gray-400 mt-1">Pages saved</dt>
+                        <dt className="text-base font-normal text-gray-900">Total de pages</dt>
+                        <dt className="text-xs font-normal text-gray-400 mt-1">Pages sauvegardées</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                                 0
-                                <span className="ml-2 text-sm font-medium text-gray-500">out of 500</span>
+                                <span className="ml-2 text-sm font-medium text-gray-500">sur 500</span>
                             </div>
                         </dd>
                     </div>
                     <div className="px-6 py-5 sm:p-8">
-                        <dt className="text-base font-normal text-gray-900">Total conversations</dt>
-                        <dt className="text-xs font-normal text-gray-400 mt-1">From all ChatBots</dt>
+                        <dt className="text-base font-normal text-gray-900">Total des conversations</dt>
+                        <dt className="text-xs font-normal text-gray-400 mt-1">De tous les ChatBots</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                                 0
@@ -58,8 +58,8 @@ const Page = () => {
                 </div>
                 <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-4 md:divide-x md:divide-y-0">
                     <div className="px-6 py-5 sm:p-8">
-                        <dt className="text-base font-normal text-gray-900">Total Sales</dt>
-                        <dt className="text-xs font-normal text-gray-400 mt-1">Total sales from conversations</dt>
+                        <dt className="text-base font-normal text-gray-900">Ventes totales</dt>
+                        <dt className="text-xs font-normal text-gray-400 mt-1">{"Chiffre d'affaires total des conversations"}</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                                 0 <span className="ml-2 text-sm font-medium text-gray-500"></span>
@@ -67,8 +67,8 @@ const Page = () => {
                         </dd>
                     </div>
                     <div className="px-6 py-5 sm:p-8">
-                        <dt className="text-base font-normal text-gray-900">Conversation Rate</dt>
-                        <dt className="text-xs font-normal text-gray-400 mt-1">Conversations converted into sales</dt>
+                        <dt className="text-base font-normal text-gray-900">Taux de conversation</dt>
+                        <dt className="text-xs font-normal text-gray-400 mt-1">Conversations converties en ventes</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                                 0
@@ -76,8 +76,8 @@ const Page = () => {
                         </dd>
                     </div>
                     <div className="px-6 py-5 sm:p-8">
-                        <dt className="text-base font-normal text-gray-900">Total orders</dt>
-                        <dt className="text-xs font-normal text-gray-400 mt-1">From all your conversations</dt>
+                        <dt className="text-base font-normal text-gray-900">Total des commandes</dt>
+                        <dt className="text-xs font-normal text-gray-400 mt-1">De toutes vos conversations</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                                 0
@@ -85,8 +85,8 @@ const Page = () => {
                         </dd>
                     </div>
                     <div className="px-6 py-5 sm:p-8">
-                        <dt className="text-base font-normal text-gray-900">AOV</dt>
-                        <dt className="text-xs font-normal text-gray-400 mt-1">Average order value</dt>
+                        <dt className="text-base font-normal text-gray-900">VMC</dt>
+                        <dt className="text-xs font-normal text-gray-400 mt-1">Valeur moyenne des commandes</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                                 0
