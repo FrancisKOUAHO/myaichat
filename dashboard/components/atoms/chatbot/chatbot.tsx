@@ -130,7 +130,6 @@ const Chatbot = (Props: { setIsOpenMyChatBots: (arg0: boolean) => void }) => {
                   <p className="text-sm text-gray-500">
                     Nous parcourons les pages de votre site web et créons
                     automatiquement un chatbot à partir de votre contenu.
-                    automatiquement un chatbot à partir de votre contenu.
                   </p>
                 </div>
               </div>
