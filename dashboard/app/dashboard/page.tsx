@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
 	AiOutlineCloudServer,
 	AiOutlineDelete,
@@ -12,7 +12,7 @@ import {
 } from "react-icons/ai";
 
 import LayoutCustom from "@/layouts/layoutCustom";
-import { Disclosure, Tab } from "@headlessui/react";
+import { Dialog, Disclosure, Tab, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Shopify from "../../public/shopify.png";
 
@@ -52,6 +52,7 @@ const Page = () => {
 	const [selectedTab, setSelectedTab] = useState(0);
 	const [isOpenMyChatBots, setIsOpenMyChatBots] = useState(true);
 	const [ws, setWs] = useState(null);
+	const [isOpenSupprimerChatBots, setIsOpenSupprimerChatBots] = useState(false);
 
 
 	const handleTabClick = (index: number) => setSelectedTab(index);
@@ -63,6 +64,8 @@ const Page = () => {
 	const closeModalWidget = () => setIsOpenWidget(false);
 	const openModalShopify = () => setIsOpenShopify(true);
 	const closeModalShopify = () => setIsOpenShopify(false);
+	const openModalSupprimerChatBots = () => setIsOpenSupprimerChatBots(true);
+	const closeModalSupprimerChatBots = () => setIsOpenSupprimerChatBots(false);
 
 	const [copied1, setCopied1] = useState(false);
 	const [copied2, setCopied2] = useState(false);
@@ -172,6 +175,8 @@ const Page = () => {
 		mutationFn: (id: any) => api.delete(`stores/${id}`),
 		onSuccess: (data) => {
 			toast(`Boutique supprimé`, {position: toast.POSITION.BOTTOM_CENTER});
+			queryClient.invalidateQueries(["shopifyStore"]);
+			closeModalSupprimerChatBots();
 		},
 		onError: (error): void => {
 			console.log("error", error);
@@ -292,8 +297,46 @@ const Page = () => {
 															</button>
 														</div>
 														<div className="m-auto">
-															<AiOutlineDelete className="-ml-0.5 mr-1.5 h-5 w-5 text-red-400"
-																							 onClick={() => deleteShopifyStoreMutation.mutateAsync(item.id)}/>
+															<AiOutlineDelete
+																className="-ml-0.5 mr-1.5 h-5 w-5 text-red-400"
+																onClick={openModalSupprimerChatBots}
+															/>
+															<Transition appear show={isOpenSupprimerChatBots} as={Fragment}>
+																<Dialog as="div" className="relative z-10" onClose={closeModalSupprimerChatBots}>
+																	<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+																		<div className="fixed inset-0 bg-black bg-opacity-25"/>
+																	</Transition.Child>
+																	<div className="fixed inset-0 overflow-y-auto">
+																		<form onSubmit={handleSubmit} className="flex min-h-full items-center justify-center p-4 text-center">
+																			<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+																				<Dialog.Panel
+																					className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6  align-middle shadow-xl transition-all">
+																					<Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+																						Etes-vous sûr de vouloir supprimer ce chatbot ?
+																					</Dialog.Title>
+																					<div className="mt-2 overflow-auto max-h-[50vh]">
+																						<div className="mt-4 justify-between">
+																							<button
+																								type="button"
+																								className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+																								onClick={() => deleteShopifyStoreMutation.mutateAsync(item.id)}																							>
+																								Oui
+																							</button>
+																							<button
+																								type="submit"
+																								className="mx-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+																								onClick={closeModalSupprimerChatBots}
+																							>
+																								Non
+																							</button>
+																						</div>
+																					</div>
+																				</Dialog.Panel>
+																			</Transition.Child>
+																		</form>
+																	</div>
+																</Dialog>
+															</Transition>
 														</div>
 													</div>
 												)

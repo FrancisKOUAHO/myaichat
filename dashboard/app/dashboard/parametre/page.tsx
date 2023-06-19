@@ -62,12 +62,13 @@ const Page = () => {
 	const deleteStoreMutation = useMutation({
 		mutationFn: (id: any) => api.delete(`stores/${id}`),
 		onSuccess: (data) => {
-			queryClient.invalidateQueries(["shopifyStore"]);
 			toast(`Boutique supprimé`, {position: toast.POSITION.BOTTOM_CENTER});
+			queryClient.invalidateQueries(["shopifyStore"]);
+			closeModalSupprimer();
 		},
 		onError: (error): void => {
 			console.log("error", error);
-		}
+		},
 	});
 
 	return (
@@ -179,16 +180,15 @@ const Page = () => {
 														</div>
 													</Dialog>
 												</Transition>
-{/*												<button
+												<button
 													onClick={openModalSupprimer}
-													// onClick={() => deleteStoreMutation.mutate(shop.id)}
 													className=" ml-2 inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
 													<AiOutlineDelete className="-ml-0.5 mr-1.5 h-5 w-5 "/>
 													Supprimer
-												</button>*/}
+												</button>
 
-												{/*<Transition appear show={isOpenSupprimer} as={Fragment}>
-													<Dialog as="div" className="relative z-10" onClose={closeModalSupprimer()}>
+												<Transition appear show={isOpenSupprimer} as={Fragment}>
+													<Dialog as="div" className="relative z-10" onClose={closeModalSupprimer}>
 														<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
 															<div className="fixed inset-0 bg-black bg-opacity-25"/>
 														</Transition.Child>
@@ -196,36 +196,34 @@ const Page = () => {
 															<form onSubmit={handleSubmit} className="flex min-h-full items-center justify-center p-4 text-center">
 																<Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
 																	<Dialog.Panel
-																		className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+																		className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6  align-middle shadow-xl transition-all">
 																		<Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-																			Contenu
+																			Etes-vous sûr de vouloir supprimer cet boutique ?
 																		</Dialog.Title>
 																		<div className="mt-2 overflow-auto max-h-[50vh]">
-                                          									<textarea className="text-sm text-black w-full border-2 border-black" placeholder="Décrivez votre boutique pour le bot afin qu'il puisse comprendre et communiquer efficacemente. re emplacement, vos horaires d'ouverture, vos politiques de livraison, et tout autre aspect de votre entreprise que vous jugez important. Plus le bot comprendra votre entreprise, plus il sera capable de fournir des informations précises et utiles à vos clients." rows={8} name="content">
-
-																			</textarea>
-																		</div>
-																		<div className="mt-4 justify-between">
-																			<button
-																				type="button"
-																				className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-																				onClick={closeModalSupprimer}
-																			>
-																				Fermer
-																			</button>
-																			<button
-																				type="submit"
-																				className="mx-2 inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-																			>
-																				Enregistrer
-																			</button>
+																			<div className="mt-4 justify-between">
+																				<button
+																					type="button"
+																					className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+																					onClick={() => deleteStoreMutation.mutate(shop.id)}
+																				>
+																					Oui
+																				</button>
+																				<button
+																					type="submit"
+																					className="mx-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+																					onClick={closeModalSupprimer}
+																				>
+																					Non
+																				</button>
+																			</div>
 																		</div>
 																	</Dialog.Panel>
 																</Transition.Child>
 															</form>
 														</div>
 													</Dialog>
-												</Transition>*/}
+												</Transition>
 
 											</td>
 										</tr>
