@@ -334,22 +334,9 @@ const Page = () => {
 												Instructions pour le widget
 											</Tab>
 											<Tab
-												onClick={() => handleTabClick(1)}
-												className={tabClasses(1)}
-											>
-												Suivi des instructions de vente <br/> (shopify
-												uniquement)
-											</Tab>
-											<Tab
-												className="inline-block w-full p-4 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none">
-												<button
-													id="retour-tab"
-													onClick={() => setCardVisible(true)}
-													className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-												>
-													<AiOutlineRollback className="-ml-0.5 mr-1.5 h-5 w-5"/>
+												onClick={() => setCardVisible(true)}
+												className="inline-block w-full p-4 rounded-tl-lg text-white text-l" style={{backgroundColor: '#7a5eea'}}>
 													Retour
-												</button>
 											</Tab>
 										</Tab.List>
 										<Tab.Panels className="border-t border-gray-200 ">
@@ -473,90 +460,6 @@ const Page = () => {
 													</div>
 												</div>
 											</Tab.Panel>
-											<Tab.Panel className="bg-white rounded-lg md:p-8">
-												<div className="mb-4 mt-4">
-													<Disclosure>
-														{({open}) => (
-															<>
-																<Disclosure.Button
-																	className="flex w-full justify-between rounded-lg bg-gray-50 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-indigo-100 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-																	<span>Copier le code suivant</span>
-																	<AiOutlineDown
-																		className={`${
-																			open ? "rotate-180 transform" : ""
-																		} h-5 w-5 text-indigo-600`}
-																	/>
-																</Disclosure.Button>
-																<Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-																	<code>azeeaz</code>
-																</Disclosure.Panel>
-															</>
-														)}
-													</Disclosure>
-												</div>
-												<div className="mb-4 mt-4">
-													<Disclosure>
-														{({open}) => (
-															<>
-																<Disclosure.Button
-																	className="flex w-full justify-between rounded-lg bg-gray-50 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-indigo-100 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                                  <span>
-                                    {
-																			"Allez dans les paramètres > Checkout Statut de la page de commande"
-																		}
-                                  </span>
-																	<AiOutlineDown
-																		className={`${
-																			open ? "rotate-180 transform" : ""
-																		} h-5 w-5 text-indigo-600`}
-																	/>
-																</Disclosure.Button>
-																<Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                                  <pre>
-                                    {
-																			'Collez le code MyAiChat dans "Script supplémentaire".'
-																		}
-                                  </pre>
-																</Disclosure.Panel>
-															</>
-														)}
-													</Disclosure>
-												</div>
-												<div className="mb-4 mt-4">
-													<div
-														className="flex p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50"
-														role="alert"
-													>
-														<svg
-															aria-hidden="true"
-															className="flex-shrink-0 inline w-5 h-5 mr-3"
-															fill="currentColor"
-															viewBox="0 0 20 20"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																fill-rule="evenodd"
-																d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-																clip-rule="evenodd"
-															></path>
-														</svg>
-														<span className="sr-only">Info</span>
-														<div>
-															<span className="font-medium">Attention !</span>
-															{
-																"Si vous avez besoin d'aide, veuillez nous contacter à l'adresse suivante"
-															}
-															<b className="font-medium">
-																{" "}
-																contact@myaichat.io
-															</b>
-														</div>
-													</div>
-												</div>
-											</Tab.Panel>
-											<Tab.Panel className="bg-white rounded-lg md:p-8">
-												Content 3
-											</Tab.Panel>
 										</Tab.Panels>
 									</div>
 								</Tab.Group>
@@ -585,7 +488,11 @@ const Page = () => {
 									}
                 </span>
 								<p className="mb-2 mt-6">1. Copiez le code suivant</p>
-								<code>zazoazkazljzlajzlazjalzjal</code>
+								<p>
+									{
+										"<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
+									}
+								</p>
 
 								<p className="mb-2 mt-6">{"2. Allez dans shopify > Theme."}</p>
 								<Image
