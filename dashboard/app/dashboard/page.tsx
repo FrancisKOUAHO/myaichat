@@ -130,7 +130,7 @@ const Page = () => {
 			user_id: userId,
 		};
 
-		const hostname = new URL(url.value).hostname;
+		const hostname = new URL(url?.value).hostname;
 		const domain = hostname.replace("www.", "").split(".")[0];
 
 		const createUrlData = {
