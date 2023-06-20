@@ -43,7 +43,7 @@ const Home = () => {
 					<img src='/logo.png' className='mx-auto h-12 w-auto' alt='logo'/>
 					<h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Se connecter</h1>
 					<p className="mt-5 text-center text-sm text-gray-600">
-						Bienvenue à nouveau !
+						Bienvenue !
 					</p>
 					<p className="mb-5 text-center text-[13px] text-gray-600">
 						{"Si vous n'avez pas de compte, cela en créera un pour vous."}
