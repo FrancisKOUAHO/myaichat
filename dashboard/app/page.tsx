@@ -42,12 +42,16 @@ const Home = () => {
 				<div className="sm:mx-auto sm:w-full p-8 sm:max-w-md">
 					<img src='/logo.png' className='mx-auto h-12 w-auto' alt='logo'/>
 					<h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Se connecter</h1>
-					<p className="mt-5 mb-5 text-center text-sm text-gray-600">
-						Bienvenue à nouveau ! Veuillez saisir vos coordonnées.
+					<p className="mt-5 text-center text-sm text-gray-600">
+						Bienvenue à nouveau !
+					</p>
+					<p className="mb-5 text-center text-[13px] text-gray-600">
+						{"Si vous n'avez pas de compte, cela en créera un pour vous."}
 					</p>
 					<div className='bg-white py-10 px-4 shadow sm:rounded-lg sm:px-10'>
 						<div className="mb-6 flex flex-col justify-center items-center border-gray-200 border-offset-2 pt-4">
 							<button id="google-connect"
+											disabled={true}
 											className=" text-black inline-flex items-center bg-white text-sm font-normal border border-gray-300 rounded-sm px-4 py-2"
 											style={{border: '1px solid #000000', padding: '10px', marginBottom: '10px'}}>
 								<img className="h-4 w-4 mr-3" src="/googleLogo.png" alt="googleLogo"/>
@@ -75,15 +79,6 @@ const Home = () => {
 								>
 									{loginMutation.isLoading ? "Loading..." : "Se connecter"}
 								</button>
-							</div>
-							<div className="text-xs text-gray-400 mt-1 text-center mt-5">
-								<span>{"Vous n'avez pas encore de compte ?"}&nbsp;</span>
-								<span
-									className="cursor-pointer"
-									style={{color: "#7F56D9"}}
-								>
-                {"S'inscrire"}
-              </span>
 							</div>
 						</form>
 					</div>
