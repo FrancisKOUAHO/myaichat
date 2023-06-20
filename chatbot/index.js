@@ -1,9 +1,10 @@
+import { apikey } from './apikey.js';
+
 function initializeChatbox(containerId) {
 	var chatboxContainer = document.getElementById(containerId);
 	var chatbox = document.createElement('div');
 	chatbox.classList.add('chatbox');
 
-	// Ajout du contenu du chatbot
 	chatbox.innerHTML = `
 				<style>
 				* {
@@ -11,7 +12,6 @@ function initializeChatbox(containerId) {
     margin: 0;
     padding: 0;
 }
-
 
 *, html {
     --primaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
@@ -298,7 +298,6 @@ anim-typewriter {
             <button><img alt="" src="https://i.goopics.net/hllj5f.jpg" width="50"/></button>
         </div>
     `;
-	// Ajout du chatbot au conteneur spécifié
 	chatboxContainer.appendChild(chatbox);
 
 	class Chatbox {
@@ -372,7 +371,6 @@ anim-typewriter {
 				}
 			});
 
-			// Afficher le premier message
 			this.updateChatText(chatBox);
 		}
 
@@ -399,7 +397,6 @@ anim-typewriter {
 
 			let outboundMessages = [...this.messages];
 
-			// Afficher le message de chargement
 			let loadingMessage = document.createElement('div');
 			loadingMessage.className = 'messages__item messages__item--loading messages__loading';
 
@@ -418,7 +415,6 @@ anim-typewriter {
 			loaderContainer.appendChild(loader);
 			loadingMessage.appendChild(loaderContainer);
 
-// Insérer le message de chargement après le dernier message de l'utilisateur
 			let userMessageItems = chatBox.querySelectorAll('.messages__item.messages__item--visitor');
 			if (userMessageItems.length > 0) {
 				let lastUserMessageItem = userMessageItems[userMessageItems.length - 1];
@@ -437,7 +433,7 @@ anim-typewriter {
 					content: chatbotPrompt,
 				});
 
-				const apiKey = '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';
+				const apiKey = apikey;
 
 				try {
 					const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -463,13 +459,11 @@ anim-typewriter {
 				} catch (error) {
 					this.updateChatText(chatBox);
 				} finally {
-					// Supprimer le message de chargement
 					chatboxMessages.removeChild(loadingMessage);
 					textField.value = '';
 				}
 			});
 
-			// Effacer le champ de texte quel que soit le résultat de la requête fetch
 			textField.value = '';
 		}
 
@@ -494,7 +488,6 @@ anim-typewriter {
 
 	const chatboxInstance = new Chatbox();
 
-	// Ajoutez le message de bienvenue à this.messages
 	const welcomeMessage = {
 		role: 'assistant',
 		content: 'Bienvenue ! Comment puis-je vous aider ?',
