@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"/>
     <script src="webfont.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <script type="text/javascript">WebFont.load({google: {families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic", "Gothic A1:300,regular,500,600,700,800", "Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"]}});</script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript">WebFont.load({google: {families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic", "Gothic A1:300,regular,500,600,700,800", "Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"]}});</script>
     <script type="text/javascript">!function (o, c) {
 			var n = c.documentElement, t = " w-mod-";
 			n.className += t + "js", ("ontouchstart" in o || o.DocumentTouch && c instanceof DocumentTouch) && (n.className += t + "touch")
@@ -35,9 +36,11 @@
                              width="210"/>
                     </a>
                 </div>
-                <nav class="navbar-menu-3 w-nav-menu" role="navigation"><a class="navbar-link-6 w-nav-link" href="https://app.myaichat.io">
+                <nav class="navbar-menu-3 w-nav-menu" role="navigation"><a class="navbar-link-6 w-nav-link"
+                                                                           href="https://app.myaichat.io">
                     <div class="text-29">
-                        Se connecter</div>
+                        Se connecter
+                    </div>
                 </a><a class="navbar-button-3 w-nav-link" href="https://app.myaichat.io">
                     <div class="log-in">Testez gratuitement</div>
                 </a><a class="navbar-button-4 w-nav-link" href="https://calendly.com/myaichat/30min">
@@ -107,7 +110,8 @@ notre chatbot"/></form>
                         <div class="description-3">
                             <div class="description-3"><span class="description-0">Analyse de données </span><span
                                     class="personalisation_text"> <br/>
-                            Il collecte et analyse les données pour améliorer constamment l&#x27;expérience utilisateur.</span></div>
+                            Il collecte et analyse les données pour améliorer constamment l&#x27;expérience utilisateur.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -153,21 +157,23 @@ notre chatbot"/></form>
                 <div class="text-34">
                     Explorez et Expérimentez Gratuitement Notre Version Bêta avant le Lancement Officiel de MyAichat
                 </div>
-                <div id="tabList" class="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg">
-                    <div onclick="handleTabClick(0)" class="tab selected" id="tab0">
+                <div class="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg"
+                     id="tabList">
+                    <div class="tab selected" id="tab0" onclick="handleTabClick(0)">
                         Mois
                     </div>
-                    <div onclick="handleTabClick(1)" class="tab" id="tab1">
+                    <div class="tab" id="tab1" onclick="handleTabClick(1)">
                         Années
                     </div>
                 </div>
-                <div id="content0" class="content">
+                <div class="content" id="content0">
                     <div class="columns-3 f2wf-columns-2">
                         <div class="column-6">
                             <div class="intro-2">
                                 <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="pricing-1-2" height="80" loading="lazy" src="img/starter.png" width="80"/>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/starter.png"
+                                        width="80"/>
                                 </div>
                                 <div class="name-2">
                                     <div class="text-35">Starter</div>
@@ -224,7 +230,8 @@ notre chatbot"/></form>
                             <div class="intro-2">
                                 <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="pricing-1-2" height="80" loading="lazy" src="img/pro.png" width="80"/></div>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/pro.png" width="80"/>
+                                </div>
                                 <div class="name-2">
                                     <div class="text-40">Pro</div>
                                 </div>
@@ -350,13 +357,14 @@ notre chatbot"/></form>
                     </div>
                 </div>
 
-                <div id="content1" class="content" style="display: none;">
+                <div class="content" id="content1" style="display: none;">
                     <div class="columns-3 f2wf-columns-2">
                         <div class="column-6">
                             <div class="intro-2">
                                 <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="pricing-1-2" height="80" loading="lazy" src="img/starter.png" width="80"/>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/starter.png"
+                                        width="80"/>
                                 </div>
                                 <div class="name-2">
                                     <div class="text-35">Starter</div>
@@ -414,7 +422,8 @@ notre chatbot"/></form>
                             <div class="intro-2">
                                 <div class="image-wrapper-3"><img
                                         alt=""
-                                        class="pricing-1-2" height="80" loading="lazy" src="img/pro.png" width="80"/></div>
+                                        class="pricing-1-2" height="80" loading="lazy" src="img/pro.png" width="80"/>
+                                </div>
                                 <div class="name-2">
                                     <div class="text-40">Pro</div>
                                 </div>
@@ -544,17 +553,17 @@ notre chatbot"/></form>
             </div>
         </div>
         <script>
-            let selectedTab = 0;
+					let selectedTab = 0;
 
-            function handleTabClick(index) {
-                document.getElementById(`tab${selectedTab}`).classList.remove('selected');
-                document.getElementById(`content${selectedTab}`).style.display = 'none';
+					function handleTabClick(index) {
+						document.getElementById(`tab${selectedTab}`).classList.remove('selected');
+						document.getElementById(`content${selectedTab}`).style.display = 'none';
 
-                selectedTab = index;
+						selectedTab = index;
 
-                document.getElementById(`tab${selectedTab}`).classList.add('selected');
-                document.getElementById(`content${selectedTab}`).style.display = 'block';
-            }
+						document.getElementById(`tab${selectedTab}`).classList.add('selected');
+						document.getElementById(`content${selectedTab}`).style.display = 'block';
+					}
         </script>
     </div>
     <div class="testimonial-column-light-3">
@@ -666,7 +675,7 @@ notre chatbot"/></form>
 <script src="index.js"
         type="text/javascript"></script>
 
-<!--<script>
+<script>
 	window.addEventListener('DOMContentLoaded', function () {
 		let script = document.createElement('script');
 		script.src = 'https://ai.myaichat.io/index.js';
@@ -675,9 +684,9 @@ notre chatbot"/></form>
 		};
 		document.head.appendChild(script);
 	});
-</script>-->
+</script>
 
-<script>
+<!--<script>
 	window.addEventListener('DOMContentLoaded', function () {
 		let script = document.createElement('script');
 		script.src = 'http://localhost:63342/myaichat/chatbot/index.js';
@@ -686,6 +695,6 @@ notre chatbot"/></form>
 		};
 		document.head.appendChild(script);
 	});
-</script>
+</script>-->
 </body>
 </html>

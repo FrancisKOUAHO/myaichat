@@ -238,12 +238,13 @@ function initializeChatbox(containerId) {
 .chatbox__button button:focus,
 .chatbox__button button:visited {
     padding: 10px;
-    background: white;
+    background: black;
     border: none;
     outline: none;
-    border-top-left-radius: 50px;
+    border-radius: 999px;
+    /*border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-    border-bottom-left-radius: 50px;
+    border-bottom-left-radius: 50px;*/
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
@@ -298,12 +299,12 @@ function initializeChatbox(containerId) {
             <div class="chatbox__footer">
                 <input placeholder="Ecrire un meessage..." type="text">
                 <button class="chatbox__send--footer send__button">
-                		<img alt="" src="https://i.goopics.net/hvi6rl.png" style="display: block;" width="20"/>
+                		<img alt="" src="https://i.goopics.net/hvi6rl.png" style="display: block;" width="25"/>
 								</button>
             </div>
         </div>
         <div class="chatbox__button">
-            <button><img alt="" src="https://i.goopics.net/hllj5f.jpg" width="50"/></button>
+            <button><img alt="" src="https://i.goopics.net/hllj5f.jpg" width="20"/></button>
         </div>
     `;
 	// Ajout du chatbot au conteneur spécifié
