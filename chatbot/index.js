@@ -297,7 +297,7 @@ anim-typewriter {
          <div class="chatbox__support">
             <div class="chatbox__header">
                 <div class="chatbox__content--header">
-                    <h4 class="chatbox__heading--header">Chat Supportt</h4>
+                    <h4 class="chatbox__heading--header">Chat Support</h4>
                     <h6 class="chatbox__heading--text">
 											<span class="chatbox__heading--rond"></span>
 											En ligne
