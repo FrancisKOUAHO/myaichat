@@ -3,6 +3,7 @@ function initializeChatbox(containerId) {
 	var chatbox = document.createElement('div');
 	chatbox.classList.add('chatbox');
 
+	// Ajout du contenu du chatbot
 	chatbox.innerHTML = `
 				<style>
 				* {
@@ -78,26 +79,35 @@ function initializeChatbox(containerId) {
     flex-direction: column-reverse;
 }
 
+.chatbox__heading--text{
+		font-size: .9rem;
+		color: white;
+		margin-top: 3px;
+}
+
+.chatbox__heading--rond{
+	background-color: #34d399;
+  border-radius: 9999px;
+  display: inline-block;
+  height: 7px;
+  width: 7px;
+}
+
+
 .messages__item {
     background: orange;
     max-width: 60.6%;
     width: fit-content;
-    word-wrap: break-word;
-
 }
 
 .messages__item--operator {
     margin-left: auto;
     background: var(--primary);
-    word-wrap: break-word;
-
 }
 
 .messages__item--visitor {
     margin-right: auto;
     background: #eee;
-    word-wrap: break-word;
-
 }
 
 /* FOOTER */
@@ -134,20 +144,6 @@ function initializeChatbox(containerId) {
 .chatbox__heading--header {
     font-size: 1rem;
     color: white;
-}
-
-.chatbox__heading--text{
-		font-size: .9rem;
-		color: white;
-		margin-top: 3px;
-}
-
-.chatbox__heading--rond{
-	background-color: #34d399;
-  border-radius: 9999px;
-  display: inline-block;
-  height: 7px;
-  width: 7px;
 }
 
 .chatbox__description--header {
@@ -280,8 +276,21 @@ function initializeChatbox(containerId) {
   font-weight: bold;
   color: #000;
 }
+
+anim-typewriter {
+    animation: typewriter 1s steps(40) 1 normal both;
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
 </style>
-        <div class="chatbox__support">
+         <div class="chatbox__support">
             <div class="chatbox__header">
                 <div class="chatbox__content--header">
                     <p class="chatbox__heading--header">Chat Support</p>
@@ -303,6 +312,7 @@ function initializeChatbox(containerId) {
             <button><img alt="" src="https://i.goopics.net/ux8qzl.png" width="20"/></button>
         </div>
     `;
+	// Ajout du chatbot au conteneur spécifié
 	chatboxContainer.appendChild(chatbox);
 
 	class Chatbox {
@@ -376,6 +386,7 @@ function initializeChatbox(containerId) {
 				}
 			});
 
+			// Afficher le premier message
 			this.updateChatText(chatBox);
 		}
 
@@ -421,6 +432,7 @@ function initializeChatbox(containerId) {
 			loaderContainer.appendChild(loader);
 			loadingMessage.appendChild(loaderContainer);
 
+// Insérer le message de chargement après le dernier message de l'utilisateur
 			let userMessageItems = chatBox.querySelectorAll('.messages__item.messages__item--visitor');
 			if (userMessageItems.length > 0) {
 				let lastUserMessageItem = userMessageItems[userMessageItems.length - 1];
@@ -465,11 +477,13 @@ function initializeChatbox(containerId) {
 				} catch (error) {
 					this.updateChatText(chatBox);
 				} finally {
+					// Supprimer le message de chargement
 					chatboxMessages.removeChild(loadingMessage);
 					textField.value = '';
 				}
 			});
 
+			// Effacer le champ de texte quel que soit le résultat de la requête fetch
 			textField.value = '';
 		}
 
@@ -481,7 +495,7 @@ function initializeChatbox(containerId) {
 
 				let messageContent = item.content;
 				if (item.role === 'assistant') {
-					messageContent = '<span class="anim-typewriter" style="animation-delay: ' + animationDelay + '; font-size: 12px">' + messageContent + '</span>';
+					messageContent = '<span class="anim-typewriter" style="animation-delay: ' + animationDelay + '; font-size: 12px;">' + messageContent + '</span>';
 				}
 
 				html += '<div class="' + messageClass + '" style="font-size: 12px;">' + messageContent + '</div>';
