@@ -3,7 +3,6 @@ function initializeChatbox(containerId) {
 	var chatbox = document.createElement('div');
 	chatbox.classList.add('chatbox');
 
-	// Ajout du contenu du chatbot
 	chatbox.innerHTML = `
 				<style>
 				* {
@@ -242,9 +241,6 @@ function initializeChatbox(containerId) {
     border: none;
     outline: none;
     border-radius: 999px;
-    /*border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    border-bottom-left-radius: 50px;*/
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
@@ -288,7 +284,7 @@ function initializeChatbox(containerId) {
         <div class="chatbox__support">
             <div class="chatbox__header">
                 <div class="chatbox__content--header">
-                    <h4 class="chatbox__heading--header">Chat Support</h4>
+                    <p class="chatbox__heading--header">Chat Support</p>
                     <p class="chatbox__heading--text">
 											<span class="chatbox__heading--rond"></span>
 											En ligne
@@ -307,7 +303,6 @@ function initializeChatbox(containerId) {
             <button><img alt="" src="https://i.goopics.net/ux8qzl.png" width="20"/></button>
         </div>
     `;
-	// Ajout du chatbot au conteneur spécifié
 	chatboxContainer.appendChild(chatbox);
 
 	class Chatbox {
@@ -381,7 +376,6 @@ function initializeChatbox(containerId) {
 				}
 			});
 
-			// Afficher le premier message
 			this.updateChatText(chatBox);
 		}
 
@@ -427,7 +421,6 @@ function initializeChatbox(containerId) {
 			loaderContainer.appendChild(loader);
 			loadingMessage.appendChild(loaderContainer);
 
-// Insérer le message de chargement après le dernier message de l'utilisateur
 			let userMessageItems = chatBox.querySelectorAll('.messages__item.messages__item--visitor');
 			if (userMessageItems.length > 0) {
 				let lastUserMessageItem = userMessageItems[userMessageItems.length - 1];
@@ -472,13 +465,11 @@ function initializeChatbox(containerId) {
 				} catch (error) {
 					this.updateChatText(chatBox);
 				} finally {
-					// Supprimer le message de chargement
 					chatboxMessages.removeChild(loadingMessage);
 					textField.value = '';
 				}
 			});
 
-			// Effacer le champ de texte quel que soit le résultat de la requête fetch
 			textField.value = '';
 		}
 
@@ -503,7 +494,6 @@ function initializeChatbox(containerId) {
 
 	const chatboxInstance = new Chatbox();
 
-	// Ajoutez le message de bienvenue à this.messages
 	const welcomeMessage = {
 		role: 'assistant',
 		content: 'Bienvenue ! Comment puis-je vous aider ?',
