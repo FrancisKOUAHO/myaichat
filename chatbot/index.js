@@ -437,7 +437,7 @@ anim-typewriter {
 					content: chatbotPrompt,
 				});
 
-				const apiKey = apikey;
+				const apiKey = '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';
 
 				try {
 					const response = await fetch('https://api.openai.com/v1/chat/completions', {
