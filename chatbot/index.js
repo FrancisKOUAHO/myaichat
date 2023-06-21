@@ -299,12 +299,12 @@ function initializeChatbox(containerId) {
             <div class="chatbox__footer">
                 <input placeholder="Ecrire un meessage..." type="text">
                 <button class="chatbox__send--footer send__button">
-                		<img alt="" src="https://i.goopics.net/hvi6rl.png" style="display: block;" width="25"/>
+                		<img alt="" src="https://i.goopics.net/hvi6rl.png" style="display: block;" width="30"/>
 								</button>
             </div>
         </div>
         <div class="chatbox__button">
-            <button><img alt="" src="https://i.goopics.net/hllj5f.jpg" width="20"/></button>
+            <button><img alt="" src="https://i.goopics.net/ux8qzl.png" width="20"/></button>
         </div>
     `;
 	// Ajout du chatbot au conteneur spécifié
