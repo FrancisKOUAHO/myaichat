@@ -229,6 +229,10 @@ function initializeChatbox(containerId) {
     color: white;
 }
 
+.chatbox__send--icon {
+	width: 20px;
+}
+
 .chatbox__button button,
 .chatbox__button button:focus,
 .chatbox__button button:visited {
@@ -293,7 +297,7 @@ anim-typewriter {
          <div class="chatbox__support">
             <div class="chatbox__header">
                 <div class="chatbox__content--header">
-                    <h4 class="chatbox__heading--header">Chat Support</h4>
+                    <h4 class="chatbox__heading--header">Chat Supportt</h4>
                     <h6 class="chatbox__heading--text">
 											<span class="chatbox__heading--rond"></span>
 											En ligne
@@ -304,7 +308,7 @@ anim-typewriter {
             <div class="chatbox__footer">
                 <input placeholder="Ecrire un meessage..." type="text">
                 <button class="chatbox__send--footer send__button">
-                		<img alt="" src="https://i.goopics.net/hvi6rl.png" style="display: block;" width="20"/>
+                		<img  alt="chatbox__send--icon" class="chatbox__send--icon" src="https://i.goopics.net/hvi6rl.png" style="display: block;"/>
 								</button>
             </div>
         </div>
