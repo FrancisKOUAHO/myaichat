@@ -312,7 +312,7 @@ anim-typewriter {
             <button><img alt="" src="https://i.goopics.net/ux8qzl.png" width="20"/></button>
         </div>
     `;
-	// Ajout du chatbot au conteneur spécifié
+
 	chatboxContainer.appendChild(chatbox);
 
 	class Chatbox {
