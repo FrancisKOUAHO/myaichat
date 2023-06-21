@@ -32,18 +32,18 @@ const Page = () => {
       <div className="w-full overflow-y-auto">
         <div className="mt-[2%] w-full p-4 text-center bg-indigo-200  rounded-lg shadow sm:p-8">
           <div className="flex items-center justify-between border-b border-gray-200">
-            <span className="font-bold text-gray-900">Scrapping</span>
+            <span className="font-bold text-gray-900">Extraction de données</span>
           </div>
           <div className="flex justify-between gap-8 p-6">
             {isLoading ? (
-              <p>Loading...</p>
+              <p>Chargement...</p>
             ) : (
               <table className="table w-full text-gray-400 border-separate space-y-6 text-sm">
                 <thead className="text-white mt-[2%] bg-indigo-200 rounded-lg">
                 <tr className="bg-indigo-600">
                   <th className="p-3">Boutique</th>
                   <th className="p-3">url du produit</th>
-                  <th className="p-3">Status</th>
+                  <th className="p-3">Statut</th>
                 </tr>
                 </thead>
                 <tbody className="mt-[2%] bg-white">

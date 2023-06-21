@@ -46,7 +46,7 @@ const Home = () => {
 						Bienvenue !
 					</p>
 					<p className="mb-5 text-center text-[13px] text-gray-600">
-						{"Si vous n'avez pas de compte, cela en créera un pour vous."}
+						{"Veuillez saisir votre adresse e-mail et un compte sera créé pour vous."}
 					</p>
 					<div className='bg-white py-10 px-4 shadow sm:rounded-lg sm:px-10'>
 						<div className="mb-6 flex flex-col justify-center items-center border-gray-200 border-offset-2 pt-4">

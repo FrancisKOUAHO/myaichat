@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { AiOutlineBell, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineBell, AiOutlineUser,AiOutlineLogout } from "react-icons/ai";
 import Input from "@/components/atoms/input/input";
 import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
@@ -58,11 +58,11 @@ const TopBar = () => {
 					</Link>
 				</div>
 				<div className="c-above-topbar-right">
-					<Input
+	{/*				<Input
 						className="c-input c-input-rounded"
 						type={"text"}
 						placeholder={"Rechercher..."}
-					/>
+					/>*/}
 					<div className="c-notification">
 						<AiOutlineBell/>
 					</div>
@@ -76,23 +76,9 @@ const TopBar = () => {
 									),
 								},
 								{
-									label: "Profil",
-									link: "/customer-history",
-									icon: (
-										<AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
-									),
-								},
-								{
-									label: "Aide",
-									link: "/account/profile",
-									icon: (
-										<AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
-									),
-								},
-								{
 									label: "Déconnexion",
 									icon: (
-										<AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
+										<AiOutlineLogout className="text-white/70 w-100 h-100 text-2xl"/>
 									),
 									onclick: () => logout(),
 								},

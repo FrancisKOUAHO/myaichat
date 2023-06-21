@@ -21,11 +21,11 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
       {
         <div className="c-sidebar">
           <p className="text-xs font-medium text-gray-400 pt-4 mb-2 pl-4">
-            Dashboard
+            MENU PRINCIPAL
           </p>
           <Link href="/dashboard" className="hover:text-[#7a5eea]">
             <AiOutlineHome />
-            Dashboard
+            Tableau de bord
           </Link>
          {/* <Link
             href="/dashboard/conversations"
@@ -47,7 +47,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
             Base de connaissances          </Link>
           <Link href="/dashboard/parametre" className="hover:text-[#7a5eea]">
             <AiOutlineSetting />
-            Parametre
+            Paramètre
           </Link>
           <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">
             PARAMÈTRES
@@ -60,7 +60,7 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
             {"OBTENIR DE L'AIDE"}
           </p>
           <a
-            href="mailto:support@myaichat.io"
+            href="mailto:contact@myaichat.io"
             target="_blank"
             className="mb-2 text-slate-500 text-xs group cursor-pointer flex items-center hover:text-[#7a5eea]"
           >
