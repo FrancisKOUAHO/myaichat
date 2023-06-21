@@ -196,7 +196,7 @@ const Page = () => {
 						<Card>
 							<div className="mt-[2%] w-full p-4 text-center bg-indigo-200  rounded-lg shadow sm:p-8">
 								<div className="flex items-center justify-between border-b border-gray-200">
-									<span className="font-bold text-gray-900">My Chatbots</span>
+									<span className="font-bold text-gray-900">Mes Chatbots</span>
 									<button
 										onClick={openModalSecond}
 										className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.775rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -229,14 +229,11 @@ const Page = () => {
 														className="text-base font-semibold leading-6 text-gray-900"
 														id="modal-title"
 													>
-														Connectons votre magasin !
+														{"Connectons votre boutique en ligne !"}
 													</h3>
 													<div className="mt-2">
 														<p className="text-sm text-gray-500">
-															Nous parcourons les pages de votre site web et
-															créons automatiquement un chatbot à partir de
-															votre contenu. automatiquement un chatbot à partir
-															de votre contenu.
+															Nous analysons les pages de votre site web et générons automatiquement un chatbot en fonction de votre contenu.
 														</p>
 													</div>
 												</div>
@@ -246,7 +243,7 @@ const Page = () => {
 															<div
 																className="mx-auto flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ">
 																<input
-																	placeholder="myshop"
+																	placeholder="maboutique.com"
 																	name="url"
 																	autoComplete="off"
 																	className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -381,7 +378,7 @@ const Page = () => {
 														alt={""}
 														className="m-1"
 													/>
-													Instructions Shopify
+													Instructions pour Shopify
 												</button>
 												<div className="mb-4 mt-4">
 													<Disclosure>
@@ -439,8 +436,7 @@ const Page = () => {
 																</Disclosure.Button>
 																<Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
                                   <pre>
-                                    Collez le code MyAiChat ci-dessus dans votre
-                                    page.
+                                    Collez le code MyAiChat ci-dessous dans votre page.
                                   </pre>
 																	<pre className="mb-4">
                                     {
@@ -449,7 +445,7 @@ const Page = () => {
                                   </pre>
 																	<code>
 																		{
-																			"Si le chatbot ne s'affiche pas, essayez de réinitialiser votre cache. Vous pouvez également contacter notre équipe d'assistance."
+																			"Si le chatbot ne s'affiche pas, essayez de vider le cache de votre navigateur. Vous pouvez également contacter notre équipe d'assistance pour obtenir de l'aide supplémentaire."
 																		}
 																	</code>
 																</Disclosure.Panel>
@@ -479,7 +475,7 @@ const Page = () => {
 														<div>
 															<span className="font-medium">Attention !</span>
 															{
-																"Si vous avez besoin d'aide, veuillez nous contacter à l'adresse suivante"
+																"Si vous avez besoin d'aide, veuillez nous contacter à l'adresse suivante :"
 															}
 															<b className="font-medium">
 																{" "}
@@ -575,7 +571,7 @@ const Page = () => {
 							<div className="w-full text-left px-4">
                 <span className="text-[20px] text-center font-medium leading-6 text-gray-900">
                   {
-										"Ces instructions s'adressent uniquement aux utilisateurs de Shopify"
+										"Ces instructions s'adressent uniquement aux utilisateurs de Shopify."
 									}
                 </span>
 								<p className="mb-2 mt-6">1. Copiez le code suivant</p>
@@ -612,7 +608,7 @@ const Page = () => {
 								</p>
 								<code className="mt-4">
 									{
-										"Collez le code dans Scripts supplémentaires et clique sur sauvegarder"
+										"Collez le code dans la section \"Scripts supplémentaires\" et cliquez sur \"Sauvegarder\"."
 									}
 								</code>
 								<Image
