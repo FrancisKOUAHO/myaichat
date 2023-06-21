@@ -83,16 +83,22 @@ function initializeChatbox(containerId) {
     background: orange;
     max-width: 60.6%;
     width: fit-content;
+    word-wrap: break-word;
+
 }
 
 .messages__item--operator {
     margin-left: auto;
     background: var(--primary);
+    word-wrap: break-word;
+
 }
 
 .messages__item--visitor {
     margin-right: auto;
     background: #eee;
+    word-wrap: break-word;
+
 }
 
 /* FOOTER */
@@ -276,19 +282,6 @@ function initializeChatbox(containerId) {
   font-size: 14px;
   font-weight: bold;
   color: #000;
-}
-
-anim-typewriter {
-    animation: typewriter 1s steps(40) 1 normal both;
-}
-
-@keyframes typewriter {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
 }
 </style>
         <div class="chatbox__support">
@@ -496,10 +489,10 @@ anim-typewriter {
 
 				let messageContent = item.content;
 				if (item.role === 'assistant') {
-					messageContent = '<span class="anim-typewriter" style="animation-delay: ' + animationDelay + '; font-size: 12px; word-break: break-all">' + messageContent + '</span>';
+					messageContent = '<span class="anim-typewriter" style="animation-delay: ' + animationDelay + '; font-size: 12px">' + messageContent + '</span>';
 				}
 
-				html += '<div class="' + messageClass + '" style="font-size: 12px; word-break: break-all">' + messageContent + '</div>';
+				html += '<div class="' + messageClass + '" style="font-size: 12px;">' + messageContent + '</div>';
 			});
 
 			const chatMessage = chatBox.querySelector('.chatbox__messages');
