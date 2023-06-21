@@ -69,6 +69,7 @@ const Home = () => {
 									id="email"
 									name="email"
 									placeholder="Email"
+									required
 								/>
 							</div>
 							<div>
