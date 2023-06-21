@@ -1,10 +1,9 @@
-import { apikey } from './apikey.js';
-
 function initializeChatbox(containerId) {
 	var chatboxContainer = document.getElementById(containerId);
 	var chatbox = document.createElement('div');
 	chatbox.classList.add('chatbox');
 
+	// Ajout du contenu du chatbot
 	chatbox.innerHTML = `
 				<style>
 				* {
@@ -12,6 +11,7 @@ function initializeChatbox(containerId) {
     margin: 0;
     padding: 0;
 }
+
 
 *, html {
     --primaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
@@ -129,6 +129,20 @@ function initializeChatbox(containerId) {
 .chatbox__heading--header {
     font-size: 1rem;
     color: white;
+}
+
+.chatbox__heading--text{
+		font-size: .9rem;
+		color: white;
+		margin-top: 3px;
+}
+
+.chatbox__heading--rond{
+	background-color: #34d399;
+  border-radius: 9999px;
+  display: inline-block;
+  height: 7px;
+  width: 7px;
 }
 
 .chatbox__description--header {
@@ -281,8 +295,8 @@ anim-typewriter {
             <div class="chatbox__header">
                 <div class="chatbox__content--header">
                     <h4 class="chatbox__heading--header">Chat Support</h4>
-                    <p>
-											<span className="bg-green-600 rounded-full inline-block h-3 w-3"></span>
+                    <p class="chatbox__heading--text">
+											<span class="chatbox__heading--rond"></span>
 											En ligne
                     </p>
                 </div>
@@ -299,6 +313,7 @@ anim-typewriter {
             <button><img alt="" src="https://i.goopics.net/hllj5f.jpg" width="50"/></button>
         </div>
     `;
+	// Ajout du chatbot au conteneur spécifié
 	chatboxContainer.appendChild(chatbox);
 
 	class Chatbox {
@@ -340,16 +355,16 @@ anim-typewriter {
 						const data2 = await response2.json();
 
 						return `
-          Vous êtes un chatbot de support client. Votre principale fonction est de répondre de manière efficace et précise aux questions des clients concernant le site web et son contenu. Vous avez également la capacité de fournir des liens pertinents extraits des métadonnées fournies.
-
-					Examinez les informations contenues dans les métadonnées pour élaborer vos réponses et fournir des liens appropriés :
-					
-					${data1[0].content}
-					${data2}
-					
-					Si une question ou une requête correspond à un contenu spécifique du site que vous pouvez identifier dans les données fournies, n'hésitez pas à fournir le lien approprié. Cependant, assurez-vous de ne répondre qu'aux questions pertinentes liées directement au site web, à ses produits, services ou contenus. Ne fournissez pas d'informations ou de liens non pertinents ou hors sujet.
-					
-					Visez à fournir des réponses claires, précises et concises, tout en assurant la satisfaction et la compréhension du client. Votre objectif ultime est de fournir une expérience client positive et d'améliorer la fidélisation des clients grâce à un service client de haute qualité.
+						Vous êtes un chatbot de support client. Votre principale fonction est de répondre de manière efficace et précise aux questions des clients concernant le site web et son contenu. Vous avez également la capacité de fournir des liens pertinents extraits des métadonnées fournies.
+	
+						Examinez les informations contenues dans les métadonnées pour élaborer vos réponses et fournir des liens appropriés :
+						
+						${data1[0].content}
+						${data2}
+						
+						Si une question ou une requête correspond à un contenu spécifique du site que vous pouvez identifier dans les données fournies, n'hésitez pas à fournir le lien approprié. Cependant, assurez-vous de ne répondre qu'aux questions pertinentes liées directement au site web, à ses produits, services ou contenus. Ne fournissez pas d'informations ou de liens non pertinents ou hors sujet.
+						
+						Visez à fournir des réponses claires, précises et concises, tout en assurant la satisfaction et la compréhension du client. Votre objectif ultime est de fournir une expérience client positive et d'améliorer la fidélisation des clients grâce à un service client de haute qualité.
 					`;
 					}
 				}
@@ -372,6 +387,7 @@ anim-typewriter {
 				}
 			});
 
+			// Afficher le premier message
 			this.updateChatText(chatBox);
 		}
 
@@ -392,12 +408,13 @@ anim-typewriter {
 				return;
 			}
 
-			let userMessage = {role: 'user', content: text1};
+			let userMessage = { role: 'user', content: text1 };
 			this.messages.push(userMessage);
 			this.updateChatText(chatBox);
 
 			let outboundMessages = [...this.messages];
 
+			// Afficher le message de chargement
 			let loadingMessage = document.createElement('div');
 			loadingMessage.className = 'messages__item messages__item--loading messages__loading';
 
@@ -416,6 +433,7 @@ anim-typewriter {
 			loaderContainer.appendChild(loader);
 			loadingMessage.appendChild(loaderContainer);
 
+// Insérer le message de chargement après le dernier message de l'utilisateur
 			let userMessageItems = chatBox.querySelectorAll('.messages__item.messages__item--visitor');
 			if (userMessageItems.length > 0) {
 				let lastUserMessageItem = userMessageItems[userMessageItems.length - 1];
@@ -451,7 +469,7 @@ anim-typewriter {
 
 					if (response.ok) {
 						const data = await response.json();
-						let botMessage = {role: 'assistant', content: data.choices[0].message.content};
+						let botMessage = { role: 'assistant', content: data.choices[0].message.content };
 						this.messages.push(botMessage);
 						this.updateChatText(chatBox);
 					} else {
@@ -460,11 +478,13 @@ anim-typewriter {
 				} catch (error) {
 					this.updateChatText(chatBox);
 				} finally {
+					// Supprimer le message de chargement
 					chatboxMessages.removeChild(loadingMessage);
 					textField.value = '';
 				}
 			});
 
+			// Effacer le champ de texte quel que soit le résultat de la requête fetch
 			textField.value = '';
 		}
 
@@ -489,6 +509,7 @@ anim-typewriter {
 
 	const chatboxInstance = new Chatbox();
 
+	// Ajoutez le message de bienvenue à this.messages
 	const welcomeMessage = {
 		role: 'assistant',
 		content: 'Bienvenue ! Comment puis-je vous aider ?',
