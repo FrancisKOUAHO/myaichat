@@ -236,7 +236,7 @@ function initializeChatbox(containerId) {
     background: black;
     border: none;
     outline: none;
-    border-radius: 999px;
+    border-radius: 50%;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
@@ -293,11 +293,11 @@ anim-typewriter {
          <div class="chatbox__support">
             <div class="chatbox__header">
                 <div class="chatbox__content--header">
-                    <p class="chatbox__heading--header">Chat Support</p>
-                    <p class="chatbox__heading--text">
+                    <h4 class="chatbox__heading--header">Chat Support</h4>
+                    <h6 class="chatbox__heading--text">
 											<span class="chatbox__heading--rond"></span>
 											En ligne
-                    </p>
+                    </h6>
                 </div>
             </div>
             <div class="chatbox__messages"></div>
