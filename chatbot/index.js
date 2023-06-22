@@ -12,7 +12,6 @@ function initializeChatbox(containerId) {
     padding: 0;
 }
 
-
 *, html {
     --primaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
     --secondaryGradient: linear-gradient(93.12deg, #000000 0.52%, #000000 100%);
