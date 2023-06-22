@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopifyScraperController;
@@ -48,6 +49,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('{url}', [ShopifyScraperController::class, 'getProductUrl']);
 });
 
+Route::get('/envoyer-cle-api', [APIController::class, 'envoyerCleAPI']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {

@@ -455,39 +455,44 @@ anim-typewriter {
 					content: chatbotPrompt,
 				});
 
-				const apiKey = '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';
-
 				try {
-					const response = await fetch('https://api.openai.com/v1/chat/completions', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'Authorization': `Bearer ${apiKey}`,
-						},
-						body: JSON.stringify({
-							model: 'gpt-3.5-turbo',
-							messages: outboundMessages,
-						}),
-					});
 
-					if (response.ok) {
-						const data = await response.json();
-						let botMessage = { role: 'assistant', content: data.choices[0].message.content };
-						this.messages.push(botMessage);
-						this.updateChatText(chatBox);
-					} else {
-						this.updateChatText(chatBox);
-					}
+					fetch('https://api.myaichat.io/api/envoyer-cle-api')
+						.then(response => response.json())
+						.then(async data => {
+							const response = await fetch('https://api.openai.com/v1/chat/completions', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+									'Authorization': `Bearer ${data.cleAPI}`,
+								},
+								body: JSON.stringify({
+									model: 'gpt-3.5-turbo',
+									messages: outboundMessages,
+								}),
+							});
+
+							if (response.ok) {
+								const data = await response.json();
+								let botMessage = {role: 'assistant', content: data.choices[0].message.content};
+								this.messages.push(botMessage);
+								this.updateChatText(chatBox);
+							} else {
+								this.updateChatText(chatBox);
+							}
+							console.log(data.cleAPI)
+						})
+						.catch(error => {
+							console.error(error);
+						});
 				} catch (error) {
 					this.updateChatText(chatBox);
 				} finally {
-					// Supprimer le message de chargement
 					chatboxMessages.removeChild(loadingMessage);
 					textField.value = '';
 				}
 			});
 
-			// Effacer le champ de texte quel que soit le résultat de la requête fetch
 			textField.value = '';
 		}
 
