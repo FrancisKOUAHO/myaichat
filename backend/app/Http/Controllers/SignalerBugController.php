@@ -12,17 +12,17 @@ class SignalerBugController extends Controller
     public function SendBugEmail(Request $request)
     {
         $content = $request->input('message');
-        $expediteur = $request->input('email');
+        $email = $request->input('email');
         $image = $request->image;
         $name = time().'.'.$image->getClientOriginalExtension();
         $path = public_path('upload');
         $image->move($path, $name);
         $url = 'http://127.0.0.1:8000/upload/'. $name;
 
-$message = 'Voici le message : ' . $content . ' de ' . $expediteur . ' image <a href="' . $url . '">Cliquez ici</a>';
+$message = 'Voici le message : ' . $content . ' de ' . $email . ' et  son image <a href="' . $url . '">Cliquez ici</a>';
         // Envoi de l'email
         Mail::raw($message, function ($message) {
-            $message->to('voldizola1@gmail.com')
+            $message->to('kouahofrancis@gmail.com')
                 ->subject('Rapport de bug');
         });
     }

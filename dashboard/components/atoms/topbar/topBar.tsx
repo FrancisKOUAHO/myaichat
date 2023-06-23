@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { AiOutlineBell, AiOutlineUser,AiOutlineLogout } from "react-icons/ai";
-import Input from "@/components/atoms/input/input";
 import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
@@ -58,11 +57,6 @@ const TopBar = () => {
 					</Link>
 				</div>
 				<div className="c-above-topbar-right">
-	{/*				<Input
-						className="c-input c-input-rounded"
-						type={"text"}
-						placeholder={"Rechercher..."}
-					/>*/}
 					<div className="c-notification">
 						<AiOutlineBell/>
 					</div>

@@ -15,8 +15,14 @@ import SidebarProps from "@/types/SidebarProps";
 import {Dialog, Transition} from "@headlessui/react";
 import {useMutation} from "@tanstack/react-query";
 import {api} from "@/config/api";
+import {useAuth} from "@/context/AuthContext";
+import { toast } from "react-toastify";
+
+
 
 const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
+    const {user} = useAuth();
+
   const [image, setImage] = useState<File | null>(null);
   const [message, setMessage] = useState("");
  const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,10 +39,10 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
         (formData: FormData) => api.post("rapport", formData),
         {
             onSuccess: (data) => {
-                console.log(data);
+                toast(`Message envoyé`, {position: toast.POSITION.BOTTOM_CENTER});
             },
             onError: (error) => {
-                console.log("error", error);
+                toast(`Réessayer d'envoyer le message`, {position: toast.POSITION.BOTTOM_CENTER});
             },
         }
     );
@@ -48,8 +54,13 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
             formData.append("image", image);
         }
         formData.append("message", message);
-        formData.append("expediteur", 'Zola');
+        formData.append("email", user.email);
         SendRapport.mutate(formData);
+
+        setImage(null);
+        setMessage('');
+
+        closeModal();
     };
 
     const handleMessageChange = (
