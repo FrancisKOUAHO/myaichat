@@ -17,10 +17,9 @@ class SignalerBugController extends Controller
         $name = time().'.'.$image->getClientOriginalExtension();
         $path = public_path('upload');
         $image->move($path, $name);
-        $url = `http://127.0.0.1:8000/upload/$name`;
+        $url = 'http://127.0.0.1:8000/upload/'. $name;
 
-
-        $message = 'Voici le message : ' . $content . ' de ' . $expediteur . ' image <img src="' . $url . '" alt="Image">';
+$message = 'Voici le message : ' . $content . ' de ' . $expediteur . ' image <a href="' . $url . '">Cliquez ici</a>';
         // Envoi de l'email
         Mail::raw($message, function ($message) {
             $message->to('voldizola1@gmail.com')
