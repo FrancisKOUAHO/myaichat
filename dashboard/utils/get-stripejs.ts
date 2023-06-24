@@ -14,7 +14,7 @@ const checkout = async ({lineItems} : any) => {
 	const stripe: Stripe | null = await getStripe()
 
 	await stripe?.redirectToCheckout({
-		mode: 'payment',
+		mode: 'subscription',
 		lineItems,
 		successUrl: `${window.location.origin}?session_id={CHECKOUT_SESSION_ID}`,
 		cancelUrl: window.location.origin

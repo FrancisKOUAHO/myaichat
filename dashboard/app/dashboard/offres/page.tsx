@@ -56,7 +56,7 @@ const Page = () => {
 																														price: "price_1NMZqYFdQvV9SdYXl4VspjGK",
 																														quantity: 1
 																													}
-																												]
+																												],
 																											})
 																										})}
                                                     className="inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
