@@ -305,7 +305,7 @@ anim-typewriter {
             </div>
             <div class="chatbox__messages"></div>
             <div class="chatbox__footer">
-                <input placeholder="Ecrire un meessage..." type="text">
+                <input placeholder="Ecrire un message..." type="text">
                 <button class="chatbox__send--footer send__button">
                 		<img  alt="chatbox__send--icon" class="chatbox__send--icon" src="https://i.goopics.net/hvi6rl.png" style="display: block;"/>
 								</button>
