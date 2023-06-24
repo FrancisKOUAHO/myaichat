@@ -479,7 +479,6 @@ anim-typewriter {
 							} else {
 								this.updateChatText(chatBox);
 							}
-							console.log(data.cleAPI)
 						})
 						.catch(error => {
 							console.error(error);
