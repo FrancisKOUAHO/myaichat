@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopifyScraperController;
 use App\Http\Controllers\ShopifyStoreController;
 use App\Http\Controllers\ShopifyProductController;
