@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ShopifyScraperController;
 use App\Http\Controllers\ShopifyStoreController;
 use App\Http\Controllers\ShopifyProductController;
+use App\Http\Controllers\SignalerBugController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -56,3 +57,5 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 });
+
+Route::post('rapport', [SignalerBugController::class, 'SendBugEmail']);

@@ -15,6 +15,7 @@ import LayoutCustom from "@/layouts/layoutCustom";
 import { Dialog, Disclosure, Tab, Transition } from "@headlessui/react";
 import Image from "next/image";
 import Shopify from "../../public/shopify.png";
+import Youtube from "../../public/youtube.png";
 
 import Theme from "../../public/themes.jpg";
 import Edit from "../../public/edit.jpg";
@@ -380,6 +381,22 @@ const Page = () => {
 													/>
 													Instructions pour Shopify
 												</button>
+												<a
+													href="https://youtu.be/mwezuQz8RBY"
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+												<button className="inline-flex items-center rounded-md mb-2 px-3 py-2 text-[0.675rem] font-semibold text-black shadow-sm hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+													<Image
+														src={Youtube}
+														width="15"
+														height="15"
+														alt={""}
+														className="m-1"
+													/>
+													Instructions Shopify
+												</button>
+												</a>
 												<div className="mb-4 mt-4">
 													<Disclosure>
 														{({open}) => (
