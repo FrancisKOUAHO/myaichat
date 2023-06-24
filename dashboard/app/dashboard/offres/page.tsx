@@ -4,6 +4,10 @@ import React, {useState} from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { Tab } from '@headlessui/react';
 import {AiOutlineRollback} from "react-icons/ai";
+import { api } from "@/config/api";
+import axios from "axios";
+import getStripe from "@/utils/get-stripejs";
+import checkout from "@/utils/get-stripejs";
 
 
 const Page = () => {
@@ -44,15 +48,21 @@ const Page = () => {
                                             <span className="text-4xl font-bold tracking-tight text-gray-900">€39</span>
                                             <span className="text-sm font-semibold leading-6 text-gray-600">/mois</span>
                                         </p>
-                                        <form data-turbo="false" className="button_to" method="post"
-                                              action="/create_checkout?plan_id=starter">
-                                            <button data-controller="loading-button" data-loading-button-target="submit"
-                                                    data-loading-button-color="white"
+                                            <button data-controller="loading-button"
+																										onClick={(() => {
+																											checkout({
+																												lineItems: [
+																													{
+																														price: "price_1NMZqYFdQvV9SdYXl4VspjGK",
+																														quantity: 1
+																													}
+																												]
+																											})
+																										})}
                                                     className="inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
                                             </button>
-                                        </form>
                                         <div className="text-sm text-indigo-500 font-medium mt-1 text-center">
                                             {"Commencer 7 jours d'essai gratuit"}
                                         </div>
@@ -195,15 +205,21 @@ const Page = () => {
                                             <span className="text-4xl font-bold tracking-tight text-gray-900">€99</span>
                                             <span className="text-sm font-semibold leading-6 text-gray-600">/mois</span>
                                         </p>
-                                        <form data-turbo="false" className="button_to" method="post"
-                                              action="/create_checkout?plan_id=pro">
-                                            <button data-controller="loading-button" data-loading-button-target="submit"
-                                                    data-loading-button-color="white"
+                                            <button data-controller="loading-button"
+                                                    onClick={(() => {
+                                                        checkout({
+                                                            lineItems: [
+                                                                {
+                                                                    price: "price_1NMZrbFdQvV9SdYXZhFVgbIf",
+                                                                    quantity: 1
+                                                                }
+                                                            ]
+                                                        })
+                                                    })}
                                                     className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
                                             </button>
-                                        </form>
                                         <div className="text-sm text-indigo-500 font-medium mt-1 text-center">
                                             {"Commencer 7 jours d'essai gratuit"}
                                         </div>
@@ -220,7 +236,7 @@ const Page = () => {
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
                                                           clip-rule="evenodd"></path>
                                                 </svg>
@@ -286,15 +302,21 @@ const Page = () => {
                                         <p className="flex items-baseline gap-x-1">
                                             <span className="text-xs font-semibold leading-6 text-gray-600">total : €348</span>
                                         </p>
-                                        <form data-turbo="false" className="button_to" method="post"
-                                              action="/create_checkout?plan_id=starter">
-                                            <button data-controller="loading-button" data-loading-button-target="submit"
-                                                    data-loading-button-color="white"
+                                            <button data-controller="loading-button"
+                                                    onClick={(() => {
+                                                        checkout({
+                                                            lineItems: [
+                                                                {
+                                                                    price: "price_1NMZrbFdQvV9SdYXZhFVgbIf",
+                                                                    quantity: 1
+                                                                }
+                                                            ]
+                                                        })
+                                                    })}
                                                     className="inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
                                             </button>
-                                        </form>
                                         <div className="text-sm text-indigo-500 font-medium mt-1 text-center">
                                             {"Commencer 7 jours d'essai gratuit"}
                                         </div>
@@ -361,15 +383,21 @@ const Page = () => {
                                         <p className="flex items-baseline gap-x-1">
                                             <span className="text-xs font-semibold leading-6 text-white">total : €708</span>
                                         </p>
-                                        <form data-turbo="false" className="button_to" method="post"
-                                              action="/create_checkout?plan_id=growth">
-                                            <button data-controller="loading-button" data-loading-button-target="submit"
-                                                    data-loading-button-color="white"
+                                            <button data-controller="loading-button"
+                                                    onClick={(() => {
+                                                        checkout({
+                                                            lineItems: [
+                                                                {
+                                                                    price: "price_1NMZrbFdQvV9SdYXZhFVgbIf",
+                                                                    quantity: 1
+                                                                }
+                                                            ]
+                                                        })
+                                                    })}
                                                     className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
                                             </button>
-                                        </form>
                                         <div className="text-sm text-white font-medium mt-1 text-center">
                                             {"Commencer 7 jours d'essai gratuit"}
                                         </div>
@@ -442,15 +470,21 @@ const Page = () => {
                                         <p className="flex items-baseline gap-x-1">
                                             <span className="text-xs font-semibold leading-6 text-gray-600">total : €828</span>
                                         </p>
-                                        <form data-turbo="false" className="button_to" method="post"
-                                              action="/create_checkout?plan_id=pro">
-                                            <button data-controller="loading-button" data-loading-button-target="submit"
-                                                    data-loading-button-color="white"
+                                            <button data-controller="loading-button"
+                                                    onClick={(() => {
+                                                        checkout({
+                                                            lineItems: [
+                                                                {
+                                                                    price: "price_1NMZrbFdQvV9SdYXZhFVgbIf",
+                                                                    quantity: 1
+                                                                }
+                                                            ]
+                                                        })
+                                                    })}
                                                     className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
                                             </button>
-                                        </form>
                                         <div className="text-sm text-indigo-500 font-medium mt-1 text-center">
                                             {"Commencer 7 jours d'essai gratuit"}
                                         </div>

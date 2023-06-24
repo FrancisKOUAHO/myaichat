@@ -11,6 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.11",
     "@next/font": "13.1.6",
+    "@stripe/stripe-js": "^1.54.1",
     "@tanstack/react-query": "^4.29.7",
     "@tanstack/react-query-devtools": "^4.24.4",
     "@types/cookie": "^0.5.1",
