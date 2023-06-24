@@ -6,7 +6,7 @@ class APIController extends Controller
 {
     public function envoyerCleAPI()
     {
-        $cleAPI = 'qMQPsCk4m1rp24QXQfseT3BlbkFJm65u0wjrVoF44BHcIo1d';
+        $cleAPI = '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';
         return response()->json(['cleAPI' => $cleAPI]);
     }
 }
