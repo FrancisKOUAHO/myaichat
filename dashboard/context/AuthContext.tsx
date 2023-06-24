@@ -16,6 +16,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = (): void => {
     destroyCookie(null, "auth_token");
+    destroyCookie(null, "userId");
     router.push("/");
   };
 
