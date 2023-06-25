@@ -6,6 +6,7 @@ use App\Http\Controllers\ShopifyScraperController;
 use App\Http\Controllers\ShopifyStoreController;
 use App\Http\Controllers\ShopifyProductController;
 use App\Http\Controllers\SignalerBugController;
+use App\Http\Controllers\StripePaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,12 +50,16 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('{url}', [ShopifyScraperController::class, 'getProductUrl']);
 });
 
-Route::get('/envoyer-cle-api', [APIController::class, 'envoyerCleAPI']);
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 });
 
+Route::prefix('stripe')->group(function () {
+    Route::post('payment', [StripePaymentController::class, 'startPayment']);
+    Route::post('webhook', [StripePaymentController::class, 'webhook']);
+});
+
+Route::get('/envoyer-cle-api', [APIController::class, 'envoyerCleAPI']);
 Route::post('rapport', [SignalerBugController::class, 'SendBugEmail']);
