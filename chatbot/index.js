@@ -51,6 +51,8 @@ function initializeChatbox(containerId) {
 /* BUTTON */
 .chatbox__button {
     text-align: right;
+    height: 0;
+    margin-bottom: 30px;
 }
 
 .send__button {
