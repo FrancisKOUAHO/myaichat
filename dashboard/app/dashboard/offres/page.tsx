@@ -3,16 +3,24 @@
 import React, {useState} from "react";
 import LayoutCustom from "@/layouts/layoutCustom";
 import { Tab } from '@headlessui/react';
-import {AiOutlineRollback} from "react-icons/ai";
+import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
-import axios from "axios";
-import getStripe from "@/utils/get-stripejs";
-import checkout from "@/utils/get-stripejs";
 
 
 const Page = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const handleTabClick = (index: number) => setSelectedTab(index);
+
+    const checkout = useMutation((price: string) =>
+        api.post('stripe/payment', {price}),
+      {
+          onSuccess: (data) => {
+          },
+          onError: (error): void => {
+              console.log('error', error);
+          },
+      }
+    );
 
 
     const tabClasses = (index: number) =>
@@ -48,17 +56,8 @@ const Page = () => {
                                             <span className="text-4xl font-bold tracking-tight text-gray-900">€39</span>
                                             <span className="text-sm font-semibold leading-6 text-gray-600">/mois</span>
                                         </p>
-                                            <button data-controller="loading-button"
-																										onClick={(() => {
-																											checkout({
-																												lineItems: [
-																													{
-																														price: "price_1NMZqYFdQvV9SdYXl4VspjGK",
-																														quantity: 1
-																													}
-																												],
-																											})
-																										})}
+                                            <button
+																										onClick={() => checkout.mutate('price_1NMZqYFdQvV9SdYXl4VspjGK')}
                                                     className="inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
@@ -126,15 +125,12 @@ const Page = () => {
                                             <span className="text-4xl font-bold tracking-tight text-white">€79</span>
                                             <span className="text-sm font-semibold leading-6 text-white">/mois</span>
                                         </p>
-                                        <form data-turbo="false" className="button_to" method="post"
-                                              action="/create_checkout?plan_id=growth">
-                                            <button data-controller="loading-button" data-loading-button-target="submit"
-                                                    data-loading-button-color="white"
+                                            <button data-loading-text="En cours..."
+                                                    onClick={() => checkout.mutate('price_1NMZszFdQvV9SdYXOreHmSi9')}
                                                     className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
                                             </button>
-                                        </form>
                                         <div className="text-sm text-white font-medium mt-1 text-center">
                                             {"Commencer 7 jours d'essai gratuit"}
                                         </div>
@@ -205,17 +201,8 @@ const Page = () => {
                                             <span className="text-4xl font-bold tracking-tight text-gray-900">€99</span>
                                             <span className="text-sm font-semibold leading-6 text-gray-600">/mois</span>
                                         </p>
-                                            <button data-controller="loading-button"
-                                                    onClick={(() => {
-                                                        checkout({
-                                                            lineItems: [
-                                                                {
-                                                                    price: "price_1NMZrbFdQvV9SdYXZhFVgbIf",
-                                                                    quantity: 1
-                                                                }
-                                                            ]
-                                                        })
-                                                    })}
+                                            <button data-loading-text="En cours..."
+                                                    onClick={() => checkout.mutate('price_1NMZrbFdQvV9SdYXZhFVgbIf')}
                                                     className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
@@ -303,16 +290,7 @@ const Page = () => {
                                             <span className="text-xs font-semibold leading-6 text-gray-600">total : €348</span>
                                         </p>
                                             <button data-controller="loading-button"
-                                                    onClick={(() => {
-                                                        checkout({
-                                                            lineItems: [
-                                                                {
-                                                                    price: "price_1NMZrbFdQvV9SdYXZhFVgbIf",
-                                                                    quantity: 1
-                                                                }
-                                                            ]
-                                                        })
-                                                    })}
+                                                    onClick={() => checkout.mutate('price_1NMZvRFdQvV9SdYXF8PSpTMB')}
                                                     className="inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
@@ -384,16 +362,7 @@ const Page = () => {
                                             <span className="text-xs font-semibold leading-6 text-white">total : €708</span>
                                         </p>
                                             <button data-controller="loading-button"
-                                                    onClick={(() => {
-                                                        checkout({
-                                                            lineItems: [
-                                                                {
-                                                                    price: "price_1NMZrbFdQvV9SdYXZhFVgbIf",
-                                                                    quantity: 1
-                                                                }
-                                                            ]
-                                                        })
-                                                    })}
+                                                    onClick={() => checkout.mutate('price_1NMZwmFdQvV9SdYXZiZjl2G9')}
                                                     className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
@@ -471,16 +440,7 @@ const Page = () => {
                                             <span className="text-xs font-semibold leading-6 text-gray-600">total : €828</span>
                                         </p>
                                             <button data-controller="loading-button"
-                                                    onClick={(() => {
-                                                        checkout({
-                                                            lineItems: [
-                                                                {
-                                                                    price: "price_1NMZrbFdQvV9SdYXZhFVgbIf",
-                                                                    quantity: 1
-                                                                }
-                                                            ]
-                                                        })
-                                                    })}
+                                                    onClick={() => checkout.mutate('price_1NMZw8FdQvV9SdYXFf37XogK')}
                                                     className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
                                                     type="submit">
                                                 <span>{"S'abonner"}</span>
