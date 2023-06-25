@@ -26,7 +26,6 @@ function initializeChatbox(containerId) {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 100000000000;
 }
 
 /* CONTENT IS CLOSE */
