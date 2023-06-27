@@ -9,6 +9,7 @@ import {AiOutlineRollback} from "react-icons/ai";
 const Page = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const handleTabClick = (index: number) => setSelectedTab(index);
+    const [isCurrentPlan, setIsCurrentPlan] = useState(false);
 
 
     const tabClasses = (index: number) =>
@@ -16,9 +17,10 @@ const Page = () => {
 
     return (
         <LayoutCustom>
+            {isCurrentPlan ? (
+                <>
             <Tab.Group>
-                <Tab.List
-                    className="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex">
+                <Tab.List className="text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex">
                     <Tab onClick={() => handleTabClick(0)}
                          className={tabClasses(0)}>
                         Mois
@@ -34,8 +36,7 @@ const Page = () => {
                             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                                 <div
                                     className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
-                                    <div
-                                        className=" bg-white max-w-[268px] rounded-3xl p-8 ring-1 ring-gray-200 hover:ring-indigo-600 hover:ring-2">
+                                    <div className=" bg-white max-w-[268px] rounded-3xl p-8 ring-1 ring-gray-200 hover:ring-indigo-600 hover:ring-2">
                                         <div className="flex items-center justify-between gap-x-4">
                                             <h3 id="tier-startup"
                                                 className="text-lg font-semibold leading-8 text-indigo-600">Starter</h3>
@@ -185,8 +186,7 @@ const Page = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div
-                                        className="max-w-[268px] rounded-3xl p-8 ring-gray-200 bg-white ring-1 hover:ring-indigo-600 hover:ring-2">
+                                    <div className="max-w-[268px] rounded-3xl p-8 ring-gray-200 bg-white ring-1 hover:ring-indigo-600 hover:ring-2">
                                         <div className="flex items-center justify-between gap-x-4">
                                             <h3 id="tier-startup"
                                                 className="text-lg font-semibold leading-8 text-indigo-600">Pro</h3>
@@ -271,10 +271,8 @@ const Page = () => {
                     <Tab.Panel className="bg-white rounded-lg md:p-2">
                         <div className="pb-6 w-full overflow-y-auto">
                             <div className="mx-auto max-w-7xl px-4 lg:px-8">
-                                <div
-                                    className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
-                                    <div
-                                        className=" bg-white max-w-[268px] rounded-3xl p-8 ring-1 ring-gray-200 hover:ring-indigo-600 hover:ring-2">
+                                <div className="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 md:max-w-2xl md:grid-cols-2 lg:max-w-4xl xl:mx-0 xl:max-w-none xl:grid-cols-3">
+                                    <div className=" bg-white max-w-[268px] rounded-3xl p-8 ring-1 ring-gray-200 hover:ring-indigo-600 hover:ring-2">
                                         <div className="flex items-center justify-between gap-x-4">
                                             <h3 id="tier-startup"
                                                 className="text-lg font-semibold leading-8 text-indigo-600">Starter</h3>
@@ -517,6 +515,33 @@ const Page = () => {
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>
+                </>
+            ) : (
+                <>
+                    <div className="p-20 mx-auto w-full overflow-y-auto">
+                        <h3 className="text-base font-semibold leading-6 text-gray-900">{"Abonnement et facturation"}</h3>
+                        <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
+                            <div className="px-6 py-5 sm:p-8">
+                                <dt className="text-xs font-normal text-gray-400">{"Abonnement"}</dt>
+                                <dt className="text-xl font-semibold text-gray-900">Starter Business</dt>
+                                <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+                                </dd>
+                            </div>
+                            <div className="px-6 py-5 sm:p-8">
+                                <dt className="text-xs font-normal text-gray-400">{"Payement"}</dt>
+                                <div className="flex items-center">
+                                    <dt className="text-xl font-semibold text-gray-900">€39</dt>
+                                    <dt className="text-xs font-normal text-gray-400 mt-1 ml-1">/mois</dt>
+                                </div>
+                            </div>
+                            <div className="px-6 py-5 sm:p-8 flex items-center justify-center gap-2">
+                                <button className="text-xs font-normal text-gray-400">{"Annuler l'abonnement"}</button>
+                                <button onClick={() => setIsCurrentPlan(true)} className="text-xs font-normal text-indigo-600">Upgrade</button>
+                            </div>
+                        </dl>
+                    </div>
+                </>
+            )}
         </LayoutCustom>
     )
 }
