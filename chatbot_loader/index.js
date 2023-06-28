@@ -1,5 +1,5 @@
 const iframe = document.createElement('iframe');
-iframe.src = 'https://chatbot-tawny-seven.vercel.app/';
+iframe.src = 'https://ai.myaichat.io/';
 iframe.style.width = '352px';
 iframe.style.maxWidth = '400px';
 iframe.style.height = '506px';
