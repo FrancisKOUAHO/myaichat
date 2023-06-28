@@ -13,9 +13,9 @@ export async function middleware(req: NextRequest) {
   console.log(URL)
 
   try {
-    const { success } = await rateLimiter.limit(domain)
+   /* const { success } = await rateLimiter.limit(domain)
 
-    if (!success) return new NextResponse("Vous écrivez des messages trop rapidement.")
+    if (!success) return new NextResponse("Vous écrivez des messages trop rapidement.")*/
     return NextResponse.next()
   } catch (error) {
     return new NextResponse(
