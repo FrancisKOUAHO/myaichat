@@ -2529,7 +2529,7 @@
         }
     });
 
-    // node_modules/core-js/internals/to-absolute-index.js
+    // node_modules/core-js/internals/to-absolute-index.html.js
     var require_to_absolute_index = __commonJS({
         "node_modules/core-js/internals/to-absolute-index.js"(exports, module) {
             var toIntegerOrInfinity = require_to_integer_or_infinity();
@@ -3112,7 +3112,7 @@
         }
     });
 
-    // node_modules/symbol-observable/lib/index.js
+    // node_modules/symbol-observable/lib/index.html.js
     var require_lib = __commonJS({
         "node_modules/symbol-observable/lib/index.js"(exports, module) {
             "use strict";
@@ -3489,7 +3489,7 @@
         }
     });
 
-    // node_modules/redux/lib/index.js
+    // node_modules/redux/lib/index.html.js
     var require_lib2 = __commonJS({
         "node_modules/redux/lib/index.js"(exports) {
             "use strict";
@@ -3892,7 +3892,7 @@
         }
     });
 
-    // packages/systems/ix2/shared/constants/index.js
+    // packages/systems/ix2/shared/constants/index.html.js
     var require_constants = __commonJS({
         "packages/systems/ix2/shared/constants/index.js"(exports) {
             "use strict";
@@ -5536,9 +5536,9 @@
                 var isArr = isArray(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
                 for (var key in value) {
                     if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
-                        (key == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
-                            isBuff && (key == "offset" || key == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
-                            isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || // Skip index properties.
+                        (key == "length" || // Node.js 0.10 has enumerable non-index.html properties on buffers.
+                            isBuff && (key == "offset" || key == "parent") || // PhantomJS 2 has enumerable non-index.html properties on typed arrays.
+                            isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || // Skip index.html properties.
                             isIndex(key, length)))) {
                         result.push(key);
                     }
@@ -6538,7 +6538,7 @@
         }
     });
 
-    // node_modules/bezier-easing/src/index.js
+    // node_modules/bezier-easing/src/index.html.js
     var require_src = __commonJS({
         "node_modules/bezier-easing/src/index.js"(exports, module) {
             var NEWTON_ITERATIONS = 4;
@@ -8493,7 +8493,7 @@
         }
     });
 
-    // packages/systems/ix2/shared/index.js
+    // packages/systems/ix2/shared/index.html.js
     var require_shared2 = __commonJS({
         "packages/systems/ix2/shared/index.js"(exports) {
             "use strict";
@@ -12112,7 +12112,7 @@
         }
     });
 
-    // packages/systems/ix2/engine/index.js
+    // packages/systems/ix2/engine/index.html.js
     var require_engine = __commonJS({
         "packages/systems/ix2/engine/index.js"(exports) {
             "use strict";

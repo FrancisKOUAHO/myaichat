@@ -414,7 +414,7 @@ const Page = () => {
 																	<div className="flex gap-10 ">
 																		<SyntaxHighlighter style={atomDark} id="code1">
 																			{
-																				"<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
+																				"<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.html.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
 																			}
 																		</SyntaxHighlighter>
 																		<button onClick={handleCopyClick1}
@@ -532,7 +532,7 @@ const Page = () => {
 								<p className="mb-2 mt-6">1. Copiez le code suivant</p>
 								<p>
 									{
-										"<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
+										"<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.html.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
 									}
 								</p>
 
