@@ -2,15 +2,18 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { rateLimiter } from '@/lib/rate-limiter'
+import url from 'url'
 
 // Cette fonction peut être marquée comme `async` si vous utilisez `await` à l'intérieur
 export async function middleware(req: NextRequest) {
-  const ip = req.ip ?? `default-${Math.random()}`
+  const referer = req.headers.get('Referer')
+  const domain: any = referer ? url.parse(referer).hostname : `default-${Math.random()}`
+  console.log(domain)
 
-  console.log(req.ip)
+  console.log(URL)
 
   try {
-    const { success } = await rateLimiter.limit(ip)
+    const { success } = await rateLimiter.limit(domain)
 
     if (!success) return new NextResponse("Vous écrivez des messages trop rapidement.")
     return NextResponse.next()
