@@ -5,7 +5,9 @@ import { rateLimiter } from '@/lib/rate-limiter'
 
 // Cette fonction peut être marquée comme `async` si vous utilisez `await` à l'intérieur
 export async function middleware(req: NextRequest) {
-  const ip = req.ip ?? '127.0.0.1'
+  const ip = req.ip ?? `default-${Math.random()}`
+
+  console.log(req.ip)
 
   try {
     const { success } = await rateLimiter.limit(ip)
