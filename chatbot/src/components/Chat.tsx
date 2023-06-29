@@ -1,12 +1,12 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 import ChatInput from './ChatInput'
 import ChatMessages from './ChatMessages'
 import ChatHeader from './ChatHeader'
 
 
-const Chat: FC = () => {
+const Chat: FunctionComponent = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (

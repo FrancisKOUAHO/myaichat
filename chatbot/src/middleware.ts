@@ -1,7 +1,7 @@
 // middleware.ts
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { rateLimiter } from '@/lib/rate-limiter'
+//import { rateLimiter } from '@/lib/rate-limiter'
 import url from 'url'
 
 // Cette fonction peut être marquée comme `async` si vous utilisez `await` à l'intérieur
