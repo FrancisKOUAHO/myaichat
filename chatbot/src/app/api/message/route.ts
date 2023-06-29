@@ -1,10 +1,11 @@
 import { ChatGPTMessage, OpenAIStream, OpenAIStreamPayload, } from '@/lib/openai-stream'
 import { MessageArraySchema } from '@/lib/validators/message'
-import { chatbotPrompt } from "@/helpers/constants/result";
+import { getServerSideProps, data1, data2 } from "@/helpers/constants/result";
+
+
 
 export async function POST(req: Request): Promise<Response> {
 	const {messages} = await req.json()
-
   console.log(messages)
 
 	const parsedMessages = MessageArraySchema.parse(messages)
@@ -18,7 +19,7 @@ export async function POST(req: Request): Promise<Response> {
 
 	outboundMessages.unshift({
 		role: 'system',
-		content: chatbotPrompt,
+		content: '',
 	})
 
 	const payload: OpenAIStreamPayload = {
@@ -34,6 +35,9 @@ export async function POST(req: Request): Promise<Response> {
 	}
 
 	const stream = await OpenAIStream(payload)
+
+	console.log('Thomas:', data1);
+	console.log('Zola:', data2);
 
 	return new Response(stream)
 }
