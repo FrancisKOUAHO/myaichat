@@ -9,7 +9,12 @@ let data2Content: any = null;
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<{
 	[key: string]: any;
 }>> => {
+	  const {req} = context;
+    const url = req?.headers?.referer ?? '';
+	console.log("url", url)
 
+    const {hostname} = new URL(url);
+    const domain = hostname.replace("www.", "").split(".")[0];
 
 	try {
 		const response1 = await fetch(`http://127.0.0.1:8000/api/stores/localhost/stores`, {
