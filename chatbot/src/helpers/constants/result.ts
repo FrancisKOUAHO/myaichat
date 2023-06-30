@@ -9,17 +9,7 @@ let data2Content: any = null;
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext): Promise<GetServerSidePropsResult<{
 	[key: string]: any;
 }>> => {
-	/*  const {req} = context;
-    const url = req?.headers?.referer ?? '';
 
-    if (!url) {
-        // Gérer le cas où l'URL est manquante ou non définie
-        throw new Error('Missing URL');
-
-    }
-
-    const {hostname} = new URL(url);
-    const domain = hostname.replace("www.", "").split(".")[0];*/
 
 	try {
 		const response1 = await fetch(`http://127.0.0.1:8000/api/stores/localhost/stores`, {
@@ -43,12 +33,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 			}
 		}
 
-		// Utilisez les propriétés data1 et data2
 		data1Content = data1;
 		data2Content = data2;
-
-		console.log("data1Content", data1Content);
-		console.log("data2Content", data2Content);
 
 		return {
 			props: {
