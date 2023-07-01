@@ -9,7 +9,7 @@ const fetchChat = async (host: string) => {
 	let data2 = null;
 
 	try {
-		const response1 = await fetch(`http://127.0.0.1:8000/api/stores/${host}/stores`, {
+		const response1 = await fetch(`https://api.myaichat.io/api/stores/${host}/stores`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const fetchChat = async (host: string) => {
 				maxAge: 30 * 24 * 60 * 60,
 			});
 
-			const response2 = await fetch(`http://127.0.0.1:8000/api/products/${host}`, {
+			const response2 = await fetch(`https://api.myaichat.io/api/products/${host}`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
