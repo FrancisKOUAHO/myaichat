@@ -1,13 +1,66 @@
-'use client'
+import { FC, useEffect, useState } from 'react';
+import ChatInput from './ChatInput';
+import ChatMessages from './ChatMessages';
+import ChatHeader from './ChatHeader';
+import { setCookie } from 'nookies'; // Utilise nookies pour les cookies
 
-import { FunctionComponent, useState } from 'react'
-import ChatInput from './ChatInput'
-import ChatMessages from './ChatMessages'
-import ChatHeader from './ChatHeader'
+const fetchChat = async (host: string) => {
+	let data1 = null;
+	let data2 = null;
 
+	try {
+		const response1 = await fetch(`http://127.0.0.1:8000/api/stores/${host}/stores`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 
-const Chat: FunctionComponent = () => {
+		if (response1.ok) {
+			data1 = await response1.json();
+			setCookie(null, 'data1', data1[0].content, {
+				maxAge: 30 * 24 * 60 * 60,
+			});
+
+			const response2 = await fetch(`http://127.0.0.1:8000/api/products/${host}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			if (response2.ok) {
+				data2 = await response2.json();
+				setCookie(null, 'data2', JSON.stringify(data2), {
+					maxAge: 30 * 24 * 60 * 60,
+				});
+			}
+		}
+
+		return {
+			data1,
+			data2,
+		};
+	} catch (error) {
+		console.error('Error:', error);
+		throw new Error('Internal Server Error');
+	}
+};
+
+const Chat: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
+
+	useEffect(() => {
+		const url = window.location.href;
+		const hostname = new URL(url).hostname;
+		const domain = hostname.replace('www.', '').split('.')[0];
+
+		setCookie(null, 'domain', domain, {
+			maxAge: 30 * 24 * 60 * 60,
+		});
+
+		fetchChat(domain);
+	}, []);
 
 	return (
 		<div>
@@ -23,7 +76,7 @@ const Chat: FunctionComponent = () => {
 				/>
 			</button>
 
-			{isOpen &&
+			{isOpen && (
 				<div className='fixed right-8 w-80 bottom-28 bg-white border border-gray-200 rounded-md overflow-hidden'>
 					<div className='w-full h-full flex flex-col'>
 						<ChatHeader/>
@@ -33,9 +86,9 @@ const Chat: FunctionComponent = () => {
 						</div>
 					</div>
 				</div>
-			}
+			)}
 		</div>
-	)
-}
+	);
+};
 
-export default Chat
+export default Chat;

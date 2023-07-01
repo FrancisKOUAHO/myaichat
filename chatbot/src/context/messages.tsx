@@ -1,11 +1,12 @@
 import { createContext, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { Message } from '@/lib/validators/message'
+import { getCookie } from "cookies-next";
 
 const defaultValue = [
   {
     id: nanoid(),
-    text: 'Bienvenue ! Comment puis-je vous aider ?',
+    text: `Bienvenue sur ${getCookie('domain')}  ! Comment puis-je vous aider ?`,
     isUserMessage: false,
   },
 ]
