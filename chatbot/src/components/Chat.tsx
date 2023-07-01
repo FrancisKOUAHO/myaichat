@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useEffect, useState } from 'react';
 import ChatInput from './ChatInput';
 import ChatMessages from './ChatMessages';
@@ -51,9 +53,12 @@ const Chat: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
-		var siteURL = document.referrer;
+		const siteURL = document.referrer;
 		const hostname = new URL(siteURL).hostname;
 		const domain = hostname.replace('www.', '').split('.')[0];
+
+		console.log("Francis !", domain)
+		console.log("Zola !", domain)
 
 		setCookie(null, 'domain', domain, {
 			maxAge: 30 * 24 * 60 * 60,
