@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import ChatInput from './ChatInput';
 import ChatMessages from './ChatMessages';
 import ChatHeader from './ChatHeader';
-import { setData } from '@/helpers/constants/dataStore';
+import { setCookie } from 'nookies'; // Utilise nookies pour les cookies
 
 const fetchChat = async (host: string) => {
 	let data1 = null;
@@ -18,6 +18,9 @@ const fetchChat = async (host: string) => {
 
 		if (response1.ok) {
 			data1 = await response1.json();
+			setCookie(null, 'data1', data1[0].content, {
+				maxAge: 30 * 24 * 60 * 60,
+			});
 
 			const response2 = await fetch(`http://127.0.0.1:8000/api/products/${host}`, {
 				method: 'GET',
@@ -28,6 +31,9 @@ const fetchChat = async (host: string) => {
 
 			if (response2.ok) {
 				data2 = await response2.json();
+				setCookie(null, 'data2', JSON.stringify(data2), {
+					maxAge: 30 * 24 * 60 * 60,
+				});
 			}
 		}
 
@@ -47,13 +53,13 @@ const Chat: FC = () => {
 	useEffect(() => {
 		const url = window.location.href;
 		const hostname = new URL(url).hostname;
-		const domain = hostname.replace("www.", "").split(".")[0];
+		const domain = hostname.replace('www.', '').split('.')[0];
 
-		console.log(domain);
-
-		fetchChat(domain).then((fetchedData) => {
-			setData(fetchedData.data1, fetchedData.data2); // Appel à setData avec les données récupérées
+		setCookie(null, 'domain', domain, {
+			maxAge: 30 * 24 * 60 * 60,
 		});
+
+		fetchChat(domain);
 	}, []);
 
 	return (
@@ -73,10 +79,10 @@ const Chat: FC = () => {
 			{isOpen && (
 				<div className='fixed right-8 w-80 bottom-28 bg-white border border-gray-200 rounded-md overflow-hidden'>
 					<div className='w-full h-full flex flex-col'>
-						<ChatHeader />
+						<ChatHeader/>
 						<div className='flex flex-col h-80'>
-							<ChatMessages className='px-2 py-3 flex-1' />
-							<ChatInput className='px-4' />
+							<ChatMessages className='px-2 py-3 flex-1'/>
+							<ChatInput className='px-4'/>
 						</div>
 					</div>
 				</div>

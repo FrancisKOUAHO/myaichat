@@ -1,14 +1,12 @@
 import { ChatGPTMessage, OpenAIStream, OpenAIStreamPayload } from '@/lib/openai-stream';
 import { MessageArraySchema } from '@/lib/validators/message';
-import { getData } from "@/helpers/constants/dataStore";
-
+import { cookies } from 'next/headers';
 
 export async function POST(req: Request): Promise<Response> {
 	const {messages} = await req.json();
-	//console.log(messages);
-	const { data1, data2 } = getData();
+	const nextCookies = cookies(); // Get cookies object
 
-	console.log("data1", data1);
+	//console.log(messages);
 
 	const parsedMessages = MessageArraySchema.parse(messages);
 
@@ -19,17 +17,21 @@ export async function POST(req: Request): Promise<Response> {
 		};
 	});
 
+	console.log(nextCookies.get('data2'));
+	console.log(nextCookies.get('data1'));
+
+
 	outboundMessages.unshift({
 		role: 'system',
 		content: `
       Vous êtes un chatbot de support client. Votre principale fonction est de répondre de manière efficace et précise aux questions des clients concernant le site web et son contenu.
       
       Les métadonnées sont structurées comme suit :
+     
+      ${nextCookies.get('data1')}
+      ${nextCookies.get('data2')}
       
-      ${data1 && data1[0]?.content}
-      ${data2 && data2}
-      
-      Exemple : "Vous pouvez consulter[ici] (dans data2 full_url)".
+      Exemple : "Vous pouvez consulter [ici] (dans data2 full_url)".
       En dehors des liens, utilisez du texte normal.
       
       Examinez attentivement ces métadonnées pour élaborer vos réponses. Si une question ou une requête correspond à un contenu spécifique du site que vous pouvez identifier dans les métadonnées fournies, n'hésitez pas à fournir l'URL appropriée. Ces URL doivent être extraites directement des métadonnées et non générées par vos soins.
