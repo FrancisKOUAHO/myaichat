@@ -1,10 +1,14 @@
 import { ChatGPTMessage, OpenAIStream, OpenAIStreamPayload } from '@/lib/openai-stream';
 import { MessageArraySchema } from '@/lib/validators/message';
-import { data1, data2 } from '@/helpers/constants/result';
+import { getData } from "@/helpers/constants/dataStore";
+
 
 export async function POST(req: Request): Promise<Response> {
-	const { messages } = await req.json();
-	console.log(messages);
+	const {messages} = await req.json();
+	//console.log(messages);
+	const { data1, data2 } = getData();
+
+	console.log("data1", data1);
 
 	const parsedMessages = MessageArraySchema.parse(messages);
 
@@ -22,10 +26,10 @@ export async function POST(req: Request): Promise<Response> {
       
       Les métadonnées sont structurées comme suit :
       
-      ${data1 ? data1[0]?.content : ''}
-      ${data2 ?? ''}
+      ${data1 && data1[0]?.content}
+      ${data2 && data2}
       
-      Exemple : "Vous pouvez consulter nos livres [ici] (https://www.example.com/books)".
+      Exemple : "Vous pouvez consulter[ici] (dans data2 full_url)".
       En dehors des liens, utilisez du texte normal.
       
       Examinez attentivement ces métadonnées pour élaborer vos réponses. Si une question ou une requête correspond à un contenu spécifique du site que vous pouvez identifier dans les métadonnées fournies, n'hésitez pas à fournir l'URL appropriée. Ces URL doivent être extraites directement des métadonnées et non générées par vos soins.

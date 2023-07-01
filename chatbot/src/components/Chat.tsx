@@ -1,13 +1,60 @@
-'use client'
+import { FC, useEffect, useState } from 'react';
+import ChatInput from './ChatInput';
+import ChatMessages from './ChatMessages';
+import ChatHeader from './ChatHeader';
+import { setData } from '@/helpers/constants/dataStore';
 
-import { FunctionComponent, useState } from 'react'
-import ChatInput from './ChatInput'
-import ChatMessages from './ChatMessages'
-import ChatHeader from './ChatHeader'
+const fetchChat = async (host: string) => {
+	let data1 = null;
+	let data2 = null;
 
+	try {
+		const response1 = await fetch(`http://127.0.0.1:8000/api/stores/${host}/stores`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
 
-const Chat: FunctionComponent = () => {
+		if (response1.ok) {
+			data1 = await response1.json();
+
+			const response2 = await fetch(`http://127.0.0.1:8000/api/products/${host}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+
+			if (response2.ok) {
+				data2 = await response2.json();
+			}
+		}
+
+		return {
+			data1,
+			data2,
+		};
+	} catch (error) {
+		console.error('Error:', error);
+		throw new Error('Internal Server Error');
+	}
+};
+
+const Chat: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
+
+	useEffect(() => {
+		const url = window.location.href;
+		const hostname = new URL(url).hostname;
+		const domain = hostname.replace("www.", "").split(".")[0];
+
+		console.log(domain);
+
+		fetchChat(domain).then((fetchedData) => {
+			setData(fetchedData.data1, fetchedData.data2); // Appel à setData avec les données récupérées
+		});
+	}, []);
 
 	return (
 		<div>
@@ -23,19 +70,19 @@ const Chat: FunctionComponent = () => {
 				/>
 			</button>
 
-			{isOpen &&
+			{isOpen && (
 				<div className='fixed right-8 w-80 bottom-28 bg-white border border-gray-200 rounded-md overflow-hidden'>
 					<div className='w-full h-full flex flex-col'>
-						<ChatHeader/>
+						<ChatHeader />
 						<div className='flex flex-col h-80'>
-							<ChatMessages className='px-2 py-3 flex-1'/>
-							<ChatInput className='px-4'/>
+							<ChatMessages className='px-2 py-3 flex-1' />
+							<ChatInput className='px-4' />
 						</div>
 					</div>
 				</div>
-			}
+			)}
 		</div>
-	)
-}
+	);
+};
 
-export default Chat
+export default Chat;
