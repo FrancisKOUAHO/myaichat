@@ -1,5 +1,5 @@
 const iframe = document.createElement('iframe');
-iframe.src = 'https://ai.myaichat.io/';
+iframe.src = 'http://localhost:3000/';
 iframe.style.width = '352px';
 iframe.style.maxWidth = '400px';
 iframe.style.height = '506px';

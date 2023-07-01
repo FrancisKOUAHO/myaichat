@@ -57,9 +57,6 @@ const Chat: FC = () => {
 		const hostname = new URL(siteURL).hostname;
 		const domain = hostname.replace('www.', '').split('.')[0];
 
-		console.log("Francis !", domain)
-		console.log("Zola !", domain)
-
 		setCookie(null, 'domain', domain, {
 			maxAge: 30 * 24 * 60 * 60,
 		});
