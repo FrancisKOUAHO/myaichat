@@ -51,8 +51,8 @@ const Chat: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
-		const url = window.location.href;
-		const hostname = new URL(url).hostname;
+		var siteURL = document.referrer;
+		const hostname = new URL(siteURL).hostname;
 		const domain = hostname.replace('www.', '').split('.')[0];
 
 		setCookie(null, 'domain', domain, {
