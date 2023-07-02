@@ -1,7 +1,7 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
 import { Message } from '@/lib/validators/message'
-import { getCookie } from "cookies-next";
+import { getCookie } from "cookies-next"
 
 const defaultValue = [
   {
@@ -10,6 +10,7 @@ const defaultValue = [
     isUserMessage: false,
   },
 ]
+
 export const MessagesContext = createContext<{
   messages: Message[]
   isMessageUpdating: boolean
@@ -29,6 +30,15 @@ export const MessagesContext = createContext<{
 export function MessagesProvider({ children }: { children: React.ReactNode }) {
   const [messages, setMessages] = useState(defaultValue)
   const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false)
+  const [isCookieAvailable, setIsCookieAvailable] = useState<boolean>(false)
+
+  useEffect(() => {
+    // Observer les changements de la valeur de cookie
+    const domainCookie = getCookie('domain')
+    if (domainCookie) {
+      setIsCookieAvailable(true)
+    }
+  }, [])
 
   const addMessage = (message: Message) => {
     setMessages((prev) => [...prev, message])
@@ -53,16 +63,21 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <MessagesContext.Provider
-      value={{
-        messages,
-        isMessageUpdating,
-        addMessage,
-        removeMessage,
-        updateMessage,
-        setIsMessageUpdating,
-      }}>
-      {children}
-    </MessagesContext.Provider>
+    <>
+      {isCookieAvailable && (
+        <MessagesContext.Provider
+          value={{
+            messages,
+            isMessageUpdating,
+            addMessage,
+            removeMessage,
+            updateMessage,
+            setIsMessageUpdating,
+          }}
+        >
+          {children}
+        </MessagesContext.Provider>
+      )}
+    </>
   )
 }
