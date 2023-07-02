@@ -8,4 +8,5 @@ iframe.style.position = 'fixed';
 iframe.style.bottom = '0';
 iframe.style.right = '0';
 iframe.style.border = 'none';
+iframe.style.zIndex = '999'
 document.body.appendChild(iframe);
