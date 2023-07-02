@@ -510,7 +510,7 @@ const Page = () => {
 								<p className="mb-2 mt-6">1. Copiez le code suivant</p>
 								<p>
 									{
-										"<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.html.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
+										"<script src=\"https://connect.myaichat.io/index.js\"></script>"
 									}
 								</p>
 
