@@ -69,23 +69,12 @@ const Page = () => {
 	const closeModalSupprimerChatBots = () => setIsOpenSupprimerChatBots(false);
 
 	const [copied1, setCopied1] = useState(false);
-	const [copied2, setCopied2] = useState(false);
 
 	const handleCopyClick1 = async () => {
 		try {
 			const code1: any = document.getElementById('code1')?.textContent;
 			await copy(code1);
 			setCopied1(true);
-		} catch (err) {
-			console.error('Failed to copy text: ', err);
-		}
-	};
-
-	const handleCopyClick2 = async () => {
-		try {
-			const code2: any = document.getElementById('code2')?.textContent;
-			await copy(code2);
-			setCopied2(true);
 		} catch (err) {
 			console.error('Failed to copy text: ', err);
 		}
@@ -222,7 +211,7 @@ const Page = () => {
 														src={Shopify}
 														width="100"
 														height="100"
-														alt={""}
+														alt=""
 													/>
 												</div>
 												<div className="mt-3 text-center sm:mt-5">
@@ -414,23 +403,12 @@ const Page = () => {
 																	<div className="flex gap-10 ">
 																		<SyntaxHighlighter style={atomDark} id="code1">
 																			{
-																				"<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
+																				"<script src=\"https://connect.myaichat.io/index.js\"></script>"
 																			}
 																		</SyntaxHighlighter>
 																		<button onClick={handleCopyClick1}
 																						className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-[10%]">
 																			{copied1 ? 'Copié!' : 'Copie'}
-																		</button>
-																	</div>
-																	<div className="flex gap-10">
-																		<SyntaxHighlighter style={atomDark} id="code2" className="w-full">
-																			{
-																				'<div id="chatbox-widget-container"></div>'
-																			}
-																		</SyntaxHighlighter>
-																		<button onClick={handleCopyClick2}
-																						className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-[10%]">
-																			{copied2 ? 'Copié!' : 'Copie'}
 																		</button>
 																	</div>
 																</Disclosure.Panel>
@@ -532,7 +510,7 @@ const Page = () => {
 								<p className="mb-2 mt-6">1. Copiez le code suivant</p>
 								<p>
 									{
-										"<script>window.addEventListener('DOMContentLoaded', function () { let script = document.createElement('script'); script.src = 'https://ai.myaichat.io/index.js'; script.onload = function () { initializeChatbox('chatbox-widget-container'); }; document.head.appendChild(script); });</script>"
+										"<script src=\"https://connect.myaichat.io/index.js\"></script>"
 									}
 								</p>
 

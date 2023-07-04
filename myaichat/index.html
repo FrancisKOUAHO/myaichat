@@ -675,25 +675,9 @@ notre chatbot"/></form>
 <script src="index.js"
         type="text/javascript"></script>
 
-<script>
-	window.addEventListener('DOMContentLoaded', function () {
-		let script = document.createElement('script');
-		script.src = 'https://ai.myaichat.io/index.js';
-		script.onload = function () {
-			initializeChatbox('chatbox-widget-container');
-		};
-		document.head.appendChild(script);
-	});
-</script>
-<!--<script>
-	window.addEventListener('DOMContentLoaded', function () {
-		let script = document.createElement('script');
-		script.src = 'http://localhost:63342/myaichat/chatbot/index.js';
-		script.onload = function () {
-			initializeChatbox('chatbox-widget-container');
-		};
-		document.head.appendChild(script);
-	});
-</script>-->
+<script src="https://connect.myaichat.io/index.js"></script>
+<!--
+<script src="http://localhost:63342/myaichat/chatbot_loader/index.js?_ijt=l8t1cp4ud9k1bq20peb3035g1r&_ij_reload=RELOAD_ON_SAVE"></script>
+-->
 </body>
 </html>

@@ -12,6 +12,7 @@ services:
     volumes:
       - ./myaichat:/var/www/myaichat
       - ./chatbot:/var/www/chatbot
+      - ./chatbot_loader:/var/www/chatbot_loader
     networks:
       local_bridge:
         ipv4_address: 172.20.2.0
@@ -28,6 +29,21 @@ services:
     networks:
       local_bridge:
         ipv4_address: 172.20.2.3
+
+  chatbot:
+    build:
+      context: ./chatbot
+      dockerfile: Dockerfile
+    container_name: chatbot
+    depends_on:
+      - webserver
+    restart: unless-stopped
+    ports:
+      - "3031:3031"
+    tty: true
+    networks:
+      local_bridge:
+        ipv4_address: 172.20.2.5
 
   dashboard:
     build:
