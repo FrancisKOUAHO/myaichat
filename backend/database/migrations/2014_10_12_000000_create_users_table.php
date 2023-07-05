@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->timestamp('magic_link_token_expires_at')->nullable();
             $table->boolean('subscription_active')->default(false);
             $table->foreignId('plan_id')->nullable();
-            $table->string('auth_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

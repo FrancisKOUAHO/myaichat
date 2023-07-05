@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('total_price', 15, 2);
             $table->string('session_id');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('payment_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -33,4 +32,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('orders');
     }
-};
+}

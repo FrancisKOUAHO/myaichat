@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { AiOutlineBell, AiOutlineUser,AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineBell, AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
@@ -9,28 +9,37 @@ import MyAiChat from "../../../public/MYAICHAT_white.png";
 import { api } from "@/config/api";
 import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import { setCookie } from "nookies";
+import { destroyCookie } from "nookies";
+import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 import { getCookie } from "cookies-next";
 
+
 const TopBar = () => {
-	const {logout, setUser, setUserId, isAuthenticated} = useAuth();
+	const {setUser, setUserId, isAuthenticated} = useAuth();
 	const [email, setEmail] = useState<string>("");
+	const router = useRouter();
+
+
+	const {
+		data,
+		isLoading,
+		isError,
+	} = useQuery(
+		['me'],
+		() => api.get(`me`),
+		{
+			enabled: !!getCookie("access_token"),
+		}
+	);
+
 
 	const getUser = (): void => {
 		api
-			.get("user", {
-				headers: {
-					'Authorization': `Bearer ${getCookie('auth_token')}`,
-					"Content-Type": "application/json",
-				},
-			})
+			.get("me")
 			.then((res: AxiosResponse): void => {
+				console.log("User: ", res.data)
 				setUser(res.data);
-				setCookie(undefined, 'userId', res.data.id, {
-					maxAge: 30 * 24 * 60 * 60,
-					path: '/',
-				})
-				setUserId(res.data.id);
 				setEmail(res.data.email);
 			})
 			.catch((error) => {
@@ -39,12 +48,21 @@ const TopBar = () => {
 			});
 	};
 
-	const authToken = getCookie('auth_token');
+	const logout = (): void => {
+		api.post('/logout').then((res) => res).then((res) => {
+			console.log(res)
+			if (res.status === 200) {
+				destroyCookie(undefined, 'access_token', {
+					path: '/',
+				})
+
+				router.push('/');
+			}
+		});
+	};
 
 	useEffect((): void => {
-		if (isAuthenticated()) {
-			getUser()
-		}
+		getUser();
 	}, []);
 
 	return (

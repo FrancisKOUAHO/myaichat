@@ -13,9 +13,6 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public mixed $magic_link_token;
-    public mixed $email;
-
     protected $fillable = [
         'email',
         'magic_link_token',
@@ -33,9 +30,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'magic_link_token_expires_at' => 'datetime',
     ];
 
-
     public function plan()
     {
         return $this->hasOne(Plan::class, 'id', 'plan_id');
     }
 }
+
