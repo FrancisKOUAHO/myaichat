@@ -69,45 +69,45 @@ const Page = () => {
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 500 réponses/mois
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 1 000 pages web
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 2 Chatbots
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Support standard
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 {"Formation à l'IA"}
                                             </li>
@@ -138,54 +138,54 @@ const Page = () => {
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 1 500 réponses/mois
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 5 000 pages web
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 5 Chatbots
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Membres illimités
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Support prioritaire
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 {"Formation à l'IA"}
                                             </li>
@@ -214,9 +214,9 @@ const Page = () => {
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 3 000 réponses/mois
                                             </li>
@@ -225,43 +225,43 @@ const Page = () => {
                                                      fill="currentColor" aria-hidden="true">
                                                     <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 15 000 pages web
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 10 Chatbots
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Membres illimités
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Support prioritaire
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 {"Formation à l'IA"}
                                             </li>
@@ -302,45 +302,45 @@ const Page = () => {
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 500 réponses/mois
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 1 000 pages web
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 2 Chatbots
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Support standard
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 {"Formation à l'IA"}
                                             </li>
@@ -374,54 +374,54 @@ const Page = () => {
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 1 500 réponses/mois
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 5 000 pages web
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 5 Chatbots
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Membres illimités
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Support prioritaire
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-white" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 {"Formation à l'IA"}
                                             </li>
@@ -452,54 +452,54 @@ const Page = () => {
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 3 000 réponses/mois
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 15 000 pages web
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 10 Chatbots
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Membres illimités
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 Support prioritaire
                                             </li>
                                             <li className="flex gap-x-3">
                                                 <svg className="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
                                                      fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd"
+                                                    <path fillRule="evenodd"
                                                           d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                          clip-rule="evenodd"></path>
+                                                          clipRule="evenodd"></path>
                                                 </svg>
                                                 {"Formation à l'IA"}
                                             </li>
