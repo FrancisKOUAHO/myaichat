@@ -59,15 +59,13 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('{url}', [ShopifyScraperController::class, 'getProductUrl']);
         });
 
-        Route::get('/checkout/success', [PaymentController::class, 'success']);
-        Route::get('/checkout/cancel', [PaymentController::class, 'cancel']);
-
         Route::post('rapport', [SignalerBugController::class, 'SendBugEmail']);
 
         Route::get('/plans', [PlanController::class, 'getPlans']);
         Route::post('/checkout/{id}', [PaymentController::class, 'checkout']);
         Route::post('/plan', [PlanController::class, 'createPlan']);
+
+        Route::get('/checkout/success', [PaymentController::class, 'success']);
+        Route::get('/checkout/cancel', [PaymentController::class, 'cancel']);
     });
-
-
 });

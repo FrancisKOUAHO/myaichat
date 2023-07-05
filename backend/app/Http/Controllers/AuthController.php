@@ -20,16 +20,15 @@ class AuthController extends Controller
             'email' => 'required|string|email',
         ]);
 
-        // Recherche de l'utilisateur ou mise à jour de l'existant
-        $user = User::updateOrCreate(
-            ['email' => $fields['email']],
-            [
-                'magic_link_token' => Str::random(60),
-                'magic_link_token_expires_at' => Carbon::now()->addHour(1)
-            ]
-        );
+        // Recherche de l'utilisateur ou création s'il n'existe pas
+        $user = User::firstOrNew(['email' => $fields['email']]);
 
-        // Envoi de l'email
+        // Générer un nouveau jeton de connexion
+        $user->magic_link_token = Str::random(60);
+        $user->magic_link_token_expires_at = Carbon::now()->addHour(1);
+        $user->save();
+
+        // Envoi de l'e-mail
         $this->sendLoginEmail($user);
 
         return response()->json(['message' => 'Veuillez consulter votre boîte de réception pour vous connecter.'], 200);
@@ -37,7 +36,6 @@ class AuthController extends Controller
 
     protected function sendLoginEmail(User $user): void
     {
-
         $magicLinkToken = 'https://app.myaichat.io/verify' . '/?magic_link_token=' . $user->magic_link_token;
         $messageBody = "Cliquez sur le lien ci-dessous pour vous connecter :\n\n" . $magicLinkToken;
 
@@ -54,16 +52,19 @@ class AuthController extends Controller
                 ->where('magic_link_token_expires_at', '>=', now())
                 ->firstOrFail();
 
+            // Vérifier si le jeton a expiré
+            if ($user->magic_link_token_expires_at < now()) {
+                return response()->json(['message' => 'Jeton de connexion expiré.'], 401);
+            }
+
+            // Réinitialiser la date d'expiration du jeton
+            $user->magic_link_token_expires_at = now()->addHour(1);
+            $user->save();
+
             // Générer un jeton d'accès API
             $accessToken = $user->createToken('access_token', ['expires_in' => 60 * 24])->plainTextToken;
 
-            // Réinitialiser les tokens
-            $user->magic_link_token = null;
-            $user->magic_link_token_expires_at = null;
-            $user->save();
-
             return response()->json(['message' => 'Connecté avec succès.', 'user' => $user, 'access_token' => $accessToken], 200);
-
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Jeton de connexion invalide ou expiré.'], 401);
         }

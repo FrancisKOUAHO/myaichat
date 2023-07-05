@@ -159,6 +159,7 @@ const Page = () => {
 	const {data: shopifyStore, isLoading} = useQuery({
 		queryKey: ["shopifyStore"],
 		queryFn: () => fetchShopifyStore(+getCookie("userId")),
+		enabled: Boolean(getCookie("access_token")),
 	});
 
 	const deleteShopifyStoreMutation = useMutation({

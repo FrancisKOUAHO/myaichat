@@ -29,7 +29,6 @@ const VerifyTokenPage = () => {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',
 				})
-
 				router.push('/dashboard');
 			} else {
 				router.push('/');

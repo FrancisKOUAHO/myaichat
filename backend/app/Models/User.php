@@ -16,7 +16,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'email',
         'magic_link_token',
-        'auth_token',
         'magic_link_token_expires_at',
         'sub_id'
     ];

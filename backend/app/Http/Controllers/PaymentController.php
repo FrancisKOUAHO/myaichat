@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Plan;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Stripe\Checkout\Session;
+use Illuminate\Support\Facades\Auth;
 use Stripe\Exception\ApiErrorException;
-use Stripe\Plan;
-use Stripe\Stripe;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PaymentController extends Controller
@@ -20,26 +20,23 @@ class PaymentController extends Controller
     public function checkout(Request $request, $plan_id): JsonResponse
     {
         $plan = Plan::find($plan_id);
-        Stripe::setApiKey(env('pk_test_51NC5X9FdQvV9SdYXnSuewdg5jkPrrmAPURxmLLcVG0PB78EuVSGKSYUgvdiOYSgOBzMzy4bPO3DfsAef6iwh4FFw003cptYJiz'));
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $lineItems = [[
             'price' => $plan->st_plan_id,
             'quantity' => 1,
         ]];
 
-        $session = Session::create([
+        $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
-            // 'phone_number_collection' => [
-            //     'enabled' => true,
-            // ],
-            //'customer_email' => Auth::user()->email,
+            'customer_email' => Auth::user()->email,
             'line_items' => $lineItems,
             'mode' => 'subscription',
             'subscription_data' => [
                 'trial_from_plan' => true,
             ],
-            'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
-            'cancel_url' => route('checkout.cancel', [], true),
+            'success_url' => "http://localhost:3030/success" . "?session_id={CHECKOUT_SESSION_ID}",
+            'cancel_url' => "http://localhost:3030/cancel",
         ]);
 
         $order = new Order();
@@ -60,11 +57,10 @@ class PaymentController extends Controller
 
     public function success(Request $request): RedirectResponse
     {
-
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
         $sessionId = $request->get('session_id');
-        try {
 
+        try {
             $session = $stripe->checkout->sessions->retrieve($sessionId);
 
             if (!$session) {
@@ -79,6 +75,7 @@ class PaymentController extends Controller
 
                 throw new NotFoundHttpException();
             }
+
             if ($order->status === 'unpaid') {
                 $order->status = 'paid';
                 $order->save();
@@ -94,7 +91,7 @@ class PaymentController extends Controller
             $payment->date = $session->created;
             $payment->save();
 
-            return redirect()->away('http://localhost:3000/plans/payment/success');
+            return redirect()->away('http://localhost:3030/plans/payment/success');
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
@@ -102,6 +99,6 @@ class PaymentController extends Controller
 
     public function cancel(): RedirectResponse
     {
-        return redirect()->away('http://localhost:3000/payment/cancellation');
+        return redirect()->away('http://localhost:3030/payment/cancellation');
     }
 }

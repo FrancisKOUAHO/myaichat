@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Plan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,37 +13,37 @@ class PlanSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $plans = [
             [
-                'name'=>'Personal',
-                'price'=> 47,
+                'name'=>'Starter',
+                'price'=> 39,
                 'interval'=>'month',
                 'trial_period_days'=> 7,
-                'lookup_key'=>'personal',
-                'st_plan_id'=>'price_1MAW4uCibmxzE7ibXvsyLiFO'
+                'lookup_key'=>'Starter',
+                'st_plan_id'=>'price_1NQWl9FdQvV9SdYXccsEVLV9'
             ],
             [
-                'name'=>'Business',
+                'name'=>'Growth',
+                'price'=> 79,
+                'interval'=>'month',
+                'trial_period_days'=> 7,
+                'lookup_key'=>'Growth',
+                'st_plan_id'=>'price_1NQWnDFdQvV9SdYXPhX9GnCW'
+            ],
+            [
+                'name'=>'Pro',
                 'price'=> 99,
                 'interval'=>'month',
-                'trial_period_days'=> 15,
-                'lookup_key'=>'business',
-                'st_plan_id'=>'price_1MAW58CibmxzE7ib7MiYJ2Up'
-            ],
-            [
-                'name'=>'Expert',
-                'price'=> 197,
-                'interval'=>'month',
-                'trial_period_days'=> 30,
-                'lookup_key'=>'expert',
-                'st_plan_id'=>'price_1MAW5MCibmxzE7ibGpdWAgZv'
+                'trial_period_days'=> 7,
+                'lookup_key'=>'Pro',
+                'st_plan_id'=>'price_1NQWmVFdQvV9SdYXhF7oPphl'
             ]
         ];
 
         foreach ($plans as $plan) {
-            \App\Models\Plan::create($plan);
+            Plan::create($plan);
         }
     }
 }

@@ -16,32 +16,9 @@ import { getCookie } from "cookies-next";
 
 
 const TopBar = () => {
-	const {setUser, setUserId, isAuthenticated} = useAuth();
-	const [email, setEmail] = useState<string>("");
+	const {email} = useAuth();
 	const router = useRouter();
 
-	const {
-		data,
-		isLoading,
-		isError,
-	} = useQuery(
-		['me'],
-		() => api.get(`me`),
-		{
-			enabled: !!getCookie("access_token"),
-		}
-	);
-
-	const getUser = (): void => {
-		api
-			.get("me")
-			.then((res: AxiosResponse): void => {
-				setEmail(res.data.email);
-			})
-			.catch((error) => {
-				console.error("Error fetching user: ", error);
-			});
-	};
 
 	const logout = (): void => {
 		api.post('/logout').then((res) => res).then((res) => {
@@ -55,10 +32,6 @@ const TopBar = () => {
 			}
 		});
 	};
-
-	useEffect((): void => {
-		getUser();
-	}, []);
 
 	return (
 		<nav className="c-topbar">
