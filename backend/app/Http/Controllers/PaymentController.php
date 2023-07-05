@@ -2,26 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Plan;
 use Stripe\Stripe;
-use Stripe\Webhook;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PaymentController extends Controller
 {
-    public function checkout(Request $request, $plan_id)
+    /**
+     * @throws ApiErrorException
+     */
+    public function checkout(Request $request, $plan_id): JsonResponse
     {
         $plan = Plan::find($plan_id);
-        \Stripe\Stripe::setApiKey(env('pk_test_51NC5X9FdQvV9SdYXnSuewdg5jkPrrmAPURxmLLcVG0PB78EuVSGKSYUgvdiOYSgOBzMzy4bPO3DfsAef6iwh4FFw003cptYJiz'));
+        Stripe::setApiKey(env('pk_test_51NC5X9FdQvV9SdYXnSuewdg5jkPrrmAPURxmLLcVG0PB78EuVSGKSYUgvdiOYSgOBzMzy4bPO3DfsAef6iwh4FFw003cptYJiz'));
 
         $lineItems = [[
             'price' => $plan->st_plan_id,
             'quantity' => 1,
         ]];
 
-        $session = \Stripe\Checkout\Session::create([
+        $session = Session::create([
             'payment_method_types' => ['card'],
             // 'phone_number_collection' => [
             //     'enabled' => true,
@@ -52,7 +58,7 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function success(Request $request)
+    public function success(Request $request): RedirectResponse
     {
 
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
@@ -94,7 +100,7 @@ class PaymentController extends Controller
         }
     }
 
-    public function cancel()
+    public function cancel(): RedirectResponse
     {
         return redirect()->away('http://localhost:3000/payment/cancellation');
     }

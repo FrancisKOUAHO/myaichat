@@ -20,7 +20,6 @@ const TopBar = () => {
 	const [email, setEmail] = useState<string>("");
 	const router = useRouter();
 
-
 	const {
 		data,
 		isLoading,
@@ -33,18 +32,14 @@ const TopBar = () => {
 		}
 	);
 
-
 	const getUser = (): void => {
 		api
 			.get("me")
 			.then((res: AxiosResponse): void => {
-				console.log("User: ", res.data)
-				setUser(res.data);
 				setEmail(res.data.email);
 			})
 			.catch((error) => {
 				console.error("Error fetching user: ", error);
-				logout();
 			});
 	};
 
