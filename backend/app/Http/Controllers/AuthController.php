@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -29,34 +29,24 @@ class AuthController extends Controller
             ]
         );
 
-        // Générer un token Passport
-        $authToken = $user->createToken('Magic Link Token')->plainTextToken;
-
         // Envoi de l'email
-        $this->sendLoginEmail($user, $authToken);
+        $this->sendLoginEmail($user);
 
-        $response = [
-            'user' => $user,
-            'message' => 'Veuillez consulter votre boîte de réception pour vous connecter.',
-            'auth_token' => $authToken,
-        ];
-
-
-        return response()->json($response, 200);
+        return response()->json(['message' => 'Veuillez consulter votre boîte de réception pour vous connecter.'], 200);
     }
 
-    protected function sendLoginEmail(User $user, string $authToken): void
+    protected function sendLoginEmail(User $user): void
     {
-        $dashboardUrl = 'https://app.myaichat.io/verify' . '/?magic_link_token=' . $user->magic_link_token;
-        $messageBody = "Cliquez sur le lien ci-dessous pour vous connecter :\n\n" . $dashboardUrl;
+        $magicLinkToken = $user->magic_link_token;
+        $magicLink = url("/login/{$magicLinkToken}"); // Génère l'URL directement
 
-        Mail::raw($messageBody, function ($message) use ($user) {
+        // Envoyer l'email contenant le lien magique
+        Mail::raw("Cliquez sur le lien suivant pour vous connecter : $magicLink", function ($message) use ($user) {
             $message->to($user->email)->subject('Lien de connexion');
         });
     }
 
-
-    public function loginWithToken(Request $request, $token)
+    public function loginWithToken(Request $request, $token): JsonResponse
     {
         try {
             $user = User::where('magic_link_token', $token)
@@ -65,24 +55,25 @@ class AuthController extends Controller
                 ->firstOrFail();
 
             // Connecter l'utilisateur
-            auth()->login($user);
+            Auth::login($user);
 
             // Réinitialiser les tokens
             $user->magic_link_token = null;
             $user->magic_link_token_expires_at = null;
             $user->save();
 
-            $response = [
-                'message' => 'Connecté avec succès.',
-                'user' => $user,
-            ];
-
-            return response()->json($response, 200);
+            return response()->json(['message' => 'Connecté avec succès.', 'user' => $user], 200);
 
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => "Jeton de connexion invalide ou expiré: $token"
-            ], 401);
+            return response()->json(['message' => 'Jeton de connexion invalide ou expiré.'], 401);
         }
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        Auth::logout();
+        Session::flush();
+
+        return response()->json(['message' => 'Déconnecté avec succès.'], 200);
     }
 }
