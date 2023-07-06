@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\APIController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ShopifyProductController;
 use App\Http\Controllers\ShopifyScraperController;
 use App\Http\Controllers\ShopifyStoreController;
-use App\Http\Controllers\ShopifyProductController;
 use App\Http\Controllers\SignalerBugController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,41 +21,50 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'auth'], function () {
-    Route::post('/magic-link', [AuthController::class, 'requestLoginLink']);
-    Route::post('/magic-link/{token}', [AuthController::class, 'loginWithToken']);
-    Route::get('/redirect', [AuthController::class, 'redirect']);
-    Route::get('/callback', [AuthController::class, 'callback']);
-});
+Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
-Route::group(['prefix' => 'stores'], function () {
-    Route::post('shopify-store', [ShopifyStoreController::class, 'store']);
-    Route::get('/stores', [ShopifyStoreController::class, 'index']);
-    Route::get('/stores/{id}', [ShopifyStoreController::class, 'show']);
-    Route::post('/stores', [ShopifyStoreController::class, 'store']);
-    Route::put('/{id}', [ShopifyStoreController::class, 'update']);
-    Route::delete('/stores/{id}', [ShopifyStoreController::class, 'destroy']);
-    Route::get('/{url}/stores', [ShopifyStoreController::class, 'getUrlStores']);
-    Route::get('/user/{userId}/stores', [ShopifyStoreController::class, 'getUserStores']);
-});
+    Route::group(['prefix' => 'auth'], function () {
+        Route::post('/request-login-link', [AuthController::class, 'requestLoginLink']);
+        Route::post('/login/{token}', [AuthController::class, 'loginWithToken']);
+        //Route::get('/redirect', [AuthController::class, 'redirect']);
+        //Route::get('/callback', [AuthController::class, 'callback']);
+    });
 
-Route::group(['prefix' => 'products'], function () {
-    Route::post('scrape', [ShopifyScraperController::class, 'scrapeShopify']);
-    Route::get('/products', [ShopifyProductController::class, 'index']);
-    Route::get('/products/{id}', [ShopifyProductController::class, 'show']);
-    Route::post('/products', [ShopifyProductController::class, 'store']);
-    Route::put('/products/{id}', [ShopifyProductController::class, 'update']);
-    Route::delete('/products/{id}', [ShopifyProductController::class, 'destroy']);
-    Route::get('/user/{user_id}/products', [ShopifyProductController::class, 'getUserProducts']);
-    Route::get('{url}', [ShopifyScraperController::class, 'getProductUrl']);
-});
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/me', function (Request $request) {
+            return $request->user();
+        });
 
-Route::get('/envoyer-cle-api', [APIController::class, 'envoyerCleAPI']);
+        Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+        Route::group(['prefix' => 'stores'], function () {
+            Route::post('shopify-store', [ShopifyStoreController::class, 'store']);
+            Route::get('/stores', [ShopifyStoreController::class, 'index']);
+            Route::get('/stores/{id}', [ShopifyStoreController::class, 'show']);
+            Route::post('/stores', [ShopifyStoreController::class, 'store']);
+            Route::put('/{id}', [ShopifyStoreController::class, 'update']);
+            Route::delete('/stores/{id}', [ShopifyStoreController::class, 'destroy']);
+            Route::get('/{url}/stores', [ShopifyStoreController::class, 'getUrlStores']);
+            Route::get('/user/{userId}/stores', [ShopifyStoreController::class, 'getUserStores']);
+        });
+
+        Route::group(['prefix' => 'products'], function () {
+            Route::post('scrape', [ShopifyScraperController::class, 'scrapeShopify']);
+            Route::get('/products', [ShopifyProductController::class, 'index']);
+            Route::get('/products/{id}', [ShopifyProductController::class, 'show']);
+            Route::post('/products', [ShopifyProductController::class, 'store']);
+            Route::put('/products/{id}', [ShopifyProductController::class, 'update']);
+            Route::delete('/products/{id}', [ShopifyProductController::class, 'destroy']);
+            Route::get('/user/{user_id}/products', [ShopifyProductController::class, 'getUserProducts']);
+            Route::get('{url}', [ShopifyScraperController::class, 'getProductUrl']);
+        });
+
+        Route::post('rapport', [SignalerBugController::class, 'SendBugEmail']);
+
+        Route::get('/plans', [PlanController::class, 'getPlans']);
+        Route::post('/checkout/{id}', [PaymentController::class, 'checkout']);
+        Route::post('/plan', [PlanController::class, 'createPlan']);
+
+        Route::get('/check-payment', [PaymentController::class, 'getPaymentStatus']);
     });
 });
-
-Route::post('rapport', [SignalerBugController::class, 'SendBugEmail']);

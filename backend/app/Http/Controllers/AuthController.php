@@ -6,13 +6,13 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+
     public function requestLoginLink(Request $request): JsonResponse
     {
         // Validation des champs
@@ -20,43 +20,31 @@ class AuthController extends Controller
             'email' => 'required|string|email',
         ]);
 
-        // Recherche de l'utilisateur ou mise à jour de l'existant
-        $user = User::updateOrCreate(
-            ['email' => $fields['email']],
-            [
-                'magic_link_token' => Str::random(60),
-                'magic_link_token_expires_at' => now()->addMinutes(30) // Définir l'expiration du jeton
-            ]
-        );
+        // Recherche de l'utilisateur ou création s'il n'existe pas
+        $user = User::firstOrNew(['email' => $fields['email']]);
 
-        // Générer un token Passport
-        $authToken = $user->createToken('Magic Link Token')->plainTextToken;
+        // Générer un nouveau jeton de connexion
+        $user->magic_link_token = Str::random(60);
+        $user->magic_link_token_expires_at = Carbon::now()->addHour(1);
+        $user->save();
 
-        // Envoi de l'email
-        $this->sendLoginEmail($user, $authToken);
+        // Envoi de l'e-mail
+        $this->sendLoginEmail($user);
 
-        $response = [
-            'user' => $user,
-            'message' => 'Veuillez consulter votre boîte de réception pour vous connecter.',
-            'auth_token' => $authToken,
-        ];
-
-
-        return response()->json($response, 200);
+        return response()->json(['message' => 'Veuillez consulter votre boîte de réception pour vous connecter.'], 200);
     }
 
-    protected function sendLoginEmail(User $user, string $authToken): void
+    protected function sendLoginEmail(User $user): void
     {
-        $dashboardUrl = 'https://app.myaichat.io/verify' . '/?magic_link_token=' . $user->magic_link_token;
-        $messageBody = "Cliquez sur le lien ci-dessous pour vous connecter :\n\n" . $dashboardUrl;
+        $magicLinkToken = 'https://app.myaichat.io/verify' . '/?magic_link_token=' . $user->magic_link_token;
+        $messageBody = "Cliquez sur le lien ci-dessous pour vous connecter :\n\n" . $magicLinkToken;
 
         Mail::raw($messageBody, function ($message) use ($user) {
             $message->to($user->email)->subject('Lien de connexion');
         });
     }
 
-
-    public function loginWithToken(Request $request, $token)
+    public function loginWithToken(Request $request, $token): JsonResponse
     {
         try {
             $user = User::where('magic_link_token', $token)
@@ -64,25 +52,28 @@ class AuthController extends Controller
                 ->where('magic_link_token_expires_at', '>=', now())
                 ->firstOrFail();
 
-            // Connecter l'utilisateur
-            auth()->login($user);
+            // Vérifier si le jeton a expiré
+            if ($user->magic_link_token_expires_at < now()) {
+                return response()->json(['message' => 'Jeton de connexion expiré.'], 401);
+            }
 
-            // Réinitialiser les tokens
-            $user->magic_link_token = null;
-            $user->magic_link_token_expires_at = null;
+            // Réinitialiser la date d'expiration du jeton
+            $user->magic_link_token_expires_at = now()->addHour(1);
             $user->save();
 
-            $response = [
-                'message' => 'Connecté avec succès.',
-                'user' => $user,
-            ];
+            // Générer un jeton d'accès API
+            $accessToken = $user->createToken('access_token', ['expires_in' => 60 * 24])->plainTextToken;
 
-            return response()->json($response, 200);
-
+            return response()->json(['message' => 'Connecté avec succès.', 'user' => $user, 'access_token' => $accessToken], 200);
         } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => "Jeton de connexion invalide ou expiré: $token"
-            ], 401);
+            return response()->json(['message' => 'Jeton de connexion invalide ou expiré.'], 401);
         }
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Déconnecté avec succès.'], 200);
     }
 }

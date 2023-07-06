@@ -1,51 +1,38 @@
 "use client";
 
 import Image from "next/image";
-import { AiOutlineBell, AiOutlineUser,AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineUser } from "react-icons/ai";
 import Dropdown from "@/components/atoms/dropdown/dropdown";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import MyAiChat from "../../../public/MYAICHAT_white.png";
 import { api } from "@/config/api";
-import { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
-import { setCookie } from "nookies";
-import { getCookie } from "cookies-next";
+import { destroyCookie } from "nookies";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 
 const TopBar = () => {
-	const {logout, setUser, setUserId, isAuthenticated} = useAuth();
-	const [email, setEmail] = useState<string>("");
+	const {email} = useAuth();
+	const router = useRouter();
 
-	const getUser = (): void => {
-		api
-			.get("user", {
-				headers: {
-					'Authorization': `Bearer ${getCookie('auth_token')}`,
-					"Content-Type": "application/json",
-				},
-			})
-			.then((res: AxiosResponse): void => {
-				setUser(res.data);
-				setCookie(undefined, 'userId', res.data.id, {
-					maxAge: 30 * 24 * 60 * 60,
+	const logout = useMutation(() =>
+			api.post('/logout'),
+		{
+			onSuccess: (data) => {
+				destroyCookie(undefined, 'access_token', {
 					path: '/',
 				})
-				setUserId(res.data.id);
-				setEmail(res.data.email);
-			})
-			.catch((error) => {
-				console.error("Error fetching user: ", error);
-				logout();
-			});
-	};
 
-	const authToken = getCookie('auth_token');
-
-	useEffect((): void => {
-		if (isAuthenticated()) {
-			getUser()
+				destroyCookie(undefined, 'userId', {
+					path: '/',
+				})
+				router.push('/');
+			},
+			onError: (error): void => {
+				console.log('error', error);
+			},
 		}
-	}, []);
+	);
 
 	return (
 		<nav className="c-topbar">
@@ -57,9 +44,6 @@ const TopBar = () => {
 					</Link>
 				</div>
 				<div className="c-above-topbar-right">
-					<div className="c-notification">
-						<AiOutlineBell/>
-					</div>
 					<div className="c-profile-avatar">
 						<Dropdown
 							list={[
@@ -74,7 +58,7 @@ const TopBar = () => {
 									icon: (
 										<AiOutlineLogout className="text-white/70 w-100 h-100 text-2xl"/>
 									),
-									onclick: () => logout(),
+									onclick: () => logout.mutate(),
 								},
 							]}
 						>

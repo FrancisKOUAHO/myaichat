@@ -159,6 +159,7 @@ const Page = () => {
 	const {data: shopifyStore, isLoading} = useQuery({
 		queryKey: ["shopifyStore"],
 		queryFn: () => fetchShopifyStore(+getCookie("userId")),
+		enabled: Boolean(getCookie("access_token")),
 	});
 
 	const deleteShopifyStoreMutation = useMutation({
@@ -585,7 +586,7 @@ const Page = () => {
 							</div>
 							<div className="w-full text-left px-4">
 								<p className="mb-2 mt-2">
-									{"3. Cliquez sur Page de paiement."}
+									{"3. Cliquez sur Page de payment."}
 								</p>
 								<Image
 									className="m-auto pt-3 mb-8"

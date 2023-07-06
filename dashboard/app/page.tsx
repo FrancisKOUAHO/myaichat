@@ -11,17 +11,9 @@ const Home = () => {
 	const router: AppRouterInstance = useRouter();
 
 	const loginMutation = useMutation((email: void) =>
-			api.post('auth/magic-link', {email}),
+			api.post('auth/request-login-link', {email}),
 		{
 			onSuccess: (data) => {
-				setCookie(undefined, 'auth_token', data.data.auth_token, {
-					maxAge: 30 * 24 * 60 * 60,
-					path: '/',
-				})
-				setCookie(undefined, 'userId', data.data.id, {
-					maxAge: 30 * 24 * 60 * 60,
-					path: '/',
-				})
 				router.push('/checkmail')
 			},
 			onError: (error): void => {
