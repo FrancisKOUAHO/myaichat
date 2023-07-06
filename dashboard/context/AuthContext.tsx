@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { parseCookies } from "nookies";
 import { api } from "@/config/api";
+import { CookieValueTypes, getCookie } from "cookies-next";
 
 export const AuthContext = createContext<any>({});
 
@@ -13,11 +13,12 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 	const [products, setProducts] = useState<any>(null);
 	const [userId, setUserId] = useState<any>(null);
 	const [email, setEmail] = useState<string>("");
-
-
+	const [isCurrentPlan, setIsCurrentPlan] = useState(false);
+	const [paymentInfo, setPaymentInfo] = useState(false);
 
 	const isAuthenticated = (): boolean => {
-		const token: string = parseCookies()["access_token"];
+		const token: CookieValueTypes = getCookie("access_token");
+		console.log("token", token)
 		return !!token;
 	};
 
@@ -32,11 +33,27 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 			});
 	};
 
+	const check_payment = () => {
+		api.get(`check-payment`)
+			.then((res) => {
+				setPaymentInfo(res.data.payment_status);
+				if (res.data.payment_status.st_payment_status === "paid") {
+					setIsCurrentPlan(true);
+				} else {
+					setIsCurrentPlan(false);
+				}
+			})
+			.catch((err) => {
+				console.log("err", err);
+			})
+	}
+
 	useEffect((): void => {
 		if (isAuthenticated()) {
 			getUser();
+			check_payment();
 		}
-	}, []);
+	}, [getUser, isAuthenticated, isCurrentPlan]);
 
 	return (
 		<AuthContext.Provider
@@ -45,10 +62,14 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 				isAuthenticated,
 				setProducts,
 				setUserId,
+				setIsCurrentPlan,
+				check_payment,
 				products,
 				userId,
 				user,
 				email,
+				isCurrentPlan,
+				paymentInfo
 			}}
 		>
 			{children}

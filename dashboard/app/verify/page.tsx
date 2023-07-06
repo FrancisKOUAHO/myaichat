@@ -35,7 +35,7 @@ const VerifyTokenPage = () => {
 
 	useEffect((): void => {
 		verifyTokenMutation(magic_link_token);
-	}, []);
+	}, [magic_link_token]);
 
 	return (
 		<div

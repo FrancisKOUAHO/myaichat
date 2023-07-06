@@ -10,7 +10,6 @@ import AuthContextProvider from "@/context/AuthContext";
 
 import { ToastContainer } from 'react-toastify';
 
-
 const RootLayout = ({children}: { children: React.ReactNode }) => {
 	const [queryClient] = useState(() => new QueryClient(
 		{
@@ -33,15 +32,15 @@ const RootLayout = ({children}: { children: React.ReactNode }) => {
 			<title>Myaichat</title>
 		</head>
 		<body className="bg-slate-100">
-			<AuthContextProvider>
-				<QueryClientProvider client={queryClient}>
-					<Hydrate>
-						{children}
-					</Hydrate>
-					<ToastContainer/>
-					<ReactQueryDevtools/>
-				</QueryClientProvider>
-			</AuthContextProvider>
+		<AuthContextProvider>
+			<QueryClientProvider client={queryClient}>
+				<Hydrate>
+					{children}
+				</Hydrate>
+				<ToastContainer/>
+				<ReactQueryDevtools/>
+			</QueryClientProvider>
+		</AuthContextProvider>
 		</body>
 		</html>
 	)
