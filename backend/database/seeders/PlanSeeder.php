@@ -39,7 +39,31 @@ class PlanSeeder extends Seeder
                 'trial_period_days'=> 7,
                 'lookup_key'=>'Pro',
                 'st_plan_id'=>'price_1NQWmVFdQvV9SdYXhF7oPphl'
-            ]
+            ],
+            [
+                'name'=>'Starter',
+                'price'=> 348,
+                'interval'=>'year',
+                'trial_period_days'=> 7,
+                'lookup_key'=>'Starter',
+                'st_plan_id'=>'price_1NQzfQFdQvV9SdYXpDBY8Wtl'
+            ],
+            [
+                'name'=>'Growth',
+                'price'=> 708,
+                'interval'=>'year',
+                'trial_period_days'=> 7,
+                'lookup_key'=>'Growth',
+                'st_plan_id'=>'price_1NQzkaFdQvV9SdYXYlbRbGyK'
+            ],
+            [
+                'name'=>'Pro',
+                'price'=> 828,
+                'interval'=>'year',
+                'trial_period_days'=> 7,
+                'lookup_key'=>'Pro',
+                'st_plan_id'=>'price_1NQzjVFdQvV9SdYXU9CMdM79'
+            ],
         ];
 
         foreach ($plans as $plan) {
