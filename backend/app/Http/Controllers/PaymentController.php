@@ -35,8 +35,8 @@ class PaymentController extends Controller
             'subscription_data' => [
                 'trial_from_plan' => true,
             ],
-            'success_url' => "http://localhost:3030/success" . "?session_id={CHECKOUT_SESSION_ID}",
-            'cancel_url' => "http://localhost:3030/cancel",
+            'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
+            'cancel_url' => route('checkout.cancel', [], true),
         ]);
 
         $order = new Order();
@@ -91,7 +91,7 @@ class PaymentController extends Controller
             $payment->date = $session->created;
             $payment->save();
 
-            return redirect()->away('http://localhost:3030/plans/payment/success');
+            return redirect()->away('http://localhost:3030/payment/success');
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
@@ -100,5 +100,30 @@ class PaymentController extends Controller
     public function cancel(): RedirectResponse
     {
         return redirect()->away('http://localhost:3030/payment/cancellation');
+    }
+
+    public function getPaymentStatus(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        $order = Order::where('user_id', $user->id)->first();
+
+        if (!$order) {
+            return response()->json([
+                'message' => 'Order not found.'
+            ], 404);
+        }
+
+        $payment = $order->payment;
+
+        if (!$payment) {
+            return response()->json([
+                'message' => 'Payment not found.'
+            ], 404);
+        }
+
+        return response()->json([
+            'payment_status' => $payment->st_payment_status
+        ]);
     }
 }

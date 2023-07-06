@@ -23,7 +23,7 @@ const Page = () => {
                             </p>
                         </div>
                         <p className="text-white text-base mb-4">
-                            {"Votre paiement n'a pas pu être effectué."}
+                            {"Votre payment n'a pas pu être effectué."}
                         </p>
                     </div>
                 </Card>

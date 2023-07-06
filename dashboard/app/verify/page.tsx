@@ -14,11 +14,8 @@ const VerifyTokenPage = () => {
 
 	const magic_link_token: any = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get('magic_link_token') : null;
 
-	console.log(magic_link_token)
-
 	const verifyTokenMutation = (token: string) => {
 		api.post(`auth/login/${token}`).then((res: AxiosResponse) => res).then((res: AxiosResponse) => {
-			console.log(res)
 			if (res.status === 200) {
 				setCookie(undefined, 'access_token', res.data.access_token, {
 					maxAge: 30 * 24 * 60 * 60,

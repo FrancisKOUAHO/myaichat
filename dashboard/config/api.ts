@@ -15,7 +15,6 @@ if (token) {
 	api.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 }
 
-
 export {
 	api,
 };

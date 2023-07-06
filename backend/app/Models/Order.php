@@ -2,18 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'status', 'total_price', 'session_id', 'user_id'
+        'status',
+        'total_price',
+        'session_id',
+        'user_id',
+        'payment_id',
     ];
 
-    // Relations
-    public function user(): BelongsTo
+    public function payment(): HasOne
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Payment::class);
     }
 }
