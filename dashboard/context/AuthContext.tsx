@@ -18,7 +18,6 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 
 	const isAuthenticated = (): boolean => {
 		const token: CookieValueTypes = getCookie("access_token");
-		console.log("token", token)
 		return !!token;
 	};
 
@@ -53,7 +52,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 			getUser();
 			check_payment();
 		}
-	}, [getUser, isAuthenticated, isCurrentPlan]);
+	}, [isCurrentPlan]);
 
 	return (
 		<AuthContext.Provider
