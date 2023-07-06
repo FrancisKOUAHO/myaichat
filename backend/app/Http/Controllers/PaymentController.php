@@ -88,6 +88,7 @@ class PaymentController extends Controller
             $payment->st_payment_intent_id = $session->payment_intent;
             $payment->st_payment_method = $session->payment_method_types[0];
             $payment->st_payment_status = $session->payment_status;
+            $payment->total = $order->total_price;
             $payment->date = $session->created;
             $payment->save();
 
@@ -123,7 +124,7 @@ class PaymentController extends Controller
         }
 
         return response()->json([
-            'payment_status' => $payment->st_payment_status
+            'payment_status' => $payment
         ]);
     }
 }
