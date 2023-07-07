@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
-import { apiLogin } from "@/config/api";
+import { api } from "@/config/api";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { setCookie } from "nookies";
@@ -11,7 +11,7 @@ const Home = () => {
 	const router: AppRouterInstance = useRouter();
 
 	const loginMutation = useMutation((email: void) =>
-			apiLogin.post('auth/request-login-link', {email}),
+			api.post('auth/request-login-link', {email}),
 		{
 			onSuccess: (data) => {
 				router.push('/checkmail')

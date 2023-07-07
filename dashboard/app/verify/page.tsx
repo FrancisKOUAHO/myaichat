@@ -1,6 +1,6 @@
 'use client'
 
-import { apiLogin } from "@/config/api";
+import { api } from "@/config/api";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
@@ -11,46 +11,29 @@ import { setCookie } from "nookies";
 const VerifyTokenPage = () => {
 	const router: AppRouterInstance = useRouter();
 
-	const magic_link_token: any =
-		typeof window !== "undefined"
-			? new URLSearchParams(window.location.search).get("magic_link_token")
-			: null;
+	const magic_link_token: any = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get('magic_link_token') : null;
 
-	const verifyTokenMutation = async (token: string) => {
-		try {
-			const res: AxiosResponse = await apiLogin.post(`auth/login/${token}`);
-
+	const verifyTokenMutation = (token: string) => {
+		api.post(`auth/login/${token}`).then((res: AxiosResponse) => res).then((res: AxiosResponse) => {
 			if (res.status === 200) {
-				setCookie(undefined, "access_token", res.data.access_token, {
+				setCookie(undefined, 'access_token', res.data.access_token, {
 					maxAge: 30 * 24 * 60 * 60,
-					path: "/",
-				});
+					path: '/',
+				})
 
-				setCookie(undefined, "userId", res.data.user.id, {
+				setCookie(undefined, 'userId', res.data.user.id, {
 					maxAge: 30 * 24 * 60 * 60,
-					path: "/",
-				});
-
-				router.push("/dashboard");
+					path: '/',
+				})
+				router.push('/dashboard');
 			} else {
-				router.push("/");
+				router.push('/');
 			}
-		} catch (error) {
-			console.error("Error verifying token: ", error);
-			router.push("/");
-		}
+		});
 	};
 
-	useEffect(() => {
-		const fetchData = async () => {
-			if (magic_link_token) {
-				await verifyTokenMutation(magic_link_token);
-			} else {
-				router.push("/");
-			}
-		};
-
-		fetchData();
+	useEffect((): void => {
+		verifyTokenMutation(magic_link_token);
 	}, [magic_link_token]);
 
 	return (
