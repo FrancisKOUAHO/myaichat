@@ -1,8 +1,7 @@
-'use client';
-
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { api } from "@/config/api";
-import { CookieValueTypes, getCookie } from "cookies-next";
+import { CookieValueTypes, getCookie, getCookies } from "cookies-next";
+import { parseCookies } from "nookies";
 
 export const AuthContext = createContext<any>({});
 
@@ -15,6 +14,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 	const [email, setEmail] = useState<string>("");
 	const [isCurrentPlan, setIsCurrentPlan] = useState(false);
 	const [paymentInfo, setPaymentInfo] = useState(false);
+	const [cookieLoaded, setCookieLoaded] = useState(false); // Nouvel état pour suivre le chargement du cookie
 
 	const isAuthenticated = (): boolean => {
 		const token: CookieValueTypes = getCookie("access_token");
@@ -22,37 +22,53 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 	};
 
 	const getUser = async (): Promise<void> => {
-		await api
-			.get("me")
-			.then((res: any): void => {
-				setEmail(res.data.email);
-			})
-			.catch((error: any) => {
-				console.error("Error fetching user: ", error);
-			});
+		try {
+			const response = await api.get("me");
+			setUser(response.data);
+			setEmail(response.data.email);
+		} catch (error) {
+			console.error("Error fetching user: ", error);
+		}
 	};
 
 	const check_payment = async () => {
-		await api.get(`check-payment`)
-			.then((res) => {
-				setPaymentInfo(res.data.payment_status);
-				if (res.data.payment_status.st_payment_status === "paid") {
-					setIsCurrentPlan(true);
-				} else {
-					setIsCurrentPlan(false);
-				}
-			})
-			.catch((err) => {
-				console.log("err", err);
-			})
-	}
-
-	useEffect((): void => {
-		if (isAuthenticated()) {
-			getUser().then(r => r);
-			check_payment().then(r => r);
+		try {
+			const response = await api.get(`check-payment`);
+			setPaymentInfo(response.data.payment_status);
+			if (response.data.payment_status.st_payment_status === "paid") {
+				setIsCurrentPlan(true);
+			} else {
+				setIsCurrentPlan(false);
+			}
+		} catch (error) {
+			console.log("Error fetching payment info: ", error);
 		}
-	}, [isCurrentPlan]);
+	};
+
+	useEffect(() => {
+		const fetchData = async () => {
+			if (isAuthenticated()) {
+				console.log("isAuthenticated");
+				await getUser();
+				await check_payment();
+			}
+		};
+
+		// Charger le cookie avant d'appeler les fonctions getUser et check_payment
+		const loadCookie = async () => {
+			const cookies = parseCookies();
+			const token: CookieValueTypes = cookies["access_token"];
+			console.log("Cookie loaded", token);
+			setCookieLoaded(true);
+		};
+
+		loadCookie(); // Charger le cookie
+
+		// Appeler fetchData uniquement lorsque le cookie a été chargé
+		if (cookieLoaded) {
+			fetchData();
+		}
+	}, [cookieLoaded]);
 
 	return (
 		<AuthContext.Provider
@@ -63,6 +79,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 				setUserId,
 				setIsCurrentPlan,
 				check_payment,
+				getUser,
 				products,
 				userId,
 				user,

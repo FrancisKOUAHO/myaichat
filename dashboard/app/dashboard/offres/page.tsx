@@ -33,7 +33,7 @@ const Page = () => {
 				[planId]: true,
 			}));
 
-			const data = await handlePlanSubscribeAsync.mutateAsync(planId);
+			const data: any = await handlePlanSubscribeAsync.mutateAsync(planId);
 
 			// Redirection vers l'URL de paiement
 			window.location.replace(data.data.url);

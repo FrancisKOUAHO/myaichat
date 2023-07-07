@@ -36,6 +36,7 @@ import getCookie from "@/utils/getCookie";
 import { toast } from "react-toastify";
 import { AxiosResponse } from "axios";
 import { parseCookies } from "nookies";
+import { useAuth } from "@/context/AuthContext";
 
 const fetchShopifyStore = async (userId: any) => {
 	const response: AxiosResponse = await api.get(`stores/user/${userId}/stores`);
@@ -45,6 +46,9 @@ const fetchShopifyStore = async (userId: any) => {
 const Page = () => {
 	const router: AppRouterInstance = useRouter();
 	const queryClient = useQueryClient();
+
+	const { getUser, isAuthenticated } = useAuth();
+
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenSecond, setIsOpenSecond] = useState(false);
@@ -179,8 +183,16 @@ const Page = () => {
 	});
 
 	useEffect(() => {
-		getScrapeMutation.mutateAsync(parseCookies()['userId']);
-	}, []);
+		const fetchData = async () => {
+			const accessToken = getCookie("access_token");
+
+			if (isAuthenticated && accessToken) {
+				await getScrapeMutation.mutateAsync(parseCookies()["userId"]);
+			}
+		};
+
+		fetchData();
+	}, [isAuthenticated, parseCookies()["userId"]]);
 
 	return (
 		<LayoutCustom>

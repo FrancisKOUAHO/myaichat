@@ -15,24 +15,21 @@ const TopBar = () => {
 	const {email} = useAuth();
 	const router = useRouter();
 
-	const logout = useMutation(() =>
-			api.post('/logout'),
-		{
-			onSuccess: (data) => {
-				destroyCookie(undefined, 'access_token', {
-					path: '/',
-				})
+	const handleLogout = () => {
+		console.log('logout')
+		api.post('logout').then((res) => {
+			destroyCookie(undefined, 'access_token', {
+				path: '/',
+			})
 
-				destroyCookie(undefined, 'userId', {
-					path: '/',
-				})
-				router.push('/');
-			},
-			onError: (error): void => {
-				console.log('error', error);
-			},
-		}
-	);
+			destroyCookie(undefined, 'userId', {
+				path: '/',
+			})
+			router.push('/');
+		}).catch((err) => {
+			console.log('err', err);
+		});
+	}
 
 	return (
 		<nav className="c-topbar">
@@ -58,7 +55,7 @@ const TopBar = () => {
 									icon: (
 										<AiOutlineLogout className="text-white/70 w-100 h-100 text-2xl"/>
 									),
-									onclick: () => logout.mutate(),
+									onclick: () => handleLogout(),
 								},
 							]}
 						>
