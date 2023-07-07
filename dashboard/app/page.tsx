@@ -1,31 +1,33 @@
 'use client'
 
 import React from "react";
-import { useMutation } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
-import { setCookie } from "nookies";
+import { AxiosResponse } from "axios";
 
 const Home = () => {
 	const router: AppRouterInstance = useRouter();
 
-	const loginMutation = useMutation((email: void) =>
-			api.post('auth/request-login-link', {email}),
-		{
-			onSuccess: (data) => {
+	const [isLoaded, setIsLoaded] = React.useState(false);
+
+	const loginMutation = (email: void) => {
+		setIsLoaded(true);
+
+		api.post('auth/request-login-link', {email}).then((res: AxiosResponse) => res).then((res: AxiosResponse) => {
+			if (res.status === 200) {
+				setIsLoaded(false);
 				router.push('/checkmail')
-			},
-			onError: (error): void => {
-				console.log('error', error);
-			},
-		}
-	);
+			} else {
+				router.push('/');
+			}
+		});
+	}
 
 	const handleSubmit = (event: any): void => {
 		event.preventDefault();
 		const {email} = event.target.elements;
-		loginMutation.mutate(email.value);
+		loginMutation(email.value);
 	};
 
 	return (
@@ -70,7 +72,7 @@ const Home = () => {
 									className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-3"
 									style={{backgroundColor: "#7F56D9"}}
 								>
-									{loginMutation.isLoading ? "Loading..." : "Se connecter"}
+									{isLoaded ? "Loading..." : "Se connecter"}
 								</button>
 							</div>
 						</form>

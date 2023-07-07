@@ -32,11 +32,11 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { api } from "@/config/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import copy from 'clipboard-copy';
-import getCookie from "@/utils/getCookie";
 import { toast } from "react-toastify";
 import { AxiosResponse } from "axios";
 import { parseCookies } from "nookies";
 import { useAuth } from "@/context/AuthContext";
+import { getCookie } from "cookies-next";
 
 const fetchShopifyStore = async (userId: any) => {
 	const response: AxiosResponse = await api.get(`stores/user/${userId}/stores`);

@@ -1,6 +1,8 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+'use client';
+
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 import { api } from "@/config/api";
-import { CookieValueTypes, getCookie, getCookies } from "cookies-next";
+import { CookieValueTypes, getCookie } from "cookies-next";
 import { parseCookies } from "nookies";
 
 export const AuthContext = createContext<any>({});
@@ -14,7 +16,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 	const [email, setEmail] = useState<string>("");
 	const [isCurrentPlan, setIsCurrentPlan] = useState(false);
 	const [paymentInfo, setPaymentInfo] = useState(false);
-	const [cookieLoaded, setCookieLoaded] = useState(false); // Nouvel état pour suivre le chargement du cookie
+	const [cookieLoaded, setCookieLoaded] = useState(false);
 
 	const isAuthenticated = (): boolean => {
 		const token: CookieValueTypes = getCookie("access_token");
@@ -31,8 +33,6 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 		}
 	};
 
-	console.log("paymentInfo", email)
-
 	const check_payment = async () => {
 		try {
 			const response = await api.get(`check-payment`);
@@ -48,26 +48,26 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 	};
 
 	useEffect(() => {
+		const loadCookie = async () => {
+			const cookies = parseCookies();
+			const token: CookieValueTypes = cookies["access_token"];
+			setCookieLoaded(true);
+		};
+
+		loadCookie();
+	}, []);
+
+	useEffect(() => {
 		const fetchData = async () => {
-			if (isAuthenticated()) {
-				console.log("isAuthenticated");
+			if (cookieLoaded && isAuthenticated()) {
 				await getUser();
 				await check_payment();
 			}
 		};
 
-		// Charger le cookie avant d'appeler les fonctions getUser et check_payment
-		const loadCookie = async () => {
-			const cookies = parseCookies();
-			const token: CookieValueTypes = cookies["access_token"];
-			console.log("Cookie loaded", token);
-			setCookieLoaded(true);
-		};
-
-		loadCookie(); // Charger le cookie
-
-		// Appeler fetchData uniquement lorsque le cookie a été chargé
-		if (cookieLoaded) {
+		const token: CookieValueTypes = getCookie("access_token");
+		if (token) {
+			api.defaults.headers.common = {Authorization: `Bearer ${token}`};
 			fetchData();
 		}
 	}, [cookieLoaded]);
@@ -87,7 +87,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 				user,
 				email,
 				isCurrentPlan,
-				paymentInfo
+				paymentInfo,
 			}}
 		>
 			{children}
