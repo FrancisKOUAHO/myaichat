@@ -35,6 +35,7 @@ import copy from 'clipboard-copy';
 import getCookie from "@/utils/getCookie";
 import { toast } from "react-toastify";
 import { AxiosResponse } from "axios";
+import { parseCookies } from "nookies";
 
 const fetchShopifyStore = async (userId: any) => {
 	const response: AxiosResponse = await api.get(`stores/user/${userId}/stores`);
@@ -72,11 +73,14 @@ const Page = () => {
 
 	const handleCopyClick1 = async () => {
 		try {
-			const code1: any = document.getElementById('code1')?.textContent;
-			await copy(code1);
-			setCopied1(true);
-		} catch (err) {
-			console.error('Failed to copy text: ', err);
+			if (typeof window !== 'undefined') {
+				const code1: any = document.getElementById('code1')?.textContent;
+				await copy(code1);
+				setCopied1(true);
+				toast.success('Code 1 copied to clipboard');
+			}
+		} catch (error) {
+			toast.error('Failed to copy code 1');
 		}
 	};
 
@@ -113,7 +117,7 @@ const Page = () => {
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
 		const {url} = event.target.elements;
-		const userId: any = +getCookie("userId");
+		const userId: any = parseCookies()['userId'];
 
 		const requestData = {
 			url: url.value,
@@ -158,7 +162,7 @@ const Page = () => {
 
 	const {data: shopifyStore, isLoading} = useQuery({
 		queryKey: ["shopifyStore"],
-		queryFn: () => fetchShopifyStore(+getCookie("userId")),
+		queryFn: () => fetchShopifyStore(parseCookies()['userId']),
 		enabled: Boolean(getCookie("access_token")),
 	});
 
@@ -175,8 +179,7 @@ const Page = () => {
 	});
 
 	useEffect(() => {
-		const userId = getCookie("userId");
-		getScrapeMutation.mutateAsync(userId);
+		getScrapeMutation.mutateAsync(parseCookies()['userId']);
 	}, []);
 
 	return (
