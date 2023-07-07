@@ -52,13 +52,13 @@ const Page = () => {
 					<dl
 						className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
 						<div className="px-6 py-5 sm:p-8">
-							<dt className="text-xs font-normal text-gray-400">{"Abonnement"}</dt>
+							<dt className="text-xs font-normal text-gray-400">{"n° abonnement"}</dt>
 							<dt className="text-[14px] mt-2 font-semibold text-gray-900">{paymentInfo.st_sub_id}</dt>
 							<dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
 							</dd>
 						</div>
 						<div className="px-6 py-5 sm:p-8">
-							<dt className="text-xs font-normal text-gray-400">{"Payement"}</dt>
+							<dt className="text-xs font-normal text-gray-400">{"Paiement"}</dt>
 							<div className="flex items-center">
 								<dt className="text-[14px] mt-2 font-semibold text-gray-900">€{paymentInfo.total}</dt>
 							</div>
