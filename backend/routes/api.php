@@ -30,6 +30,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         //Route::get('/callback', [AuthController::class, 'callback']);
     });
 
+    Route::get('/{url}/stores', [ShopifyStoreController::class, 'getUrlStores']);
+    Route::get('/product/{domain}', [ShopifyProductController::class, 'getUrlShopifyProduct']);
+
+
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/me', function (Request $request) {
             return $request->user();
@@ -44,7 +48,6 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::post('/stores', [ShopifyStoreController::class, 'store']);
             Route::put('/{id}', [ShopifyStoreController::class, 'update']);
             Route::delete('/stores/{id}', [ShopifyStoreController::class, 'destroy']);
-            Route::get('/{url}/stores', [ShopifyStoreController::class, 'getUrlStores']);
             Route::get('/user/{userId}/stores', [ShopifyStoreController::class, 'getUserStores']);
         });
 

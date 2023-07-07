@@ -4,45 +4,26 @@ import { FC, useEffect, useState } from 'react';
 import ChatInput from './ChatInput';
 import ChatMessages from './ChatMessages';
 import ChatHeader from './ChatHeader';
-import { setCookie } from 'nookies'; // Utilise nookies pour les cookies
+import { setCookie } from 'nookies';
+import { api } from "@/config/api";
 
 const fetchChat = async (host: string) => {
-	let data1 = null;
-	let data2 = null;
-
 	try {
-		const response1 = await fetch(`https://api.myaichat.io/api/stores/${host}/stores`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-
-		if (response1.ok) {
-			data1 = await response1.json();
+		const response1 = await api.get(`${host}/stores`);
+		if (response1.status === 200) {
+			const data1 = response1.data;
 			setCookie(null, 'data1', data1[0].content, {
 				maxAge: 30 * 24 * 60 * 60,
 			});
 
-			const response2 = await fetch(`https://api.myaichat.io/api/products/${host}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-
-			if (response2.ok) {
-				data2 = await response2.json();
+			const response2 = await api.get(`product/${host}`);
+			if (response2.status === 200) {
+				const data2 = response2.data;
 				setCookie(null, 'data2', JSON.stringify(data2), {
 					maxAge: 30 * 24 * 60 * 60,
 				});
 			}
 		}
-
-		return {
-			data1,
-			data2,
-		};
 	} catch (error) {
 		console.error('Error:', error);
 		throw new Error('Internal Server Error');
@@ -54,15 +35,26 @@ const Chat: FC = () => {
 
 	useEffect(() => {
 		const siteURL = document.referrer;
-		const hostname = new URL(siteURL).hostname;
-		const domain = hostname.replace('www.', '').split('.')[0];
+		if (!siteURL) {
+			// Gérer le cas où document.referrer n'est pas défini
+			return;
+		}
 
-		setCookie(null, 'domain', domain, {
-			maxAge: 30 * 24 * 60 * 60,
-		});
+		try {
+			const hostname = new URL(siteURL).hostname;
+			const domain = hostname.replace('www.', '').split('.')[0];
 
-		fetchChat(domain);
+			setCookie(null, 'domain', domain, {
+				maxAge: 30 * 24 * 60 * 60,
+			});
+
+			fetchChat(domain);
+		} catch (error) {
+			console.error('Error:', error);
+			// Gérer l'erreur de construction de l'URL
+		}
 	}, []);
+
 
 	return (
 		<div>

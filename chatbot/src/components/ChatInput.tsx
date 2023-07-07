@@ -1,3 +1,5 @@
+'use client'
+
 import { MessagesContext } from '@/context/messages'
 import { cn } from '@/lib/utils'
 import { Message } from '@/lib/validators/message'

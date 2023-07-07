@@ -6,7 +6,7 @@ export async function POST(req: Request): Promise<Response> {
 	const {messages} = await req.json();
 	const nextCookies = cookies(); // Get cookies object
 
-	//console.log(messages);
+	console.log(messages);
 
 	const parsedMessages = MessageArraySchema.parse(messages);
 
@@ -17,9 +17,20 @@ export async function POST(req: Request): Promise<Response> {
 		};
 	});
 
-	console.log(nextCookies.get('data2'));
-	console.log(nextCookies.get('data1'));
+	let content = nextCookies.get('data1')?.value
 
+	const content2 = nextCookies.get('data2')?.value;
+
+	let fullUrls = [];
+
+	if (content2) {
+		try {
+			const parsedContent2 = JSON.parse(content2);
+			fullUrls = parsedContent2.map((item: any) => item.full_url);
+		} catch (error) {
+			console.error('Error parsing content2:', error);
+		}
+	}
 
 	outboundMessages.unshift({
 		role: 'system',
@@ -28,12 +39,12 @@ export async function POST(req: Request): Promise<Response> {
       
       Les métadonnées sont structurées comme suit :
      
-      ${nextCookies.get('data1')}
-      ${nextCookies.get('data2')}
+     ${content}
+     ${content2}
 					
-			Lorsqu'un client pose une question à laquelle la réponse peut se trouver sur une page spécifique du site, comme une page de produit, votre tâche est d'extraire le "full_url" approprié de "data2" pour le client. Par exemple, si un client demande "Où puis-je acheter ce produit ?", vous pouvez répondre en utilisant l'URL du produit stockée dans "full_url" de "data2". Votre réponse pourrait être : "Vous pouvez acheter ce produit [ici](URL extraite de data2 full_url)".
+			Lorsqu'un client pose une question à laquelle la réponse peut se trouver sur une page spécifique du site, comme une page de produit, votre tâche est d'extraire le "full_url" approprié de "content2" pour le client. Par exemple, si un client demande "Où puis-je acheter ce produit ?", vous pouvez répondre en utilisant l'URL du produit stockée dans "full_url" de "content2". Votre réponse pourrait être : "Vous pouvez acheter ce produit [${fullUrls}] (URL extraite de content2 full_url)".
 		
-					En dehors des liens, utilisez du texte normal. Assurez-vous de ne répondre qu'aux questions pertinentes liées directement au site web, à ses produits, services ou contenus.
+			En dehors des liens, utilisez du texte normal. Assurez-vous de ne répondre qu'aux questions pertinentes liées directement au site web, à ses produits, services ou contenus.
 			Si une question est posée qui n'est pas liée à votre site web ou à son contenu, votre réponse automatisée sera : "Je suis désolé mais votre question n'est pas dans le contexte de notre service".
 
       

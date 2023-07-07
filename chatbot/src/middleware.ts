@@ -1,30 +1,25 @@
 // middleware.ts
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-//import { rateLimiter } from '@/lib/rate-limiter'
-import url from 'url'
+import { rateLimiter } from '@/lib/rate-limiter'
 
-// Cette fonction peut être marquée comme `async` si vous utilisez `await` à l'intérieur
+// This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest) {
-  const referer = req.headers.get('Referer')
-  const domain: any = referer ? url.parse(referer).hostname : `default-${Math.random()}`
-  console.log(domain)
-
-  console.log(URL)
+  const ip = req.ip ?? '127.0.0.1'
 
   try {
-   /* const { success } = await rateLimiter.limit(domain)
+    const { success } = await rateLimiter.limit(ip)
 
-    if (!success) return new NextResponse("Vous écrivez des messages trop rapidement.")*/
+    if (!success) return new NextResponse('You are writing messages too fast.')
     return NextResponse.next()
   } catch (error) {
     return new NextResponse(
-      "Désolé, une erreur s'est produite lors du traitement de votre message. Veuillez réessayer plus tard."
+      'Sorry, something went wrong processing your message. Please try again later.'
     )
   }
 }
 
-// Voir la section "Correspondance des chemins" ci-dessous pour en savoir plus
+// See "Matching Paths" below to learn more
 export const config = {
   matcher: '/api/message/:path*',
 }

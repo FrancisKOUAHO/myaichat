@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ShopifyProduct;
+use App\Models\ShopifyStore;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +20,13 @@ class ShopifyProductController extends Controller
     {
         $product = ShopifyProduct::findOrFail($id);
         return response()->json($product);
+    }
+
+    public function getUrlShopifyProduct($url): JsonResponse
+    {
+        $stores = ShopifyProduct::where('domain', $url)->get();
+
+        return response()->json($stores);
     }
 
     public function store(Request $request): JsonResponse

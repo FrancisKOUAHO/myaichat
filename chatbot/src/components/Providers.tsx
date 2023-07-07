@@ -13,7 +13,9 @@ const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MessagesProvider>{children}</MessagesProvider>
+      <MessagesProvider>
+        {children}
+      </MessagesProvider>
     </QueryClientProvider>
   )
 }
