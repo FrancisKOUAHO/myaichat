@@ -92,7 +92,7 @@ class PaymentController extends Controller
             $payment->date = $session->created;
             $payment->save();
 
-            return redirect()->away('https://app.myaichat.io/payment/success');
+            return redirect()->away('http://localhost:3030/payment/success');
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
@@ -100,7 +100,7 @@ class PaymentController extends Controller
 
     public function cancel(): RedirectResponse
     {
-        return redirect()->away('https://app.myaichat.io/dashboard');
+        return redirect()->away('http://localhost:3030/dashboard');
     }
 
     public function getPaymentStatus(Request $request): JsonResponse

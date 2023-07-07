@@ -21,8 +21,8 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 		return !!token;
 	};
 
-	const getUser = (): void => {
-		api
+	const getUser = async (): Promise<void> => {
+		await api
 			.get("me")
 			.then((res: any): void => {
 				setEmail(res.data.email);
@@ -32,8 +32,8 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 			});
 	};
 
-	const check_payment = () => {
-		api.get(`check-payment`)
+	const check_payment = async () => {
+		await api.get(`check-payment`)
 			.then((res) => {
 				setPaymentInfo(res.data.payment_status);
 				if (res.data.payment_status.st_payment_status === "paid") {
@@ -49,8 +49,8 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
 
 	useEffect((): void => {
 		if (isAuthenticated()) {
-			getUser();
-			check_payment();
+			getUser().then(r => r);
+			check_payment().then(r => r);
 		}
 	}, [isCurrentPlan]);
 

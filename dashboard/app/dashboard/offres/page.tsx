@@ -14,32 +14,54 @@ const Page = () => {
 
 	const handleTabClick = (index: number) => setSelectedTab(index);
 
-	const {
-		data: plans,
-	} = useQuery(
-		['plans'],
-		() => api.get(`plans`),
-	);
+	const {data: plans} = useQuery(['plans'], () => api.get(`plans`));
 
-	const Starter = plans && plans.data.data.find((plan: any) => plan.id === 1);
-	const Growth = plans && plans.data.data.find((plan: any) => plan.id === 2);
-	const Pro = plans && plans.data.data.find((plan: any) => plan.id === 3);
-
-	const StarterPlus = plans && plans.data.data.find((plan: any) => plan.id === 4);
-	const GrowthPlus = plans && plans.data.data.find((plan: any) => plan.id === 5);
-	const ProPlus = plans && plans.data.data.find((plan: any) => plan.id === 6);
-
-	const handlePlanMutation = useMutation(
+	const handlePlanSubscribeAsync = useMutation(
 		(planId: number) => api.post(`checkout/${planId}`),
 		{
-			onSuccess: (data) => {
-				window.location.replace(data.data.url);
-			},
 			onError: (error): void => {
 				console.error(error);
 			},
 		}
 	);
+
+	const handlePlanSubscribe = async (planId: number) => {
+		try {
+			// Mettre le plan en chargement
+			setIsLoading((prevLoading) => ({
+				...prevLoading,
+				[planId]: true,
+			}));
+
+			const data = await handlePlanSubscribeAsync.mutateAsync(planId);
+
+			// Redirection vers l'URL de paiement
+			window.location.replace(data.data.url);
+		} catch (error) {
+			console.error(error);
+		} finally {
+			// Arrêter le chargement du plan
+			setIsLoading((prevLoading) => ({
+				...prevLoading,
+				[planId]: false,
+			}));
+		}
+	};
+
+	const isLoadingInitial = !plans;
+	const [isLoading, setIsLoading] = useState<{ [key: number]: boolean }>({});
+
+	if (isLoadingInitial) {
+		return <div>Loading...</div>;
+	}
+
+	const Starter = plans?.data.data.find((plan: any) => plan.id === 1);
+	const Growth = plans?.data.data.find((plan: any) => plan.id === 2);
+	const Pro = plans?.data.data.find((plan: any) => plan.id === 3);
+
+	const StarterPlus = plans?.data.data.find((plan: any) => plan.id === 4);
+	const GrowthPlus = plans?.data.data.find((plan: any) => plan.id === 5);
+	const ProPlus = plans?.data.data.find((plan: any) => plan.id === 6);
 
 	const tabClasses = (index: number) =>
 		`inline-block w-full p-4 rounded-tl-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`
@@ -102,11 +124,12 @@ const Page = () => {
 												<span className="text-sm font-semibold leading-6 text-gray-600">/mois</span>
 											</p>
 											<button
-												onClick={() => handlePlanMutation.mutate(Starter && Starter.id)}
+												onClick={() => handlePlanSubscribe(Starter && Starter.id)}
 												type="button"
+												disabled={isLoading[Starter && Starter.id]}
 												className="inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
 											>
-												<span>{"S'abonner"}</span>
+												<span>{isLoading[Starter && Starter.id] ? "Loading..." : "S'abonner"}</span>
 											</button>
 											<div className="text-sm text-indigo-500 font-medium mt-1 text-center">
 												{"7 jours d'essai gratuit"}
@@ -174,10 +197,11 @@ const Page = () => {
 											</p>
 											<button data-loading-text="En cours..."
 															type="button"
-															onClick={() => handlePlanMutation.mutate(Growth && Growth.id)}
+															onClick={() => handlePlanSubscribe(Growth && Growth.id)}
+															disabled={isLoading[Growth && Growth.id]}
 															className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
 											>
-												<span>{"S'abonner"}</span>
+												<span>{isLoading[Growth && Growth.id] ? "Loading..." : "S'abonner"}</span>
 											</button>
 											<div className="text-sm text-white font-medium mt-1 text-center">
 												{"7 jours d'essai gratuit"}
@@ -251,10 +275,11 @@ const Page = () => {
 											</p>
 											<button data-loading-text="En cours..."
 															type="button"
-															onClick={() => handlePlanMutation.mutate(Pro && Pro.id)}
+															onClick={() => handlePlanSubscribe(Pro && Pro.id)}
+															disabled={isLoading[Pro && Pro.id]}
 															className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
 											>
-												<span>{"S'abonner"}</span>
+												<span>{isLoading[Pro && Pro.id] ? "Loading..." : "S'abonner"}</span>
 											</button>
 											<div className="text-sm text-indigo-500 font-medium mt-1 text-center">
 												{"7 jours d'essai gratuit"}
@@ -340,11 +365,12 @@ const Page = () => {
 													className="text-xs font-semibold leading-6 text-gray-600">total : €{StarterPlus && StarterPlus.price}</span>
 											</p>
 											<button data-controller="loading-button"
-															onClick={() => handlePlanMutation.mutate(StarterPlus && StarterPlus.id)}
+															onClick={() => handlePlanSubscribe(StarterPlus && StarterPlus.id)}
+															disabled={isLoading[StarterPlus && StarterPlus.id]}
 															type="button"
 															className="inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
 											>
-												<span>{"S'abonner"}</span>
+												<span>{isLoading[StarterPlus && StarterPlus.id] ? "Loading..." : "S'abonner"}</span>
 											</button>
 											<div className="text-sm text-indigo-500 font-medium mt-1 text-center">
 												{"7 jours d'essai gratuit"}
@@ -415,10 +441,11 @@ const Page = () => {
 													className="text-xs font-semibold leading-6 text-white">total : €{GrowthPlus && GrowthPlus.price}</span>
 											</p>
 											<button data-controller="loading-button"
-															onClick={() => handlePlanMutation.mutate(GrowthPlus && GrowthPlus.id)}
+															onClick={() => handlePlanSubscribe(GrowthPlus && GrowthPlus.id)}
+															disabled={isLoading[GrowthPlus && GrowthPlus.id]}
 															className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
 															type="button">
-												<span>{"S'abonner"}</span>
+												<span>{isLoading[GrowthPlus && GrowthPlus.id] ? "Loading..." : "S'abonner"}</span>
 											</button>
 											<div className="text-sm text-white font-medium mt-1 text-center">
 												{"7 jours d'essai gratuit"}
@@ -495,10 +522,11 @@ const Page = () => {
 													className="text-xs font-semibold leading-6 text-gray-600">total : €{ProPlus && ProPlus.price}</span>
 											</p>
 											<button data-controller="loading-button"
-															onClick={() => handlePlanMutation.mutate(ProPlus && ProPlus.id)}
+															onClick={() => handlePlanSubscribe(ProPlus && ProPlus.id)}
+															disabled={isLoading[ProPlus && ProPlus.id]}
 															className="mb-1 inline-flex items-center justify-center w-full h-12 px-4 mt-6 font-medium tracking-wide transition duration-200 rounded shadow-md focus:shadow-outline focus:outline-none text-white bg-black hover:bg-gray-800"
 															type="button">
-												<span>{"S'abonner"}</span>
+												<span>{isLoading[ProPlus && ProPlus.id] ? "Loading..." : "S'abonner"}</span>
 											</button>
 											<div className="text-sm text-indigo-500 font-medium mt-1 text-center">
 												{"7 jours d'essai gratuit"}
