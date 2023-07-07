@@ -48,12 +48,7 @@ const Page = () => {
 		}
 	};
 
-	const isLoadingInitial = !plans;
 	const [isLoading, setIsLoading] = useState<{ [key: number]: boolean }>({});
-
-	if (isLoadingInitial) {
-		return <div>Loading...</div>;
-	}
 
 	const Starter = plans?.data.data.find((plan: any) => plan.id === 1);
 	const Growth = plans?.data.data.find((plan: any) => plan.id === 2);
