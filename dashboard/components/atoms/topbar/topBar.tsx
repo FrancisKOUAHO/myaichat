@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 
 const TopBar = () => {
-	const {email} = useAuth();
+	const {getUser} = useAuth();
 	const router = useRouter();
 
 	const handleLogout = () => {
@@ -45,7 +45,7 @@ const TopBar = () => {
 						<Dropdown
 							list={[
 								{
-									label: `${email}`,
+									label: `${getUser && getUser.email}`,
 									icon: (
 										<AiOutlineUser className="text-white/70 w-100 h-100 text-2xl"/>
 									),
