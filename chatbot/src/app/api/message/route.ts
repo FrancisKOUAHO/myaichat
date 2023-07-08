@@ -52,7 +52,7 @@ export async function POST(req: Request): Promise<Response> {
 	});
 
 	const payload: OpenAIStreamPayload = {
-		model: 'gpt-4-0613',
+		model: 'gpt-3.5-turbo-0613',
 		messages: outboundMessages,
 		temperature: 0.4,
 		top_p: 1,
