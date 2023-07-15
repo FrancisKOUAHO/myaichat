@@ -18,37 +18,23 @@ export async function POST(req: Request): Promise<Response> {
 	});
 
 	let content = nextCookies.get('data1')?.value
-
 	const content2 = nextCookies.get('data2')?.value;
-
-	let fullUrls = [];
-
-	if (content2) {
-		try {
-			const parsedContent2 = JSON.parse(content2);
-			fullUrls = parsedContent2.map((item: any) => item.full_url);
-		} catch (error) {
-			console.error('Error parsing content2:', error);
-		}
-	}
 
 	outboundMessages.unshift({
 		role: 'system',
 		content: `
-		
 		Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
-          Vous êtes également capable de répondre aux questions.
-          
-          Utilisez ces métadonnées pour répondre aux questions des clients :
-          
-         ${content}
-     		 ${content2}
-     		 ${fullUrls}
-          
-          Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
-          Fournissez des réponses courtes et concises.
-          Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
-		    `,
+		Vous êtes également capable de répondre aux questions.
+		
+		Utilisez ces métadonnées pour répondre aux questions des clients :
+		
+		${content}
+		${content2}
+			 
+		Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
+		Fournissez des réponses courtes et concises.
+		Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
+        `,
 	});
 
 	const payload: OpenAIStreamPayload = {

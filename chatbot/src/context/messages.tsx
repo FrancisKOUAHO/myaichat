@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import { nanoid } from 'nanoid'
 import { Message } from '@/lib/validators/message'
 

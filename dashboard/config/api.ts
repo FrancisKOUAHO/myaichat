@@ -5,7 +5,6 @@ let api = axios.create({
 	baseURL: 'https://api.myaichat.io/api/v1/',
 });
 
-
 api.defaults.headers.post['Content-Type'] = 'application/json';
 
 export {
