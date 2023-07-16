@@ -37,8 +37,8 @@ import {
       method: "POST",
       body: JSON.stringify(payload),
     });
-  
-    const stream = new ReadableStream({
+
+    const stream: ReadableStream = new ReadableStream({
       async start(controller) {
         // callback
         function onParse(event: ParsedEvent | ReconnectInterval) {
