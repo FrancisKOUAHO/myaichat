@@ -6,21 +6,25 @@ import ChatMessages from './ChatMessages';
 import ChatHeader from './ChatHeader';
 import { setCookie } from 'nookies';
 import { api } from "@/config/api";
+import {getCookie} from "cookies-next";
 
-const fetchChat = async (host: string) => {
+const fetchChat = async (host: string, domain: string) => {
 	try {
 		const response1 = await api.get(`${host}/stores`);
 		if (response1.status === 200) {
 			const data1 = response1.data;
 			setCookie(null, 'data1', data1[0].content, {
 				maxAge: 30 * 24 * 60 * 60,
+				path: domain
 			});
+
 
 			const response2 = await api.get(`product/${host}`);
 			if (response2.status === 200) {
 				const data2 = response2.data;
 				setCookie(null, 'data2', JSON.stringify(data2), {
 					maxAge: 30 * 24 * 60 * 60,
+					path: domain
 				});
 			}
 		}
@@ -35,6 +39,9 @@ const Chat: FC = () => {
 
 	useEffect(() => {
 		const siteURL = document.referrer;
+
+		console.log(siteURL)
+
 		if (!siteURL) {
 			// Gérer le cas où document.referrer n'est pas défini
 			return;
@@ -48,11 +55,14 @@ const Chat: FC = () => {
 				maxAge: 30 * 24 * 60 * 60,
 			});
 
-			fetchChat(domain);
+			fetchChat(domain, siteURL);
 		} catch (error) {
 			console.error('Error:', error);
 			// Gérer l'erreur de construction de l'URL
 		}
+
+		console.log(getCookie('data1'))
+		console.log(getCookie('data2'))
 	}, []);
 
 
