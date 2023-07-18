@@ -18,6 +18,7 @@ export async function POST(req: Request): Promise<Response> {
 
 	try {
 		const refererURL = parse(req.headers.get('referer') || '');
+		console.log('refererURL', refererURL)
 		const domain = refererURL.hostname?.replace('www.', '').split('.')[0];
 
 		const response1 = await fetch(`https://api.myaichat.io/api/v1/${domain}/stores`);
