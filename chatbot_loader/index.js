@@ -8,6 +8,5 @@ iframe.style.position = 'fixed';
 iframe.style.bottom = '0';
 iframe.style.right = '0';
 iframe.style.border = 'none';
-iframe.style.zIndex = '999';
-iframe.sandbox = 'allow-scripts allow-same-origin'; // permissions added
+iframe.style.zIndex = '999'
 document.body.appendChild(iframe);

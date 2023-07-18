@@ -1,10 +1,9 @@
 import { ChatGPTMessage, OpenAIStream, OpenAIStreamPayload } from '@/lib/openai-stream';
 import { MessageArraySchema } from '@/lib/validators/message';
-import { cookies } from 'next/headers';
+import { api } from "@/config/api";
 
 export async function POST(req: Request): Promise<Response> {
 	const {messages} = await req.json();
-	const nextCookies = cookies(); // Get cookies object
 
 	console.log(messages);
 
@@ -17,25 +16,37 @@ export async function POST(req: Request): Promise<Response> {
 		};
 	});
 
-	let content = nextCookies.get('data1')?.value
-	const content2 = nextCookies.get('data2')?.value;
+	try {
+		const siteURL = req.headers.get('referer') || '';
+		const hostname = new URL(siteURL).hostname;
+		const domain = hostname.replace('www.', '').split('.')[0];
 
-	outboundMessages.unshift({
-		role: 'system',
-		content: `
-		Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
-		Vous êtes également capable de répondre aux questions.
-		
-		Utilisez ces métadonnées pour répondre aux questions des clients :
-		
-		${content}
-		${content2}
-			 
-		Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
-		Fournissez des réponses courtes et concises.
-		Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
-        `,
-	});
+		const response1 = await api.get(`${domain}/stores`);
+		const data1 = response1.status === 200 ? response1.data : null;
+
+		const response2 = await api.get(`product/${domain}`);
+		const data2 = response2.status === 200 ? response2.data : null;
+
+		outboundMessages.unshift({
+			role: 'system',
+			content: `
+				Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
+				Vous êtes également capable de répondre aux questions.
+				
+				Utilisez ces métadonnées pour répondre aux questions des clients :
+				
+				${data1[0].content}
+				${JSON.stringify(data2)}
+					 
+				Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
+				Fournissez des réponses courtes et concises.
+				Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
+			`,
+		});
+
+	} catch (error) {
+		console.error('Error:', error);
+	}
 
 	const payload: OpenAIStreamPayload = {
 		model: 'gpt-3.5-turbo-0613',
