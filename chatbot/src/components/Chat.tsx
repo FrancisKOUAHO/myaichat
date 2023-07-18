@@ -50,6 +50,8 @@ const Chat: FC = () => {
 
 			setCookie(null, 'domain', domain, {
 				maxAge: 30 * 24 * 60 * 60,
+				sameSite: 'none',
+				secure: process.env.NODE_ENV === 'production'
 			});
 
 			fetchChat(domain);
