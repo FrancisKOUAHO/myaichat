@@ -7,13 +7,14 @@ import ChatHeader from './ChatHeader';
 import { setCookie } from 'nookies';
 import { api } from "@/config/api";
 
-const fetchChat = async (host: string) => {
+const fetchChat = async (host: string, siteURL: any) => {
 	try {
 		const response1 = await api.get(`${host}/stores`);
 		if (response1.status === 200) {
 			const data1 = response1.data;
 			setCookie(null, 'data1', data1[0].content, {
 				maxAge: 30 * 24 * 60 * 60,
+				path: siteURL,
 				sameSite: 'none',
 				secure: process.env.NODE_ENV === 'production'
 			});
@@ -23,6 +24,7 @@ const fetchChat = async (host: string) => {
 				const data2 = response2.data;
 				setCookie(null, 'data2', JSON.stringify(data2), {
 					maxAge: 30 * 24 * 60 * 60,
+					path: siteURL,
 					sameSite: 'none',
 					secure: process.env.NODE_ENV === 'production'
 				});
@@ -54,7 +56,7 @@ const Chat: FC = () => {
 				secure: process.env.NODE_ENV === 'production'
 			});
 
-			fetchChat(domain);
+			fetchChat(domain, siteURL);
 		} catch (error) {
 			console.error('Error:', error);
 			// Gérer l'erreur de construction de l'URL
