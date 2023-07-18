@@ -35,8 +35,8 @@ export async function POST(req: Request): Promise<Response> {
         
         Utilisez ces métadonnées pour répondre aux questions des clients :
         
-        ${data1}
-        ${data2}
+        ${JSON.stringify(data1)}
+        ${JSON.stringify(data2)}
              
         Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
         Fournissez des réponses courtes et concises.
