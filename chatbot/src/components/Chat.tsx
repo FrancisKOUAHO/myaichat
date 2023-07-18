@@ -7,14 +7,14 @@ import ChatHeader from './ChatHeader';
 import { setCookie } from 'nookies';
 import { api } from "@/config/api";
 
-const fetchChat = async (host: string, siteURL: any) => {
+const fetchChat = async (host: string) => {
 	try {
 		const response1 = await api.get(`${host}/stores`);
 		if (response1.status === 200) {
 			const data1 = response1.data;
 			setCookie(null, 'data1', data1[0].content, {
 				maxAge: 30 * 24 * 60 * 60,
-				path: siteURL,
+				path: '/',
 				sameSite: 'none',
 				secure: process.env.NODE_ENV === 'production'
 			});
@@ -24,7 +24,7 @@ const fetchChat = async (host: string, siteURL: any) => {
 				const data2 = response2.data;
 				setCookie(null, 'data2', JSON.stringify(data2), {
 					maxAge: 30 * 24 * 60 * 60,
-					path: siteURL,
+					path: '/',
 					sameSite: 'none',
 					secure: process.env.NODE_ENV === 'production'
 				});
@@ -42,7 +42,6 @@ const Chat: FC = () => {
 	useEffect(() => {
 		const siteURL = document.referrer;
 		if (!siteURL) {
-			// Gérer le cas où document.referrer n'est pas défini
 			return;
 		}
 
@@ -52,11 +51,12 @@ const Chat: FC = () => {
 
 			setCookie(null, 'domain', domain, {
 				maxAge: 30 * 24 * 60 * 60,
+				path: '/',
 				sameSite: 'none',
 				secure: process.env.NODE_ENV === 'production'
 			});
 
-			fetchChat(domain, siteURL);
+			fetchChat(domain);
 		} catch (error) {
 			console.error('Error:', error);
 			// Gérer l'erreur de construction de l'URL
