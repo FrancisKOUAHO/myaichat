@@ -24,7 +24,7 @@ export async function POST(req: Request): Promise<Response> {
 		const response1 = await fetch(`https://api.myaichat.io/api/v1/${domain}/stores`);
 		const data1 = response1.ok ? await response1.json() : null;
 
-		console.log('response2', data1);
+		console.log('response1', data1);
 
 
 		const response2 = await fetch(`https://api.myaichat.io/api/v1/product/${domain}`);
@@ -40,8 +40,8 @@ export async function POST(req: Request): Promise<Response> {
 				
 				Utilisez ces métadonnées pour répondre aux questions des clients :
 				
-				${data1[0].content}
-				${JSON.stringify(data2)}
+				${data1}
+				${data2}
 					 
 				Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
 				Fournissez des réponses courtes et concises.
