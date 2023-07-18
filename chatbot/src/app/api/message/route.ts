@@ -1,9 +1,9 @@
-import { ChatGPTMessage, OpenAIStream, OpenAIStreamPayload } from '@/lib/openai-stream';
-import { MessageArraySchema } from '@/lib/validators/message';
-import { api } from "@/config/api";
+import {ChatGPTMessage, OpenAIStream, OpenAIStreamPayload} from "@/lib/openai-stream";
+import {parse} from "url";
+import {MessageArraySchema} from "@/lib/validators/message";
 
 export async function POST(req: Request): Promise<Response> {
-	const {messages} = await req.json();
+	const { messages } = await req.json();
 
 	console.log(messages);
 
@@ -17,15 +17,14 @@ export async function POST(req: Request): Promise<Response> {
 	});
 
 	try {
-		const siteURL = req.headers.get('referer') || '';
-		const hostname = new URL(siteURL).hostname;
-		const domain = hostname.replace('www.', '').split('.')[0];
+		const refererURL = parse(req.headers.get('referer') || '');
+		console.log('refererURL', refererURL)
+		const domain = refererURL.hostname?.replace('www.', '').split('.')[0];
 
 		const response1 = await fetch(`https://api.myaichat.io/api/v1/${domain}/stores`);
 		const data1 = response1.ok ? await response1.json() : null;
 
 		console.log('response1', data1);
-
 
 		const response2 = await fetch(`https://api.myaichat.io/api/v1/product/${domain}`);
 		const data2 = response2.ok ? await response2.json() : null;
@@ -35,22 +34,21 @@ export async function POST(req: Request): Promise<Response> {
 		outboundMessages.unshift({
 			role: 'system',
 			content: `
-				Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
-				Vous êtes également capable de répondre aux questions.
-				
-				Utilisez ces métadonnées pour répondre aux questions des clients :
-				
-				${data1}
-				${data2}
-					 
-				Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
-				Fournissez des réponses courtes et concises.
-				Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
-			`,
+        Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
+        Vous êtes également capable de répondre aux questions.
+        
+        Utilisez ces métadonnées pour répondre aux questions des clients :
+        
+        ${data1}
+        ${data2}
+             
+        Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
+        Fournissez des réponses courtes et concises.
+        Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
+      `,
 		});
 
-		console.log('outboundMessages', outboundMessages)
-
+		console.log('outboundMessages', outboundMessages);
 	} catch (error) {
 		console.error('Error:', error);
 	}
