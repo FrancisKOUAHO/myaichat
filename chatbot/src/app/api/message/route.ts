@@ -21,11 +21,16 @@ export async function POST(req: Request): Promise<Response> {
 		const hostname = new URL(siteURL).hostname;
 		const domain = hostname.replace('www.', '').split('.')[0];
 
-		const response1 = await api.get(`${domain}/stores`);
-		const data1 = response1.status === 200 ? response1.data : null;
+		const response1 = await fetch(`https://api.myaichat.io/api/v1/${domain}/stores`);
+		const data1 = response1.ok ? await response1.json() : null;
 
-		const response2 = await api.get(`product/${domain}`);
-		const data2 = response2.status === 200 ? response2.data : null;
+		console.log('response2', data1);
+
+
+		const response2 = await fetch(`https://api.myaichat.io/api/v1/product/${domain}`);
+		const data2 = response2.ok ? await response2.json() : null;
+
+		console.log('response2', data2);
 
 		outboundMessages.unshift({
 			role: 'system',
@@ -43,6 +48,8 @@ export async function POST(req: Request): Promise<Response> {
 				Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
 			`,
 		});
+
+		console.log('outboundMessages', outboundMessages)
 
 	} catch (error) {
 		console.error('Error:', error);
