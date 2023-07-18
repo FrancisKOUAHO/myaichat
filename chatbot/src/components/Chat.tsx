@@ -1,68 +1,12 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import ChatInput from './ChatInput';
 import ChatMessages from './ChatMessages';
 import ChatHeader from './ChatHeader';
-import { setCookie } from 'nookies';
-import { api } from "@/config/api";
-
-const fetchChat = async (host: string) => {
-	try {
-		const response1 = await api.get(`${host}/stores`);
-		if (response1.status === 200) {
-			const data1 = response1.data;
-			setCookie(null, 'data1', data1[0].content, {
-				maxAge: 30 * 24 * 60 * 60,
-				path: '/',
-				sameSite: 'none',
-				secure: process.env.NODE_ENV === 'production'
-			});
-
-			const response2 = await api.get(`product/${host}`);
-			if (response2.status === 200) {
-				const data2 = response2.data;
-				setCookie(null, 'data2', JSON.stringify(data2), {
-					maxAge: 30 * 24 * 60 * 60,
-					path: '/',
-					sameSite: 'none',
-					secure: process.env.NODE_ENV === 'production'
-				});
-			}
-		}
-	} catch (error) {
-		console.error('Error:', error);
-		throw new Error('Internal Server Error');
-	}
-};
 
 const Chat: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
-
-	useEffect(() => {
-		const siteURL = document.referrer;
-		if (!siteURL) {
-			return;
-		}
-
-		try {
-			const hostname = new URL(siteURL).hostname;
-			const domain = hostname.replace('www.', '').split('.')[0];
-
-			setCookie(null, 'domain', domain, {
-				maxAge: 30 * 24 * 60 * 60,
-				path: '/',
-				sameSite: 'none',
-				secure: process.env.NODE_ENV === 'production'
-			});
-
-			fetchChat(domain);
-		} catch (error) {
-			console.error('Error:', error);
-			// Gérer l'erreur de construction de l'URL
-		}
-	}, []);
-
 
 	return (
 		<div>
