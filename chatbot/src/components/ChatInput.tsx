@@ -9,6 +9,7 @@ import { nanoid } from 'nanoid'
 import { FC, HTMLAttributes, useContext, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import TextareaAutosize from 'react-textarea-autosize'
+import {parse} from "url";
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -23,6 +24,11 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
     setIsMessageUpdating,
   } = useContext(MessagesContext)
 
+
+  const siteURL = document.referrer;
+  const hostname = new URL(siteURL).hostname;
+  const domain = hostname.replace('www.', '').split('.')[0];
+
   const { mutate: sendMessage, isLoading } = useMutation({
     mutationKey: ['sendMessage'],
     // inclure le message pour l'utiliser ultérieurement dans onMutate
@@ -32,7 +38,7 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({ messages, domain }),
       })
 
       return response.body
