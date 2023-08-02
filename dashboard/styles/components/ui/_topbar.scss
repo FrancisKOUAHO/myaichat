@@ -1,5 +1,21 @@
 @use '../../settings/index' as *;
 
+.c-trial-message {
+  width: 98%; /* the same width as c-below-topbar */
+  height: auto; /* change this line */
+  background-color: #e1d8ff; /* For a yellow bar, change to your preference */
+  text-align: center;
+  font-weight: bold;
+  color: #111827; /* For black text, change to your preference */
+  border-radius: 10px; /* the same border-radius as c-below-topbar */
+  padding: 10px; /* If necessary, adjust as needed */
+  z-index: 1;
+  position: sticky;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: -10px;
+}
+
 .c-topbar {
   display: flex;
   flex-direction: row;
@@ -11,6 +27,7 @@
   margin: 10px 0 20px 20px;
   color: $main-color;
   z-index: 1;
+
 
   .c-below-topbar {
     width: 98.5%;
