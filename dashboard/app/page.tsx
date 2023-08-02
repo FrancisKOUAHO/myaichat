@@ -43,15 +43,15 @@ const Home = () => {
 						{"Veuillez saisir votre adresse e-mail et un compte sera créé pour vous."}
 					</p>
 					<div className='bg-white py-10 px-4 shadow sm:rounded-lg sm:px-10'>
-						<div className="mb-6 flex flex-col justify-center items-center border-gray-200 border-offset-2 pt-4">
-							<button id="google-connect"
-											disabled={true}
-											className=" text-black inline-flex items-center bg-white text-sm font-normal border border-gray-300 rounded-sm px-4 py-2"
-											style={{border: '1px solid #000000', padding: '10px', marginBottom: '10px'}}>
-								<img className="h-4 w-4 mr-3" src="/googleLogo.png" alt="googleLogo"/>
-								Connexion avec Google
-							</button>
-						</div>
+						{/*<div className="mb-6 flex flex-col justify-center items-center border-gray-200 border-offset-2 pt-4">*/}
+						{/*	<button id="google-connect"*/}
+						{/*					disabled={true}*/}
+						{/*					className=" text-black inline-flex items-center bg-white text-sm font-normal border border-gray-300 rounded-sm px-4 py-2"*/}
+						{/*					style={{border: '1px solid #000000', padding: '10px', marginBottom: '10px'}}>*/}
+						{/*		<img className="h-4 w-4 mr-3" src="/googleLogo.png" alt="googleLogo"/>*/}
+						{/*		Connexion avec Google*/}
+						{/*	</button>*/}
+						{/*</div>*/}
 						<form className="mb-5" onSubmit={handleSubmit}>
 							<div className="pb-5">
 								<label className="block text-sm font-medium  mb-1" htmlFor="email">
