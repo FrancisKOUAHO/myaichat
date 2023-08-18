@@ -83,7 +83,25 @@ const Page = () => {
                             </div>
                             <Tab.Panels>
                                 <Tab.Panel>
-                                    <div className="grid grid-cols-1 md:grid-cols-3">
+                                    <div className="grid grid-cols-1 md:grid-cols-4">
+                                    <div className="px-6 py-5 sm:p-8">
+                                            <div className="flex items-baseline gap-x-1">
+                                                <dt className="text-lg font-semibold  text-gray-800">Starter</dt>
+                                            </div>
+                                            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+                                                <div className="flex items-baseline text-2xl font-semibold text-gray-600">
+                                                    €15
+                                                </div>
+                                            </dd>
+                                            <dt className="text-xs font-normal text-gray-400 mt-1">Per user/per month</dt>
+                                            <dt className="text-xs font-normal text-gray-400">Billed annually</dt>
+                                            <button data-loading-text="En cours..." type="button" className=" w-full h-10 px-4 mt-3 rounded shadow-md focus:shadow-outline focus:outline-none bg-indigo-50 hover:bg-indigo-100">
+                                                <span className=" text-sm font-medium text-indigo-500">{"Downgrade"}</span>
+                                            </button>
+                                            <div className="text-sm text-indigo-500 font-semibold mt-2 text-center">
+                                                {"7 jours d'essai gratuit"}
+                                            </div>
+                                        </div>
                                         <div className="px-6 py-5 sm:p-8">
                                             <div className="flex items-baseline gap-x-1">
                                                 <dt className="text-lg font-semibold  text-gray-800">Starter</dt>
