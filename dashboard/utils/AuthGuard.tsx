@@ -8,12 +8,10 @@ const AuthGuard: ({children}: { children: any }) => (null | JSX.Element) = ({chi
 
 	useEffect(() => {
 		if (!isAuthenticated()) {
-			// Rediriger l'utilisateur vers la page de connexion
 			router.push('/');
 		}
-	}, []);
+	}, [isAuthenticated, router]);
 
-	// Laisser le composant de la page être rendu normalement
 	return (
 		<>
 			{children}

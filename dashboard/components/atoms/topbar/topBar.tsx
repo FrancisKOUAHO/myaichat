@@ -12,24 +12,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 
 const TopBar = () => {
-	const {email} = useAuth();
-	const router = useRouter();
-
-	const handleLogout = () => {
-		console.log('logout')
-		api.post('logout').then((res) => {
-			destroyCookie(undefined, 'access_token', {
-				path: '/',
-			})
-
-			destroyCookie(undefined, 'userId', {
-				path: '/',
-			})
-			router.push('/');
-		}).catch((err) => {
-			console.log('err', err);
-		});
-	}
+	const {email, handleLogout} = useAuth();
 
 	return (
 		<nav className="c-topbar">

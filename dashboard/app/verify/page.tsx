@@ -20,12 +20,22 @@ const VerifyTokenPage = () => {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',
 				})
-
 				setCookie(undefined, 'userId', res.data.user.id, {
 					maxAge: 30 * 24 * 60 * 60,
 					path: '/',
 				})
-				router.push('/dashboard');
+
+				api.get(`check-payment`, {
+					headers: {
+						'Authorization': `Bearer ${res.data.access_token}`
+					}
+				}).then((res: AxiosResponse) => res).then((res: AxiosResponse) => {
+					if (res.data.order.status !== "unpaid"){
+						router.push('/dashboard/subscription');
+					}
+
+					router.push('/dashboard');
+				});
 			} else {
 				router.push('/');
 			}
