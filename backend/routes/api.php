@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\Providerontroller;
 use App\Http\Controllers\ShopifyProductController;
 use App\Http\Controllers\ShopifyScraperController;
 use App\Http\Controllers\ShopifyStoreController;
@@ -26,8 +27,8 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/request-login-link', [AuthController::class, 'requestLoginLink']);
         Route::post('/login/{token}', [AuthController::class, 'loginWithToken']);
-        //Route::get('/redirect', [AuthController::class, 'redirect']);
-        //Route::get('/callback', [AuthController::class, 'callback']);
+        Route::get('/{provider}/redirect', [Providerontroller::class, 'redirect']);
+        Route::get('/{provider}/callback', [Providerontroller::class, 'callback'])->name('callback');
     });
 
     Route::get('/{url}/stores', [ShopifyStoreController::class, 'getUrlStores']);

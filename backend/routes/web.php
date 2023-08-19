@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/checkout/success', [PaymentController::class, 'success'])->name('checkout.success');
 Route::get('/checkout/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
+

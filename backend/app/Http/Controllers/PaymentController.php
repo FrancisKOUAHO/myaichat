@@ -96,9 +96,9 @@ class PaymentController extends Controller
                     $order->status = 'trial';
                 } else {
                     if ($session->payment_status === 'paid') {
-                        $order->status = 'paid'; // Mettre à jour le statut en "paid" si le paiement a été effectué avec succès chez Stripe
+                        $order->status = 'paid';
                     } else {
-                        $order->status = 'unpaid'; // Si le paiement n'a pas été effectué avec succès, remettre en "unpaid"
+                        $order->status = 'unpaid';
                     }
                 }
                 $order->save();

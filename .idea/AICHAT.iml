@@ -5,9 +5,9 @@
       <sourceFolder url="file://$MODULE_DIR$/backend/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/backend/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/backend/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
-      <sourceFolder url="file://$MODULE_DIR$/backend/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/backend/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/backend/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/zzz/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/zzz/vendor/composer" />
@@ -245,6 +245,8 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/zircote/swagger-php" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/stripe/stripe-php" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/psr/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/laravel/socialite" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/league/oauth1-client" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
