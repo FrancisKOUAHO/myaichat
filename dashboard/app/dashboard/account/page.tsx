@@ -3,10 +3,11 @@
 import React from "react";
 
 import LayoutCustom from "@/layouts/layoutCustom";
-import { useQuery } from "@tanstack/react-query";
-import { api } from "@/config/api";
-import { differenceInDays } from 'date-fns';
-import { getCookie } from "cookies-next";
+import {useQuery} from "@tanstack/react-query";
+import {api} from "@/config/api";
+import {differenceInDays} from 'date-fns';
+import {getCookie} from "cookies-next";
+import Link from "next/link";
 
 const Page = () => {
     const {data: paymentInfo, isLoading, isFetching} = useQuery({
@@ -28,7 +29,7 @@ const Page = () => {
                         </dd>
                     </div>
                     <div className="px-6 py-5 sm:p-8">
-                        <dt className="text-xs font-normal text-gray-400">{"Paiement"}</dt>
+                        <dt className="text-xs font-normal text-gray-400">Paiement</dt>
                         <div className="flex items-center">
                             {paymentInfo && paymentInfo.data.payment_status.trial_end > paymentInfo.data.payment_status.trial_end ? (
                                 <dt className="text-[14px] mt-2 font-semibold text-gray-900">€{paymentInfo.data.payment_status.total}</dt>
@@ -36,14 +37,14 @@ const Page = () => {
                                 <dt className="text-[14px] mt-2 font-semibold text-gray-900">
                                     {paymentInfo && paymentInfo.data.payment_status.trial_end
                                         ? `${differenceInDays(new Date(paymentInfo.data.payment_status.trial_end), new Date())} jours restants`
-                                        : 'Période d\'essai non définie'}
+                                        : "Période d'essai non définie"}
                                 </dt>
                             )}
                         </div>
                     </div>
                     <div className="px-6 py-5 sm:p-8 flex items-center justify-center gap-2">
-                        <button className="text-xs font-normal text-gray-400">{"Annuler l'abonnement"}</button>
-                        <button className="text-xs font-normal text-indigo-600">Upgrade</button>
+                        <Link href="#" className="text-xs font-normal text-gray-400">Annuler l'abonnement</Link>
+                        <Link href="#" className="text-xs font-normal text-indigo-600">Upgrade</Link>
                     </div>
                 </dl>
             </div>

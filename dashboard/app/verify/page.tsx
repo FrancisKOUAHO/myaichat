@@ -29,12 +29,19 @@ const VerifyTokenPage = () => {
 					headers: {
 						'Authorization': `Bearer ${res.data.access_token}`
 					}
-				}).then((res: AxiosResponse) => res).then((res: AxiosResponse) => {
-					if (res.data.order.status !== "unpaid"){
+				}).then((res) => {
+					console.log(res.data);
+					if (res.data.order.status !== "unpaid") {
+						router.push('/dashboard');
+					} else {
 						router.push('/dashboard/subscription');
 					}
-
-					router.push('/dashboard');
+				}).catch((error) => {
+					if (error.response && error.response.status === 404) {
+						router.push('/dashboard/subscription');
+					} else {
+						console.error("An error occurred:", error);
+					}
 				});
 			} else {
 				router.push('/');

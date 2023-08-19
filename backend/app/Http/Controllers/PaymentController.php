@@ -33,7 +33,7 @@ class PaymentController extends Controller
             'line_items' => $lineItems,
             'mode' => 'subscription',
             'subscription_data' => [
-                'trial_from_plan' => true,
+                'trial_period_days' => 15,
             ],
             'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => route('checkout.cancel', [], true),
@@ -76,11 +76,6 @@ class PaymentController extends Controller
                 throw new NotFoundHttpException();
             }
 
-            if ($order->status === 'unpaid') {
-                $order->status = 'paid';
-                $order->save();
-            }
-
             $payment = new Payment();
             $payment->order_id = $order->id;
             $payment->st_cus_id = $session->customer;
@@ -90,9 +85,26 @@ class PaymentController extends Controller
             $payment->st_payment_status = $session->payment_status;
             $payment->total = $order->total_price;
             $payment->date = $session->created;
+
+            $trialEndDate = now()->addDays(15);
+            $payment->trial_end = $trialEndDate;
+
             $payment->save();
 
-            return redirect()->away('https://app.myaichat.io/payment/success');
+            if ($order->status === 'unpaid') {
+                if (now()->lt($order->payment->trial_end)) {
+                    $order->status = 'trial';
+                } else {
+                    if ($session->payment_status === 'paid') {
+                        $order->status = 'paid'; // Mettre à jour le statut en "paid" si le paiement a été effectué avec succès chez Stripe
+                    } else {
+                        $order->status = 'unpaid'; // Si le paiement n'a pas été effectué avec succès, remettre en "unpaid"
+                    }
+                }
+                $order->save();
+            }
+
+            return redirect()->away('http://localhost:3030/dashboard');
         } catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
@@ -100,7 +112,7 @@ class PaymentController extends Controller
 
     public function cancel(): RedirectResponse
     {
-        return redirect()->away('https://app.myaichat.io/dashboard');
+        return redirect()->away('http://localhost:3030/subscription');
     }
 
     public function getPaymentStatus(Request $request): JsonResponse
@@ -124,7 +136,8 @@ class PaymentController extends Controller
         }
 
         return response()->json([
-            'payment_status' => $payment
+            'payment_status' => $payment,
+            'order'=> $order
         ]);
     }
 }

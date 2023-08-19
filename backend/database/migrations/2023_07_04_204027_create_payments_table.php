@@ -23,6 +23,7 @@ class CreatePaymentsTable extends Migration
             $table->string('st_payment_method', 1024)->nullable();
             $table->string('st_payment_status', 1024)->nullable();
             $table->bigInteger('date')->nullable();
+            $table->timestamp('trial_end')->nullable();
             $table->timestamps();
         });
     }
