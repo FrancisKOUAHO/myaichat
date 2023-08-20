@@ -36,3 +36,13 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p storage/framework/sessions  storage/framework/views storage/framework/cache
 RUN chmod -R 777 storage bootstrap/cache
 RUN chown -R application:application .
+
+# Expose port 8000
+EXPOSE 8000
+
+# Set the environment variable to indicate whether it's development or production
+# This can be passed in during the docker-compose configuration
+ENV APP_ENV production  # Change to "local" for development if needed
+
+# Run the application (you can adjust the command based on how you start your Laravel app)
+CMD ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisord.conf"]

@@ -25,6 +25,10 @@ services:
     depends_on:
       - webserver
     restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
     tty: true
     networks:
       local_bridge:
@@ -35,11 +39,14 @@ services:
       context: ./chatbot
       dockerfile: Dockerfile
     container_name: chatbot
+    command: yarn dev
     depends_on:
       - webserver
     restart: unless-stopped
     ports:
       - "3031:3031"
+    environment:
+      NODE_ENV: development
     tty: true
     networks:
       local_bridge:
@@ -50,11 +57,14 @@ services:
       context: ./dashboard
       dockerfile: Dockerfile
     container_name: dashboard
+    command: yarn dev
     depends_on:
       - webserver
     restart: unless-stopped
     ports:
       - "3030:3030"
+    environment:
+      NODE_ENV: development
     tty: true
     networks:
       local_bridge:
