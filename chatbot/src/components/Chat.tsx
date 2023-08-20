@@ -23,7 +23,7 @@ const Chat: FC = () => {
 			</button>
 
 			{isOpen && (
-				<div className='fixed right-8 w-80 bottom-28 bg-white border border-gray-200 rounded-md overflow-hidden'>
+				<div className='fixed right-8 w-80 bottom-28 bg-white border border-gray-200 rounded-md overflow-hidden ismobile'>
 					<div className='w-full h-full flex flex-col'>
 						<ChatHeader/>
 						<div className='flex flex-col h-80'>
