@@ -17,6 +17,7 @@ class Providerontroller extends Controller
     {
         try {
             $socialUser = Socialite::driver($provider)->stateless()->user();
+
             $user = User::firstOrCreate(['email' => $socialUser->email]);
 
             $this->resetMagicLinkToken($user);

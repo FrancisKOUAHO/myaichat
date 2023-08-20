@@ -18,10 +18,8 @@ COPY . /usr/src/app
 # Construire l'application
 RUN yarn build
 
-# Exposer le port 3000
+# Exposer le port 3031
 EXPOSE 3031
 
-# Utilisation de CMD pour démarrer l'application
-# Si la variable NODE_ENV est définie à "development", lancer la commande "yarn dev"
-# Sinon, lancer la commande "yarn start" pour le mode production
+# Utilisation de CMD pour démarrer l'application avec hot reload
 CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then yarn dev; else yarn start; fi"]
