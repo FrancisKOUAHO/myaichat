@@ -24,9 +24,9 @@ class Providerontroller extends Controller
             $magicLinkToken = $this->generateAccessToken($user);
             $this->saveMagicLinkTokenInDatabase($user, $magicLinkToken);
 
-            return redirect()->away('http://localhost:3030/verify/?magic_link_token=' . $magicLinkToken);
+            return redirect()->away('https://app.myaichat.io/verify/?magic_link_token=' . $magicLinkToken);
         } catch (Exception $e) {
-            return redirect()->away('http://localhost:3030');
+            return redirect()->away('https://app.myaichat.io');
         }
     }
 
