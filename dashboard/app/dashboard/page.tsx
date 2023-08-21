@@ -47,8 +47,7 @@ const Page = () => {
 	const router: AppRouterInstance = useRouter();
 	const queryClient = useQueryClient();
 
-	const { getUser, isAuthenticated } = useAuth();
-
+	const { isAuthenticated } = useAuth();
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [isOpenSecond, setIsOpenSecond] = useState(false);
@@ -56,8 +55,6 @@ const Page = () => {
 	const [isOpenShopify, setIsOpenShopify] = useState(false);
 	const [isCardVisible, setCardVisible] = useState(true);
 	const [selectedTab, setSelectedTab] = useState(0);
-	const [isOpenMyChatBots, setIsOpenMyChatBots] = useState(true);
-	const [ws, setWs] = useState(null);
 	const [isOpenSupprimerChatBots, setIsOpenSupprimerChatBots] = useState(false);
 
 

@@ -1,0 +1,9 @@
+.container-chat-messages {
+  @media (max-width: 767px) {
+    flex: 2 2 450px;
+  }
+
+  @media (min-width: 767px) {
+    flex: 2 2 555px;
+  }
+}

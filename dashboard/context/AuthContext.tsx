@@ -1,98 +1,97 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useEffect, useState } from "react"
-import { api } from "@/config/api";
-import { CookieValueTypes, getCookie } from "cookies-next";
-import { parseCookies } from "nookies";
+import {createContext, ReactNode, useContext, useEffect, useState} from "react"
+import {api} from "@/config/api";
+import {CookieValueTypes, getCookie} from "cookies-next";
+import {destroyCookie, parseCookies} from "nookies";
+import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
+import {useRouter} from "next/navigation";
 
 export const AuthContext = createContext<any>({});
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({children}: { children: ReactNode }) => {
-	const [user, setUser] = useState<any>(null);
-	const [products, setProducts] = useState<any>(null);
-	const [userId, setUserId] = useState<any>(null);
-	const [email, setEmail] = useState<string>("");
-	const [isCurrentPlan, setIsCurrentPlan] = useState(false);
-	const [paymentInfo, setPaymentInfo] = useState(false);
-	const [cookieLoaded, setCookieLoaded] = useState(false);
+    const router: AppRouterInstance = useRouter();
 
-	const isAuthenticated = (): boolean => {
-		const token: CookieValueTypes = getCookie("access_token");
-		return !!token;
-	};
+    const [user, setUser] = useState<any>(null);
+    const [products, setProducts] = useState<any>(null);
+    const [userId, setUserId] = useState<any>(null);
+    const [email, setEmail] = useState<string>("");
+    const [cookieLoaded, setCookieLoaded] = useState(false);
 
-	const getUser = async (): Promise<void> => {
-		try {
-			const response = await api.get("me");
-			setUser(response.data);
-			setEmail(response.data.email);
-		} catch (error) {
-			console.error("Error fetching user: ", error);
-		}
-	};
+    const isAuthenticated = (): boolean => {
+        const token: CookieValueTypes = getCookie("access_token");
+        return !!token;
+    };
 
-	const check_payment = async () => {
-		try {
-			const response = await api.get(`check-payment`);
-			setPaymentInfo(response.data.payment_status);
-			if (response.data.payment_status.st_payment_status === "paid") {
-				setIsCurrentPlan(true);
-			} else {
-				setIsCurrentPlan(false);
-			}
-		} catch (error) {
-			console.log("Error fetching payment info: ", error);
-		}
-	};
+    const getUser = async (): Promise<void> => {
+        try {
+            const response = await api.get("me");
+            setUser(response.data);
+            setEmail(response.data.email);
+        } catch (error) {
+            console.error("Error fetching user: ", error);
+        }
+    };
 
-	useEffect(() => {
-		const loadCookie = async () => {
-			const cookies = parseCookies();
-			const token: CookieValueTypes = cookies["access_token"];
-			setCookieLoaded(true);
-		};
+    const handleLogout = () => {
+        api.post('logout').then( (res) => {
+            destroyCookie(undefined, 'access_token', {
+                path: '/',
+            })
+            destroyCookie(undefined, 'userId', {
+                path: '/',
+            })
+            router.push('/');
+        }).catch((err) => {
+            console.log('err', err);
+        });
+    }
 
-		loadCookie();
-	}, []);
+    const fetchData = async () => {
+        if (cookieLoaded && isAuthenticated()) {
+            await getUser();
+        }
+    };
 
-	useEffect(() => {
-		const fetchData = async () => {
-			if (cookieLoaded && isAuthenticated()) {
-				await getUser();
-				await check_payment();
-			}
-		};
+    useEffect(() => {
+        const loadCookie = async () => {
+            const cookies = parseCookies();
+            const token: CookieValueTypes = cookies["access_token"];
+            setCookieLoaded(true);
+        };
 
-		const token: CookieValueTypes = getCookie("access_token");
-		if (token) {
-			api.defaults.headers.common = {Authorization: `Bearer ${token}`};
-			fetchData();
-		}
-	}, [cookieLoaded]);
+        loadCookie().then(r => r);
+    }, []);
 
-	return (
-		<AuthContext.Provider
-			value={{
-				setUser,
-				isAuthenticated,
-				setProducts,
-				setUserId,
-				setIsCurrentPlan,
-				check_payment,
-				getUser,
-				products,
-				userId,
-				user,
-				email,
-				isCurrentPlan,
-				paymentInfo,
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
-	);
+    useEffect(() => {
+
+        const token: CookieValueTypes = getCookie("access_token");
+        if (token) {
+            api.defaults.headers.common = {Authorization: `Bearer ${token}`};
+            fetchData().then(r => r);
+        }
+    }, [cookieLoaded]);
+
+    return (
+        <AuthContext.Provider
+            value={{
+                setUser,
+                isAuthenticated,
+                setProducts,
+                setUserId,
+                getUser,
+                handleLogout,
+                products,
+                userId,
+                user,
+                email,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export default AuthContextProvider;

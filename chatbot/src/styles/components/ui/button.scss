@@ -1,0 +1,14 @@
+.ui-button {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: black;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px 0px;
+  cursor: pointer;
+  z-index: 999999999;
+  transition: all 0.2s ease-in-out 0s;
+  right: 10px;
+  bottom: 20px;
+  transform: scale(1);
+}

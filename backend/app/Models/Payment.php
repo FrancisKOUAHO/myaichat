@@ -20,6 +20,11 @@ class Payment extends Model
         'st_payment_method',
         'st_payment_status',
         'date',
+        'trial_end',
+    ];
+
+    protected $dates = [
+        'trial_end',
     ];
 
     public function order(): BelongsTo

@@ -1,21 +1,25 @@
+# Utiliser l'image Node.js Alpine
 FROM node:18-alpine
 
+# Définir la variable d'environnement PORT
 ENV PORT 3031
 
-# Create app directory
+# Créer le répertoire de l'application
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# Installing dependencies
-COPY package*.json /usr/src/app/
-RUN npm install
+# Copier les fichiers de dépendances
+COPY package.json yarn.lock /usr/src/app/
+RUN yarn install
 
-# Copying source files
+# Copier les fichiers sources
 COPY . /usr/src/app
 
-# Building app
-RUN npm run build
+# Construire l'application
+RUN yarn build
+
+# Exposer le port 3031
 EXPOSE 3031
 
-# Running the app
-CMD ["npm", "start"]
+# Utilisation de CMD pour démarrer l'application avec hot reload
+CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then yarn dev; else yarn start; fi"]

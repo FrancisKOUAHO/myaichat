@@ -13,24 +13,7 @@ import { useMutation } from "@tanstack/react-query";
 import {useState} from "react";
 
 const TopBar = () => {
-	const {email} = useAuth();
-	const router = useRouter();
-
-	const handleLogout = () => {
-		console.log('logout')
-		api.post('logout').then((res) => {
-			destroyCookie(undefined, 'access_token', {
-				path: '/',
-			})
-
-			destroyCookie(undefined, 'userId', {
-				path: '/',
-			})
-			router.push('/');
-		}).catch((err) => {
-			console.log('err', err);
-		});
-	}
+	const {email, handleLogout} = useAuth();
 
 	// State to control whether to show trial message
 	const [showTrialMessage, setShowTrialMessage] = useState(true);

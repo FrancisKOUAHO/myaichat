@@ -25,6 +25,18 @@ services:
     depends_on:
       - webserver
     restart: unless-stopped
+    volumes:
+      - ./backend:/app
+      - /app/vendor
+      - /app/node_modules
+      - /app/public
+      - /app/storage
+      - /app/bootstrap/cache
+    ports:
+      - "8000:8000"
+      #- "8000:80"
+    environment:
+      APP_ENV: development
     tty: true
     networks:
       local_bridge:
@@ -35,11 +47,19 @@ services:
       context: ./chatbot
       dockerfile: Dockerfile
     container_name: chatbot
+    command: yarn dev
     depends_on:
       - webserver
     restart: unless-stopped
+    volumes:
+      - ./chatbot:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+      - /usr/src/app/.next/cache
     ports:
       - "3031:3031"
+    environment:
+      NODE_ENV: development
     tty: true
     networks:
       local_bridge:
@@ -50,11 +70,19 @@ services:
       context: ./dashboard
       dockerfile: Dockerfile
     container_name: dashboard
+    command: yarn dev
     depends_on:
       - webserver
     restart: unless-stopped
+    volumes:
+      - ./dashboard:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+      - /usr/src/app/.next/cache
     ports:
       - "3030:3030"
+    environment:
+      NODE_ENV: development
     tty: true
     networks:
       local_bridge:

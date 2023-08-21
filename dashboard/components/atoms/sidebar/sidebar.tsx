@@ -99,9 +99,9 @@ const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
           <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">
             PARAMÈTRES
           </p>
-          <Link href="/dashboard/offres" className="hover:text-[#7a5eea]">
+          <Link href="/dashboard/account" className="hover:text-[#7a5eea]">
             <AiOutlineCreditCard />
-            Offres
+            Mon compte
           </Link>
           <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">
             {"OBTENIR DE L'AIDE"}

@@ -1,0 +1,15 @@
+@use '../../settings/index' as *;
+
+.container-chat {
+  height: 618px;
+  border: 1px solid rgb(212, 212, 216);
+  border-radius: 10px;
+  background: white;
+
+  @media (max-width: 767px) {
+  }
+
+  .wrapper-chat {
+    background: white;
+  }
+}

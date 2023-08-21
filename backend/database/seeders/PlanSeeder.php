@@ -17,10 +17,18 @@ class PlanSeeder extends Seeder
     {
         $plans = [
             [
+                'name'=>'Lite',
+                'price'=> 15,
+                'interval'=>'month',
+                'trial_period_days'=> 15,
+                'lookup_key'=>'Lite',
+                'st_plan_id'=>'price_1NgqMlFdQvV9SdYXyE2UuLzz'
+            ],
+            [
                 'name'=>'Starter',
                 'price'=> 39,
                 'interval'=>'month',
-                'trial_period_days'=> 7,
+                'trial_period_days'=> 15,
                 'lookup_key'=>'Starter',
                 'st_plan_id'=>'price_1NQWl9FdQvV9SdYXccsEVLV9'
             ],
@@ -28,7 +36,7 @@ class PlanSeeder extends Seeder
                 'name'=>'Growth',
                 'price'=> 79,
                 'interval'=>'month',
-                'trial_period_days'=> 7,
+                'trial_period_days'=> 15,
                 'lookup_key'=>'Growth',
                 'st_plan_id'=>'price_1NQWnDFdQvV9SdYXPhX9GnCW'
             ],
@@ -36,15 +44,23 @@ class PlanSeeder extends Seeder
                 'name'=>'Pro',
                 'price'=> 99,
                 'interval'=>'month',
-                'trial_period_days'=> 7,
+                'trial_period_days'=> 15,
                 'lookup_key'=>'Pro',
                 'st_plan_id'=>'price_1NQWmVFdQvV9SdYXhF7oPphl'
+            ],
+            [
+                'name'=>'Lite',
+                'price'=> 132,
+                'interval'=>'year',
+                'trial_period_days'=> 15,
+                'lookup_key'=>'Lite',
+                'st_plan_id'=>'price_1NgqOwFdQvV9SdYX5PLQyBR8'
             ],
             [
                 'name'=>'Starter',
                 'price'=> 348,
                 'interval'=>'year',
-                'trial_period_days'=> 7,
+                'trial_period_days'=> 15,
                 'lookup_key'=>'Starter',
                 'st_plan_id'=>'price_1NQzfQFdQvV9SdYXpDBY8Wtl'
             ],
@@ -52,7 +68,7 @@ class PlanSeeder extends Seeder
                 'name'=>'Growth',
                 'price'=> 708,
                 'interval'=>'year',
-                'trial_period_days'=> 7,
+                'trial_period_days'=> 15,
                 'lookup_key'=>'Growth',
                 'st_plan_id'=>'price_1NQzkaFdQvV9SdYXYlbRbGyK'
             ],
@@ -60,7 +76,7 @@ class PlanSeeder extends Seeder
                 'name'=>'Pro',
                 'price'=> 828,
                 'interval'=>'year',
-                'trial_period_days'=> 7,
+                'trial_period_days'=> 15,
                 'lookup_key'=>'Pro',
                 'st_plan_id'=>'price_1NQzjVFdQvV9SdYXU9CMdM79'
             ],
