@@ -1,0 +1,33 @@
+/* Styles pour les écrans de taille desktop */
+iframe.desktop {
+    border: none;
+    opacity: 1;
+    transform: scale(1);
+    height: min(704px, calc(100% - 104px));
+    position: fixed;
+    pointer-events: all;
+    transform-origin: right bottom;
+    transition: transform 0.3s cubic-bezier(0, 1.2, 1, 1) 0s, opacity 0.2s ease-out 0s;
+    right: 10px;
+    bottom: 0;
+    width: 400px;
+    z-index: 10000;
+    border-radius: 0.75rem;
+}
+
+/* Styles pour les écrans de taille mobile */
+iframe.mobile {
+    border: none;
+    opacity: 1;
+    transform: scale(1);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    pointer-events: all;
+    transform-origin: right bottom;
+    transition: transform 0.3s cubic-bezier(0, 1.2, 1, 1) 0s, opacity 0.2s ease-out 0s;
+    z-index: 10000;
+    border-radius: 0.75rem;
+}

@@ -1,7 +1,7 @@
 'use client'
 
 import Chat from '@/components/Chat'
-import './globals.css'
+import '../styles/_main.scss'
 import Providers from '@/components/Providers'
 import React from "react";
 
