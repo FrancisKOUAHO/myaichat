@@ -1,11 +1,11 @@
-# AICHAT
+# MYAICHAT
 
 
 ## Démarer le projet
 Remplir le .env pour cela il faut copier coller .env.example puis remplir les lignes avec les information suivantes
 - true
 - root
-- aichat
+- myaichat
 
 Lancer l'ensemble des conteneurs pour pouvoir coder<br/>
 ``docker-compose up``<br/><br/>
