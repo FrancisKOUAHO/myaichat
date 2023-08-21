@@ -10,11 +10,22 @@ import { api } from "@/config/api";
 import { destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import {useState} from "react";
 
 const TopBar = () => {
 	const {email, handleLogout} = useAuth();
 
+	// State to control whether to show trial message
+	const [showTrialMessage, setShowTrialMessage] = useState(true);
+
+
 	return (
+		<>
+		{showTrialMessage && (
+			<div className="c-trial-message">
+				{"Bienvenue ! Profitez de votre essai gratuit de 7 jours."}
+			</div>
+		)}
 		<nav className="c-topbar">
 			<div className="c-below-topbar"></div>
 			<div className="c-above-topbar">
@@ -48,6 +59,7 @@ const TopBar = () => {
 				</div>
 			</div>
 		</nav>
+		</>
 	);
 };
 
