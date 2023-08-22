@@ -1,0 +1,27 @@
+name: Deploy Monorepo to Railay
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker images
+        run: |
+          docker-compose -f docker-compose.yml build
+          echo "zG5!6Pb3LzH@x!T3" | docker login -u iamfrancisco --password-stdin
+          docker-compose -f docker-compose.yml push
+
+      - name: Deploy with Docker Compose to Railay
+        run: |
+          curl -X POST "https://railay.io/api/v1/apps" \
+            -H "Authorization: Bearer your_railay_api_token" \
+            -H "Content-Type: application/json" \
+            -d '{"source":"compose","composeFilePath":"docker-compose.yml"}'
