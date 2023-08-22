@@ -1,48 +1,35 @@
-# Stage 1: Install dependencies with composer
-FROM composer:2.2.6 as vendor
+FROM php:8.2-apache
 
-COPY database/ database/
-COPY composer.json composer.json
-COPY composer.lock composer.lock
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    libzip-dev \
+    zip
 
-RUN composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --no-plugins \
-    --no-scripts \
-    --prefer-dist \
-    --optimize-autoloader
+# Enable mod_rewrite
+RUN a2enmod rewrite
 
-# Stage 2: Set up Nginx and PHP environment
-FROM webdevops/php-nginx:8.2
+# Add ServerName directive
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-ENV WEB_DOCUMENT_ROOT /app/public
-ENV PHP_POST_MAX_SIZE 128M
-ENV PHP_MEMORY_LIMIT 1024M
-ENV PHP_UPLOAD_MAX_FILESIZE 50M
-ENV FPM_PM_MAX_CHILDREN 100
-ENV FPM_PM static
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql zip
 
-WORKDIR /app
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-COPY . .
-COPY --from=vendor /app/vendor/ /app/vendor/
+# Copy the application code
+COPY . /var/www/html
 
-# Install the PostgreSQL PDO extension
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    && docker-php-ext-install pdo_pgsql
+# Set the working directory
+WORKDIR /var/www/html
 
-RUN mkdir -p storage/framework/sessions  storage/framework/views storage/framework/cache
-RUN chmod -R 777 storage bootstrap/cache
-RUN chown -R application:application .
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Expose port 8000
-EXPOSE 8000
+# Install project dependencies
+RUN composer install
 
-# Set the environment variable to indicate whether it's development or production
-# This can be passed in during the docker-compose configuration
-ENV APP_ENV production  # Change to "local" for development if needed
-
-# Run the application (you can adjust the command based on how you start your Laravel app)
-CMD ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisord.conf"]
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
