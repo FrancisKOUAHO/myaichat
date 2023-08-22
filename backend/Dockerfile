@@ -31,7 +31,7 @@ COPY --from=vendor /app/vendor/ /app/vendor/
 # Install the PostgreSQL PDO extension
 RUN apt-get update && apt-get install -y \
     libpq-dev \
-    && docker-php-ext-install pdo_pgsql
+    && docker-php-ext-install
 
 RUN mkdir -p storage/framework/sessions  storage/framework/views storage/framework/cache
 RUN chmod -R 777 storage bootstrap/cache
