@@ -40,9 +40,5 @@ RUN chown -R application:application .
 # Expose port 8000
 EXPOSE 8000
 
-# Set the environment variable to indicate whether it's development or production
-# This can be passed in during the docker-compose configuration
-ENV APP_ENV production  # Change to "development" for development if needed
-
 # Run the application (you can adjust the command based on how you start your Laravel app)
-CMD ["sh", "-c", "if [ \"$APP_ENV\" = \"development\" ]; then php artisan serve --host=0.0.0.0 --port=8000; else supervisord --nodaemon --configuration /etc/supervisor/supervisord.conf; fi"]
+CMD ["supervisord", "--nodaemon", "--configuration", "/etc/supervisor/supervisord.conf"]

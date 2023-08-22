@@ -33,10 +33,7 @@ services:
       - /app/storage
       - /app/bootstrap/cache
     ports:
-      - "8000:8000"
-      #- "8000:80"
-    environment:
-      APP_ENV: production
+      - "8000:80"
     tty: true
     networks:
       local_bridge:
@@ -47,7 +44,6 @@ services:
       context: ./chatbot
       dockerfile: Dockerfile
     container_name: chatbot
-    command: yarn dev
     depends_on:
       - webserver
     restart: unless-stopped
@@ -70,7 +66,6 @@ services:
       context: ./dashboard
       dockerfile: Dockerfile
     container_name: dashboard
-    command: yarn dev
     depends_on:
       - webserver
     restart: unless-stopped

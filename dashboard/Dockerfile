@@ -21,5 +21,7 @@ RUN yarn build
 # Exposer le port 3030
 EXPOSE 3030
 
+ENV NODE_ENV production  # Change to "development" for development if needed
+
 # Utilisation de CMD pour démarrer l'application avec hot reload
 CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then yarn dev; else yarn start; fi"]
