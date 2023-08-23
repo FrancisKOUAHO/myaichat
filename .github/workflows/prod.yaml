@@ -21,7 +21,13 @@ jobs:
     - name: Install Railway CLI
       run: npm install -g @railway/cli
 
-    - name: Simulate Comment for Production Approval
+    - name: Deploy to Railway Pre-Production
       run: |
-        echo "To approve the production deployment, run the following command in your terminal:"
-        echo "gh pr comment ${{ github.event.workflow_run.pull_requests[0].number }} --body '/approve'"
+        # Set the RAILWAY_TOKEN environment variable
+        export RAILWAY_TOKEN=${{ secrets.RAILWAY_API_TOKEN_PROD }}
+        # Run the deployment command for your services in production
+        railway up -e preproduction -s myaichat
+        railway up -e preproduction -s loader.myaichat
+        railway up -e preproduction -s api.myaichat
+        railway up -e preproduction -s dashboard.myaichat
+        railway up -e preproduction -s chatbot.myaichat
