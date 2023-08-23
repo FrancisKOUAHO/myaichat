@@ -129,6 +129,8 @@
       <path value="$PROJECT_DIR$/backend/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/backend/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/backend/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/backend/vendor/laravel/prompts" />
+      <path value="$PROJECT_DIR$/backend/vendor/symfony/polyfill-php83" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
