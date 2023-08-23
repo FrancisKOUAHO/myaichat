@@ -27,8 +27,8 @@ jobs:
         # Set the RAILWAY_TOKEN environment variable
         export RAILWAY_TOKEN=${{ secrets.RAILWAY_API_TOKEN_PREPROD }}
 
-        # Run the deployment command
-        railway up -e preproduction
+        # Run the deployment command for a specific service
+        railway up -e preproduction -s RAILWAY_TOKEN
 
   deploy_to_prod:
     name: Deploy to Production
@@ -56,8 +56,8 @@ jobs:
           # Set the RAILWAY_TOKEN environment variable
           export RAILWAY_TOKEN=${{ secrets.RAILWAY_API_TOKEN_PROD }}
 
-          # Run the production deployment command
-          railway up -e production
+          # Run the production deployment command for a specific service
+          railway up -e production -s RAILWAY_TOKEN
         else
           echo "Pre-Production deployment is not in a good state. Skipping Production deployment."
         fi
