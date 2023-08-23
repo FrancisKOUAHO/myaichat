@@ -1,0 +1,56 @@
+name: Railway Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_to_preprod:
+    name: Deploy to Pre-Production
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Install Railway CLI
+      run: npm install -g railway
+
+    - name: Deploy to Railway Pre-Production
+      run: |
+        railway up -e preproduction -t ${{ secrets.RAILWAY_API_TOKEN_PREPROD }}
+
+  deploy_to_prod:
+    name: Deploy to Production
+    needs: deploy_to_preprod
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Install Railway CLI
+      run: npm install -g railway
+
+    - name: Check Pre-Production Deployment Status
+      run: |
+        deployment_status=$(railway status -e your_preprod_env)
+        echo "Pre-Production Deployment Status: $deployment_status"
+
+        if [[ $deployment_status == "good" ]]; then
+          # Replace 'your_prod_env' with your Railway environment name
+          railway up -e production -t ${{ secrets.RAILWAY_API_TOKEN_PROD }}
+        else
+          echo "Pre-Production deployment is not in a good state. Skipping Production deployment."
+        fi
