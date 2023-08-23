@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Ceci permet le déclenchement manuel
 
 jobs:
   deploy_to_preprod:
@@ -27,7 +26,6 @@ jobs:
       run: |
         # Set the RAILWAY_TOKEN environment variable
         export RAILWAY_TOKEN=${{ secrets.RAILWAY_API_TOKEN_PREPROD }}
-
         # Run the deployment command for your services in pre-production
         railway up -e preproduction -s myaichat
         railway up -e preproduction -s loader.myaichat
