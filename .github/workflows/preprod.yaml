@@ -3,7 +3,7 @@ name: Pre-Production Deployment
 on:
   push:
     branches:
-      - preprod  # Utilize the "preprod" branch to trigger the pre-production deployment
+      - main
 
 jobs:
   deploy_to_preprod:
