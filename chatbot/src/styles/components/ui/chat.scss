@@ -1,34 +1,29 @@
 @use '../../settings/index' as *;
 
 .container-chat {
-    /* Styles de base pour le conteneur du chat, comme la largeur, la hauteur, etc. */
-    width: 400px; /* par exemple */
-    height: 600px; /* par exemple */
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+  width: 400px;
+  position: fixed;
+  bottom: 100px;
+  right: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-/* Pour les écrans très petits, ajustez la taille et/ou la position du conteneur du chat */
-@media (max-width: 360px) {
-    .container-chat {
-        width: calc(100% - 14px);
-        height: 500px; /* Ajustez selon vos besoins */
-        bottom: 5px;
-        right: 5px;
-    }
+@media (max-width: 767px) {
+  .container-chat {
+    width: calc(100% - 14px);
+    max-width: 400px;;
+    bottom: 100px;
+    right: 5px;
+  }
 }
 
 .wrapper-chat {
-    /* Styles pour le wrapper du chat */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 10px;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  overflow: hidden;
+  background-color: white;
 }
-
-/* ... Vous pouvez ajouter des styles supplémentaires ou ajuster les styles existants selon vos besoins ... */
