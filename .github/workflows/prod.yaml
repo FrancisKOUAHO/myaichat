@@ -5,6 +5,7 @@ on:
     workflows: ["Pre-Production Deployment"]
     types:
       - completed
+  workflow_dispatch: # Ceci permet le déclenchement manuel
 
 jobs:
   deploy_to_prod:
