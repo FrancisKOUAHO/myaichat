@@ -1,15 +1,13 @@
 name: Production Deployment
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch: # Ceci permet le déclenchement manuel
+  workflow_dispatch: # Permet le déclenchement manuel
 
 jobs:
-  deploy_to_preprod:
-    name: Deploy to Pre-Production
+  deploy_to_prod:
+    name: Deploy to Production
     runs-on: ubuntu-latest
+    if: github.event.workflow_run.event == 'workflow_run' && needs.preprod.result == 'success'
 
     steps:
     - name: Checkout repository
@@ -23,13 +21,7 @@ jobs:
     - name: Install Railway CLI
       run: npm install -g @railway/cli
 
-    - name: Deploy to Railway Production
+    - name: Simulate Comment for Production Approval
       run: |
-        # Set the RAILWAY_TOKEN environment variable
-        export RAILWAY_TOKEN=${{ secrets.RAILWAY_API_TOKEN_PROD }}
-        # Run the deployment command for your services in production
-        railway up -e production -s myaichat
-        railway up -e production -s loader.myaichat
-        railway up -e production -s api.myaichat
-        railway up -e production -s dashboard.myaichat
-        railway up -e production -s chatbot.myaichat
+        echo "To approve the production deployment, run the following command in your terminal:"
+        echo "gh pr comment ${{ github.event.workflow_run.pull_requests[0].number }} --body '/approve'"
