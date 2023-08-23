@@ -13,19 +13,6 @@ jobs:
     if: github.event.workflow_run.event == 'workflow_run' && needs.deploy_to_preprod.result == 'success'
 
     steps:
-    - name: Manual approval
-      id: approval
-      run: echo "Approve the deployment by commenting '/approve' on the workflow run."
-
-    - name: Check for approval
-      run: |
-        if [[ "${{ steps.approval.outputs.result }}" == "/approve" ]]; then
-          echo "Deployment approved. Proceeding with production deployment."
-        else
-          echo "Deployment not approved. Skipping production deployment."
-          exit 0
-        fi
-
     - name: Checkout repository
       uses: actions/checkout@v2
 
@@ -37,14 +24,7 @@ jobs:
     - name: Install Railway CLI
       run: npm install -g @railway/cli
 
-    - name: Deploy to Railway Production
+    - name: Simulate Comment for Production Approval
       run: |
-        # Set the RAILWAY_TOKEN environment variable
-        export RAILWAY_TOKEN=${{ secrets.RAILWAY_API_TOKEN_PROD }}
-
-        # Run the production deployment command for your services
-        railway up -e production -s myaichat
-        railway up -e production -s loader.myaichat
-        railway up -e production -s api.myaichat
-        railway up -e production -s dashboard.myaichat
-        railway up -e production -s chatbot.myaichat
+        echo "To approve the production deployment, run the following command in your terminal:"
+        echo "gh pr comment ${{ github.event.workflow_run.pull_requests[0].number }} --body '/approve'"
