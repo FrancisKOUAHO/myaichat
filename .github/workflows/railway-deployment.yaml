@@ -14,10 +14,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
+    - name: Set up Node.js 16.x
       uses: actions/setup-node@v2
       with:
-        node-version: 14
+        node-version: '16.x'
 
     - name: Install Railway CLI
       run: npm install -g @railway/cli
@@ -35,21 +35,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
+    - name: Set up Node.js 16.x
       uses: actions/setup-node@v2
       with:
-        node-version: 14
+        node-version: '16.x'
 
     - name: Install Railway CLI
-      run: npm install -g railway
+      run: npm install -g @railway/cli
 
     - name: Check Pre-Production Deployment Status
       run: |
-        deployment_status=$(railway status -e your_preprod_env)
+        deployment_status=$(railway status -e preproduction)
         echo "Pre-Production Deployment Status: $deployment_status"
 
         if [[ $deployment_status == "good" ]]; then
-          # Replace 'your_prod_env' with your Railway environment name
+          # Replace 'production' with your Railway environment name
           railway up -e production -t ${{ secrets.RAILWAY_API_TOKEN_PROD }}
         else
           echo "Pre-Production deployment is not in a good state. Skipping Production deployment."
