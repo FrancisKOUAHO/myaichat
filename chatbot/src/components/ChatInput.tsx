@@ -25,7 +25,7 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
   } = useContext(MessagesContext)
 
 
-  const siteURL = document.referrer;
+  const siteURL = document.referrer || window.location.href;
   const hostname = new URL(siteURL).hostname;
   const domain = hostname.replace('www.', '').split('.')[0];
 
