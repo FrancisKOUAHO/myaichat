@@ -13,7 +13,10 @@ class PlanSeeder extends Seeder
      *
      * @return void
      */
-    public function run(): void
+
+    // production
+
+    /*public function run(): void
     {
         $plans = [
             [
@@ -85,9 +88,11 @@ class PlanSeeder extends Seeder
         foreach ($plans as $plan) {
             Plan::create($plan);
         }
-    }
+    }*/
 
-    /*public function run(): void
+    // development
+
+    public function run(): void
     {
         $plans = [
             [
@@ -159,5 +164,5 @@ class PlanSeeder extends Seeder
         foreach ($plans as $plan) {
             Plan::create($plan);
         }
-    }*/
+    }
 }
