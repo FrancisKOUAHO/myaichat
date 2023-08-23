@@ -13,6 +13,7 @@ services:
       - ./myaichat:/var/www/myaichat
       - ./chatbot:/var/www/chatbot
       - ./chatbot_loader:/var/www/chatbot_loader
+      - ./backend:/var/www/backend
     networks:
       local_bridge:
         ipv4_address: 172.20.2.0
@@ -25,13 +26,9 @@ services:
     depends_on:
       - webserver
     restart: unless-stopped
+    working_dir: /var/www/
     volumes:
-      - ./backend:/app
-      - /app/vendor
-      - /app/node_modules
-      - /app/public
-      - /app/storage
-      - /app/bootstrap/cache
+      - ./backend:/var/www
     ports:
       - "8000:80"
     tty: true
