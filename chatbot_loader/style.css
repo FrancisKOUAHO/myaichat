@@ -19,11 +19,5 @@ iframe.desktop {
 iframe.mobile {
    height: 100vh;
    width: calc(100% - 14px);
-}
-
-@media (max-width: 360px) {
-    iframe.mobile {
-        width: 100%;
-        margin-left: 10%;
-    }
+    background-color: red;
 }
