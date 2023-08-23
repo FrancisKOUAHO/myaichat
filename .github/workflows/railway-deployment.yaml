@@ -29,6 +29,10 @@ jobs:
 
         # Run the deployment command for a specific service
         railway up -e preproduction -s myaichat
+        railway up -e preproduction -s loader.myaichat
+        railway up -e preproduction -s api.myaichat
+        railway up -e preproduction -s dashboard.myaichat
+        railway up -e preproduction -s chatbot.myaichat
 
   deploy_to_prod:
     name: Deploy to Production
@@ -58,6 +62,10 @@ jobs:
 
           # Run the production deployment command for a specific service
           railway up -e production -s myaichat
+          railway up -e production -s loader.myaichat
+          railway up -e production -s api.myaichat
+          railway up -e production -s dashboard.myaichat
+          railway up -e production -s chatbot.myaichat
         else
           echo "Pre-Production deployment is not in a good state. Skipping Production deployment."
         fi
