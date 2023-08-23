@@ -53,7 +53,7 @@ jobs:
 
     - name: Check Pre-Production Deployment Status
       run: |
-        deployment_status=$(railway status -e preproduction)
+        deployment_status=$(railway status preproduction)
         echo "Pre-Production Deployment Status: $deployment_status"
 
         if [[ $deployment_status == "good" ]]; then
