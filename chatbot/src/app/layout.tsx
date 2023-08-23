@@ -1,9 +1,12 @@
 'use client'
 
-import Chat from '@/components/Chat'
-import '../styles/_main.scss'
-import Providers from '@/components/Providers'
 import React from "react";
+import Head from 'next/head'
+
+import Providers from '@/components/Providers'
+import Chat from '@/components/Chat'
+
+import '../styles/_main.scss'
 
 export default function RootLayout({
   children,
@@ -12,6 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang='fr_FR'>
+    <Head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+    </Head>
       <Providers>
         <body>
           <Chat />

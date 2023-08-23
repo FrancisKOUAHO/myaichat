@@ -17,17 +17,7 @@ iframe.desktop {
 
 /* Styles pour les écrans de taille mobile */
 iframe.mobile {
-    border: none;
-    opacity: 1;
-    transform: scale(1);
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    pointer-events: all;
-    transform-origin: right bottom;
-    transition: transform 0.3s cubic-bezier(0, 1.2, 1, 1) 0s, opacity 0.2s ease-out 0s;
-    z-index: 10000;
-    border-radius: 0.75rem;
+   height: 100vh;
+   width: calc(100% - 14px);
+    background-color: red;
 }
