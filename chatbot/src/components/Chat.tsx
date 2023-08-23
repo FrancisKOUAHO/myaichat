@@ -24,10 +24,10 @@ const Chat: FC = () => {
 			</button>
 
 			{isOpen && (
-				<div className='container-chat'>
+                <div className="fixed bottom-2 right-2 w-full sm:w-96 h-3/4 ml-5% sm:ml-0 rounded-lg shadow-lg overflow-hidden">
 					<div className='w-full h-full flex flex-col'>
 						<ChatHeader/>
-						<div className='flex flex-col wrapper-chat'>
+						<div className='flex flex-col space-y-4 p-4'>
 							<ChatMessages className='px-2 py-3'/>
 							<ChatInput className='px-4'/>
 						</div>
