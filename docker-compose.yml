@@ -1,30 +1,11 @@
 version: "3.9"
 
 services:
-  webserver:
-    container_name: webserver
-    ports:
-      - "80:80"
-      - "443:443"
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    volumes:
-      - ./myaichat:/var/www/myaichat
-      - ./chatbot:/var/www/chatbot
-      - ./chatbot_loader:/var/www/chatbot_loader
-      - ./backend:/var/www/backend
-    networks:
-      local_bridge:
-        ipv4_address: 172.20.2.0
-
   chatbot:
     build:
       context: ./chatbot
       dockerfile: Dockerfile
     container_name: chatbot
-    depends_on:
-      - webserver
     restart: unless-stopped
     volumes:
       - ./chatbot:/usr/src/app
@@ -34,7 +15,7 @@ services:
     ports:
       - "3031:3031"
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
     tty: true
     networks:
       local_bridge:
@@ -45,8 +26,6 @@ services:
       context: ./dashboard
       dockerfile: Dockerfile
     container_name: dashboard
-    depends_on:
-      - webserver
     restart: unless-stopped
     volumes:
       - ./dashboard:/usr/src/app
@@ -56,7 +35,7 @@ services:
     ports:
       - "3030:3030"
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
     tty: true
     networks:
       local_bridge:
