@@ -24,7 +24,11 @@ jobs:
 
     - name: Deploy to Railway Pre-Production
       run: |
-        railway up -e preproduction -t ${{ secrets.RAILWAY_API_TOKEN_PREPROD }}
+        # Set the RAILWAY_TOKEN environment variable
+        export RAILWAY_TOKEN=${{ secrets.RAILWAY_API_TOKEN_PREPROD }}
+
+        # Run the deployment command
+        railway up -e preproduction
 
   deploy_to_prod:
     name: Deploy to Production
@@ -49,8 +53,11 @@ jobs:
         echo "Pre-Production Deployment Status: $deployment_status"
 
         if [[ $deployment_status == "good" ]]; then
-          # Replace 'production' with your Railway environment name
-          railway up -e production -t ${{ secrets.RAILWAY_API_TOKEN_PROD }}
+          # Set the RAILWAY_TOKEN environment variable
+          export RAILWAY_TOKEN=${{ secrets.RAILWAY_API_TOKEN_PROD }}
+
+          # Run the production deployment command
+          railway up -e production
         else
           echo "Pre-Production deployment is not in a good state. Skipping Production deployment."
         fi
