@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/backend/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/backend/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/zzz/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/zzz/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/zzz/vendor/darkaonline/l5-swagger" />
