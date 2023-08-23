@@ -33,3 +33,4 @@ jobs:
         railway up -e preproduction -s api.myaichat
         railway up -e preproduction -s dashboard.myaichat
         railway up -e preproduction -s chatbot.myaichat
+        
