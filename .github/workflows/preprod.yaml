@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch: # Ceci permet le déclenchement manuel
 
 jobs:
   deploy_to_preprod:
