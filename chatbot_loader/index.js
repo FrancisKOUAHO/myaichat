@@ -38,8 +38,8 @@ function applyStylesToIframe(iframe) {
 
 function createIframe() {
     const iframe = document.createElement('iframe');
-    //iframe.src = 'https://ai.myaichat.io';
-    iframe.src = 'http://localhost:3031';
+    iframe.src = 'https://ai.myaichat.io';
+    //iframe.src = 'http://localhost:3031';
     document.body.appendChild(iframe);
     applyStylesToIframe(iframe);
 }
