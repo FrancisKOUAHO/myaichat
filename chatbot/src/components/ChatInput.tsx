@@ -109,7 +109,16 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
           rows={2}
           maxRows={4}
           value={input}
-          autoFocus
+          onFocus={() => {
+            if (!input) {
+              textareaRef.current?.removeAttribute('readonly');
+            }
+          }}
+          onBlur={() => {
+            if (!input) {
+              textareaRef.current?.setAttribute('readonly', 'readonly');
+            }
+          }}
           disabled={isLoading}
           onChange={(e) => setInput(e.target.value)}
           placeholder='Écrire un message...'
