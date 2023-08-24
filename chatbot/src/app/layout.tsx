@@ -16,8 +16,8 @@ export default function RootLayout({
   return (
     <html lang='fr_FR'>
     <Head>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <meta charSet='utf-8' />
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     </Head>
       <Providers>
         <body>
