@@ -3,7 +3,6 @@ function applyStylesToIframe(iframe) {
     window.addEventListener('load', () => {
         let widthWindow = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         if (widthWindow >= 768) {
-            iframe.style.background = 'red';
             iframe.style.border = 'none';
             iframe.style.opacity = '1';
             iframe.style.transform = 'scale(1)';
@@ -19,7 +18,6 @@ function applyStylesToIframe(iframe) {
             iframe.style.borderRadius = '0.75rem';
 
         } else {
-            iframe.style.background = 'red';
             iframe.style.border = 'none';
             iframe.style.opacity = '1';
             iframe.style.transform = 'scale(1)';
