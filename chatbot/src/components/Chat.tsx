@@ -8,33 +8,20 @@ import ChatHeader from './ChatHeader';
 const Chat: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
-	const toggleChatbot = () => {
-		setIsOpen(!isOpen);
-		const iframe: any = document.querySelector('iframe');
-
-		if (isOpen) {
-			iframe.style.pointerEvents = 'none';
-		} else {
-			iframe.style.pointerEvents = 'all';
-		}
-	};
-
 	return (
 		<div>
-			<div className="relative z-50">
-				<button
-					className="ui-button"
-					onClick={toggleChatbot}
-				>
-					<img
-						src="https://i.goopics.net/ux8qzl.png"
-						alt="Open Chat"
-						width={24}
-						height={24}
-						style={{marginLeft: 'auto', marginRight: 'auto'}}
-					/>
-				</button>
-			</div>
+			<button
+				className="ui-button"
+				onClick={() => setIsOpen(!isOpen)}
+			>
+				<img
+					src="https://i.goopics.net/ux8qzl.png"
+					alt="Open Chat"
+					width={24}
+					height={24}
+					style={{marginLeft: 'auto', marginRight: 'auto'}}
+				/>
+			</button>
 
 			{isOpen && (
                 <div className="container-chat">
