@@ -24,7 +24,7 @@ const Chat: FC = () => {
 			</button>
 
 			{isOpen && (
-				<div className="container-chat">
+                <div className="container-chat">
 					<div className='w-full h-full flex flex-col'>
 						<ChatHeader/>
 						<div className='flex flex-col wrapper-chat'>
