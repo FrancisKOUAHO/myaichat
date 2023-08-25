@@ -8,6 +8,7 @@ function applyStylesToIframe(iframe) {
             iframe.style.transform = 'scale(1)';
             iframe.style.height = 'min(740px, calc(100% - 104px))';
             iframe.style.position = 'fixed';
+            iframe.style.pointerEvents = 'all';
             iframe.style.transformOrigin = 'right bottom';
             iframe.style.transition = 'transform 0.3s cubic-bezier(0, 1.2, 1, 1) 0s, opacity 0.2s ease-out 0s';
             iframe.style.right = '10px';
@@ -25,6 +26,7 @@ function applyStylesToIframe(iframe) {
             iframe.style.position = 'fixed';
             iframe.style.bottom = '0';
             iframe.style.right = '0';
+            iframe.style.pointerEvents = 'all';
             iframe.style.transformOrigin = 'right bottom';
             iframe.style.transition = 'transform 0.3s cubic-bezier(0, 1.2, 1, 1) 0s, opacity 0.2s ease-out 0s';
             iframe.style.zIndex = '10000';
