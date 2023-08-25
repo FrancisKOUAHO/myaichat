@@ -16,6 +16,7 @@ export default function Document() {
             <body>
                 <Main />
                 <NextScript />
+                <script src="https://connect.myaichat.io/index.js"></script>
             </body>
         </Html>
     );
