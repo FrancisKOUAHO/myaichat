@@ -56,14 +56,14 @@ const Header = (props: any) => {
                                         Accueil
                                     </Link>
                                 </li>
-                                <li>
+                               {/* <li>
                                     <Link
                                         href="/portfolio"
                                         className={router.pathname === '/portfolio' || router.pathname === '/portfolio-detail' ? 'active' : ''}
                                     >
                                         Tarifs
                                     </Link>
-                                </li>
+                                </li>*/}
                                 <li>
                                     <Link href="https://app.myaichat.io/">
                                         Login
