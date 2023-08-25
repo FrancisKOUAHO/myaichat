@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import {useSelector} from "react-redux";
 import {IRootState} from "../../store";
 
@@ -18,7 +19,7 @@ const Hero = () => {
                     <div
                         className="pt-14 pb-8 mt-[90px] text-center text-white lg:w-3/5 lg:py-20 ltr:lg:text-left rtl:lg:text-right">
                         <h2 className="text-xl font-extrabold leading-normal sm:text-1xl lg:text-[40px] lg:leading-[64px]">
-                            <span className="text-white">Boostez Vos Ventes : Jusqu'à 35% <br></br></span>
+                            <span className="text-white">Boostez Vos Ventes : Jusqu'à 35%<br></br></span>
                             <span className="text-white">de Conversion avec notre Chatbot</span>
                         </h2>
                         <p className="my-8 text-lg lg:w-3/4 text-white">
@@ -43,3 +44,6 @@ const Hero = () => {
 }
 
 export default Hero
+
+
+
