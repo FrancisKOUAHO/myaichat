@@ -14,9 +14,71 @@ const Testimonial = ({
             id: 1,
             name: 'Allan Branch',
             role: 'CEO of Lifted',
-            thumbnail: '/assets/images/testimonial.png',
             message:
-                "Il existe de nombreuses variantes de passages du Lorem Ipsum disponibles, mais la majorité ont subi des altérations sous une forme ou une autre, par injection d'humour ou par des mots aléatoires qui ne semblent même pas légèrement crédibles.",
+                "MyAIChat a été un véritable atout pour notre entreprise. Grâce à leur technologie de pointe, nous avons pu améliorer notre service client et offrir une expérience utilisateur exceptionnelle.",
+        },
+        {
+            id: 2,
+            name: 'Sophie Ramirez',
+            role: 'Marketing Manager',
+            message:
+                "Nous avons intégré MyAIChat sur notre site web et nos clients sont ravis de la rapidité et de l'efficacité de leurs réponses. Cela a vraiment boosté nos ventes en ligne.",
+        },
+        {
+            id: 3,
+            name: 'Alexandre Dubois',
+            role: 'E-commerce Owner',
+            message:
+                "La fonctionnalité de chat en direct de MyAIChat a transformé la manière dont nous interagissons avec nos clients. C'est comme avoir un support 24/7 à portée de main.",
+        },
+        {
+            id: 4,
+            name: 'Emily Carter',
+            role: 'Online Retailer',
+            message:
+                "MyAIChat a simplifié la gestion des questions fréquentes de nos clients. Maintenant, nous pouvons nous concentrer sur des problèmes plus complexes tout en offrant une assistance rapide à nos utilisateurs.",
+        },
+        {
+            id: 5,
+            name: 'Marc Dupont',
+            role: 'Small Business Owner',
+            message:
+                "En tant que petite entreprise, il était difficile de fournir un support client de qualité en permanence. MyAIChat a résolu ce problème et a considérablement amélioré notre service.",
+        },
+        {
+            id: 6,
+            name: 'Jessica Patel',
+            role: 'Digital Marketer',
+            message:
+                "L'IA de MyAIChat est incroyablement précise et pertinente dans ses réponses. Cela crée une expérience utilisateur fluide et professionnelle sur notre site web.",
+        },
+        {
+            id: 7,
+            name: 'Daniel Rodriguez',
+            role: 'E-commerce Manager',
+            message:
+                "Nous avons constaté une augmentation significative de l'engagement des visiteurs depuis que nous avons intégré MyAIChat. Les clients adorent l'interaction instantanée.",
+        },
+        {
+            id: 8,
+            name: 'Sophia Miller',
+            role: 'Startup Founder',
+            message:
+                "Je suis impressionnée par la capacité de MyAIChat à comprendre et à répondre aux questions complexes de nos utilisateurs. Cela nous a aidés à gagner en crédibilité.",
+        },
+        {
+            id: 9,
+            name: 'Lucas Johnson',
+            role: 'Tech Enthusiast',
+            message:
+                "MyAIChat est un exemple brillant de l'avenir de la technologie. Son intelligence artificielle est remarquablement utile et adaptative.",
+        },
+        {
+            id: 10,
+            name: 'Isabelle Martin',
+            role: 'Online Shop Owner',
+            message:
+                "Avoir MyAIChat sur notre site nous a permis d'offrir un support client exceptionnel et de fidéliser nos clients. Cela a eu un impact positif sur nos ventes.",
         },
     ],
     className = '',
@@ -71,9 +133,6 @@ const Testimonial = ({
                                                     </linearGradient>
                                                 </defs>
                                             </svg>
-                                        </span>
-                                        <span className="absolute top-0 -right-6 hidden md:block">
-                                            <img src="/assets/images/blue-quote.png" alt="blue-quote" className="" />
                                         </span>
                                     </div>
                                     <div className="w-full max-w-[570px] lg:mt-[150px]">
@@ -230,11 +289,6 @@ const Testimonial = ({
                                                     <div className="items-center gap-4 sm:grid sm:grid-cols-3">
                                                         <div className="col-span-2">
                                                             <div className="relative rounded-3xl bg-white/[0.02] p-6">
-                                                                <img
-                                                                    src="/assets/images/blue-quote.png"
-                                                                    alt="blue-quote"
-                                                                    className="absolute top-0 ltr:right-0 rtl:left-0 sm:-top-6 ltr:sm:-right-6 rtl:sm:-left-6"
-                                                                />
                                                                 <div className="pb-8">
                                                                     <svg
                                                                         width="96"
@@ -293,9 +347,6 @@ const Testimonial = ({
                                                                     <h6 className="text-sm font-bold italic">{feedback.role}</h6>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div className="mx-auto mt-4 h-20 w-20 max-w-[255px] overflow-hidden rounded-full bg-white ltr:ml-auto rtl:mr-auto dark:bg-gray-dark sm:mt-0 sm:h-auto sm:w-auto sm:rounded-[150px] ltr:sm:mr-0 rtl:sm:ml-0">
-                                                            <img src={feedback.thumbnail} alt="testimonial" className="h-full w-full object-cover object-top" />
                                                         </div>
                                                     </div>
                                                 </SwiperSlide>
@@ -368,9 +419,6 @@ const Testimonial = ({
                                         type.toLowerCase() === 'common' && 'ltr:right-1/3 rtl:left-1/3 sm:absolute sm:mt-0 sm:justify-end'
                                     } ${type.toLowerCase() === 'modern-saas' && 'ltr:left-0 rtl:right-0 md:absolute md:mt-0 md:justify-end'}`}
                                 >
-                                    <Link href="#" className="text-sm font-extrabold text-white transition hover:text-secondary dark:hover:text-secondary">
-                                        voir tout
-                                    </Link>
                                     <button
                                         type="button"
                                         className="testimonial-button-prev static mt-0 flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition after:hidden after:text-[0px] hover:bg-secondary rtl:rotate-180"
