@@ -1,5 +1,5 @@
 # --- BUILD STAGE ---
-FROM arm64v8/openjdk:17-jdk-slim AS build
+FROM gradle:7.2.1-jdk17 AS build
 
 WORKDIR /usr/app
 
@@ -10,12 +10,11 @@ COPY settings.gradle ./
 COPY src ./src
 COPY src/main/resources/application.properties ./application.properties
 
-
 RUN chmod +x ./gradlew
 RUN ./gradlew clean bootJar
 
 # --- PACKAGE STAGE ---
-FROM arm64v8/openjdk:20-jdk-slim
+FROM arm64v8/openjdk:17-jdk-slim
 
 WORKDIR /usr/app
 
