@@ -21,18 +21,20 @@ const Chat: FC = () => {
 
 	return (
 		<div>
-			<button
-				className="ui-button"
-				onClick={toggleChatbot}
-			>
-				<img
-					src="https://i.goopics.net/ux8qzl.png"
-					alt="Open Chat"
-					width={24}
-					height={24}
-					style={{marginLeft: 'auto', marginRight: 'auto'}}
-				/>
-			</button>
+			<div className="relative z-50">
+				<button
+					className="ui-button"
+					onClick={toggleChatbot}
+				>
+					<img
+						src="https://i.goopics.net/ux8qzl.png"
+						alt="Open Chat"
+						width={24}
+						height={24}
+						style={{marginLeft: 'auto', marginRight: 'auto'}}
+					/>
+				</button>
+			</div>
 
 			{isOpen && (
                 <div className="container-chat">
