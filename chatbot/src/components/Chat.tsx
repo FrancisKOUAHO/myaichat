@@ -8,11 +8,22 @@ import ChatHeader from './ChatHeader';
 const Chat: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
+	const toggleChatbot = () => {
+		setIsOpen(!isOpen);
+		const iframe: any = document.querySelector('iframe');
+
+		if (isOpen) {
+			iframe.style.pointerEvents = 'none';
+		} else {
+			iframe.style.pointerEvents = 'all';
+		}
+	};
+
 	return (
 		<div>
 			<button
 				className="ui-button"
-				onClick={() => setIsOpen(!isOpen)}
+				onClick={toggleChatbot}
 			>
 				<img
 					src="https://i.goopics.net/ux8qzl.png"
