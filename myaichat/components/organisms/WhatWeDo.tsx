@@ -15,10 +15,14 @@ const WhatWeDo = () => {
                         <div className="grid gap-4 lg:grid-cols-2">
                             <div className="pt-28 lg:pb-10 lg:pt-0">
                                 <div className="heading mb-12 ltr:lg:text-left rtl:lg:text-right">
-                                    <h6>CE QUE NOUS FAISONS</h6>
-                                    <h4 className="pb-4 leading-normal !text-white lg:!leading-[50px]">Augmentez vos performances</h4>
+                                    <h6>BIENVENUE SUR MYAICHAT - VOTRE PARTENAIRE CHATBOT</h6>
+                                    <h4 className="pb-4 leading-normal !text-white lg:!leading-[50px]">Augmentez vos
+                                        performances</h4>
                                     <p className="text-lg font-semibold xl:w-11/12">
-                                        Nous procédons par étapes pour chacune de vos plateformes. Nous aidons le client avec notre talentueux expert.
+                                        Notre Engagement : Maximiser Votre Réussite
+                                        Chez Myaichat, notre mission est de transformer votre expérience
+                                        client et d'amplifier vos conversions en mettant à votre disposition un chatbot
+                                        révolutionnaire.
                                     </p>
                                 </div>
                                 <ul className="space-y-8 text-lg font-semibold text-white">
@@ -33,7 +37,7 @@ const WhatWeDo = () => {
                                                 />
                                             </svg>
                                         </div>
-                                        <p>Développez votre produit</p>
+                                        <p>Améliorez Vos Performances</p>
                                     </li>
                                     <li className="flex items-center gap-3.5">
                                         <div
@@ -46,7 +50,7 @@ const WhatWeDo = () => {
                                                 />
                                             </svg>
                                         </div>
-                                        <p>Organisez votre flux de travail</p>
+                                        <p>Améliorez Vos Performances</p>
                                     </li>
                                     <li className="flex items-center gap-3.5">
                                         <div
@@ -59,7 +63,7 @@ const WhatWeDo = () => {
                                                 />
                                             </svg>
                                         </div>
-                                        <p>Découvrez une nouvelle façon avec nous</p>
+                                        <p>Explorez de Nouvelles Perspectives</p>
                                     </li>
                                     <li className="flex items-center gap-3.5">
                                         <div
@@ -72,7 +76,7 @@ const WhatWeDo = () => {
                                                 />
                                             </svg>
                                         </div>
-                                        <p>Analyses intégrées</p>
+                                        <p>Des Analyses Approfondies à Votre Service</p>
                                     </li>
                                 </ul>
                             </div>
