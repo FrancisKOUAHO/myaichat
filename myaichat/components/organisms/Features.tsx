@@ -1,8 +1,8 @@
 const Features = () => {
     return (
-        <section className="py-14 dark:bg-none lg:py-20 sm:mt-10"
+        <section className="py-14 dark:bg-none lg:py-20"
         style={{background: 'hsl(250, 24%, 9%)'}}>
-            <div className="container">
+            <div className="container sm:mt-10">
                 <div className="lg:w-1/2">
                     <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right">
                         <h6 style={{fontSize: '28px'}}>Nos fonctionnalités</h6>
@@ -36,7 +36,7 @@ const Features = () => {
                         <div className="flex-1">
                             <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">Personnalisation
                                 analytics</h3>
-                            <p className="line-clamp-3">Notre chatbot comprend vos clients pour recommander des produits pertinents....</p>
+                            <p className="line-clamp-3">Notre chatbot comprend vos clients pour recommander des produits pertinents.</p>
                         </div>
                     </div>
                     <div className="flex gap-5" data-aos="fade-up" data-aos-duration="1000">
@@ -96,8 +96,8 @@ const Features = () => {
                         </div>
                         <div className="flex-1">
                             <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">Gestion des commandes</h3>
-                            <p className="line-clamp-3">
-                                Au-delà de la simple gestion, notre chatbot interagit avec les clients, fournissant des informations de commande en temps réel et facilitant les retours
+                            <p>
+                                Au-delà de la simple gestion, notre chatbot interagit avec les clients, fournissant des informations de commande en temps réel et facilitant les retours.
                             </p>
                         </div>
                     </div>
