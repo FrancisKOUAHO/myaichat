@@ -16,7 +16,6 @@ function applyStylesToIframe(iframe) {
             iframe.style.bottom = '0';
             iframe.style.width = '400px';
             iframe.style.zIndex = '10000';
-            iframe.style.pointerEvents = 'none';
             iframe.style.borderRadius = '0.75rem';
 
         } else {
@@ -32,7 +31,6 @@ function applyStylesToIframe(iframe) {
             iframe.style.transformOrigin = 'right bottom';
             iframe.style.transition = 'transform 0.3s cubic-bezier(0, 1.2, 1, 1) 0s, opacity 0.2s ease-out 0s';
             iframe.style.zIndex = '10000';
-            iframe.style.pointerEvents = 'none';
             iframe.style.borderRadius = '0.75rem';
 
         }

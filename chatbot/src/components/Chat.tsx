@@ -1,12 +1,23 @@
 'use client';
 
-import { FC, useState } from 'react';
+import {FC, useEffect, useState} from 'react';
 import ChatInput from './ChatInput';
 import ChatMessages from './ChatMessages';
 import ChatHeader from './ChatHeader';
 
 const Chat: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
+
+	const toggleChatbot = () => {
+		setIsOpen(!isOpen);
+		const iframe: any = document.querySelector('iframe');
+
+		if (isOpen) {
+			iframe.style.pointerEvents = 'none';
+		} else {
+			iframe.style.pointerEvents = 'all';
+		}
+	};
 
 	return (
 		<div>
