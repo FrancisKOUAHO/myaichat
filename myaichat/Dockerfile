@@ -2,7 +2,7 @@
 FROM node:18-alpine
 
 # Définir la variable d'environnement PORT
-ENV PORT 3033
+ENV PORT 3032
 
 # Créer le répertoire de l'application
 RUN mkdir -p /usr/src/app
@@ -19,7 +19,7 @@ COPY . /usr/src/app
 RUN yarn build
 
 # Exposer le port 3030
-EXPOSE 3033
+EXPOSE 3032
 
 ENV NODE_ENV production  # Change to "development" for development if needed
 

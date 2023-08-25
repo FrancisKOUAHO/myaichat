@@ -30,7 +30,7 @@ const Header = (props: any) => {
                 <div className="flex items-center justify-between py-5 lg:py-0">
                     <Link href="/" className="flex gap-2 items-center justify-center">
                         <img src="/assets/images/myaichat.png" alt="myaichat" className="h-10 w-full"/>
-                        <span className="ml-4 text-xl font-bold">Myaichat</span>
+                        <span className="ml-4 text-xl font-bold" style={{color: 'white'}}>Myaichat</span>
                     </Link>
                     <div className="flex items-center">
                         <div onClick={() => toggleMenu()}
@@ -65,10 +65,7 @@ const Header = (props: any) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link
-                                        href="/team"
-                                        className={router.pathname === '/team' ? 'active' : ''}
-                                    >
+                                    <Link href="https://app.myaichat.io/">
                                         Login
                                     </Link>
                                 </li>
