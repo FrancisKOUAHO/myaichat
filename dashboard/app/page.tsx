@@ -50,35 +50,55 @@ const Home = () => {
     };
 
     return (
-        <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:p-8 p-8">
+        <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:p-8 p-8"
+             style={{
+                 background: `linear-gradient(327.21deg, rgba(33, 0, 75, 0.24) 3.65%, rgba(60, 0, 136, 0) 40.32%), linear-gradient(245.93deg, rgba(209, 21, 111, 0.16) 0%, rgba(209, 25, 80, 0) 36.63%), linear-gradient(147.6deg, rgba(58, 19, 255, 0) 29.79%, rgba(98, 19, 255, 0.01) 85.72%), #13111C`,
+                 height: '100vh',
+             }}>
             <div className="grid w-full ">
                 <div className="sm:mx-auto sm:w-full p-8 sm:max-w-md">
-                    <img src='/logo.png' className='mx-auto h-12 w-auto' alt='logo'/>
-                    <h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Se connecter</h1>
-                    <p className="mt-5 text-center text-sm text-gray-600">
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        gap: '10px',
+                        alignItems: 'center',
+                    }}>
+                        <img src='/myaichat.png' style={{width: '70px', height: '70px'}} alt='logo'/>
+                        <span className="text-center text-3xl font-bold tracking-tight"
+                              style={{color: 'white'}}>Myaichat</span>
+                    </div>
+                    <h1 className="mt-6 text-center text-3xl font-bold tracking-tight text-white">Se connecter</h1>
+                    <p className="mt-5 text-center text-sm text-white">
                         Bienvenue !
                     </p>
-                    <p className="mb-5 text-center text-[13px] text-gray-600">
-                        {"Veuillez saisir votre adresse e-mail et un compte sera créé pour vous."}
+                    <p className="mb-5 text-center text-[13px] text-white">
+                        Veuillez saisir votre adresse e-mail et un compte sera créé pour vous.
                     </p>
-                    <div className='bg-white py-10 px-4 shadow sm:rounded-lg sm:px-10'>
+                    <div className='mt-10 py-10 px-4 shadow sm:rounded-lg sm:px-10'
+                         style={{
+                             borderRadius: '10px',
+                             boxShadow: 'rgba(132, 59, 206, 0.15) 0px 4px 24px',
+                         }}
+                    >
                         <div
-                            className="mb-6 flex flex-col justify-center items-center border-gray-200 border-offset-2 pt-4">
-                            <button onClick={handleGoogleConnect}
-                                    className=" text-black inline-flex items-center bg-white text-sm font-normal border border-gray-300 rounded-sm px-4 py-2"
-                                    style={{border: '1px solid #000000', padding: '10px', marginBottom: '10px'}}>
-                                <img className="h-4 w-4 mr-3" src="/googleLogo.png" alt="googleLogo"/>
+                            className="flex justify-center items-center mb-20"
+                            style={{
+                                borderRadius: '10px',
+                                border: '1px solid white',
+                            }}>
+                            <button onClick={handleGoogleConnect} className="flex gap-3 justify-center items-center text-center p-2 text-white">
+                                <img className="h-8 w-8" src="/googleLogo.png" alt="googleLogo"/>
                                 Connexion avec Google
                             </button>
                         </div>
                         <form className="mb-5" onSubmit={handleSubmit}>
                             <div className="pb-5">
-                                <label className="block text-sm font-medium  mb-1" htmlFor="email">
+                                <label className="block text-sm font-medium  mb-1 text-white" htmlFor="email">
                                     Email
                                 </label>
                                 <input
                                     type="email"
-                                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    className="block w-full text-white bg-transparent rounded-md border border-white px-3 py-2 placeholder-white shadow-sm focus:border-white focus:outline-none focus:ring-white sm:text-sm"
                                     id="email"
                                     name="email"
                                     placeholder="Email"
