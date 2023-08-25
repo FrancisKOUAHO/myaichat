@@ -23,7 +23,7 @@ const Chat: FC = () => {
 		<div>
 			<button
 				className="ui-button"
-				onClick={() => setIsOpen(!isOpen)}
+				onClick={() => toggleChatbot()}
 			>
 				<img
 					src="https://i.goopics.net/ux8qzl.png"
