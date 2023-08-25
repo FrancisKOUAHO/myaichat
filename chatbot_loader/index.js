@@ -37,16 +37,24 @@ function applyStylesToIframe(iframe) {
     });
 }
 
+let iframe = null;
+
 function createIframe() {
     const iframe = document.createElement('iframe');
     iframe.src = 'https://ai.myaichat.io';
     //iframe.src = 'http://localhost:3031';
     document.body.appendChild(iframe);
     applyStylesToIframe(iframe);
-
-    iframe.contentWindow.document.addEventListener('click', function (event) {
-        event.stopPropagation();
-    });
 }
 
 createIframe();
+
+document.addEventListener('click', function (event) {
+    if (!iframe || !iframe.style) return;
+
+    if (!iframe.style.pointerEvents || iframe.style.pointerEvents === 'all') {
+        iframe.style.pointerEvents = 'none'; // Bloque les interactions avec l'iframe
+    } else {
+        iframe.style.pointerEvents = 'all'; // Débloque les interactions avec l'iframe
+    }
+});
