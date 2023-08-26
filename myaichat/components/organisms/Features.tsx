@@ -1,15 +1,19 @@
+import {useLanguage} from "../../contexts/LanguageContext";
+
 const Features = () => {
+    const {translations} = useLanguage();
+
     return (
         <section className="py-14 dark:bg-none lg:py-20"
-        style={{background: 'hsl(250, 24%, 9%)'}}>
+                 style={{background: 'hsl(250, 24%, 9%)'}}>
             <div className="container sm:mt-10">
                 <div className="lg:w-1/2">
                     <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right">
-                        <h6 style={{fontSize: '28px'}}>Nos fonctionnalités</h6>
+                        <h6 style={{fontSize: '28px'}}>{translations.features.title}</h6>
                         <h6 className="text-black mt-4 text-lg font-semibold"
-                        style={{color: 'white', fontSize: '38px', lineHeight: '50px'}}
+                            style={{color: 'white', fontSize: '38px', lineHeight: '50px'}}
                         >
-                            Améliorez votre expérience client grâce à notre Chatbot
+                            {translations.features.content}
                         </h6>
                     </div>
                 </div>
@@ -34,9 +38,8 @@ const Features = () => {
                             </svg>
                         </div>
                         <div className="flex-1">
-                            <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">Personnalisation
-                                analytics</h3>
-                            <p className="line-clamp-3">Notre chatbot comprend vos clients pour recommander des produits pertinents.</p>
+                            <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">{translations.personalize.title}</h3>
+                            <p className="line-clamp-3">{translations.personalize.content}</p>
                         </div>
                     </div>
                     <div className="flex gap-5" data-aos="fade-up" data-aos-duration="1000">
@@ -66,8 +69,8 @@ const Features = () => {
                             </svg>
                         </div>
                         <div className="flex-1">
-                            <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">Disponibilité 24/7</h3>
-                            <p className="line-clamp-3">Notre chatbot est toujours là pour aider, jour et nuit.</p>
+                            <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">{translations.Availability.title}</h3>
+                            <p className="line-clamp-3">{translations.Availability.content}</p>
                         </div>
                     </div>
                     <div className="flex gap-5" data-aos="fade-up" data-aos-duration="1000">
@@ -95,9 +98,9 @@ const Features = () => {
                             </svg>
                         </div>
                         <div className="flex-1">
-                            <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">Gestion des commandes</h3>
+                            <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">{translations.OrderManagement.title}</h3>
                             <p>
-                                Au-delà de la simple gestion, notre chatbot interagit avec les clients, fournissant des informations de commande en temps réel et facilitant les retours.
+                                {translations.OrderManagement.content}
                             </p>
                         </div>
                     </div>
@@ -116,8 +119,8 @@ const Features = () => {
                             </svg>
                         </div>
                         <div className="flex-1">
-                            <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">Analyse de données</h3>
-                            <p className="line-clamp-3">Il collecte et analyse les données pour améliorer constamment l'expérience utilisateur.</p>
+                            <h3 className="mb-6 text-[22px] font-extrabold dark:text-white">{translations.DataAnalysis.title}</h3>
+                            <p className="line-clamp-3">{translations.DataAnalysis.content}</p>
                         </div>
                     </div>
                 </div>

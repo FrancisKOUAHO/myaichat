@@ -1,5 +1,94 @@
 {
-    "home": {
-        "title": "Home"
+  "home": {
+    "title": "MyaiChat",
+    "content": "Boost Your Sales: Up to 35%",
+    "subContent": "Conversion with our Chatbot",
+    "subContent2": "Personalized Shopping Guide for Every Visitor",
+    "button": "Try the chatbot now"
+  },
+  "links": {
+    "home": "Home",
+    "blog": "Blog",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "login": "Login"
+  },
+  "langs": {
+    "fr": "French",
+    "en": "English"
+  },
+  "features": {
+    "title": "Our Features",
+    "content": "Enhance your customer experience with our Chatbot"
+  },
+  "personalize": {
+    "title": "Personalization Analytics",
+    "content": "Our chatbot understands your customers to recommend relevant products."
+  },
+  "Availability": {
+    "title": "24/7 Availability",
+    "content": "Our chatbot is always there to help, day and night."
+  },
+  "OrderManagement": {
+    "title": "Order Management",
+    "content": "Beyond simple management, our chatbot interacts with customers, providing real-time order information and facilitating returns."
+  },
+  "DataAnalysis": {
+    "title": "Data Analysis",
+    "content": "It collects and analyzes data to continuously improve the user experience."
+  },
+  "firstClass": "Faced with unanswered queries or struggles to find products, customers might abandon their incomplete shopping carts.",
+  "conversionOptimization": {
+    "title": "Conversion Optimization",
+    "content": "60% of users interacting with the chatbot convert, that's what chatbots offer you, according to a Forrester study. Users engaging with these automated assistants are significantly more likely to make a purchase, thereby increasing engagement on your site."
+  },
+  "instantResponses": {
+    "title": "Instant Responses",
+    "content": "90% of customers demand immediate answers to their questions. With fast responses and personalized recommendations, the shopping experience becomes smooth, conducive to closing the sale."
+  },
+  "welcome": {
+    "title": "WELCOME TO MYAICHAT - YOUR CHATBOT PARTNER",
+    "subTitle": "Boost your performance",
+    "content": "Our Commitment: Maximize Your Success. At Myaichat, our mission is to transform your customer experience and amplify your conversions by providing you with a revolutionary chatbot.",
+    "items": [
+      {
+        "title": "Enhance Your Performance"
+      },
+      {
+        "title": "Explore New Perspectives"
+      },
+      {
+        "title": "In-Depth Analytics at Your Service"
+      }
+    ]
+  },
+  "Testimony": "Testimony",
+  "comment": "Customer Comments",
+  "testimonials": [
+    {
+      "name": "Allan Branch",
+      "role": "CEO of Lifted",
+      "message": "MyAIChat has been a true asset to our business. Thanks to their cutting-edge technology, we've been able to improve our customer service and provide an exceptional user experience."
+    },
+    {
+      "name": "Sophie Ramirez",
+      "role": "Marketing Manager",
+      "message": "We integrated MyAIChat on our website and our customers are thrilled with the speed and efficiency of their responses. It has truly boosted our online sales."
+    },
+    {
+      "name": "Alexandre Dubois",
+      "role": "E-commerce Owner",
+      "message": "The live chat feature of MyAIChat has transformed how we interact with our customers. It's like having 24/7 support at your fingertips."
     }
+  ],
+  "footer": {
+    "legal": {
+      "legal": "Legal",
+      "termsAndConditions": "Terms and Conditions",
+      "privacyPolicy": "Privacy Policy",
+      "blog": "Blog"
+    },
+    "copyright": "Copyright©",
+    "myaichat": "myaichat Corp."
+  }
 }
