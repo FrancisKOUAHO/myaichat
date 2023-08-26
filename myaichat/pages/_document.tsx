@@ -17,7 +17,7 @@ export default function Document() {
             <body>
             <Main/>
             <NextScript/>
-            <div id="widget-chat-container">
+            <div className="my-chat-container">
                 <script src="https://connect.myaichat.io/index.js"></script>
             </div>
             </body>
