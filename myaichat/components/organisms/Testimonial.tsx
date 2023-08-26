@@ -1,89 +1,17 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Autoplay, Navigation } from 'swiper';
+import {Autoplay, Navigation} from 'swiper';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { IRootState } from '../../store';
+import {useSelector} from 'react-redux';
+import {IRootState} from '../../store';
+import {useLanguage} from "../../contexts/LanguageContext";
 
-const Testimonial = ({
-    showTitle = true,
-    type = 'common',
-    feedbacks = [
-        {
-            id: 1,
-            name: 'Allan Branch',
-            role: 'CEO of Lifted',
-            message:
-                "MyAIChat a été un véritable atout pour notre entreprise. Grâce à leur technologie de pointe, nous avons pu améliorer notre service client et offrir une expérience utilisateur exceptionnelle.",
-        },
-        {
-            id: 2,
-            name: 'Sophie Ramirez',
-            role: 'Marketing Manager',
-            message:
-                "Nous avons intégré MyAIChat sur notre site web et nos clients sont ravis de la rapidité et de l'efficacité de leurs réponses. Cela a vraiment boosté nos ventes en ligne.",
-        },
-        {
-            id: 3,
-            name: 'Alexandre Dubois',
-            role: 'E-commerce Owner',
-            message:
-                "La fonctionnalité de chat en direct de MyAIChat a transformé la manière dont nous interagissons avec nos clients. C'est comme avoir un support 24/7 à portée de main.",
-        },
-        {
-            id: 4,
-            name: 'Emily Carter',
-            role: 'Online Retailer',
-            message:
-                "MyAIChat a simplifié la gestion des questions fréquentes de nos clients. Maintenant, nous pouvons nous concentrer sur des problèmes plus complexes tout en offrant une assistance rapide à nos utilisateurs.",
-        },
-        {
-            id: 5,
-            name: 'Marc Dupont',
-            role: 'Small Business Owner',
-            message:
-                "En tant que petite entreprise, il était difficile de fournir un support client de qualité en permanence. MyAIChat a résolu ce problème et a considérablement amélioré notre service.",
-        },
-        {
-            id: 6,
-            name: 'Jessica Patel',
-            role: 'Digital Marketer',
-            message:
-                "L'IA de MyAIChat est incroyablement précise et pertinente dans ses réponses. Cela crée une expérience utilisateur fluide et professionnelle sur notre site web.",
-        },
-        {
-            id: 7,
-            name: 'Daniel Rodriguez',
-            role: 'E-commerce Manager',
-            message:
-                "Nous avons constaté une augmentation significative de l'engagement des visiteurs depuis que nous avons intégré MyAIChat. Les clients adorent l'interaction instantanée.",
-        },
-        {
-            id: 8,
-            name: 'Sophia Miller',
-            role: 'Startup Founder',
-            message:
-                "Je suis impressionnée par la capacité de MyAIChat à comprendre et à répondre aux questions complexes de nos utilisateurs. Cela nous a aidés à gagner en crédibilité.",
-        },
-        {
-            id: 9,
-            name: 'Lucas Johnson',
-            role: 'Tech Enthusiast',
-            message:
-                "MyAIChat est un exemple brillant de l'avenir de la technologie. Son intelligence artificielle est remarquablement utile et adaptative.",
-        },
-        {
-            id: 10,
-            name: 'Isabelle Martin',
-            role: 'Online Shop Owner',
-            message:
-                "Avoir MyAIChat sur notre site nous a permis d'offrir un support client exceptionnel et de fidéliser nos clients. Cela a eu un impact positif sur nos ventes.",
-        },
-    ],
-    className = '',
-}) => {
+const Testimonial = ({showTitle = true, type = 'common', className = ''}) => {
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
+
+    const {translations} = useLanguage();
+
 
     return (
         <section className={`relative py-14 lg:py-[100px] ${className}`}
@@ -107,19 +35,22 @@ const Testimonial = ({
                     dir={isRtl ? 'rtl' : 'ltr'}
                     key={isRtl ? 'true' : 'false'}
                 >
-                    {feedbacks.map((feedback: any) => {
+                    {translations.testimonials.map((feedback: any) => {
                         return (
                             <SwiperSlide key={feedback.id}>
-                                <div className="flex flex-col items-center gap-7 pb-3 sm:pb-[70px] lg:flex-row xl:gap-12">
+                                <div
+                                    className="flex flex-col items-center gap-7 pb-3 sm:pb-[70px] lg:flex-row xl:gap-12">
                                     <div className="relative pl-10 pt-[30px] rtl:rotate-y-180">
                                         <span className="absolute top-0 left-0">
-                                            <img src="/assets/images/testimonial-shadow.svg" alt="" />
+                                            <img src="/assets/images/testimonial-shadow.svg" alt=""/>
                                         </span>
-                                        <div className="w-full max-w-[347px] overflow-hidden rounded-b-3xl rounded-tl-[200px]">
-                                            <img src={feedback.thumbnail} alt="" />
+                                        <div
+                                            className="w-full max-w-[347px] overflow-hidden rounded-b-3xl rounded-tl-[200px]">
+                                            <img src={feedback.thumbnail} alt=""/>
                                         </div>
                                         <span className="absolute -bottom-5 -right-5">
-                                            <svg width="42" height="47" viewBox="0 0 42 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="42" height="47" viewBox="0 0 42 47" fill="none"
+                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M1 45.2263C12.6553 45.2263 24.325 39.9256 30.3725 29.8141C35.6466 20.9958 37.7394 10.8446 40.2006 1"
                                                     stroke="url(#paint0_linear_134_9118)"
@@ -127,9 +58,10 @@ const Testimonial = ({
                                                     strokeLinecap="round"
                                                 />
                                                 <defs>
-                                                    <linearGradient id="paint0_linear_134_9118" x1="40" y1="6" x2="-2" y2="39.5" gradientUnits="userSpaceOnUse">
-                                                        <stop stopColor="#B476E5" />
-                                                        <stop offset="1" stopColor="#B476E5" stopOpacity="0" />
+                                                    <linearGradient id="paint0_linear_134_9118" x1="40" y1="6" x2="-2"
+                                                                    y2="39.5" gradientUnits="userSpaceOnUse">
+                                                        <stop stopColor="#B476E5"/>
+                                                        <stop offset="1" stopColor="#B476E5" stopOpacity="0"/>
                                                     </linearGradient>
                                                 </defs>
                                             </svg>
@@ -138,7 +70,8 @@ const Testimonial = ({
                                     <div className="w-full max-w-[570px] lg:mt-[150px]">
                                         <div className="rounded-3xl bg-gray-dark p-6">
                                             <div className="pb-8">
-                                                <svg width="96" height="16" viewBox="0 0 96 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <svg width="96" height="16" viewBox="0 0 96 16" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M86.2864 2.84744C87.0637 1.5558 88.9363 1.5558 89.7136 2.84744L90.1964 3.64962C90.4756 4.11365 90.9311 4.44459 91.4587 4.56678L92.3708 4.77803C93.8395 5.11816 94.4181 6.8991 93.4299 8.03752L92.8162 8.74454C92.4612 9.15352 92.2872 9.68898 92.334 10.2285L92.4149 11.1613C92.5453 12.6631 91.0303 13.7638 89.6423 13.1757L88.7802 12.8105C88.2815 12.5993 87.7185 12.5993 87.2198 12.8105L86.3577 13.1757C84.9697 13.7638 83.4547 12.6631 83.5851 11.1613L83.666 10.2285C83.7128 9.68899 83.5388 9.15352 83.1838 8.74454L82.5701 8.03752C81.5819 6.89911 82.1605 5.11816 83.6292 4.77803L84.5413 4.56678C85.0689 4.44459 85.5244 4.11365 85.8036 3.64962L86.2864 2.84744Z"
                                                         fill="#7780A1"
@@ -166,7 +99,8 @@ const Testimonial = ({
                                                 <h5 className="font-extrabold text-primary">{feedback.name}</h5>
                                                 <h6 className="text-sm font-bold italic">{feedback.role}</h6>
                                                 <span className="absolute right-0 bottom-0">
-                                                    <svg width="100" height="73" viewBox="0 0 100 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg width="100" height="73" viewBox="0 0 100 73" fill="none"
+                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <g opacity="0.05">
                                                             <path
                                                                 d="M79.5222 0C85.1084 0 89.8948 2.12795 93.8833 6.1167C98.1392 10.1054 100 14.8935 100 20.2128C100 25.2666 98.4045 29.7875 94.9462 33.7764C91.4881 38.0323 85.9039 38.8302 81.3825 39.0952C82.1803 45.7443 85.9037 52.6589 89.3619 57.4472C89.8944 58.245 90.425 59.0427 91.2246 59.5752C92.2876 60.6382 92.2876 62.2356 91.2246 63.2986L83.5126 71.543C82.4495 72.8732 80.3216 72.606 79.2567 71.543C76.0657 68.0849 72.8731 63.831 70.2144 59.5751C62.7675 47.6072 59.044 35.6393 59.044 23.669C59.044 16.7544 61.1719 10.9032 65.1606 6.64734C69.1493 2.39334 74.2029 0.000144939 79.5217 0.000144939L79.5222 0Z"
@@ -186,8 +120,10 @@ const Testimonial = ({
                             </SwiperSlide>
                         );
                     })}
-                    <div className="bottom-0 z-[1] mt-5 flex items-center justify-end gap-4 ltr:right-28 rtl:left-28 sm:absolute sm:mt-0 sm:justify-end">
-                        <Link href="#" className="text-sm font-extrabold text-white transition hover:text-secondary dark:hover:text-secondary">
+                    <div
+                        className="bottom-0 z-[1] mt-5 flex items-center justify-end gap-4 ltr:right-28 rtl:left-28 sm:absolute sm:mt-0 sm:justify-end">
+                        <Link href="#"
+                              className="text-sm font-extrabold text-white transition hover:text-secondary dark:hover:text-secondary">
                             {' '}
                             View All{' '}
                         </Link>
@@ -196,7 +132,8 @@ const Testimonial = ({
                             type="button"
                             className="swiper-button-prev2 static mt-0 flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition after:text-[0px] hover:bg-secondary rtl:rotate-180"
                         >
-                            <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="7" height="12" viewBox="0 0 7 12" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M5.95007 1.2002L1.48924 5.3424C1.06317 5.73803 1.06317 6.41236 1.48924 6.80799L5.95007 10.9502"
                                     stroke="white"
@@ -210,7 +147,8 @@ const Testimonial = ({
                             type="button"
                             className="swiper-button-next2 static mt-0 flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition after:text-[0px] hover:bg-secondary rtl:rotate-180"
                         >
-                            <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="7" height="12" viewBox="0 0 7 12" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M1.05005 10.7998L5.51089 6.6576C5.93695 6.26197 5.93695 5.58764 5.51089 5.19201L1.05005 1.0498"
                                     stroke="white"
@@ -226,7 +164,8 @@ const Testimonial = ({
                     {type.toLowerCase() === 'modern-saas' && (
                         <div>
                             <div className="absolute top-0 ltr:left-1/4 rtl:right-1/4 rtl:rotate-y-180">
-                                <svg width="191" height="66" viewBox="0 0 191 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="191" height="66" viewBox="0 0 191 66" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         fillRule="evenodd"
                                         clipRule="evenodd"
@@ -235,15 +174,17 @@ const Testimonial = ({
                                         fillOpacity="0.5"
                                     />
                                     <defs>
-                                        <linearGradient id="paint0_linear_823_12546" x1="180" y1="51.5" x2="34" y2="-15.5" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="#B476E5" />
-                                            <stop offset="1" stopColor="#B476E5" stopOpacity="0" />
+                                        <linearGradient id="paint0_linear_823_12546" x1="180" y1="51.5" x2="34"
+                                                        y2="-15.5" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#B476E5"/>
+                                            <stop offset="1" stopColor="#B476E5" stopOpacity="0"/>
                                         </linearGradient>
                                     </defs>
                                 </svg>
                             </div>
                             <div className="absolute top-1/4 hidden ltr:right-4 rtl:left-4 rtl:rotate-y-180 lg:block">
-                                <svg width="301" height="322" viewBox="0 0 301 322" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="301" height="322" viewBox="0 0 301 322" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         fillRule="evenodd"
                                         clipRule="evenodd"
@@ -252,9 +193,10 @@ const Testimonial = ({
                                         fillOpacity="0.3"
                                     />
                                     <defs>
-                                        <linearGradient id="paint0_linear_823_12555" x1="177" y1="146" x2="218.5" y2="201.5" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="#47BDFF" />
-                                            <stop offset="1" stopColor="#47BDFF" stopOpacity="0" />
+                                        <linearGradient id="paint0_linear_823_12555" x1="177" y1="146" x2="218.5"
+                                                        y2="201.5" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#47BDFF"/>
+                                            <stop offset="1" stopColor="#47BDFF" stopOpacity="0"/>
                                         </linearGradient>
                                     </defs>
                                 </svg>
@@ -262,9 +204,10 @@ const Testimonial = ({
                         </div>
                     )}
                     <div className="container">
-                        <div className={`heading text-center ltr:lg:text-left rtl:lg:text-right ${showTitle ? '' : 'hidden'}`}>
-                            <h6>Témoignage</h6>
-                            <h4 className="!text-white">Commentaires de nos clients</h4>
+                        <div
+                            className={`heading text-center ltr:lg:text-left rtl:lg:text-right ${showTitle ? '' : 'hidden'}`}>
+                            <h6>{translations.Testimony}</h6>
+                            <h4 className="!text-white">{translations.comment}</h4>
                         </div>
                         <div className={`mx-auto ${type.toLowerCase() === 'common' ? 'lg:w-11/12' : ''} `}>
                             <div className="relative sm:py-12 md:py-0">
@@ -274,7 +217,7 @@ const Testimonial = ({
                                     spaceBetween={30}
                                     loop={true}
                                     speed={1000}
-                                    autoplay={{ delay: 3000, disableOnInteraction: false }}
+                                    autoplay={{delay: 3000, disableOnInteraction: false}}
                                     navigation={{
                                         nextEl: '.testimonial-button-next',
                                         prevEl: '.testimonial-button-prev',
@@ -283,7 +226,7 @@ const Testimonial = ({
                                     key={isRtl ? 'true' : 'false'}
                                 >
                                     {type.toLowerCase() === 'common' &&
-                                        feedbacks.map((feedback: any) => {
+                                        translations.testimonials.map((feedback: any) => {
                                             return (
                                                 <SwiperSlide key={feedback.id}>
                                                     <div className="items-center gap-4 sm:grid sm:grid-cols-3">
@@ -353,13 +296,16 @@ const Testimonial = ({
                                             );
                                         })}
                                     {type.toLowerCase() === 'modern-saas' &&
-                                        feedbacks.map((feedback: any) => {
+                                        translations.testimonials.map((feedback: any) => {
                                             return (
                                                 <SwiperSlide key={feedback.id}>
-                                                    <div className="mb-6 flex flex-col items-center justify-between gap-6 md:mb-14 md:flex-row">
-                                                        <div className="relative rounded-3xl bg-white/[0.02] p-6 md:w-2/3 lg:w-1/2">
+                                                    <div
+                                                        className="mb-6 flex flex-col items-center justify-between gap-6 md:mb-14 md:flex-row">
+                                                        <div
+                                                            className="relative rounded-3xl bg-white/[0.02] p-6 md:w-2/3 lg:w-1/2">
                                                             <div className="absolute right-4 top-4">
-                                                                <svg width="90" height="73" viewBox="0 0 90 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <svg width="90" height="73" viewBox="0 0 90 73"
+                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <g opacity="0.05">
                                                                         <path
                                                                             d="M69.4343 72.4434C75.0205 72.4434 79.8069 70.3154 83.7954 66.3267C88.0513 62.338 89.9121 57.5499 89.9121 52.2306C89.9121 47.1768 88.3166 42.6559 84.8583 38.6669C81.4002 34.4111 75.816 33.6131 71.2946 33.3481C72.0924 26.699 75.8158 19.7844 79.274 14.9962C79.8065 14.1984 80.3371 13.4007 81.1367 12.8682C82.1997 11.8052 82.1997 10.2078 81.1367 9.1448L73.4247 0.900398C72.3616 -0.429802 70.2337 -0.162651 69.1688 0.900398C65.9779 4.3585 62.7852 8.6124 60.1266 12.8683C52.6796 24.8362 48.9561 36.8041 48.9561 48.7743C48.9561 55.6889 51.084 61.5401 55.0728 65.796C59.0615 70.05 64.1151 72.4432 69.4339 72.4432L69.4343 72.4434Z"
@@ -373,7 +319,8 @@ const Testimonial = ({
                                                                 </svg>
                                                             </div>
                                                             <div className="pb-8">
-                                                                <svg width="96" height="16" viewBox="0 0 96 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <svg width="96" height="16" viewBox="0 0 96 16"
+                                                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path
                                                                         d="M86.2864 2.84744C87.0637 1.5558 88.9363 1.5558 89.7136 2.84744L90.1964 3.64962C90.4756 4.11365 90.9311 4.44459 91.4587 4.56678L92.3708 4.77803C93.8395 5.11816 94.4181 6.8991 93.4299 8.03752L92.8162 8.74454C92.4612 9.15352 92.2872 9.68898 92.334 10.2285L92.4149 11.1613C92.5453 12.6631 91.0303 13.7638 89.6423 13.1757L88.7802 12.8105C88.2815 12.5993 87.7185 12.5993 87.2198 12.8105L86.3577 13.1757C84.9697 13.7638 83.4547 12.6631 83.5851 11.1613L83.666 10.2285C83.7128 9.68899 83.5388 9.15352 83.1838 8.74454L82.5701 8.03752C81.5819 6.89911 82.1605 5.11816 83.6292 4.77803L84.5413 4.56678C85.0689 4.44459 85.5244 4.11365 85.8036 3.64962L86.2864 2.84744Z"
                                                                         fill="#7780A1"
@@ -402,13 +349,6 @@ const Testimonial = ({
                                                                 <h6 className="text-sm font-bold italic">{feedback.role}</h6>
                                                             </div>
                                                         </div>
-                                                        <div className="mx-auto w-40 flex-1 md:mx-0 md:w-full md:max-w-sm">
-                                                            <img
-                                                                src={feedback.thumbnail}
-                                                                alt="testimonial"
-                                                                className="h-full w-full rounded-[30px] object-cover"
-                                                            />
-                                                        </div>
                                                     </div>
                                                 </SwiperSlide>
                                             );
@@ -423,7 +363,8 @@ const Testimonial = ({
                                         type="button"
                                         className="testimonial-button-prev static mt-0 flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition after:hidden after:text-[0px] hover:bg-secondary rtl:rotate-180"
                                     >
-                                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M5.95007 1.2002L1.48924 5.3424C1.06317 5.73803 1.06317 6.41236 1.48924 6.80799L5.95007 10.9502"
                                                 stroke="white"
@@ -436,7 +377,8 @@ const Testimonial = ({
                                         type="button"
                                         className="testimonial-button-next static mt-0 flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition after:hidden after:text-[0px] hover:bg-secondary rtl:rotate-180"
                                     >
-                                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M1.05005 10.7998L5.51089 6.6576C5.93695 6.26197 5.93695 5.58764 5.51089 5.19201L1.05005 1.0498"
                                                 stroke="white"

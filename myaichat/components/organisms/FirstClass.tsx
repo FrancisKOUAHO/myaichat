@@ -1,14 +1,15 @@
-import Link from "next/link";
+import {useLanguage} from "../../contexts/LanguageContext";
 
 const FirstClass = () => {
+    const {translations} = useLanguage();
+
     return (
         <section className="py-14 dark:bg-white/[0.03] lg:py-20"
                  style={{background: 'hsl(250, 24%, 9%)'}}
         >
             <div className="container">
                 <div className="heading mb-5 text-center">
-                    <h4 style={{color: 'white'}}>Face à des interrogations sans réponses ou des difficultés pour trouver
-                        des produits, les clients risquent de laisser leurs paniers d'achats inachevés.</h4>
+                    <h4 style={{color: 'white'}}>{translations.firstClass}</h4>
                 </div>
                 <div
                     className="mt-14 grid gap-4 rounded-2xl py-8 px-4 sm:p-10 lg:mt-20 lg:grid-cols-2"
@@ -17,13 +18,9 @@ const FirstClass = () => {
                     }}
                 >
                     <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right">
-                        <h4 style={{color: 'white', fontSize: '26px'}}>Optimisation des Conversions</h4>
+                        <h4 style={{color: 'white', fontSize: '26px'}}>{translations.conversionOptimization.title}</h4>
                         <p className="mt-6 text-lg font-semibold" style={{color: 'white'}}>
-                            60% des utilisateurs qui interagissent avec le chatbot convertissent, c'est ce que vous
-                            offrent
-                            les chatbots, selon une étude de Forrester. Les utilisateurs interagissant avec ces
-                            assistants automatisés sont en effet nettement plus enclins à concrétiser leur achat,
-                            augmentant ainsi l'engagement sur votre site.
+                            {translations.conversionOptimization.content}
                         </p>
                     </div>
                     <div className="lg:ltr:pl-24 lg:rtl:pr-24">
@@ -37,12 +34,9 @@ const FirstClass = () => {
                     }}
                 >
                     <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right">
-                        <h4 style={{color: 'white', fontSize: '26px'}}>Réponses Instantanées</h4>
+                        <h4 style={{color: 'white', fontSize: '26px'}}>{translations.instantResponses.title}</h4>
                         <p className="mt-6 text-lg font-semibold" style={{color: 'white'}}>
-                            90%.
-                            des clients exigent des réponses immédiates à leurs questions. Avec des réponses rapides et
-                            des recommandations personnalisées, l'expérience d'achat devient fluide, propice à la
-                            conclusion de la vente.
+                            {translations.instantResponses.content}
                         </p>
                     </div>
                     <div className="lg:ltr:pl-24 lg:rtl:pr-24">

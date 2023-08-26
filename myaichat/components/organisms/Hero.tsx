@@ -2,9 +2,12 @@ import Link from "next/link";
 
 import {useSelector} from "react-redux";
 import {IRootState} from "../../store";
+import {useLanguage} from "../../contexts/LanguageContext";
 
 const Hero = () => {
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
+
+    const {translations} = useLanguage();
 
     return (
         <section
@@ -19,15 +22,15 @@ const Hero = () => {
                     <div
                         className="pt-14 pb-8 mt-[90px] text-center text-white lg:w-3/5 lg:py-20 ltr:lg:text-left rtl:lg:text-right">
                         <h2 className="text-xl font-extrabold leading-normal sm:text-1xl lg:text-[40px] lg:leading-[64px]">
-                            <span className="text-white">Boostez Vos Ventes : Jusqu'à 35%<br></br></span>
-                            <span className="text-white">de Conversion avec notre Chatbot</span>
+                            <span className="text-white">{translations.home.content}<br></br></span>
+                            <span className="text-white">{translations.home.subContent}</span>
                         </h2>
                         <p className="my-8 text-lg lg:w-3/4 text-white">
-                            Un Guide d'Achat Personnalisé pour Chaque Visiteur
+                            {translations.home.subContent2}
                         </p>
                         <Link href="https://app.myaichat.io/"
                               className="border transform transition-transform duration-50 active:scale-95 focus:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-50 border-pink-500 hover:border-pink-600 disabled:bg-pink-500 disabled:border-pink-500 focus-visible:ring-pink-600 py-2 px-3 rounded-md text-base leading-6 space-x-3 !rounded-lg !py-3 !px-11 h-[50px] text-white font-semibold shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] hover:bg-[linear-gradient(76.35deg,_#660AC2_15.89%,_#850AC2_89.75%)] focus:bg-[linear-gradient(76.35deg,_#4D0891_15.89%,_#630891_89.75%)]">
-                            Essayez le chatbot maintenant
+                            {translations.home.button}
                         </Link>
                     </div>
                     <div
