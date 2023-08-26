@@ -5,17 +5,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const style = document.createElement('style');
     style.innerHTML = `
-    .widget-chat-button {
+    .widget-chat-container {
       position: fixed;
+      right: 15px;
+      bottom: 20px;
+      z-index: 999999999;
+    }
+
+    .widget-chat-button {
       width: 50px;
       height: 50px;
       border-radius: 25px;
       background-color: black;
       cursor: pointer;
-      z-index: 999999999;
       transition: all 0.2s ease-in-out 0s;
-      right: 15px;
-      bottom: 20px;
       transform: scale(1);
     }
 
@@ -42,19 +45,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     container.appendChild(button);
 
-    function toggleChat() {
-        const iframe = document.querySelector('iframe');
-        iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
-    }
-
-    const iframe = document.createElement('iframe');
-    iframe.src = 'https://ai.myaichat.io'; // or a local URL for development
-    document.body.appendChild(iframe);
+    const iframe = createIframe();
+    container.appendChild(iframe);
     applyStylesToIframe(iframe);
 });
 
+function createIframe() {
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://ai.myaichat.io'; // or a local URL for development
+    document.body.appendChild(iframe);
+    return iframe;
+}
+
 function applyStylesToIframe(iframe) {
-    window.addEventListener('load', () => {
+    function updateStyles() {
         const widthWindow = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         const isMobile = widthWindow < 768;
 
@@ -72,5 +76,14 @@ function applyStylesToIframe(iframe) {
         iframe.style.bottom = '0';
         iframe.style.zIndex = '9999';
         iframe.style.borderRadius = '0.75rem';
-    });
+    }
+
+    window.addEventListener('load', updateStyles);
+    window.addEventListener('resize', updateStyles);
+    updateStyles();
+}
+
+function toggleChat() {
+    const iframe = document.querySelector('iframe');
+    iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
 }
