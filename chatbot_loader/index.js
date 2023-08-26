@@ -56,8 +56,6 @@ function applyStylesToIframe(iframe) {
     }
 
     window.addEventListener('load', updateStyles);
-
-    window.addEventListener('resize', updateStyles);
     updateStyles();
 }
 
