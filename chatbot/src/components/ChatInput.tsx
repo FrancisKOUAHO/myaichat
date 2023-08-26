@@ -6,10 +6,9 @@ import { Message } from '@/lib/validators/message'
 import { useMutation } from '@tanstack/react-query'
 import { CornerDownLeft, Loader2 } from 'lucide-react'
 import { nanoid } from 'nanoid'
-import { FC, HTMLAttributes, useContext, useRef, useState } from 'react'
+import {FC, HTMLAttributes, useContext, useEffect, useRef, useState} from 'react'
 import { toast } from 'react-hot-toast'
 import TextareaAutosize from 'react-textarea-autosize'
-import {parse} from "url";
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -24,14 +23,18 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
     setIsMessageUpdating,
   } = useContext(MessagesContext)
 
+  const [domain, setDomain] = useState('');
 
-  const siteURL = document.referrer || window.location.href;
-  const hostname = new URL(siteURL).hostname;
-  const domain = hostname.replace('www.', '').split('.')[0];
+  useEffect(() => {
+    const siteURL = document.referrer || window.location.href;
+    const hostname = new URL(siteURL).hostname;
+    const domain = hostname.replace('www.', '').split('.')[0];
+    setDomain(domain);
+  }, []);
 
   const { mutate: sendMessage, isLoading } = useMutation({
     mutationKey: ['sendMessage'],
-    // inclure le message pour l'utiliser ultérieurement dans onMutate
+
     mutationFn: async (_message: Message) => {
       const response = await fetch('/api/message', {
         method: 'POST',
@@ -49,7 +52,6 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
     onSuccess: async (stream) => {
       if (!stream) throw new Error('Pas de flux disponible')
 
-      // construire un nouveau message à ajouter
       const id = nanoid()
       const responseMessage: Message = {
         id,
@@ -57,7 +59,6 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
         text: '',
       }
 
-      // ajouter le nouveau message à l'état
       addMessage(responseMessage)
 
       setIsMessageUpdating(true)
@@ -73,7 +74,6 @@ const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
         updateMessage(id, (prev) => prev + chunkValue)
       }
 
-      // nettoyer
       setIsMessageUpdating(false)
       setInput('')
 
