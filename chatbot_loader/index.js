@@ -55,6 +55,8 @@ function applyStylesToIframe(iframe) {
         iframe.style.borderRadius = '0.75rem';
     }
 
+    window.addEventListener('load', updateStyles);
+
     window.addEventListener('resize', updateStyles);
     updateStyles();
 }
