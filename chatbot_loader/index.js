@@ -82,6 +82,9 @@ function applyStylesToIframe(iframe) {
 
 function toggleChat() {
     const iframe = document.querySelector('iframe');
-    const isHidden = iframe.style.transform === 'translateY(100%)';
-    iframe.style.transform = isHidden ? 'none' : 'translateY(100%)';
+    if (iframe.style.display === 'none') {
+        iframe.style.display = 'block';
+    } else {
+        iframe.style.display = 'none';
+    }
 }
