@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     const container = document.createElement('div');
-    container.id = 'widget-chat-container';
+    container.className = 'widget-chat-container';
     document.body.appendChild(container);
 
     const style = document.createElement('style');
     style.innerHTML = `
+    /* Styles for the chat widget */
     .widget-chat-container {
       position: fixed;
       right: 15px;
@@ -27,7 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
         bottom: 10px;
       }
     }
-  `;
+    /* Rest of your styles... */
+    `;
     document.head.appendChild(style);
 
     const button = document.createElement('button');
