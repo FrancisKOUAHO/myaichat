@@ -82,9 +82,5 @@ function applyStylesToIframe(iframe) {
 
 function toggleChat() {
     const iframe = document.querySelector('iframe');
-    if (iframe.style.display === 'none') {
-        iframe.style.display = 'block';
-    } else {
-        iframe.style.display = 'none';
-    }
+    iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
 }
