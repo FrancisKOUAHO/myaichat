@@ -5,21 +5,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const style = document.createElement('style');
     style.innerHTML = `
-    /* Styles for the chat widget */
-    .widget-chat-container {
-      position: fixed;
-      right: 15px;
-      bottom: 20px;
-      z-index: 999999999;
-    }
-
     .widget-chat-button {
+      position: fixed;
       width: 50px;
       height: 50px;
       border-radius: 25px;
       background-color: black;
       cursor: pointer;
+      z-index: 999999999;
       transition: all 0.2s ease-in-out 0s;
+      right: 15px;
+      bottom: 20px;
       transform: scale(1);
     }
 
@@ -28,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
         bottom: 10px;
       }
     }
-    /* Rest of your styles... */
     `;
     document.head.appendChild(style);
 
