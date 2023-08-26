@@ -76,6 +76,7 @@ function applyStylesToIframe(iframe) {
             iframe.style.borderRadius = '0.75rem';
 
         } else {
+            iframe.style.display = 'none';
             iframe.style.border = 'none';
             iframe.style.opacity = '1';
             iframe.style.transform = 'scale(1)';
