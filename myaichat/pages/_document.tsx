@@ -1,25 +1,24 @@
 // pages/_document.js
-import {Html, Head, Main, NextScript} from 'next/document';
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
     return (
         <Html>
             <Head>
                 <title>Myaichat | Accueil</title>
-                <meta charSet="UTF-8"/>
-                <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <meta charSet="UTF-8" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <link rel="icon" type="image/png" href="/assets/favicon.png"/>
-                <link rel="icon" type="icon" href="/assets/images/favicon.png"/>
-                <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700;800&display=swap"
-                      rel="stylesheet"/>
+                <link rel="icon" type="icon" href="/assets/images/favicon.png" />
+                <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;700;800&display=swap" rel="stylesheet" />
             </Head>
             <body>
-            <Main/>
-            <NextScript/>
-            <div className="my-chat-container">
-                <script src="https://connect.myaichat.io/index.js"></script>
-            </div>
+                <Main />
+                <NextScript />
+                <div id="widget-chat-container">
+                    <script src="https://connect.myaichat.io/index.js"></script>
+                </div>
             </body>
         </Html>
     );

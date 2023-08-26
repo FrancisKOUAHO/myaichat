@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const container = document.createElement('div');
-    container.id = 'my-chat-container'; // Change the ID here
+    const container = createChatContainer();
     document.body.appendChild(container);
 
     const style = document.createElement('style');
     style.innerHTML = `
-    .my-chat-container {
+    .widget-chat-button {
       position: fixed;
       width: 50px;
       height: 50px;
@@ -20,25 +19,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     @media (max-width: 767px) {
-      .my-chat-container {
+      .widget-chat-button {
         bottom: 10px;
       }
     }
   `;
     document.head.appendChild(style);
 
-    const button = createChatButton();
+    const button = createChatButton(toggleChat);
     container.appendChild(button);
 
-    const iframe = createChatIframe();
+    const iframe = createIframe();
     container.appendChild(iframe);
     applyStylesToIframe(iframe);
 });
 
-function createChatButton() {
+function createChatContainer() {
+    const container = document.createElement('div');
+    container.id = 'widget-chat-container';
+    return container;
+}
+
+function createChatButton(clickHandler) {
     const button = document.createElement('button');
     button.className = 'widget-chat-button';
-    button.addEventListener('click', toggleChat);
+    button.addEventListener('click', clickHandler);
 
     const img = document.createElement('img');
     img.src = 'https://i.goopics.net/ux8qzl.png';
@@ -51,15 +56,15 @@ function createChatButton() {
     return button;
 }
 
-function createChatIframe() {
+function createIframe() {
     const iframe = document.createElement('iframe');
-    iframe.src = 'https://ai.myaichat.io';
-    document.body.appendChild(iframe);
+    //iframe.src = 'https://ai.myaichat.io';
+    iframe.src = 'http://localhost:3031';
     return iframe;
 }
 
 function applyStylesToIframe(iframe) {
-    function updateStyles() {
+    const updateStyles = () => {
         const widthWindow = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         const isMobile = widthWindow < 768;
 
@@ -77,7 +82,7 @@ function applyStylesToIframe(iframe) {
         iframe.style.bottom = '0';
         iframe.style.zIndex = '9999';
         iframe.style.borderRadius = '0.75rem';
-    }
+    };
 
     window.addEventListener('load', updateStyles);
     window.addEventListener('resize', updateStyles);
