@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const container = createChatContainer();
+    const container = document.createElement('div');
+    container.id = 'widget-chat-container';
     document.body.appendChild(container);
 
     const style = document.createElement('style');
@@ -26,24 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
   `;
     document.head.appendChild(style);
 
-    const button = createChatButton(toggleChat);
-    container.appendChild(button);
-
-    const iframe = createIframe();
-    container.appendChild(iframe);
-    applyStylesToIframe(iframe);
-});
-
-function createChatContainer() {
-    const container = document.createElement('div');
-    container.id = 'widget-chat-container';
-    return container;
-}
-
-function createChatButton(clickHandler) {
     const button = document.createElement('button');
     button.className = 'widget-chat-button';
-    button.addEventListener('click', clickHandler);
+    button.addEventListener('click', toggleChat);
 
     const img = document.createElement('img');
     img.src = 'https://i.goopics.net/ux8qzl.png';
@@ -53,18 +39,22 @@ function createChatButton(clickHandler) {
     img.style.margin = 'auto';
 
     button.appendChild(img);
-    return button;
-}
 
-function createIframe() {
+    container.appendChild(button);
+
+    function toggleChat() {
+        const iframe = document.querySelector('iframe');
+        iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
+    }
+
     const iframe = document.createElement('iframe');
-    //iframe.src = 'https://ai.myaichat.io';
-    iframe.src = 'http://localhost:3031';
-    return iframe;
-}
+    iframe.src = 'https://ai.myaichat.io'; // or a local URL for development
+    document.body.appendChild(iframe);
+    applyStylesToIframe(iframe);
+});
 
 function applyStylesToIframe(iframe) {
-    const updateStyles = () => {
+    window.addEventListener('load', () => {
         const widthWindow = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         const isMobile = widthWindow < 768;
 
@@ -82,14 +72,5 @@ function applyStylesToIframe(iframe) {
         iframe.style.bottom = '0';
         iframe.style.zIndex = '9999';
         iframe.style.borderRadius = '0.75rem';
-    };
-
-    window.addEventListener('load', updateStyles);
-    window.addEventListener('resize', updateStyles);
-    updateStyles();
-}
-
-function toggleChat() {
-    const iframe = document.querySelector('iframe');
-    iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
+    });
 }
