@@ -45,9 +45,7 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
 
     return (
         <App>
-            {/* BEGIN MAIN CONTAINER */}
             <div>
-                {/* screen loader  */}
                 {showLoader && (
                     <div className="screen_loader fixed inset-0 z-[60] grid place-content-center bg-[#fafafa] dark:bg-[#060818]">
                         <svg
