@@ -8,7 +8,7 @@ const nextConfig = {
     },
     i18n: {
         locales: ['fr', 'en-US'],
-        defaultLocale: 'en-US',
+        defaultLocale: 'fr',
     },
 };
 
