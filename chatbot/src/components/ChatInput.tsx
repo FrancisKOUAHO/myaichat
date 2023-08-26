@@ -94,12 +94,6 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
             <div className='relative mt-4 flex-1 overflow-hidden rounded-lg border-none outline-none'>
                 <TextareaAutosize
                     ref={textareaRef}
-                    onClick={() => {
-                        if (!input) {
-                            textareaRef.current?.removeAttribute('readonly');
-                            textareaRef.current?.focus(); // Mettre le focus sur l'input
-                        }
-                    }}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                             e.preventDefault()
