@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function createIframe() {
     const iframe = document.createElement('iframe');
     iframe.src = 'https://ai.myaichat.io'; // or a local URL for development
+    iframe.style.display = 'none'; // Start with the iframe hidden
     document.body.appendChild(iframe);
     return iframe;
 }
@@ -59,7 +60,6 @@ function applyStylesToIframe(iframe) {
         const widthWindow = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         const isMobile = widthWindow < 768;
 
-        iframe.style.display = 'none';
         iframe.style.border = 'none';
         iframe.style.opacity = '1';
         iframe.style.transform = 'scale(1)';
@@ -77,7 +77,6 @@ function applyStylesToIframe(iframe) {
 
     window.addEventListener('load', updateStyles);
     window.addEventListener('resize', updateStyles);
-    updateStyles();
 }
 
 function toggleChat() {
