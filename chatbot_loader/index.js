@@ -70,7 +70,7 @@ function applyStylesToIframe(iframe) {
         iframe.style.transition = 'transform 0.3s cubic-bezier(0, 1.2, 1, 1) 0s, opacity 0.2s ease-out 0s';
         iframe.style.right = isMobile ? '0' : '10px';
         iframe.style.bottom = '0';
-        iframe.style.zIndex = '10000';
+        iframe.style.zIndex = '9999';
         iframe.style.borderRadius = '0.75rem';
     });
 }
