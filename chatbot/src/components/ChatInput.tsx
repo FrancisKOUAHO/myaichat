@@ -8,7 +8,6 @@ import {CornerDownLeft, Loader2} from 'lucide-react'
 import {nanoid} from 'nanoid'
 import {FC, HTMLAttributes, useContext, useEffect, useRef, useState} from 'react'
 import {toast} from 'react-hot-toast'
-import TextareaAutosize from 'react-textarea-autosize'
 
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {
 }
@@ -117,6 +116,7 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
                     onChange={(e) => setInput(e.target.value)}
                     placeholder='Écrire un message...'
                     className='peer disabled:opacity-50 pr-14 block w-full border-0 bg-zinc-100 py-1.5 text-gray-900 focus:ring-0 text-sm sm:leading-6'
+                    style={{padding: '8px'}}
                 />
 
                 <div className='absolute inset-y-0 right-0 flex py-1.5 pr-1.5'>
