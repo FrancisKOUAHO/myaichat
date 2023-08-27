@@ -12,6 +12,10 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: true,
     },
+    i18n: {
+        locales: ['fr', 'en-US'],
+        defaultLocale: 'fr',
+    },
     async headers() {
         return [
             {
