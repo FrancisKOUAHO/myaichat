@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function createIframe() {
     const iframe = document.createElement('iframe');
-    //iframe.src = 'https://ai.myaichat.io'; // or a local URL for development
-    iframe.src = 'http://localhost:3031'; // or a local URL for development
+    iframe.src = 'https://ai.myaichat.io'; // or a local URL for development
+    //iframe.src = 'http://localhost:3031'; // or a local URL for development
     iframe.style.display = 'none'; // Start with the iframe hidden
     document.body.appendChild(iframe);
     return iframe;
