@@ -197,12 +197,12 @@ const Page = () => {
 				<div className="w-full overflow-y-auto">
 					{isCardVisible ? (
 						<Card>
-							<div className="mt-[2%] w-full p-4 text-center bg-indigo-200  rounded-lg shadow sm:p-8">
+							<div className="mt-[2%] w-full p-4 text-center bg-indigo-200 rounded-lg shadow sm:p-8">
 								<div className="flex items-center justify-between border-b border-gray-200">
 									<span className="font-bold text-gray-900">Mes Chatbots</span>
 									<button
 										onClick={openModalSecond}
-										className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.775rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+										className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.775rem] shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 									>
 										<AiOutlinePlus className="-ml-0.5 mr-1.5 h-5 w-5"/>
 										Créer un nouveau chatbot
@@ -260,14 +260,14 @@ const Page = () => {
 											<div className="w-full mt-10 justify-end flex">
 												<button
 													type="button"
-													className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+													className="inline-flex justify-center shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 													onClick={closeModalSecond}
 												>
 													Fermer
 												</button>
 												<button
 													type="submit"
-													className="inline-flex justify-center mx-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+													className="inline-flex justify-center shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] mx-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 												>
 													Connecter
 												</button>
@@ -290,7 +290,7 @@ const Page = () => {
 															<button
 																id="installer-tab"
 																onClick={() => setCardVisible(false)}
-																className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+																className="inline-flex items-center shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 															>
 																<AiOutlineCloudServer className="-ml-0.5 mr-1.5 h-5 w-5"/>
 																Installer
@@ -318,13 +318,13 @@ const Page = () => {
 																						<div className="mt-4 justify-between">
 																							<button
 																								type="button"
-																								className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+																								className="inline-flex shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 																								onClick={() => deleteShopifyStoreMutation.mutateAsync(item.id)}																							>
 																								Oui
 																							</button>
 																							<button
 																								type="submit"
-																								className="mx-2 inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+																								className="mx-2 inline-flex shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
 																								onClick={closeModalSupprimerChatBots}
 																							>
 																								Non
@@ -365,7 +365,7 @@ const Page = () => {
 											<Tab
 												onClick={() => setCardVisible(true)}
 												className="inline-block w-full p-4 rounded-tl-lg text-white text-l" style={{backgroundColor: '#7a5eea'}}>
-													Retour
+												Retour
 											</Tab>
 										</Tab.List>
 										<Tab.Panels className="border-t border-gray-200 ">
@@ -388,16 +388,16 @@ const Page = () => {
 													target="_blank"
 													rel="noopener noreferrer"
 												>
-												<button className="inline-flex items-center rounded-md mb-2 px-3 py-2 text-[0.675rem] font-semibold text-black shadow-sm hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-													<Image
-														src={Youtube}
-														width="15"
-														height="15"
-														alt={""}
-														className="m-1"
-													/>
-													Instructions Shopify
-												</button>
+													<button className="inline-flex items-center rounded-md mb-2 px-3 py-2 text-[0.675rem] font-semibold text-black shadow-sm hover:bg-indigo-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+														<Image
+															src={Youtube}
+															width="15"
+															height="15"
+															alt={""}
+															className="m-1"
+														/>
+														Instructions Shopify
+													</button>
 												</a>
 												<div className="mb-4 mt-4">
 													<Disclosure>
@@ -420,7 +420,7 @@ const Page = () => {
 																			}
 																		</SyntaxHighlighter>
 																		<button onClick={handleCopyClick1}
-																						className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-[10%]">
+																				className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.675rem] font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 h-[10%]">
 																			{copied1 ? 'Copié!' : 'Copie'}
 																		</button>
 																	</div>
@@ -448,8 +448,8 @@ const Page = () => {
                                   </pre>
 																	<pre className="mb-4">
                                     {
-																			"Vous pouvez l'ajouter dans la section de l'en-tête / head  HTML."
-																		}
+										"Vous pouvez l'ajouter dans la section de l'en-tête / head  HTML."
+									}
                                   </pre>
 																	<code>
 																		{
@@ -517,8 +517,8 @@ const Page = () => {
 							<div className="w-full text-left px-4">
                 <span className="text-[20px] text-center font-medium leading-6 text-gray-900">
                   {
-										"Ces instructions s'adressent uniquement aux utilisateurs de Shopify"
-									}
+					  "Ces instructions s'adressent uniquement aux utilisateurs de Shopify"
+				  }
                 </span>
 								<p className="mb-2 mt-6">1. Copiez le code suivant</p>
 								<p>
@@ -579,8 +579,8 @@ const Page = () => {
 							<div className="w-full text-left px-4">
                 <span className="text-[20px] text-center font-medium leading-6 text-gray-900">
                   {
-										"Ces instructions s'adressent uniquement aux utilisateurs de Shopify."
-									}
+					  "Ces instructions s'adressent uniquement aux utilisateurs de Shopify."
+				  }
                 </span>
 								<p className="mb-2 mt-6">1. Copiez le code suivant</p>
 								<code>zazoazkazljzlajzlazjalzjal</code>

@@ -7,7 +7,7 @@ const nextConfig = {
         ignoreDuringBuilds: true,
     },
     i18n: {
-        locales: ['fr', 'en-US'],
+        locales: ['fr', 'en-US', 'es-ES'],
         defaultLocale: 'fr',
     },
 };

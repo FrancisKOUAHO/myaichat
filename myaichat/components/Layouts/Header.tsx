@@ -113,6 +113,14 @@ const Header = (props: any) => {
                                                                 {translations.langs.en}
                                                             </button>
                                                         </Menu.Item>
+
+                                                        <Menu.Item>
+                                                            <button
+                                                                className="flex gap-2 bg-transparent px-4 py-2 text-sm font-medium text-white hover:bg-[#B476E5] w-full hover:text-white"
+                                                                onClick={() => handleLanguageChange('es')}>
+                                                                {translations.langs.es}
+                                                            </button>
+                                                        </Menu.Item>
                                                     </div>
                                                 </Menu.Items>
                                             </Transition>

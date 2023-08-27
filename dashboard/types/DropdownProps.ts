@@ -3,7 +3,7 @@ import React from 'react';
 type Item = {
     label?: string;
     link?: string;
-    onclick?: () => void;
+    onclick?: (arg0?: any) => void;
     icon?: any
 };
 
