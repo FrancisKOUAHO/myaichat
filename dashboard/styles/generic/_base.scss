@@ -114,8 +114,13 @@ i {
   font-size: 1rem !important;
 }
 
-.table tr {
+.table tr,  {
   border-radius: 20px;
+}
+
+td:last-child,  {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 tr td:nth-child(n+5),
