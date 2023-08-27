@@ -94,6 +94,12 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
             <div className='relative mt-4 flex-1 overflow-hidden rounded-lg border-none outline-none'>
                 <TextareaAutosize
                     ref={textareaRef}
+                    onClick={() => {
+                        if (!input) {
+                            textareaRef.current?.removeAttribute('readonly');
+                            textareaRef.current?.focus();
+                        }
+                    }}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                             e.preventDefault()
@@ -110,16 +116,6 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
                     rows={2}
                     maxRows={4}
                     value={input}
-                    onFocus={() => {
-                        if (!input) {
-                            textareaRef.current?.removeAttribute('readonly');
-                        }
-                    }}
-                    onBlur={() => {
-                        if (!input) {
-                            textareaRef.current?.setAttribute('readonly', 'readonly');
-                        }
-                    }}
                     disabled={isLoading}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder='Écrire un message...'
