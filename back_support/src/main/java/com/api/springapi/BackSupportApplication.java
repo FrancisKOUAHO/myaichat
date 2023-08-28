@@ -11,6 +11,7 @@ public class BackSupportApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackSupportApplication.class, args);
+		System.out.println();
 	}
 	@GetMapping("/hello")
 	public String Hello(){
