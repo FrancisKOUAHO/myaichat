@@ -45,6 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
             z-index: 9999;
             border-radius: 0.75rem;
         }
+        
+        .hidden {
+            display: none;
+        }
     `;
     document.head.appendChild(style);
 
@@ -64,19 +68,18 @@ document.addEventListener('DOMContentLoaded', function () {
     container.appendChild(button);
 
     const iframe = createIframe();
-    iframe.classList.add('widget-chat-iframe'); // Add the new class to the iframe
+    iframe.classList.add('widget-chat-iframe', 'hidden');
     container.appendChild(iframe);
 });
 
 function createIframe() {
     const iframe = document.createElement('iframe');
-    iframe.src = 'https://ai.myaichat.io'; // or a local URL for development
-    iframe.style.display = 'none'; // Start with the iframe hidden
+    iframe.src = 'https://ai.myaichat.io';
     document.body.appendChild(iframe);
     return iframe;
 }
 
 function toggleChat() {
     const iframe = document.querySelector('.widget-chat-iframe');
-    iframe.style.display = iframe.style.display === 'none' ? 'block' : 'none';
+    iframe.classList.toggle('hidden');
 }
