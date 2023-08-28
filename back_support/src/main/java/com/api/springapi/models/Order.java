@@ -1,6 +1,6 @@
 package com.api.springapi.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -32,7 +32,5 @@ public class Order {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    // Getters, setters, and other methods...
 
 }

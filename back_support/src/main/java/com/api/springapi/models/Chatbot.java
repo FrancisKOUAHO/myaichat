@@ -1,6 +1,6 @@
 package com.api.springapi.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
