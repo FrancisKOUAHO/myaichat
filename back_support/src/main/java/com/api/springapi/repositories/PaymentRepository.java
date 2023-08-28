@@ -22,6 +22,10 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     @Query("SELECT SUM(o.totalPrice) FROM Order o WHERE EXTRACT(YEAR FROM o.createdAt) = EXTRACT(YEAR FROM CURRENT_DATE)")
     BigDecimal calculateAnnualRevenue();
 
+    //Requête pour calculer le cnombre total de orders
+    @Query("SELECT COUNT(o) FROM Order o")
+    Long countOrders();
+
 //    SELECT
 //    EXTRACT(YEAR FROM created_at) AS year,
 //    SUM(total_price) AS yearly_revenue
