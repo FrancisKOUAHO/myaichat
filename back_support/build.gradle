@@ -20,6 +20,14 @@ springBoot {
 	buildInfo()
 }
 
+jar {
+	manifest {
+		attributes(
+			'Main-Class': 'com.api.springapi.BackSupportApplication'
+		)
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
