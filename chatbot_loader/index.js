@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             border-radius: 0.75rem;
         }
         
-        .hidden {
+        #widget-chat-iframe-hidden {
             display: none;
         }
     `;
@@ -68,7 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
     container.appendChild(button);
 
     const iframe = createIframe();
-    iframe.classList.add('widget-chat-iframe', 'hidden');
+    iframe.id = 'widget-chat-iframe-hidden';
+    iframe.classList.add('widget-chat-iframe');
     container.appendChild(iframe);
 });
 
@@ -80,6 +81,6 @@ function createIframe() {
 }
 
 function toggleChat() {
-    const iframe = document.querySelector('.widget-chat-iframe');
-    iframe.classList.toggle('hidden');
+    const iframe = document.getElementById('widget-chat-iframe-hidden');
+    iframe.style.display = (iframe.style.display === 'none') ? 'block' : 'none';
 }
