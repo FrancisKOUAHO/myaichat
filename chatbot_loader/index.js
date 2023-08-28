@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function () {
         @media (max-width: 767px) {
             .widget-chat-button {
                 bottom: 10px;
-                right: 0;
             }
 
             .widget-chat-iframe {
