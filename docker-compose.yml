@@ -74,7 +74,7 @@ services:
       - /usr/src/app/.next
       - /usr/src/app/.next/cache
     ports:
-      - "3033:3034"
+      - "3034:3034"
     environment:
       NODE_ENV: development
     tty: true
