@@ -33,7 +33,6 @@ public class AutControllers {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Jeton de connexion invalide ou expiré.");
         }
 
-        // Générez un jeton d'accès API ici si nécessaire ou d'autres étapes post-connexion
         return ResponseEntity.ok("Connecté avec succès.");
     }
 }

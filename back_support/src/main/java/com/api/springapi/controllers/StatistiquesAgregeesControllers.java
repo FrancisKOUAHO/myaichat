@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
-@CrossOrigin(origins = ["http://localhost:3000", "https://admin.myaichat.io", "https://www.myaichat.io"])
+@CrossOrigin(origins = {"http://localhost:3000/", "https://admin.myaichat.io/", "https://www.myaichat.io/", "*"})
 @RestController
 @RequestMapping("/api/stats")
 public class StatistiquesAgregeesControllers {

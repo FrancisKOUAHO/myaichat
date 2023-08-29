@@ -42,7 +42,6 @@ public class AuthService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
-            // Clear the token so it can't be reused
             user.setMagicLinkToken(null);
             user.setMagicLinkTokenExpiresAt(null);
             userRepository.save(user);

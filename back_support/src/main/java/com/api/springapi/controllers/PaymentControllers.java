@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = ["http://localhost:3000", "https://admin.myaichat.io", "https://www.myaichat.io", "**"])
+@CrossOrigin(origins = {"http://localhost:3000/", "https://admin.myaichat.io/", "https://www.myaichat.io/", "*"})
 @RestController
 @RequestMapping("/api/payments")
 public class PaymentControllers {
