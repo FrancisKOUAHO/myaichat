@@ -28,37 +28,37 @@ export default function DashboardPage() {
     useEffect(() => {
 
         // Récupérer le revenu total
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/payments/total-revenue`)
+        axios.get("https://api-admin.myaichat.io/api/payments/total-revenue")
             .then(response => {
                 setTotalRevenue(response.data.totalRevenue);
             });
         // Récupérer le total des utilisateurs
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/stats/total-users`).then(response => {
+        axios.get("https://api-admin.myaichat.io/api/stats/total-users").then(response => {
             setTotalUsers(response.data);
         });
 
         // Récupérer le total des chatbots actifs
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/stats/total-chatbots`).then(response => {
+        axios.get("https://api-admin.myaichat.io/api/stats/total-chatbots").then(response => {
             setTotalChatbots(response.data);
         });
 
         // Récupérer le total des orders
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/payments/total-orders`).then(response => {
+        axios.get("https://api-admin.myaichat.io/api/payments/total-orders").then(response => {
             setTotalOrders(response.data);
         });
 
         // // Récupérer les abonnements
-        // axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/stats/subscriptions`).then(response => {
+        // axios.get("https://api-admin.myaichat.io/api/stats/subscriptions").then(response => {
         //     setTotalChatbots(response.data);
         // });
 
         // Récupérer le revenu mensuel
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/payments/monthly-revenue`).then(response => {
+        axios.get("https://api-admin.myaichat.io/api/payments/monthly-revenue").then(response => {
             setMonthlyRevenue(response.data.monthlyRevenue);
         });
 
         // Récupérer le revenu annuel
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/payments/annual-revenue`).then(response => {
+        axios.get("https://api-admin.myaichat.io/api/payments/annual-revenue").then(response => {
             setAnnualRevenue(response.data);
         });
     }, []);

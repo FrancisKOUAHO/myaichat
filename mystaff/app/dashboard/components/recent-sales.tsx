@@ -12,7 +12,7 @@ export function RecentSales() {
 
     useEffect(() => {
         // Récupérer les derniers des abonnements
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/stats/subscriptions`).then(response => {
+        axios.get("https://api-admin.myaichat.io/api/stats/subscriptions").then(response => {
             const data = response.data;
 
             // Trier les données
