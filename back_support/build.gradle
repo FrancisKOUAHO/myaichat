@@ -16,7 +16,10 @@ repositories {
 }
 
 bootRun {
-    systemProperties['server.port'] = System.getenv('PORT')
+    doLast {
+        systemProperties['server.port'] = System.getenv('PORT')
+        println "Server running on port: ${System.getenv('PORT')}"
+    }
 }
 
 springBoot {
