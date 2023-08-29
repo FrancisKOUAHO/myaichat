@@ -22,7 +22,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/requestLoginLink`, {
+      const response = await axios.post("https://api-admin.myaichat.io/auth/requestLoginLink", {
         email: email
       });
       console.log(response.data);
