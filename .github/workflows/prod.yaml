@@ -32,6 +32,7 @@ jobs:
         # Run the deployment command for your services in production
         railway up -e production -s myaichat
         railway up -e production -s support.myaichat
+        railway up -e production -s admin.myaichat
         railway up -e production -s loader.myaichat
         railway up -e production -s api.myaichat
         railway up -e production -s dashboard.myaichat

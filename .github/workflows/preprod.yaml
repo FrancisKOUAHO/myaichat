@@ -29,6 +29,7 @@ jobs:
         # Run the deployment command for your services in pre-production
         railway up -e preproduction -s myaichat
         railway up -e preproduction -s support.myaichat
+        railway up -e preproduction -s admin.myaichat
         railway up -e preproduction -s loader.myaichat
         railway up -e preproduction -s api.myaichat
         railway up -e preproduction -s dashboard.myaichat
