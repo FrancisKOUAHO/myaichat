@@ -15,13 +15,6 @@ repositories {
 	mavenCentral()
 }
 
-bootRun {
-    doLast {
-        systemProperties['server.port'] = System.getenv('PORT')
-        println "Server running on port: ${System.getenv('PORT')}"
-    }
-}
-
 springBoot {
 	mainClass = 'com.api.springapi.BackSupportApplication'
 	buildInfo()
