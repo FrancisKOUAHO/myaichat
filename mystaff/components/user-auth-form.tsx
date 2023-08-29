@@ -15,8 +15,11 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const router: AppRouterInstance = useRouter();
+
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [email, setEmail] = useState<string>("");
+
+
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
     setIsLoading(true);
@@ -27,7 +30,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       });
       console.log(response.data);
       router.push('/checkmail')
-      // Gérez la réponse comme vous le souhaitez
     } catch (error) {
       console.error("Erreur lors de la demande du lien magique", error);
     } finally {
