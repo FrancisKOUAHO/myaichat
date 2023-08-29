@@ -62,6 +62,26 @@ services:
       local_bridge:
         ipv4_address: 172.20.2.4
 
+  mystaff:
+    build:
+      context: ./mystaff
+      dockerfile: Dockerfile
+    container_name: mystaff
+    restart: unless-stopped
+    volumes:
+      - ./mystaff:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+      - /usr/src/app/.next/cache
+    ports:
+      - "3033:3034"
+    environment:
+      NODE_ENV: development
+    tty: true
+    networks:
+      local_bridge:
+        ipv4_address: 172.20.2.5
+
 networks:
   local_bridge:
     name: docker_network
