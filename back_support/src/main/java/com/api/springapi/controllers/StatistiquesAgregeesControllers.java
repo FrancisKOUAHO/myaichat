@@ -1,6 +1,5 @@
 package com.api.springapi.controllers;
 
-
 import com.api.springapi.dto.ClientOverviewDTO;
 import com.api.springapi.dto.SubscriptionDetailDTO;
 import com.api.springapi.services.StatistiquesAgregeesService;
@@ -10,9 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:3000")
+
+@CrossOrigin(origins = ["http://localhost:3000", "https://admin.myaichat.io", "https://www.myaichat.io"])
 @RestController
 @RequestMapping("/api/stats")
 public class StatistiquesAgregeesControllers {

@@ -36,9 +36,4 @@ public class AutControllers {
         // Générez un jeton d'accès API ici si nécessaire ou d'autres étapes post-connexion
         return ResponseEntity.ok("Connecté avec succès.");
     }
-
-    @GetMapping("/helloWorld")
-    public String helloWorld() {
-        return "Hello, World!";
-    }
 }

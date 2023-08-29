@@ -14,8 +14,7 @@ import java.math.BigDecimal;
 @Service
 public class RevenueService {
     @Autowired
-    private PaymentRepository paymentRepository; // Remplacez par le nom de votre repository
-
+    private PaymentRepository paymentRepository;
     public RevenueDTO getRevenueTotal() {
         RevenueDTO revenueDTO = new RevenueDTO();
         BigDecimal totalRevenue = paymentRepository.calculatedTotalRevenue();

@@ -10,6 +10,8 @@ import com.api.springapi.models.User;
 public class EmailService {
 
     private final JavaMailSender mailSender;
+    @Value("${APP_URL}")
+    private String APP_URL;
 
     @Autowired
     public EmailService(JavaMailSender mailSender) {
@@ -17,13 +19,13 @@ public class EmailService {
     }
 
     public void sendLoginEmail(User user) {
-        String magicLinkToken = "https://app.myaichat.io/verify/?magic_link_token=" + user.getMagicLinkToken();
+        String magicLinkToken = APP_URL + "/verify/?magic_link_token=" + user.getMagicLinkToken();
         String messageBody = "Cliquez sur le lien ci-dessous pour vous connecter :\n\n" + magicLinkToken;
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("contact@myaichat.io");  // Utilisez votre adresse par défaut ici
+        message.setFrom("contact@myaichat.io");
         message.setTo(user.getEmail());
-        message.setSubject("Magic Link pour MyAiChat");
+        message.setSubject("Connexion");
         message.setText(messageBody);
         mailSender.send(message);
     }

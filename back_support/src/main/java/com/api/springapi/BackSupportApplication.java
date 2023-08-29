@@ -12,8 +12,9 @@ public class BackSupportApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackSupportApplication.class, args);
 	}
+
 	@GetMapping("/hello")
 	public String Hello(){
-		return "hello Zola";
+		return "welcome to my api";
 	}
 }
