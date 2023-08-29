@@ -28,7 +28,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/requestLoginLink`, {
         email: email
       });
-      console.log(response.data);
+
       router.push('/checkmail')
     } catch (error) {
       console.error("Erreur lors de la demande du lien magique", error);
