@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 export function RecentSales() {
-    const [LastOrders, setLastOrders] = useState(null);
+    const [LastOrders, setLastOrders] = useState<any>(null);
 
 
     useEffect(() => {
@@ -29,8 +29,7 @@ export function RecentSales() {
     return (
         <div className="space-y-8 overflow-y-auto" style={{ maxHeight: '400px' }}>
             {
-                LastOrders && LastOrders.map((LastOrder, index) => (
-                    <>
+                LastOrders && LastOrders.map((LastOrder: any, index: number) => (
                     <div className="flex items-center" key={index}>
                         <Avatar className="h-9 w-9">
                             <AvatarImage src="/avatars/01.png" alt="Avatar" />
@@ -43,7 +42,6 @@ export function RecentSales() {
                         </div>
                         <div className="ml-auto font-medium">+€{LastOrder.planPrice}</div>
                     </div>
-                    </>
                 ))
             }
         </div>
