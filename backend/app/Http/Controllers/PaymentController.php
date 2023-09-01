@@ -40,14 +40,26 @@ class PaymentController extends Controller
             'cancel_url' => route('checkout.cancel', [], true),
         ]);
 
-        $order = new Order();
-        $order->status = 'unpaid';
-        $order->total_price = $plan->price;
-        $order->session_id = $session->id;
-        $order->user_id = auth()->user()->id;
-        $order->save();
-
         $user = auth()->user();
+
+        // Vérifiez si l'utilisateur a déjà un enregistrement dans la base de données
+        $existingOrder = Order::where('user_id', $user->id)->where('status', 'unpaid')->first();
+
+        if ($existingOrder) {
+            // Mettez à jour l'enregistrement existant avec les nouvelles informations du paiement
+            $existingOrder->total_price = $plan->price;
+            $existingOrder->session_id = $session->id;
+            $existingOrder->save();
+        } else {
+            // Créez un nouvel enregistrement
+            $order = new Order();
+            $order->status = 'unpaid';
+            $order->total_price = $plan->price;
+            $order->session_id = $session->id;
+            $order->user_id = $user->id;
+            $order->save();
+        }
+
         $user->plan_id = $plan->id;
         $user->save();
 
