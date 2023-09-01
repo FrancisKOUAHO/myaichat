@@ -35,6 +35,7 @@ class PaymentController extends Controller
             'subscription_data' => [
                 'trial_period_days' => 15,
             ],
+            'allow_promotion_codes' => true,
             'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
             'cancel_url' => route('checkout.cancel', [], true),
         ]);

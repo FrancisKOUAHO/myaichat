@@ -43,8 +43,7 @@ const Page = () => {
                         </div>
                     </div>
                     <div className="px-6 py-5 sm:p-8 flex items-center justify-center gap-2">
-                        <Link href="#" className="text-xs font-normal text-gray-400">Annuler l'abonnement</Link>
-                        <Link href="#" className="text-xs font-normal text-indigo-600">Upgrade</Link>
+                        <Link href="https://billing.stripe.com/p/login/3cs4jw2kp1fkdMccMM" target="_blank" className="text-xs font-normal text-blue-600">Gérer mon abonnement</Link>
                     </div>
                 </dl>
             </div>
