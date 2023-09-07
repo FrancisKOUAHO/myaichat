@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
@@ -15,8 +16,10 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     BigDecimal calculatedTotalRevenue();
 
     // Requête pour calculer le chiffre d'affaires pour le mois en cours et recuperer le mois
+//    @Query("SELECT SUM(o.totalPrice), TO_CHAR(CURRENT_DATE, 'Month') FROM Order o WHERE EXTRACT(MONTH FROM o.createdAt) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM o.createdAt) = EXTRACT(YEAR FROM CURRENT_DATE)")
     @Query("SELECT SUM(o.totalPrice), TO_CHAR(CURRENT_DATE, 'Month') FROM Order o WHERE EXTRACT(MONTH FROM o.createdAt) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM o.createdAt) = EXTRACT(YEAR FROM CURRENT_DATE)")
-    Object[] calculateMonthlyRevenue();
+    List<Object[]> calculateMonthlyRevenue();
+
 
 
     // Requête pour calculer le chiffre d'affaires pour l'année en cours
