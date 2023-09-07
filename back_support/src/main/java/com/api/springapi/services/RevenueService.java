@@ -21,12 +21,29 @@ public class RevenueService {
         revenueDTO.setTotalRevenue(totalRevenue);
         return revenueDTO;
     }
+//    public MonthlyRevenueDTO getRevenueMonthly() {
+//        MonthlyRevenueDTO revenueDTO = new MonthlyRevenueDTO();
+//        Object[] result = paymentRepository.calculateMonthlyRevenue();
+//        if (result != null) {
+//            revenueDTO.setMonthlyRevenue((BigDecimal) result[0]);
+//            revenueDTO.setCurrentMonth((String) result[1]);
+//        }
+//        return revenueDTO;
+//    }
+
     public MonthlyRevenueDTO getRevenueMonthly() {
         MonthlyRevenueDTO revenueDTO = new MonthlyRevenueDTO();
-        BigDecimal monthlyRevenue = paymentRepository.calculateMonthlyRevenue();
-        revenueDTO.setMonthlyRevenue(monthlyRevenue);
+        Object[] result = paymentRepository.calculateMonthlyRevenue();
+
+        if (result != null && result.length == 2) {
+            revenueDTO.setMonthlyRevenue((BigDecimal) result[0]);
+            revenueDTO.setCurrentMonth((String) result[1]);
+        }
+
         return revenueDTO;
     }
+
+
 
     public AnnualRevenueDTO getRevenueAnnual() {
         AnnualRevenueDTO revenueDTO = new AnnualRevenueDTO();

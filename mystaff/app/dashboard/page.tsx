@@ -23,6 +23,7 @@ export default function DashboardPage() {
     const [totalOrders, setTotalOrders] = useState<number | null>(null);
     const [totalChatbots, setTotalChatbots] = useState<number | null>(null);
     const [monthlyRevenue, setMonthlyRevenue] = useState<number | null>(null);
+    const [currentMonth, setCurrentMonth] = useState(null);
     const [annualRevenue, setAnnualRevenue] = useState<number | null>(null);
 
     useEffect(() => {
@@ -55,6 +56,7 @@ export default function DashboardPage() {
         // Récupérer le revenu mensuel
         axios.get("https://api-admin.myaichat.io/api/payments/monthly-revenue").then(response => {
             setMonthlyRevenue(response.data.monthlyRevenue);
+            setCurrentMonth(response.data.currentMonth);
         });
 
         // Récupérer le revenu annuel
@@ -199,7 +201,7 @@ export default function DashboardPage() {
                                 <Card>
                                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                         <CardTitle className="text-sm font-medium">
-                                            Mois en cours
+                                            Mois en cours : <span className="text-sm font-medium">{currentMonth}</span>
                                         </CardTitle>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"

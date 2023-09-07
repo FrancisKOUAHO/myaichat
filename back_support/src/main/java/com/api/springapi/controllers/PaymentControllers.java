@@ -2,7 +2,6 @@ package com.api.springapi.controllers;
 
 import com.api.springapi.dto.AnnualRevenueDTO;
 import com.api.springapi.dto.MonthlyRevenueDTO;
-import com.api.springapi.dto.OrderDTO;
 import com.api.springapi.dto.RevenueDTO;
 import com.api.springapi.services.RevenueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ public class PaymentControllers {
 
     @GetMapping("/total-revenue")
     public ResponseEntity<RevenueDTO> getTotalRevenue(){
-
         return  ResponseEntity.ok(revenueService.getRevenueTotal());
     }
 
