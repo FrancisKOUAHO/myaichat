@@ -2,7 +2,7 @@ package com.api.springapi.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -14,30 +14,34 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @Column(name = "remember_token")
-    private String rememberToken;
+    @Column(name = "email_verified_at")
+    private LocalDateTime emailVerifiedAt;
+
+    @Column(name = "subscription_active", nullable = false)
+    private Boolean subscriptionActive = false;
 
     @Column(name = "magic_link_token")
     private String magicLinkToken;
 
     @Column(name = "magic_link_token_expires_at")
-    private LocalDate magicLinkTokenExpiresAt;
+    private LocalDateTime magicLinkTokenExpiresAt;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
-
-    @Column(name = "updated_at")
-    private LocalDate updatedAt;
-
-    @Column(name = "subscription_active")
-    private Boolean subscriptionActive;
+    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
-    @Column(name = "email_verified_at")
-    private LocalDate emailVerifiedAt;
+    @Column(name = "plan_id", insertable = false, updatable = false)
+    private Long planId;
+
+    @Column(name = "remember_token", length = 100)
+    private String rememberToken;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
 
     // Constructeurs
     public User() {}
@@ -46,7 +50,7 @@ public class User {
         this.email = email;
     }
 
-    public User(String email, String magicLinkToken, LocalDate magicLinkTokenExpiresAt) {
+    public User(String email, String magicLinkToken, LocalDateTime magicLinkTokenExpiresAt) {
         this.email = email;
         this.magicLinkToken = magicLinkToken;
         this.magicLinkTokenExpiresAt = magicLinkTokenExpiresAt;
@@ -57,14 +61,6 @@ public class User {
         return id;
     }
 
-    public String getRememberToken() {return rememberToken;}
-
-    public LocalDate getUpdatedAt() {return updatedAt;}
-
-    public Boolean getSubscriptionActive() {return subscriptionActive;}
-
-    public LocalDate getEmailVerifiedAt() {return emailVerifiedAt;}
-
     public String getEmail() {
         return email;
     }
@@ -73,30 +69,24 @@ public class User {
         return magicLinkToken;
     }
 
-    public LocalDate getMagicLinkTokenExpiresAt() {
+    public LocalDateTime getMagicLinkTokenExpiresAt() {
         return magicLinkTokenExpiresAt;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
     public Plan getPlan() { return plan;
     }
+
+    public Long getPlanId() { return planId;
+    }
+
     // Setters
     public void setId(Long id) {
         this.id = id;
     }
-
-    public void setEmailVerifiedAt(LocalDate emailVerifiedAt) {this.emailVerifiedAt = emailVerifiedAt;}
-
-    public void setPlan(Plan plan) {this.plan = plan;}
-
-    public void setSubscriptionActive(Boolean subscriptionActive) {this.subscriptionActive = subscriptionActive;}
-
-    public void setUpdatedAt(LocalDate updatedAt) {this.updatedAt = updatedAt;}
-
-    public void setRememberToken(String rememberToken) {this.rememberToken = rememberToken;}
 
     public void setEmail(String email) {
         this.email = email;
@@ -106,13 +96,55 @@ public class User {
         this.magicLinkToken = magicLinkToken;
     }
 
-    public void setMagicLinkTokenExpiresAt(LocalDate magicLinkTokenExpiresAt) {
+    public void setMagicLinkTokenExpiresAt(LocalDateTime magicLinkTokenExpiresAt) {
         this.magicLinkTokenExpiresAt = magicLinkTokenExpiresAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+
+    public LocalDateTime getEmailVerifiedAt() {
+        return emailVerifiedAt;
+    }
+
+    public void setEmailVerifiedAt(LocalDateTime emailVerifiedAt) {
+        this.emailVerifiedAt = emailVerifiedAt;
+    }
+
+    public Boolean getSubscriptionActive() {
+        return subscriptionActive;
+    }
+
+    public void setSubscriptionActive(Boolean subscriptionActive) {
+        this.subscriptionActive = subscriptionActive;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
+    public void setPlanId(Long planId) {
+        this.planId = planId;
+    }
+
+    public String getRememberToken() {
+        return rememberToken;
+    }
+
+    public void setRememberToken(String rememberToken) {
+        this.rememberToken = rememberToken;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
 
     // Autres méthodes
     @Override
