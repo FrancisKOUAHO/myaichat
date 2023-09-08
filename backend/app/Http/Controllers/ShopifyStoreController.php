@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ShopifyStore;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -68,5 +69,18 @@ class ShopifyStoreController extends Controller
         $stores = ShopifyStore::where('user_id', $userID)->get();
 
         return response()->json($stores);
+    }
+
+    public function getChatbotNumber($userId): JsonResponse
+    {
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => 'Utilisateur non trouvé'], 404);
+        }
+
+        $chatbotNumber = ShopifyStore::where('user_id', $userId)->count();
+
+        return response()->json(['chatbotNumber' => $chatbotNumber], 200);
     }
 }
