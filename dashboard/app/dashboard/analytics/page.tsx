@@ -1,9 +1,32 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useState } from 'react'
 import LayoutCustom from "@/layouts/layoutCustom";
+import { useQuery } from '@tanstack/react-query'
+import { api } from '@/config/api'
 
 const Page = () => {
+    const [user, setUser] = useState<any>(null);
+
+    const getUser = async (): Promise<void> => {
+        try {
+            const response = await api.get("me");
+            setUser(response.data);
+        } catch (error) {
+            console.error("Error fetching user: ", error);
+        }
+    };
+
+    const { data: chatbotNumber } = useQuery({
+        queryKey: ["number-chatbot"],
+        queryFn: () => api.get(`stores/get-chatbot-number/${user?.id}`),
+        enabled: !!user,
+    });
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
     return (
         <LayoutCustom>
             <div className="p-20 mx-auto w-full overflow-y-auto">
@@ -13,10 +36,12 @@ const Page = () => {
                         <dt className="text-base font-normal text-gray-900">ChatBot</dt>
                         <dt className="text-xs font-normal text-gray-400 mt-1">Nombre total de ChatBots créés</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                            <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                0
-                                {/*<span className="ml-2 text-sm font-medium text-gray-500">of  1 </span>*/}
-                            </div>
+                            {chatbotNumber && (
+                              <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                  {chatbotNumber.data.chatbotNumber}
+                                  <span className="ml-2 text-sm font-medium text-gray-500">of  1 </span>
+                              </div>
+                            )}
                         </dd>
                     </div>
                     <div className="px-6 py-5 sm:p-8">
@@ -25,8 +50,9 @@ const Page = () => {
                         </dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                0
-                                <span className="ml-2 text-sm font-medium text-gray-500">sur 30 (ce mois-ci)</span>
+                                <p>fonctionnalité à venir</p>
+                               {/* 0
+                                <span className="ml-2 text-sm font-medium text-gray-500">sur 30 (ce mois-ci)</span>*/}
                             </div>
                         </dd>
                     </div>
@@ -35,8 +61,9 @@ const Page = () => {
                         <dt className="text-xs font-normal text-gray-400 mt-1">Pages sauvegardées</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                0
-                                <span className="ml-2 text-sm font-medium text-gray-500">sur 500</span>
+                                <p>fonctionnalité à venir</p>
+                               {/* 0
+                                <span className="ml-2 text-sm font-medium text-gray-500">sur 500</span>*/}
                             </div>
                         </dd>
                     </div>
@@ -45,7 +72,8 @@ const Page = () => {
                         <dt className="text-xs font-normal text-gray-400 mt-1">De tous les ChatBots</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                0
+                                <p>fonctionnalité à venir</p>
+                                {/*0*/}
                             </div>
                         </dd>
                     </div>
@@ -62,7 +90,8 @@ const Page = () => {
                         <dt className="text-xs font-normal text-gray-400 mt-1">{"Chiffre d'affaires total des conversations"}</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                0 <span className="ml-2 text-sm font-medium text-gray-500"></span>
+                                <p>fonctionnalité à venir</p>
+                               {/* 0 <span className="ml-2 text-sm font-medium text-gray-500"></span>*/}
                             </div>
                         </dd>
                     </div>
@@ -71,7 +100,8 @@ const Page = () => {
                         <dt className="text-xs font-normal text-gray-400 mt-1">Conversations converties en ventes</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                0
+                                <p>fonctionnalité à venir</p>
+                               {/* 0*/}
                             </div>
                         </dd>
                     </div>
@@ -80,7 +110,8 @@ const Page = () => {
                         <dt className="text-xs font-normal text-gray-400 mt-1">De toutes vos conversations</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                0
+                                <p>fonctionnalité à venir</p>
+                               {/* 0*/}
                             </div>
                         </dd>
                     </div>
@@ -89,7 +120,8 @@ const Page = () => {
                         <dt className="text-xs font-normal text-gray-400 mt-1">Valeur moyenne des commandes</dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                0
+                                <p>fonctionnalité à venir</p>
+                                {/*0*/}
                             </div>
                         </dd>
                     </div>
