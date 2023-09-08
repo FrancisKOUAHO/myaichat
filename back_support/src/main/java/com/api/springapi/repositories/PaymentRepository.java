@@ -48,6 +48,4 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
 //    EXTRACT(MONTH FROM created_at) = EXTRACT(MONTH FROM CURRENT_DATE - INTERVAL '1 month') AND
 //    EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM CURRENT_DATE - INTERVAL '1 month');
 
-
-
 }

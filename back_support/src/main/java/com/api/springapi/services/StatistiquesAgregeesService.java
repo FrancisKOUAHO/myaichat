@@ -46,7 +46,7 @@ public class StatistiquesAgregeesService {
                         chatbotUrlsMap.put("url " + (i + 1), urls.get(i));
                     }
 
-                    return new ClientOverviewDTO(user.getEmail(), user.getCreatedAt(), chatbotsCount, chatbotUrlsMap);
+                    return new ClientOverviewDTO(user.getEmail(), user.getCreatedAt().atStartOfDay(), chatbotsCount, chatbotUrlsMap);
                 })
                 .collect(Collectors.toList());
     }
@@ -59,9 +59,8 @@ public class StatistiquesAgregeesService {
                     String planName = plan != null ? plan.getName() : "No Plan";
                     BigDecimal planPrice = plan != null ? plan.getPrice() : BigDecimal.ZERO;
                     String planInterval = plan != null ? plan.getInterval() : "No Interval";
-                    return new SubscriptionDetailDTO(user.getEmail(), planName, planPrice, planInterval, user.getCreatedAt());
+                    return new SubscriptionDetailDTO(user.getEmail(), planName, planPrice, planInterval, user.getCreatedAt().atStartOfDay());
                 })
                 .collect(Collectors.toList());
     }
-
 }

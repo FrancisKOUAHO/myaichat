@@ -5,9 +5,9 @@ import com.api.springapi.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
-import java.time.LocalDateTime;
 @Service
 public class AuthService {
 
@@ -30,7 +30,7 @@ public class AuthService {
 
         String magicLinkToken = UUID.randomUUID().toString();
         user.setMagicLinkToken(magicLinkToken);
-        LocalDateTime expiry = LocalDateTime.now().plusHours(1);
+        LocalDate expiry = LocalDate.now();
         user.setMagicLinkTokenExpiresAt(expiry);
 
         userRepository.save(user);
@@ -38,7 +38,7 @@ public class AuthService {
     }
 
     public boolean verifyMagicLink(String token) {
-        Optional<User> userOptional = userRepository.findByMagicLinkTokenAndMagicLinkTokenExpiresAtAfter(token, LocalDateTime.now());
+        Optional<User> userOptional = userRepository.findByMagicLinkTokenAndMagicLinkTokenExpiresAtAfter(token, LocalDate.now().atStartOfDay());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 

@@ -2,27 +2,42 @@ package com.api.springapi.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Column(unique = true)
     private String email;
+
+    @Column(name = "remember_token")
+    private String rememberToken;
+
+    @Column(name = "magic_link_token")
     private String magicLinkToken;
-    private LocalDateTime magicLinkTokenExpiresAt;
+
+    @Column(name = "magic_link_token_expires_at")
+    private LocalDate magicLinkTokenExpiresAt;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDate updatedAt;
+
+    @Column(name = "subscription_active")
+    private Boolean subscriptionActive;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
+
+    @Column(name = "email_verified_at")
+    private LocalDate emailVerifiedAt;
 
     // Constructeurs
     public User() {}
@@ -31,7 +46,7 @@ public class User {
         this.email = email;
     }
 
-    public User(String email, String magicLinkToken, LocalDateTime magicLinkTokenExpiresAt) {
+    public User(String email, String magicLinkToken, LocalDate magicLinkTokenExpiresAt) {
         this.email = email;
         this.magicLinkToken = magicLinkToken;
         this.magicLinkTokenExpiresAt = magicLinkTokenExpiresAt;
@@ -42,6 +57,14 @@ public class User {
         return id;
     }
 
+    public String getRememberToken() {return rememberToken;}
+
+    public LocalDate getUpdatedAt() {return updatedAt;}
+
+    public Boolean getSubscriptionActive() {return subscriptionActive;}
+
+    public LocalDate getEmailVerifiedAt() {return emailVerifiedAt;}
+
     public String getEmail() {
         return email;
     }
@@ -50,11 +73,11 @@ public class User {
         return magicLinkToken;
     }
 
-    public LocalDateTime getMagicLinkTokenExpiresAt() {
+    public LocalDate getMagicLinkTokenExpiresAt() {
         return magicLinkTokenExpiresAt;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
@@ -65,6 +88,16 @@ public class User {
         this.id = id;
     }
 
+    public void setEmailVerifiedAt(LocalDate emailVerifiedAt) {this.emailVerifiedAt = emailVerifiedAt;}
+
+    public void setPlan(Plan plan) {this.plan = plan;}
+
+    public void setSubscriptionActive(Boolean subscriptionActive) {this.subscriptionActive = subscriptionActive;}
+
+    public void setUpdatedAt(LocalDate updatedAt) {this.updatedAt = updatedAt;}
+
+    public void setRememberToken(String rememberToken) {this.rememberToken = rememberToken;}
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -73,11 +106,11 @@ public class User {
         this.magicLinkToken = magicLinkToken;
     }
 
-    public void setMagicLinkTokenExpiresAt(LocalDateTime magicLinkTokenExpiresAt) {
+    public void setMagicLinkTokenExpiresAt(LocalDate magicLinkTokenExpiresAt) {
         this.magicLinkTokenExpiresAt = magicLinkTokenExpiresAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
