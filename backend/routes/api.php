@@ -50,8 +50,6 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::post('/checkout/{id}', [PaymentController::class, 'checkout']);
     Route::post('/plan', [PlanController::class, 'createPlan']);
 
-    Route::get('/check-payment', [PaymentController::class, 'getPaymentStatus']);
-
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/me', function (Request $request) {
@@ -81,5 +79,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('/user/{user_id}/products', [ShopifyProductController::class, 'getUserProducts']);
             Route::get('{url}', [ShopifyScraperController::class, 'getProductUrl']);
         });
+
+        Route::get('/check-payment', [PaymentController::class, 'getPaymentStatus']);
     });
 });

@@ -132,6 +132,13 @@ class PaymentController extends Controller
     {
         $user = $request->user();
 
+        // Vérifier si l'utilisateur est authentifié
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not authenticated.'
+            ], 401); // Utilisateur non authentifié, code 401 Unauthorized
+        }
+
         $order = Order::where('user_id', $user->id)->first();
 
         if (!$order) {
@@ -150,7 +157,8 @@ class PaymentController extends Controller
 
         return response()->json([
             'payment_status' => $payment,
-            'order'=> $order
+            'order' => $order
         ]);
     }
+
 }
