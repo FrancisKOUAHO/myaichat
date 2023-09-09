@@ -15,20 +15,16 @@ class AuthController extends Controller
 
     public function requestLoginLink(Request $request): JsonResponse
     {
-        // Validation des champs
         $fields = $request->validate([
             'email' => 'required|string|email',
         ]);
 
-        // Recherche de l'utilisateur ou création s'il n'existe pas
         $user = User::firstOrNew(['email' => $fields['email']]);
 
-        // Générer un nouveau jeton de connexion
         $user->magic_link_token = Str::random(60);
         $user->magic_link_token_expires_at = Carbon::now()->addHour(1);
         $user->save();
 
-        // Envoi de l'e-mail
         $this->sendLoginEmail($user);
 
         return response()->json(['message' => 'Veuillez consulter votre boîte de réception pour vous connecter.'], 200);
@@ -52,16 +48,13 @@ class AuthController extends Controller
                 ->where('magic_link_token_expires_at', '>=', now())
                 ->firstOrFail();
 
-            // Vérifier si le jeton a expiré
             if ($user->magic_link_token_expires_at < now()) {
                 return response()->json(['message' => 'Jeton de connexion expiré.'], 401);
             }
 
-            // Réinitialiser la date d'expiration du jeton
             $user->magic_link_token_expires_at = now()->addHour(1);
             $user->save();
 
-            // Générer un jeton d'accès API
             $accessToken = $user->createToken('access_token', ['expires_in' => 60 * 24])->plainTextToken;
 
             return response()->json(['message' => 'Connecté avec succès.', 'user' => $user, 'access_token' => $accessToken], 200);

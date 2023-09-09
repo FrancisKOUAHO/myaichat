@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Mail\MagicLinkEmail;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,7 +18,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'magic_link_token',
         'magic_link_token_expires_at',
-        'sub_id'
+        'sub_id',
+        'last_reset_date'
     ];
 
     protected $hidden = [
@@ -32,6 +34,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function plan()
     {
         return $this->hasOne(Plan::class, 'id', 'plan_id');
+    }
+
+    // Mutateur pour obtenir la valeur de last_reset_date
+    public function getLastResetDateAttribute($value)
+    {
+        return Carbon::parse($value); // Convertit la chaîne en objet Carbon
+    }
+
+    // Mutateur pour définir la valeur de last_reset_date
+    public function setLastResetDateAttribute($value)
+    {
+        $this->attributes['last_reset_date'] = Carbon::parse($value)->toDateTimeString();
     }
 }
 

@@ -24,6 +24,7 @@ class PlanSeeder extends Seeder
                 'price'=> 15,
                 'interval'=>'month',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 150,
                 'lookup_key'=>'Lite',
                 'st_plan_id'=>'price_1NhYlyFdQvV9SdYX19x5YRWy'
             ],
@@ -32,6 +33,7 @@ class PlanSeeder extends Seeder
                 'price'=> 39,
                 'interval'=>'month',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 500,
                 'lookup_key'=>'Starter',
                 'st_plan_id'=>'price_1NVXvfFdQvV9SdYXSGsPeiep'
             ],
@@ -40,6 +42,7 @@ class PlanSeeder extends Seeder
                 'price'=> 79,
                 'interval'=>'month',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 1500,
                 'lookup_key'=>'Growth',
                 'st_plan_id'=>'price_1NVXvPFdQvV9SdYXYO49ndDl'
             ],
@@ -48,6 +51,7 @@ class PlanSeeder extends Seeder
                 'price'=> 99,
                 'interval'=>'month',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 3000,
                 'lookup_key'=>'Pro',
                 'st_plan_id'=>'price_1NVXvbFdQvV9SdYXXxdHArtW'
             ],
@@ -56,6 +60,7 @@ class PlanSeeder extends Seeder
                 'price'=> 132,
                 'interval'=>'year',
                 'trial_period_days'=> 15,
+                 'allowed_responses'=> 150,
                 'lookup_key'=>'Lite',
                 'st_plan_id'=>'price_1NhYlpFdQvV9SdYXEkqej8ai'
             ],
@@ -64,6 +69,7 @@ class PlanSeeder extends Seeder
                 'price'=> 348,
                 'interval'=>'year',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 500,
                 'lookup_key'=>'Starter',
                 'st_plan_id'=>'price_1NVXvIFdQvV9SdYXoDRFqLRC'
             ],
@@ -72,6 +78,7 @@ class PlanSeeder extends Seeder
                 'price'=> 708,
                 'interval'=>'year',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 1500,
                 'lookup_key'=>'Growth',
                 'st_plan_id'=>'price_1NVXv7FdQvV9SdYXzRKXk2yn'
             ],
@@ -80,6 +87,7 @@ class PlanSeeder extends Seeder
                 'price'=> 828,
                 'interval'=>'year',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 3000,
                 'lookup_key'=>'Pro',
                 'st_plan_id'=>'price_1NVXvDFdQvV9SdYXufunLNJs'
             ],
@@ -100,6 +108,7 @@ class PlanSeeder extends Seeder
                 'price'=> 15,
                 'interval'=>'month',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 150,
                 'lookup_key'=>'Lite',
                 'st_plan_id'=>'price_1NgqMlFdQvV9SdYXyE2UuLzz'
             ],
@@ -108,6 +117,7 @@ class PlanSeeder extends Seeder
                 'price'=> 39,
                 'interval'=>'month',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 500,
                 'lookup_key'=>'Starter',
                 'st_plan_id'=>'price_1NQWl9FdQvV9SdYXccsEVLV9'
             ],
@@ -116,6 +126,7 @@ class PlanSeeder extends Seeder
                 'price'=> 79,
                 'interval'=>'month',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 1500,
                 'lookup_key'=>'Growth',
                 'st_plan_id'=>'price_1NQWnDFdQvV9SdYXPhX9GnCW'
             ],
@@ -124,6 +135,7 @@ class PlanSeeder extends Seeder
                 'price'=> 99,
                 'interval'=>'month',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 3000,
                 'lookup_key'=>'Pro',
                 'st_plan_id'=>'price_1NQWmVFdQvV9SdYXhF7oPphl'
             ],
@@ -132,6 +144,7 @@ class PlanSeeder extends Seeder
                 'price'=> 132,
                 'interval'=>'year',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 150,
                 'lookup_key'=>'Lite',
                 'st_plan_id'=>'price_1NgqOwFdQvV9SdYX5PLQyBR8'
             ],
@@ -140,6 +153,7 @@ class PlanSeeder extends Seeder
                 'price'=> 348,
                 'interval'=>'year',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 500,
                 'lookup_key'=>'Starter',
                 'st_plan_id'=>'price_1NQzfQFdQvV9SdYXpDBY8Wtl'
             ],
@@ -148,6 +162,7 @@ class PlanSeeder extends Seeder
                 'price'=> 708,
                 'interval'=>'year',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 1500,
                 'lookup_key'=>'Growth',
                 'st_plan_id'=>'price_1NQzkaFdQvV9SdYXYlbRbGyK'
             ],
@@ -156,6 +171,7 @@ class PlanSeeder extends Seeder
                 'price'=> 828,
                 'interval'=>'year',
                 'trial_period_days'=> 15,
+                'allowed_responses'=> 3000,
                 'lookup_key'=>'Pro',
                 'st_plan_id'=>'price_1NQzjVFdQvV9SdYXU9CMdM79'
             ],

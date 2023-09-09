@@ -1,30 +1,27 @@
-import {ChatGPTMessage, OpenAIStream, OpenAIStreamPayload} from "@/lib/openai-stream";
-import {parse} from "url";
-import {MessageArraySchema} from "@/lib/validators/message";
+import { ChatGPTMessage, OpenAIStream, OpenAIStreamPayload } from "@/lib/openai-stream";
+import { MessageArraySchema } from "@/lib/validators/message";
 
 export async function POST(req: Request): Promise<Response> {
-	const { messages, domain } = await req.json();
-
-	console.log(messages);
-
-	const parsedMessages = MessageArraySchema.parse(messages);
-
-	const outboundMessages: ChatGPTMessage[] = parsedMessages.map((message) => {
-		return {
-			role: message.isUserMessage ? 'user' : 'system',
-			content: message.text,
-		};
-	});
-
 	try {
-		const response1 = await fetch(`https://api.myaichat.io/api/v1/${domain}/stores`);
-		const data1 = response1.ok ? await response1.json() : null;
+		const { messages, domain } = await req.json();
+
+		const parsedMessages = MessageArraySchema.parse(messages);
+
+		const outboundMessages: ChatGPTMessage[] = parsedMessages.map((message) => {
+			return {
+				role: message.isUserMessage ? 'user' : 'system',
+				content: message.text,
+			};
+		});
+
+		const [response1, response2] = await Promise.all([
+			fetch(`https://api.myaichat.io/api/v1/${domain}/stores`),
+			fetch(`https://api.myaichat.io/api/v1/product/${domain}`),
+		]);
+
+		const [data1, data2] = await Promise.all([response1.json(), response2.json()]);
 
 		console.log('response1', data1);
-
-		const response2 = await fetch(`https://api.myaichat.io/api/v1/product/${domain}`);
-		const data2 = response2.ok ? await response2.json() : null;
-
 		console.log('response2', data2);
 
 		outboundMessages.unshift({
@@ -45,23 +42,24 @@ export async function POST(req: Request): Promise<Response> {
 		});
 
 		console.log('outboundMessages', outboundMessages);
+
+		const payload: OpenAIStreamPayload = {
+			model: 'gpt-3.5-turbo-0613',
+			messages: outboundMessages,
+			temperature: 0.4,
+			top_p: 1,
+			frequency_penalty: 0,
+			presence_penalty: 0,
+			max_tokens: 150,
+			stream: true,
+			n: 1,
+		};
+
+		const stream = await OpenAIStream(payload);
+
+		return new Response(stream);
 	} catch (error) {
 		console.error('Error:', error);
+		return new Response('Une erreur s\'est produite.', { status: 500 });
 	}
-
-	const payload: OpenAIStreamPayload = {
-		model: 'gpt-3.5-turbo-0613',
-		messages: outboundMessages,
-		temperature: 0.4,
-		top_p: 1,
-		frequency_penalty: 0,
-		presence_penalty: 0,
-		max_tokens: 150,
-		stream: true,
-		n: 1,
-	};
-
-	const stream = await OpenAIStream(payload);
-
-	return new Response(stream);
 }
