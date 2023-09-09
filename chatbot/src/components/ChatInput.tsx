@@ -6,6 +6,7 @@ import { CornerDownLeft, Loader2 } from 'lucide-react'
 import { MessagesContext } from '@/context/messages'
 import { toast } from 'react-hot-toast'
 import { cn } from '@/lib/utils'
+import axios from 'axios'
 
 interface ChatInputProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -26,6 +27,20 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
         mutationKey: ['sendMessage'],
 
         mutationFn: async (_message: Message) => {
+            const test = await axios.post('/api/message', {
+                messages,
+                domain,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then((response) => {
+                console.log("response", response)
+            })
+
+            console.log("test", test)
+
+
             const response = await fetch('/api/message', {
                 method: 'POST',
                 headers: {
@@ -34,12 +49,16 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
                 body: JSON.stringify({ messages, domain }),
             })
 
+            console.log("response")
+
             return response.body
         },
         onMutate(message) {
             addMessage(message)
         },
         onSuccess: async (stream) => {
+            console.log("stream")
+
             if (allowedResponses !== null && messages.filter((message) => !message.isUserMessage).length >= allowedResponses) {
                 console.log('Nombre de réponses autorisées dépassé.')
                 return
@@ -56,6 +75,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
 
             addMessage(responseMessage)
 
+            console.log('responseMessage', responseMessage)
+
             setIsMessageUpdating(true)
 
             const reader = stream.getReader()
@@ -63,6 +84,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
             let done = false
 
             while (!done) {
+                console.log("TOTO")
                 const { value, done: doneReading } = await reader.read()
                 done = doneReading
                 const chunkValue = decoder.decode(value)
@@ -77,14 +99,12 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
             }, 10)
         },
         onError: (_, message) => {
+            console.log('VERT')
             toast.error('Quelque chose s\'est mal passé. Veuillez réessayer.')
             removeMessage(message.id)
             inputRef.current?.focus()
         },
     })
-
-    console.log('allowedResponses', allowedResponses)
-    console.log(domain)
 
     return (
       <div {...props} className={cn('border-t border-zinc-300 p-2 container-ui-input', className)}>
