@@ -75,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function createIframe() {
     const iframe = document.createElement('iframe');
-    iframe.src = 'https://ai.myaichat.io';
+    //iframe.src = 'https://ai.myaichat.io';
+    iframe.src = 'http://localhost:3031';
     document.body.appendChild(iframe);
     return iframe;
 }
