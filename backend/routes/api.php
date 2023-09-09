@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\Providerontroller;
@@ -38,6 +39,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::group(['prefix' => 'users'], function () {
         Route::get('/user-plan', [UserController::class, 'getPlanByShopifyUrl']);
     });
+
+    Route::post('/messages', [MessageController::class, 'store']);
+    Route::get('/messages/{url}/message-count', [MessageController::class, 'getMessageCount']);
+
 
     Route::post('rapport', [SignalerBugController::class, 'SendBugEmail']);
 

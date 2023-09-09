@@ -7,6 +7,7 @@ import { MessagesContext } from '@/context/messages'
 import { toast } from 'react-hot-toast'
 import { cn } from '@/lib/utils'
 import axios from 'axios'
+import { api } from '@/config/api'
 
 interface ChatInputProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -16,7 +17,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
     const {
         messages,
         domain,
-        allowedResponses,
         addMessage,
         removeMessage,
         updateMessage,
@@ -27,20 +27,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
         mutationKey: ['sendMessage'],
 
         mutationFn: async (_message: Message) => {
-            const test = await axios.post('/api/message', {
-                messages,
-                domain,
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            }).then((response) => {
-                console.log("response", response)
-            })
-
-            console.log("test", test)
-
-
             const response = await fetch('/api/message', {
                 method: 'POST',
                 headers: {
@@ -49,19 +35,28 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
                 body: JSON.stringify({ messages, domain }),
             })
 
-            console.log("response")
-
             return response.body
         },
         onMutate(message) {
             addMessage(message)
         },
-        onSuccess: async (stream) => {
-            console.log("stream")
 
-            if (allowedResponses !== null && messages.filter((message) => !message.isUserMessage).length >= allowedResponses) {
-                console.log('Nombre de réponses autorisées dépassé.')
-                return
+        onSuccess: async (stream) => {
+            const saveMessage = await api.post('messages',{
+              url: domain,
+              messages_json: JSON.stringify(messages),
+            })
+
+            if (saveMessage.status !== 201) {
+              toast.error('Quelque chose s\'est mal passé. Veuillez réessayer.')
+              return
+            }
+
+            const { data } = await api.get(`messages/${domain}/message-count`)
+
+            if (data.can_send_message !== true) {
+              toast.error('Nombre de réponses autorisées dépassé.')
+              return
             }
 
             if (!stream) throw new Error('Pas de flux disponible')
@@ -75,8 +70,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
 
             addMessage(responseMessage)
 
-            console.log('responseMessage', responseMessage)
-
             setIsMessageUpdating(true)
 
             const reader = stream.getReader()
@@ -84,7 +77,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
             let done = false
 
             while (!done) {
-                console.log("TOTO")
                 const { value, done: doneReading } = await reader.read()
                 done = doneReading
                 const chunkValue = decoder.decode(value)
@@ -99,7 +91,6 @@ const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
             }, 10)
         },
         onError: (_, message) => {
-            console.log('VERT')
             toast.error('Quelque chose s\'est mal passé. Veuillez réessayer.')
             removeMessage(message.id)
             inputRef.current?.focus()
