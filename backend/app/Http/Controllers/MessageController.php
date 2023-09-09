@@ -19,9 +19,19 @@ class MessageController extends Controller
         $existingMessage = Message::where('url', $request->input('url'))->first();
 
         if ($existingMessage) {
+            // Ajouter les nouveaux messages à l'ancienne entrée
+            $existingMessages = json_decode($existingMessage->messages_json, true);
+            $newMessages = json_decode($request->input('messages_json'), true);
+
+            // Fusionner les messages existants avec les nouveaux messages
+            $mergedMessages = array_merge($existingMessages, $newMessages);
+
+            // Mettre à jour le champ 'messages_json' de l'entrée existante avec les messages fusionnés
+            $existingMessage->messages_json = json_encode($mergedMessages);
             $existingMessage->increment('message_count');
             $existingMessage->save();
         } else {
+            // Créer une nouvelle entrée s'il n'existe pas d'entrée avec cette URL
             $message = new Message([
                 'url' => $request->input('url'),
                 'messages_json' => $request->input('messages_json'),

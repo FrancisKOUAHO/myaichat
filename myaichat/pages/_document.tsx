@@ -17,11 +17,9 @@ export default function Document() {
             <body>
             <Main />
             <NextScript />
-            {/*
-            <script src="https://connect.myaichat.io/index.js"/>
-*/}
-            <script
-                src='http://localhost:63342/myaichat/chatbot_loader/index.js?_ijt=o66s8l90nlgi9i1kbclig0bkm6&_ij_reload=RELOAD_ON_SAVE' />
+            <script src='https://connect.myaichat.io/index.js' />
+            {/*<script
+                src='http://localhost:63342/myaichat/chatbot_loader/index.js?_ijt=o66s8l90nlgi9i1kbclig0bkm6&_ij_reload=RELOAD_ON_SAVE' />*/}
             </body>
         </Html>
     )
