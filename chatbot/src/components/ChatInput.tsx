@@ -7,8 +7,7 @@ import { MessagesContext } from '@/context/messages'
 import { toast } from 'react-hot-toast'
 import { cn } from '@/lib/utils'
 
-interface ChatInputProps extends React.HTMLAttributes<HTMLDivElement> {
-}
+interface ChatInputProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
     const inputRef = useRef<HTMLInputElement | null>(null)
