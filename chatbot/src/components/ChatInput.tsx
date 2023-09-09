@@ -1,38 +1,29 @@
-'use client'
+import React, { useContext, useRef, useState } from 'react'
+import { nanoid } from 'nanoid'
+import { Message } from '@/lib/validators/message'
+import { useMutation } from '@tanstack/react-query'
+import { CornerDownLeft, Loader2 } from 'lucide-react'
+import { MessagesContext } from '@/context/messages'
+import { toast } from 'react-hot-toast'
+import { cn } from '@/lib/utils'
 
-import {MessagesContext} from '@/context/messages'
-import {cn} from '@/lib/utils'
-import {Message} from '@/lib/validators/message'
-import {useMutation} from '@tanstack/react-query'
-import {CornerDownLeft, Loader2} from 'lucide-react'
-import {nanoid} from 'nanoid'
-import {FC, HTMLAttributes, useContext, useEffect, useRef, useState} from 'react'
-import {toast} from 'react-hot-toast'
-
-interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {
+interface ChatInputProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
-const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
-    const inputRef: any = useRef<HTMLTextAreaElement | null>(null)
+const ChatInput: React.FC<ChatInputProps> = ({ className, ...props }) => {
+    const inputRef = useRef<HTMLInputElement | null>(null)
     const [input, setInput] = useState<string>('')
     const {
         messages,
+        domain,
+        allowedResponses,
         addMessage,
         removeMessage,
         updateMessage,
         setIsMessageUpdating,
     } = useContext(MessagesContext)
 
-    const [domain, setDomain] = useState('');
-
-    useEffect(() => {
-        const siteURL = document.referrer || window.location.href;
-        const hostname = new URL(siteURL).hostname;
-        const domain = hostname.replace('www.', '').split('.')[0];
-        setDomain(domain);
-    }, []);
-
-    const {mutate: sendMessage, isLoading} = useMutation({
+    const { mutate: sendMessage, isLoading } = useMutation({
         mutationKey: ['sendMessage'],
 
         mutationFn: async (_message: Message) => {
@@ -41,7 +32,7 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({messages, domain}),
+                body: JSON.stringify({ messages, domain }),
             })
 
             return response.body
@@ -50,6 +41,11 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
             addMessage(message)
         },
         onSuccess: async (stream) => {
+            if (allowedResponses !== null && messages.filter((message) => !message.isUserMessage).length >= allowedResponses) {
+                console.log('Nombre de réponses autorisées dépassé.')
+                return
+            }
+
             if (!stream) throw new Error('Pas de flux disponible')
 
             const id = nanoid()
@@ -68,7 +64,7 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
             let done = false
 
             while (!done) {
-                const {value, done: doneReading} = await reader.read()
+                const { value, done: doneReading } = await reader.read()
                 done = doneReading
                 const chunkValue = decoder.decode(value)
                 updateMessage(id, (prev) => prev + chunkValue)
@@ -88,64 +84,66 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
         },
     })
 
+    console.log('allowedResponses', allowedResponses)
+    console.log(domain)
+
     return (
-        <div {...props} className={cn('border-t border-zinc-300 p-2 container-ui-input', className)}>
-            <div className='relative mt-4 flex-1 overflow-hidden rounded-lg border-none outline-none'>
-                <input
-                    ref={inputRef}
-                    onClick={() => {
-                        if (!input) {
-                            inputRef.current?.focus();
+      <div {...props} className={cn('border-t border-zinc-300 p-2 container-ui-input', className)}>
+          <div className='relative mt-4 flex-1 overflow-hidden rounded-lg border-none outline-none'>
+              <input
+                ref={inputRef}
+                onClick={() => {
+                    if (!input) {
+                        inputRef.current?.focus()
+                    }
+                }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault()
+
+                        const message: Message = {
+                            id: nanoid(),
+                            isUserMessage: true,
+                            text: input,
                         }
-                    }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                            e.preventDefault();
 
-                            const message: Message = {
-                                id: nanoid(),
-                                isUserMessage: true,
-                                text: input,
-                            };
+                        sendMessage(message)
+                    }
+                }}
+                value={input}
+                disabled={isLoading}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder='Écrire un message...'
+                className='peer disabled:opacity-50 pr-14 block w-full border-0 bg-zinc-100 py-1.5 text-gray-900 focus:ring-0 text-sm sm:leading-6'
+                style={{ padding: '8px' }}
+              />
 
-                            sendMessage(message);
-                        }
-                    }}
-                    value={input}
-                    disabled={isLoading}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder='Écrire un message...'
-                    className='peer disabled:opacity-50 pr-14 block w-full border-0 bg-zinc-100 py-1.5 text-gray-900 focus:ring-0 text-sm sm:leading-6'
-                    style={{padding: '8px'}}
-                />
+              <div className='absolute inset-y-0 right-0 flex py-1.5 pr-1.5'>
+                  <kbd
+                    className='inline-flex items-center rounded border bg-white border-gray-200 px-1 font-sans text-xs text-gray-400'>
+                      {isLoading ? (
+                        <Loader2 className='w-3 h-3 animate-spin' />
+                      ) : (
+                        <CornerDownLeft
+                          className='w-3 h-3'
+                          onClick={() => {
+                              const message: Message = {
+                                  id: nanoid(),
+                                  isUserMessage: true,
+                                  text: input,
+                              }
+                              sendMessage(message)
+                          }}
+                        />
+                      )}
+                  </kbd>
+              </div>
 
-                <div className='absolute inset-y-0 right-0 flex py-1.5 pr-1.5'>
-                    <kbd
-                        className='inline-flex items-center rounded border bg-white border-gray-200 px-1 font-sans text-xs text-gray-400'>
-                        {isLoading ? (
-                            <Loader2 className='w-3 h-3 animate-spin'/>
-                        ) : (
-                            <CornerDownLeft
-                                className='w-3 h-3'
-                                onClick={() => {
-                                    const message: Message = {
-                                        id: nanoid(),
-                                        isUserMessage: true,
-                                        text: input,
-                                    };
-                                    sendMessage(message);
-                                }}
-                            />
-                        )}
-                    </kbd>
-                </div>
-
-                <div
-                    className='absolute inset-x-0 bottom-0 border-t border-gray-300 peer-focus:border-t-2 peer-focus:border-indigo-600'
-                    aria-hidden='true'
-                />
-            </div>
-        </div>
+              <div
+                className='absolute inset-x-0 bottom-0 border-t border-gray-300 peer-focus:border-t-2 peer-focus:border-indigo-600'
+                aria-hidden='true' />
+          </div>
+      </div>
     )
 }
 
