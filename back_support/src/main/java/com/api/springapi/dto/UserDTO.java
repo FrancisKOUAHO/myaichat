@@ -33,17 +33,17 @@ public class UserDTO {
         return magicLinkToken;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getMagicLinkTokenExpiresAt() {
         return magicLinkTokenExpiresAt;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
@@ -56,7 +56,7 @@ public class UserDTO {
         return planId;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime getEmailVerifiedAt() {
         return emailVerifiedAt;
     }

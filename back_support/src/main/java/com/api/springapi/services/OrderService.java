@@ -24,12 +24,6 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
-    public Order update(Long id, OrderDTO orderDTO) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
-        BeanUtils.copyProperties(orderDTO, order, "id");
-        return orderRepository.save(order);
-    }
-
     public void deleteById(Long id) {
         orderRepository.deleteById(id);
     }

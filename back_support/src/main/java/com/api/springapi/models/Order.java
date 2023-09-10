@@ -2,6 +2,7 @@ package com.api.springapi.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -23,8 +24,13 @@ public class Order {
     @Column(name = "session_id", length = 255, nullable = false)
     private String sessionId;
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Long userId;
+
+    @ManyToOne(fetch = FetchType.EAGER) // Utilisez EAGER au lieu de LAZY
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
+
 
     @Column(name = "payment_id")
     private Long paymentId;
@@ -42,6 +48,11 @@ public class Order {
         return id;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+
     public String getStatus() {
         return status;
     }
@@ -52,10 +63,6 @@ public class Order {
 
     public String getSessionId() {
         return sessionId;
-    }
-
-    public Long getUserId() {
-        return userId;
     }
 
     public Long getPaymentId() {
@@ -75,6 +82,10 @@ public class Order {
         this.id = id;
     }
 
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -85,10 +96,6 @@ public class Order {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public void setPaymentId(Long paymentId) {
@@ -102,5 +109,4 @@ public class Order {
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 }

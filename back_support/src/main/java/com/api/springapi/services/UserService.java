@@ -1,8 +1,11 @@
 package com.api.springapi.services;
 
 import com.api.springapi.dto.UserDTO;
+import com.api.springapi.models.Order;
 import com.api.springapi.models.User;
+import com.api.springapi.repositories.OrderRepository;
 import com.api.springapi.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,10 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrderRepository orderRepository; // Injectez le dépôt OrderRepository
+
     public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
         return users.stream()
@@ -36,16 +43,6 @@ public class UserService {
                 });
     }
 
-    public UserDTO save(UserDTO userDTO) {
-        User user = new User();
-        BeanUtils.copyProperties(userDTO, user);
-        User savedUser = userRepository.save(user);
-
-        UserDTO savedUserDTO = new UserDTO();
-        BeanUtils.copyProperties(savedUser, savedUserDTO);
-        return savedUserDTO;
-    }
-
     public UserDTO update(Long id, UserDTO userDTO) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         BeanUtils.copyProperties(userDTO, user);
@@ -56,8 +53,10 @@ public class UserService {
         return updatedUserDTO;
     }
 
-    public void deleteById(Long id) {
+
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
+
 
 }

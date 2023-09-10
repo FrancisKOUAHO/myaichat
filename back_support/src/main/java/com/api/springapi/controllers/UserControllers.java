@@ -31,12 +31,6 @@ public class UserControllers {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO) {
-        UserDTO newUserDTO = userService.save(userDTO);
-        return ResponseEntity.ok(newUserDTO);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
         UserDTO updatedUserDTO = userService.update(id, userDTO);
@@ -45,7 +39,8 @@ public class UserControllers {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        userService.deleteById(id);
+        userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
     }
+
 }
