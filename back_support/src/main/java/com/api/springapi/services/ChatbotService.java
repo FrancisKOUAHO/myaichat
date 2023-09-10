@@ -28,6 +28,8 @@ public class ChatbotService {
     public Chatbot save(ChatbotDTO chatbotDTO) {
         Chatbot chatbot = new Chatbot();
         BeanUtils.copyProperties(chatbotDTO, chatbot, "id");
+        
+        
 
         return chatbotRepository.save(chatbot);
     }

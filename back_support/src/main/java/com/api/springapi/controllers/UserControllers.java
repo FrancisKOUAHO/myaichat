@@ -24,23 +24,23 @@ public class UserControllers {
         return ResponseEntity.ok(users);
     }
 
-
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        Optional<User> userOptional = userService.findById(id);
-        return userOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
+        Optional<UserDTO> userDTOOptional = userService.findById(id);
+        return userDTOOptional.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody UserDTO userDTO) {
-        User user = userService.save(userDTO);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO) {
+        UserDTO newUserDTO = userService.save(userDTO);
+        return ResponseEntity.ok(newUserDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        User user = userService.update(id, userDTO);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO userDTO) {
+        UserDTO updatedUserDTO = userService.update(id, userDTO);
+        return ResponseEntity.ok(updatedUserDTO);
     }
 
     @DeleteMapping("/{id}")

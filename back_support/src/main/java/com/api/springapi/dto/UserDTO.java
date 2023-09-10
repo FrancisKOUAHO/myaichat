@@ -1,18 +1,20 @@
 package com.api.springapi.dto;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 
 public class UserDTO {
     private Long id;
     private String email;
     private String rememberToken;
     private String magicLinkToken;
-    private LocalDate magicLinkTokenExpiresAt;
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    private LocalDateTime magicLinkTokenExpiresAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Boolean subscriptionActive;
     private Long planId; // Assuming Plan ID is of type Long
-    private LocalDate emailVerifiedAt;
+    private LocalDateTime emailVerifiedAt;
 
     // Getters
     public Long getId() {
@@ -31,15 +33,18 @@ public class UserDTO {
         return magicLinkToken;
     }
 
-    public LocalDate getMagicLinkTokenExpiresAt() {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    public LocalDateTime getMagicLinkTokenExpiresAt() {
         return magicLinkTokenExpiresAt;
     }
 
-    public LocalDate getCreatedAt() {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public LocalDate getUpdatedAt() {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -51,7 +56,8 @@ public class UserDTO {
         return planId;
     }
 
-    public LocalDate getEmailVerifiedAt() {
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    public LocalDateTime getEmailVerifiedAt() {
         return emailVerifiedAt;
     }
 
@@ -72,15 +78,15 @@ public class UserDTO {
         this.magicLinkToken = magicLinkToken;
     }
 
-    public void setMagicLinkTokenExpiresAt(LocalDate magicLinkTokenExpiresAt) {
+    public void setMagicLinkTokenExpiresAt(LocalDateTime magicLinkTokenExpiresAt) {
         this.magicLinkTokenExpiresAt = magicLinkTokenExpiresAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(LocalDate updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -92,7 +98,7 @@ public class UserDTO {
         this.planId = planId;
     }
 
-    public void setEmailVerifiedAt(LocalDate emailVerifiedAt) {
+    public void setEmailVerifiedAt(LocalDateTime emailVerifiedAt) {
         this.emailVerifiedAt = emailVerifiedAt;
     }
 }

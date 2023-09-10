@@ -1,5 +1,6 @@
 package com.api.springapi.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "email_verified_at")
     private LocalDateTime emailVerifiedAt;
 
@@ -23,9 +25,11 @@ public class User {
     @Column(name = "magic_link_token")
     private String magicLinkToken;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "magic_link_token_expires_at")
     private LocalDateTime magicLinkTokenExpiresAt;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -39,6 +43,7 @@ public class User {
     @Column(name = "remember_token", length = 100)
     private String rememberToken;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

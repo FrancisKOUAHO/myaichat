@@ -16,40 +16,48 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
     public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
-        // Convertissez les entités User en UserDTO ici
         return users.stream()
-                .map(this::convertToDTO)
+                .map(user -> {
+                    UserDTO userDTO = new UserDTO();
+                    BeanUtils.copyProperties(user, userDTO);
+                    return userDTO;
+                })
                 .collect(Collectors.toList());
     }
 
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(id);
+    public Optional<UserDTO> findById(Long id) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    UserDTO userDTO = new UserDTO();
+                    BeanUtils.copyProperties(user, userDTO);
+                    return userDTO;
+                });
     }
 
-    public User save(UserDTO userDTO) {
+    public UserDTO save(UserDTO userDTO) {
         User user = new User();
-        BeanUtils.copyProperties(userDTO, user, "id");
-        return userRepository.save(user);
+        BeanUtils.copyProperties(userDTO, user);
+        User savedUser = userRepository.save(user);
+
+        UserDTO savedUserDTO = new UserDTO();
+        BeanUtils.copyProperties(savedUser, savedUserDTO);
+        return savedUserDTO;
     }
 
-    public User update(Long id, UserDTO userDTO) {
+    public UserDTO update(Long id, UserDTO userDTO) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        BeanUtils.copyProperties(userDTO, user, "id");
-        return userRepository.save(user);
+        BeanUtils.copyProperties(userDTO, user);
+        User updatedUser = userRepository.save(user);
+
+        UserDTO updatedUserDTO = new UserDTO();
+        BeanUtils.copyProperties(updatedUser, updatedUserDTO);
+        return updatedUserDTO;
     }
 
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
 
-
-    private UserDTO convertToDTO(User user) {
-        UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(user, userDTO);
-        // Copiez les autres propriétés si nécessaire
-        return userDTO;
-    }
 }
