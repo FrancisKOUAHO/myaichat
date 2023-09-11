@@ -36,7 +36,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::get('/{url}/stores', [ShopifyStoreController::class, 'getUrlStores']);
     Route::get('/product/{domain}', [ShopifyProductController::class, 'getUrlShopifyProduct']);
 
-    Route::group(['prefix' => 'users'], function () {
+    Route::group(['prefix' => 'page'], function () {
         Route::get('/user-plan', [UserController::class, 'getPlanByShopifyUrl']);
     });
 

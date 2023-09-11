@@ -33,8 +33,8 @@ public class StatistiquesAgregeesService {
     }
 
     public List<ClientOverviewDTO> getClientsOverview() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
+        List<User> page = userRepository.findAll();
+        return page.stream()
                 .map(user -> {
                     Long chatbotsCount = chatbotRepository.countChatbotsByUserId(user.getId());
                     List<String> urls = chatbotRepository.findByUserId(user.getId()).stream()
@@ -52,8 +52,8 @@ public class StatistiquesAgregeesService {
     }
 
     public List<SubscriptionDetailDTO> getSubscriptionDetails() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
+        List<User> page = userRepository.findAll();
+        return page.stream()
                 .map(user -> {
                     Plan plan = user.getPlan();
                     String planName = plan != null ? plan.getName() : "No Plan";
