@@ -1,9 +1,10 @@
 package com.api.springapi.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -38,14 +39,17 @@ public class Payment {
     @Column(name = "date")
     private Long date;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "trial_end")
-    private LocalDateTime trialEnd;
+    private LocalDate trialEnd;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
 
     public Long getId() {
         return id;
@@ -119,27 +123,27 @@ public class Payment {
         this.date = date;
     }
 
-    public LocalDateTime getTrialEnd() {
+    public LocalDate getTrialEnd() {
         return trialEnd;
     }
 
-    public void setTrialEnd(LocalDateTime trialEnd) {
+    public void setTrialEnd(LocalDate trialEnd) {
         this.trialEnd = trialEnd;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public LocalDate getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
 

@@ -1,15 +1,18 @@
 package com.api.springapi.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "orders")
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(nullable = false, length = 255)
@@ -21,18 +24,89 @@ public class Order {
     @Column(name = "session_id", length = 255, nullable = false)
     private String sessionId;
 
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Long userId;
+
+    @ManyToOne(fetch = FetchType.EAGER) // Utilisez EAGER au lieu de LAZY
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
+
 
     @Column(name = "payment_id")
     private Long paymentId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
 
-    // Getters, setters, and other methods...
+    // Getters
+    public Long getId() {
+        return id;
+    }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public Long getPaymentId() {
+        return paymentId;
+    }
+
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
