@@ -24,8 +24,8 @@ public class UserService {
     private OrderRepository orderRepository; // Injectez le dépôt OrderRepository
 
     public List<UserDTO> findAll() {
-        List<User> users = userRepository.findAll();
-        return users.stream()
+        List<User> page = userRepository.findAll();
+        return page.stream()
                 .map(user -> {
                     UserDTO userDTO = new UserDTO();
                     BeanUtils.copyProperties(user, userDTO);

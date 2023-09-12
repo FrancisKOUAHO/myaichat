@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = {"http://localhost:3000/", "https://admin.myaichat.io/", "https://www.myaichat.io/", "*"})
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/page")
 public class UserControllers {
 
     @Autowired
@@ -20,8 +20,8 @@ public class UserControllers {
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll() {
-        List<UserDTO> users = userService.findAll();
-        return ResponseEntity.ok(users);
+        List<UserDTO> page = userService.findAll();
+        return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")

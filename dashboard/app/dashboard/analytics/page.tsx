@@ -4,6 +4,14 @@ import React, { useEffect, useState } from 'react'
 import LayoutCustom from "@/layouts/layoutCustom";
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/config/api'
+import { AxiosResponse } from 'axios'
+import { parseCookies } from 'nookies'
+import { getCookie } from 'cookies-next'
+
+const fetchShopifyStore = async (userId: any) => {
+    const response: AxiosResponse = await api.get(`stores/user/${userId}/stores`);
+    return response;
+};
 
 const Page = () => {
     const [user, setUser] = useState<any>(null);
@@ -21,6 +29,18 @@ const Page = () => {
         queryKey: ["number-chatbot"],
         queryFn: () => api.get(`stores/get-chatbot-number/${user?.id}`),
         enabled: !!user,
+    });
+
+    const {data: shopifyStore, isLoading} = useQuery({
+        queryKey: ["shopifyStore"],
+        queryFn: () => fetchShopifyStore(parseCookies()['userId']),
+        enabled: Boolean(getCookie("access_token")),
+    });
+
+    const {data: shopifyStoreName, isLoading: isLoadingShopifyStoreId} = useQuery({
+        queryKey: ["shopifyStoreId"],
+        queryFn: () => api.get(`messages/${shopifyStore?.data[0].url}/message-count`),
+        enabled: !!["shopifyStore"],
     });
 
     useEffect(() => {
@@ -50,9 +70,8 @@ const Page = () => {
                         </dt>
                         <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                             <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                <p>fonctionnalité à venir</p>
-                               {/* 0
-                                <span className="ml-2 text-sm font-medium text-gray-500">sur 30 (ce mois-ci)</span>*/}
+                                { shopifyStoreName && shopifyStoreName.data.message_count}
+                                <span className="ml-2 text-sm font-medium text-gray-500">sur { shopifyStoreName && shopifyStoreName.data.allowed_responses} (ce mois-ci)</span>
                             </div>
                         </dd>
                     </div>
