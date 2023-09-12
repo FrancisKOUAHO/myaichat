@@ -24,13 +24,8 @@ public class Order {
     @Column(name = "session_id", length = 255, nullable = false)
     private String sessionId;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
+    @Column(name = "user_id",  nullable = false)
     private Long userId;
-
-    @ManyToOne(fetch = FetchType.EAGER) // Utilisez EAGER au lieu de LAZY
-    @JoinColumn(name = "user_id", nullable = true)
-    private User user;
-
 
     @Column(name = "payment_id")
     private Long paymentId;

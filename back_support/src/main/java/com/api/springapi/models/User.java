@@ -16,11 +16,11 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Product> products; // Nouveau champ pour la liste des produits
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Product> products; // Nouveau champ pour la liste des produits
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = false)
+//    private List<Order> orders;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "email_verified_at")

@@ -12,12 +12,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "user_id", nullable = true)
+    @Column(name = "user_id", nullable = false)
     private Long userId;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false,  insertable = false, updatable = false)
-    private User user; // Nouveau champ pour établir une relation avec User
 
     @Column(name = "title")
     private String title;
