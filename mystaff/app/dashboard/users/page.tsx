@@ -1,9 +1,9 @@
-const page = () => {
+const Page = () => {
     return(
         <>
-            <h1>USERS MAN</h1>
+            <h1>Zola</h1>
         </>
-    )
+        )
 }
 
-export default page
+export default Page

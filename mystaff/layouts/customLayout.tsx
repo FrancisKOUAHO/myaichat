@@ -8,7 +8,7 @@ import TableNav from "@/components/table-nav";
 export default function customLayout({children} : {children:any}){
     return(
         <>
-            <div className="md:hidden">
+            <div>
                 <Image
                     src="/examples/dashboard-light.png"
                     width={1280}
@@ -24,7 +24,7 @@ export default function customLayout({children} : {children:any}){
                     className="hidden dark:block"
                 />
             </div>
-            <div className="hidden flex-col md:flex">
+            <div className="flex-col md:flex">
                 <div className="border-b">
                     <div className="flex h-16 items-center px-4">
                         <div className="ml-auto flex items-center space-x-4">

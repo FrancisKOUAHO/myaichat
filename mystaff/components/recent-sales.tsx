@@ -32,7 +32,7 @@ export function RecentSales() {
                 LastOrders && LastOrders.map((LastOrder: any, index: number) => (
                     <div className="flex items-center" key={index}>
                         <Avatar className="h-9 w-9">
-                            <AvatarImage src="/avatars/01.png" alt="Avatar" />
+                            {/*<AvatarImage src="/avatars/01.png" alt="Avatar" />*/}
                             <AvatarFallback>{index + 1}</AvatarFallback>
                         </Avatar>
                         <div className="ml-4 space-y-1">

@@ -9,7 +9,7 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 
 
-const page = () => {
+const Page = () => {
     const [totalRevenue, setTotalRevenue] = useState<number | null>(null);
     const [totalUsers, setTotalUsers] = useState<number | null>(null);
     const [totalOrders, setTotalOrders] = useState<number | null>(null);
@@ -170,4 +170,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
