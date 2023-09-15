@@ -1,4 +1,4 @@
-import {useLanguage} from "../../contexts/LanguageContext";
+import {useLanguage} from "../../context/LanguageContext";
 
 const FirstClass = () => {
     const {translations} = useLanguage();
