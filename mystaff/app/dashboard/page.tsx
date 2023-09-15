@@ -17,34 +17,28 @@ import Apercu from  "./apercu/page"
 
 export default function DashboardPage() {
     return (
-<CustomLayout>
-    <h1>
-        ZOLA
-    </h1>
-</CustomLayout>
-        // <CustomLayout>
-        //     <Apercu/>
-        //     <TabsContent value="apercu" className="space-y-4">
-        //         <Apercu/>
-        //     </TabsContent>
-        //     <TabsContent value="utilisateurs" className="space-y-4">
-        //         <Users/>
-        //     </TabsContent>
-        //     <TabsContent value="boutiques" className="space-y-4">
-        //         <Shops/>
-        //     </TabsContent>
-        //     <TabsContent value="produits">
-        //         <Products/>
-        //     </TabsContent>
-        //     <TabsContent value="commandes">
-        //         <Orders/>
-        //     </TabsContent>
-        //     <TabsContent value="abonnements">
-        //         <Plans/>
-        //     </TabsContent>
-        //     <TabsContent value="paiements">
-        //         <Paiement/>
-        //     </TabsContent>
-        // </CustomLayout>
+         <CustomLayout>
+             <TabsContent value="apercu" className="space-y-4">
+                 <Apercu/>
+             </TabsContent>
+             <TabsContent value="utilisateurs" className="space-y-4">
+                 <Users/>
+            </TabsContent>
+             <TabsContent value="boutiques" className="space-y-4">
+                 <Shops/>
+             </TabsContent>
+             <TabsContent value="produits">
+                 <Products/>
+             </TabsContent>
+             <TabsContent value="commandes">
+                 <Orders/>
+             </TabsContent>
+             <TabsContent value="abonnements">
+                 <Plans/>
+             </TabsContent>
+             <TabsContent value="paiements">
+                 <Paiement/>
+             </TabsContent>
+         </CustomLayout>
     )
 }
