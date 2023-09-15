@@ -5,7 +5,7 @@ import {Autoplay, Navigation} from 'swiper';
 import Link from 'next/link';
 import {useSelector} from 'react-redux';
 import {IRootState} from '../../store';
-import {useLanguage} from "../../contexts/LanguageContext";
+import {useLanguage} from "../../context/LanguageContext";
 
 const Testimonial = ({showTitle = true, type = 'common', className = ''}) => {
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;

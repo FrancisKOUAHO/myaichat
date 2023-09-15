@@ -1,14 +1,7 @@
-import React, { createContext, useEffect, useState } from 'react'
-import { nanoid } from 'nanoid'
-import { Message } from '@/lib/validators/message'
-
-const defaultValue = [
-  {
-    id: nanoid(),
-    text: 'Bienvenue ! Comment puis-je vous aider ?',
-    isUserMessage: false,
-  },
-]
+import React, { createContext, useEffect, useState, useContext } from 'react';
+import { nanoid } from 'nanoid';
+import { Message } from '@/lib/validators/message';
+import { useLanguage } from '@/context/LanguageContext';
 
 export const MessagesContext = createContext<{
   messages: Message[];
@@ -26,41 +19,47 @@ export const MessagesContext = createContext<{
   removeMessage: () => {},
   updateMessage: () => {},
   setIsMessageUpdating: () => {},
-})
+});
 
 export function MessagesProvider({ children }: { children: React.ReactNode }) {
-  const [messages, setMessages] = useState(defaultValue)
-  const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false)
-  const [domain, setDomain] = useState<string>('')
+  const { translations } = useLanguage();
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: nanoid(),
+      text: translations.welcome,
+      isUserMessage: false,
+    },
+  ]);
+  const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false);
+  const [domain, setDomain] = useState<string>('');
 
   const addMessage = (message: Message) => {
-    setMessages((prev) => [...prev, message])
-  }
+    setMessages((prev) => [...prev, message]);
+  };
 
   const removeMessage = (id: string) => {
-    setMessages((prev) => prev.filter((message) => message.id !== id))
-  }
+    setMessages((prev) => prev.filter((message) => message.id !== id));
+  };
 
   const updateMessage = (
     id: string,
-    updateFn: (prevText: string) => string,
+    updateFn: (prevText: string) => string
   ) => {
     setMessages((prev) =>
-      prev.map((message) => {
-        if (message.id === id) {
-          return { ...message, text: updateFn(message.text) }
-        }
-        return message
-      }),
-    )
-  }
+      prev.map((message) =>
+        message.id === id
+          ? { ...message, text: updateFn(message.text) }
+          : message
+      )
+    );
+  };
 
   useEffect(() => {
-    const siteURL = document.referrer || window.location.href
-    const hostname = new URL(siteURL).hostname
-    const domain = hostname.replace('www.', '').split('.')[0]
-    setDomain(domain)
-  }, [])
+    const siteURL = document.referrer || window.location.href;
+    const hostname = new URL(siteURL).hostname;
+    const domain = hostname.replace('www.', '').split('.')[0];
+    setDomain(domain);
+  }, []);
 
   return (
     <MessagesContext.Provider
@@ -75,6 +74,13 @@ export function MessagesProvider({ children }: { children: React.ReactNode }) {
       }}>
       {children}
     </MessagesContext.Provider>
-  )
+  );
 }
 
+export const useMessages = () => {
+  const context = useContext(MessagesContext);
+  if (!context) {
+    throw new Error('useMessages must be used within a MessagesProvider');
+  }
+  return context;
+};
