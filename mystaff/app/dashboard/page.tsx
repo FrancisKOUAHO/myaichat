@@ -12,9 +12,6 @@ import Orders from  "./oders/page"
 import Apercu from  "./apercu/page"
 
 
-
-
-
 export default function DashboardPage() {
     return (
          <CustomLayout>
