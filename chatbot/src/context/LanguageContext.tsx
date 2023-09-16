@@ -2,16 +2,17 @@
 
 import React, { createContext, FunctionComponent, useContext, useState } from 'react'
 
-import {getLanguageName} from 'browser-language-auto-detector'
+import { getLanguageName } from 'browser-language-auto-detector'
 
 import enTranslations from '../locales/en.json'
 import frTranslations from '../locales/fr.json'
 import esTranslations from '../locales/es.json'
+import Translations from '@/types/Translations'
 
 type LanguageContextType = {
   language: string;
   setLanguage: (lang: string) => void;
-  translations: any;
+  translations: Translations;
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
