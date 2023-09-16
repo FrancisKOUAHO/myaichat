@@ -5,9 +5,11 @@ import LayoutCustom from "@/layouts/layoutCustom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "@/config/api";
 import { getCookie } from "cookies-next";
-
+import { useLanguage } from '@/context/LanguageContext'
 
 const Page = () => {
+  const { translations } = useLanguage()
+
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
@@ -32,18 +34,18 @@ const Page = () => {
       <div className="w-full overflow-y-auto">
         <div className="mt-[2%] w-full p-4 text-center bg-indigo-200  rounded-lg shadow sm:p-8">
           <div className="flex items-center justify-between border-b border-gray-200">
-            <span className="font-bold text-gray-900">Extraction de données</span>
+            <span className="font-bold text-gray-900">{translations.DATA_EXTRACTION}</span>
           </div>
           <div className="flex justify-between gap-8 p-6">
             {isLoading ? (
-              <p>Chargement...</p>
+              <p>{translations.LOADING_TEXT}</p>
             ) : (
               <table className="table w-full text-gray-400 border-separate space-y-6 text-sm">
                 <thead className="text-white mt-[2%] bg-indigo-200 rounded-lg">
                 <tr className="bg-indigo-600">
-                  <th className="p-3">Boutique</th>
-                  <th className="p-3">url du produit</th>
-                  <th className="p-3">Statut</th>
+                  <th className="p-3">{translations.STORE}</th>
+                  <th className="p-3">{translations.PRODUCT_URL}</th>
+                  <th className="p-3">{translations.STATUS}</th>
                 </tr>
                 </thead>
                 <tbody className="mt-[2%] bg-white">
