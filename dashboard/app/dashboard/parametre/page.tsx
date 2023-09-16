@@ -9,8 +9,6 @@ import {api} from "@/config/api";
 import {getCookie} from "cookies-next";
 import {toast} from "react-toastify";
 import {AxiosResponse} from "axios";
-import translations from '@/types/Translations'
-import { useLanguage } from '@/context/LanguageContext'
 
 const getScrapeMutation = async (data: any) => {
     const response: AxiosResponse = await api.get(`stores/user/${data}/stores`);
@@ -19,7 +17,6 @@ const getScrapeMutation = async (data: any) => {
 
 const Page = () => {
     const queryClient: QueryClient = useQueryClient();
-    const { translations } = useLanguage()
 
     const [isOpenVisualiser, setIsOpenVisualiser] = useState(false);
     const [isOpenModifier, setIsOpenModifier] = useState(false);
@@ -80,8 +77,8 @@ const Page = () => {
                         <table className="table w-full text-gray-400 border-separate space-y-6 text-sm">
                             <thead className="text-white mt-[2%] bg-indigo-200 rounded-lg w-full">
                             <tr className="shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] w-full">
-                                <th className="p-3">{translations.STORE}</th>
-                                <th className="p-3">{translations.CONTENT}</th>
+                                <th className="p-3">Boutique</th>
+                                <th className="p-3">Contenu</th>
                                 <th className="p-3" style={{
                                     borderRadius: "0 0.625rem 0.625rem 0"
                                 }}>Action
@@ -90,7 +87,7 @@ const Page = () => {
                             </thead>
                             <tbody className="mt-[2%] bg-white">
                             {
-                                isLoading ? translations.LOADING_TEXT :
+                                isLoading ? 'Chargement...' :
                                     shopifyStore && shopifyStore.data.map((shop: any) => {
                                         return (
                                             <tr className="bg-white" key={shop.id}>
@@ -279,6 +276,7 @@ const Page = () => {
                                                             </div>
                                                         </Dialog>
                                                     </Transition>
+
                                                 </td>
                                             </tr>
                                         );

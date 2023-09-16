@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import React, { Fragment, FunctionComponent, useState } from 'react'
+import React, {Fragment, FunctionComponent, useState} from "react";
 import {
   AiOutlineCreditCard,
   AiOutlineFileSync,
@@ -9,137 +9,133 @@ import {
   AiOutlineMail,
   AiOutlineShop,
   AiOutlineSetting,
-} from 'react-icons/ai'
-import Link from 'next/link'
-import SidebarProps from '@/types/SidebarProps'
-import ReportForm from '../ReportForm/ReportForm'
-import { useMutation } from '@tanstack/react-query'
-import { api } from '@/config/api'
-import { useAuth } from '@/context/AuthContext'
-import { toast } from 'react-toastify'
-import { useLanguage } from '@/context/LanguageContext'
+} from "react-icons/ai";
+import Link from "next/link";
+import SidebarProps from "@/types/SidebarProps";
+import ReportForm from "../ReportForm/ReportForm";
+import {useMutation} from "@tanstack/react-query";
+import {api} from "@/config/api";
+import {useAuth} from "@/context/AuthContext";
+import { toast } from "react-toastify";
+
 
 const Sidebar: FunctionComponent<SidebarProps> = ({}) => {
-  const { translations } = useLanguage()
-  const { user } = useAuth()
+    const {user} = useAuth();
 
-  const [image, setImage] = useState<File | null>(null)
-  const [message, setMessage] = useState('')
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [image, setImage] = useState<File | null>(null);
+  const [message, setMessage] = useState("");
+ const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
-    setIsModalOpen(true)
-  }
+    setIsModalOpen(true);
+  };
 
   const closeModal = () => {
-    setIsModalOpen(false)
-  }
+    setIsModalOpen(false);
+  };
 
   const SendRapport = useMutation(
-    (formData: FormData) => api.post('rapport', formData),
+    (formData: FormData) => api.post("rapport", formData),
     {
-      onSuccess: (data) => {
-        toast(`Message envoyé`, { position: toast.POSITION.BOTTOM_CENTER })
-      },
-      onError: (error) => {
-        toast(`Réessayer d'envoyer le message`, { position: toast.POSITION.BOTTOM_CENTER })
-      },
-    },
-  )
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    if (image) {
-      formData.append('image', image)
+        onSuccess: (data) => {
+            toast(`Message envoyé`, {position: toast.POSITION.BOTTOM_CENTER});
+        },
+        onError: (error) => {
+            toast(`Réessayer d'envoyer le message`, {position: toast.POSITION.BOTTOM_CENTER});
+        },
     }
-    formData.append('message', message)
-    formData.append('email', user.email)
-    SendRapport.mutate(formData)
+    );
 
-    setImage(null)
-    setMessage('')
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        if (image) {
+            formData.append("image", image);
+        }
+        formData.append("message", message);
+        formData.append("email", user.email);
+        SendRapport.mutate(formData);
 
-    closeModal()
-  }
+        setImage(null);
+        setMessage('');
 
-  const handleMessageChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    setMessage(event.target.value)
-  }
+        closeModal();
+    };
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      setImage(event.target.files[0])
-    }
-  }
+    const handleMessageChange = (
+        event: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
+        setMessage(event.target.value);
+    };
 
-  console.log('translations', translations)
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files.length > 0) {
+            setImage(event.target.files[0]);
+        }
+    };
 
   return (
     <>
       {
-        <div className='c-sidebar'>
-          <p className='text-xs font-medium text-gray-400 pt-4 mb-2 pl-4'>
-            {translations.MAIN_MENU.toUpperCase()}
+        <div className="c-sidebar">
+          <p className="text-xs font-medium text-gray-400 pt-4 mb-2 pl-4">
+            MENU PRINCIPAL
           </p>
-          <Link href='/dashboard' className='hover:text-[#7a5eea]'>
+          <Link href="/dashboard" className="hover:text-[#7a5eea]">
             <AiOutlineHome />
-            {translations.DASHBOARD}
+            Tableau de bord
           </Link>
-          <Link href='/dashboard/analytics' className='hover:text-[#7a5eea]'>
+          <Link href="/dashboard/analytics" className="hover:text-[#7a5eea]">
             <AiOutlineFileSync />
-            {translations.STATISTICS}
+            Statistiques
           </Link>
-          <Link href='/dashboard/knowledge' className='hover:text-[#7a5eea]'>
+          <Link href="/dashboard/knowledge" className="hover:text-[#7a5eea]">
             <AiOutlineShop />
-            {translations.KNOWLEDGE_BASE}
-          </Link>
-          <Link href='/dashboard/parametre' className='hover:text-[#7a5eea]'>
+            Base de connaissances          </Link>
+          <Link href="/dashboard/parametre" className="hover:text-[#7a5eea]">
             <AiOutlineSetting />
-            {translations.SETTINGS}
+            Paramètre
           </Link>
-          <p className='text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4'>
-            {translations.SETTINGS.toUpperCase()}
+          <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">
+            PARAMÈTRES
           </p>
-          <Link href='/dashboard/account' className='hover:text-[#7a5eea]'>
+          <Link href="/dashboard/account" className="hover:text-[#7a5eea]">
             <AiOutlineCreditCard />
-            {translations.MY_ACCOUNT}
+            Mon compte
           </Link>
-          <p className='text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4'>
-            {'OBTENIR DE L\'AIDE'}
+          <p className="text-xs font-medium text-gray-400 pt-4 mb-2 mt-2 pl-4">
+            {"OBTENIR DE L'AIDE"}
           </p>
           <a
-            href='mailto:contact@myaichat.io'
-            target='_blank'
-            className='mb-2 text-slate-500 text-xs group cursor-pointer flex items-center hover:text-[#7a5eea]'
+            href="mailto:contact@myaichat.io"
+            target="_blank"
+            className="mb-2 text-slate-500 text-xs group cursor-pointer flex items-center hover:text-[#7a5eea]"
           >
             <AiOutlineMail />
-            {translations.EMAIL}
+            contact@myaichat.io
           </a>
 
           <a>
-            <button onClick={openModal}>
-              <div className='mb-2 text-xs group cursor-pointer flex items-center hover:text-[#7a5eea]'>
+            <button onClick={openModal} >
+              <div className="mb-2 text-xs group cursor-pointer flex items-center hover:text-[#7a5eea]">
                 <AiOutlineIssuesClose />
-                {translations.GET_HELP}
+                Signaler un problème
               </div>
             </button>
-            <ReportForm
-              isModalOpen={isModalOpen}
-              closeModal={closeModal}
-              handleSubmit={handleSubmit}
-              message={message}
-              handleMessageChange={handleMessageChange}
-              image={image}
-              handleImageChange={handleImageChange}
-            />
+              <ReportForm
+                  isModalOpen={isModalOpen}
+                  closeModal={closeModal}
+                  handleSubmit={handleSubmit}
+                  message={message}
+                  handleMessageChange={handleMessageChange}
+                  image={image}
+                  handleImageChange={handleImageChange}
+              />
           </a>
         </div>
       }
     </>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

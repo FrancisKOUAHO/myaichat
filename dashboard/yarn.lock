@@ -1000,13 +1000,6 @@ braces@^3.0.2, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-browser-language-auto-detector@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/browser-language-auto-detector/-/browser-language-auto-detector-2.0.6.tgz#cf74796d20c439fdfb84d5c62a1ac3e50e4f15b3"
-  integrity sha512-OrXuO8yDq2/ssOBl4BxyyO0DKfN6qWgsMrbwB9JD7WHgsFu5Tc0vcwNn+B9a8+pWV3FqY8j9pqie+ZuPOmsU8w==
-  dependencies:
-    "@babel/runtime" "^7.21.0"
-
 browserslist@^4.21.4:
   version "4.21.5"
   resolved "https://registry.npmjs.org/browserslist/-/browserslist-4.21.5.tgz"
