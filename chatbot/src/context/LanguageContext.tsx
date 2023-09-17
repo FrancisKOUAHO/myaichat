@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, FunctionComponent, useContext, useState } from 'react'
+import React, { createContext, FunctionComponent, useContext, useEffect, useState } from 'react'
 
 import { getLanguageName } from 'browser-language-auto-detector'
 
@@ -23,10 +23,15 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ children }) => {
 
-  const getLanguage = getLanguageName()?.origin.toLowerCase().substring(0, 2)
 
-  const [language, setLanguage] = useState<any>(getLanguage)
+  const [language, setLanguage] = useState<any>('fr')
   const translations = language === 'en' ? enTranslations : (language === 'fr' ? frTranslations : language === 'es' ? esTranslations : frTranslations)
+
+  useEffect(() => {
+    const getLanguage = getLanguageName()?.origin.toLowerCase().substring(0, 2)
+    setLanguage(getLanguage)
+
+  }, [language])
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, translations }}>
