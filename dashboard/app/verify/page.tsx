@@ -8,7 +8,6 @@ import { setCookie } from "nookies";
 import { toast } from "react-toastify";
 
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
-import { AxiosResponse } from "axios";
 
 const VerifyTokenPage = () => {
     const router: AppRouterInstance = useRouter();
@@ -24,8 +23,6 @@ const VerifyTokenPage = () => {
 
         try {
             const { data: { access_token, user } } = await api.post(`auth/login/${token}`);
-
-            console.log(access_token, user)
 
             setCookie(undefined, 'access_token', access_token, {
                 maxAge: 30 * 24 * 60 * 60,
