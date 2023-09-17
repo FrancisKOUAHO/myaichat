@@ -3,13 +3,13 @@ import React, { createContext, FunctionComponent, useContext, useState } from 'r
 import enTranslations from '../locales/en.json';
 import frTranslations from '../locales/fr.json';
 import esTranslations from '../locales/es.json';
-import TranslationsEnFr from "../types/TranslationsEnFr";
 import {useRouter} from "next/router";
+import Translations from '../types/Translations'
 
 type LanguageContextType = {
     language: string;
     setLanguage: (lang: string) => void;
-    translations: TranslationsEnFr | any;
+    translations: Translations | any;
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
