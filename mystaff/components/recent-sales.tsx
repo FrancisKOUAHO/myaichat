@@ -1,7 +1,6 @@
 import {
     Avatar,
     AvatarFallback,
-    AvatarImage,
 } from "@/components/ui/avatar"
 import {useEffect, useState} from "react";
 import axios from "axios";

@@ -1,6 +1,5 @@
 "use client"
 
-import CustomLayout from "@/layouts/customLayout";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Overview} from "@/components/overview";
 import {RecentSales} from "@/components/recent-sales";
