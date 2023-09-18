@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {createColumnHelper, flexRender, getCoreRowModel, useReactTable,  getPaginationRowModel,
+import {createColumnHelper, flexRender, getCoreRowModel, useReactTable,  getPaginationRowModel,  SortingState,  getSortedRowModel,  ColumnFiltersState,  getFilteredRowModel,
 } from '@tanstack/react-table';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,6 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
@@ -22,80 +21,15 @@ import {
     DotsHorizontalIcon,
 } from "@radix-ui/react-icons"
 
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal,ArrowUpDown } from "lucide-react";
 
-
-
-type User = {
-    id: number;
-    email: string;
-    emailVerifiedAt: Date | null;
-    magicLinkToken: string | null;
-    magicLinkTokenExpiresAt: Date | null;
-    subscriptionActive: boolean;
-    planId: number | null;
-    rememberToken: string | null;
-    createdAt: Date | null;
-    updatedAt: Date | null;
-};
-
-const columnHelper = createColumnHelper<User>()
-
-
-const columns = [
-
-    columnHelper.accessor('id', {
-        cell: info => info.row.id,
-    }),
-    columnHelper.accessor('email', {
-        cell: info => info.getValue(),
-    }),
-    columnHelper.accessor(row => row.emailVerifiedAt, {
-        id: 'emailVerifiedAt',
-        cell: ({ row }) => row.getValue('emailVerifiedAt') ? <i>{new Date(row.getValue('emailVerifiedAt')).toLocaleString()}</i> : null,
-        header: () => <div className="text-right">Email Verified At</div>,
-
-    }),
-    columnHelper.accessor(row => row.magicLinkToken, {
-        id: 'magicLinkToken',
-        cell: info => info.getValue() ? info.getValue() : 'N/A',
-        header: () => <div className="text-right">Magic Link TokenNo</div>,
-
-    }),
-    columnHelper.accessor(row => row.magicLinkTokenExpiresAt, {
-        id: 'magicLinkTokenExpiresAt',
-        cell: info => info.row.getValue('magicLinkTokenExpiresAt') ? new Date(info.row.getValue('magicLinkTokenExpiresAt')).toLocaleString() : null,
-        header: () => <span>Magic Link Token Expires At</span>,
-    }),
-    columnHelper.accessor(row => row.subscriptionActive, {
-        id: 'subscriptionActive',
-        cell: info => info.getValue() ? 'Active' : 'Inactive',
-        header: () => <span>Subscription Active</span>,
-    }),
-    columnHelper.accessor(row => row.planId, {
-        id: 'planId',
-        cell: info => info.getValue() !== null ? info.getValue() : 'N/A',
-        header: () => <span>Plan ID</span>,
-    }),
-    columnHelper.accessor(row => row.rememberToken, {
-        id: 'rememberToken',
-        cell: info => info.getValue() ? info.getValue() : 'N/A',
-        header: () => <span>Remember Token</span>,
-    }),
-    columnHelper.accessor(row => row.createdAt, {
-        id: 'createdAt',
-        cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
-        header: () => <span>Created At</span>,
-    }),
-    columnHelper.accessor(row => row.updatedAt, {
-        id: 'updatedAt',
-        cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
-        header: () => <span>Updated At</span>,
-    }),
-];
 
 const Page: React.FC = () => {
     const [data, setData] = useState<User[]>([]);
+    const columnHelper = createColumnHelper<User>();
+    const [sorting, setSorting] = React.useState<SortingState>([]);
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -112,15 +46,112 @@ const Page: React.FC = () => {
         fetchData();
     }, []);
 
+
+    type User = {
+        id: number;
+        email: string;
+        emailVerifiedAt: Date | null;
+        magicLinkToken: string | null;
+        magicLinkTokenExpiresAt: Date | null;
+        subscriptionActive: boolean;
+        planId: number | null;
+        rememberToken: string | null;
+        createdAt: Date | null;
+        updatedAt: Date | null;
+    };
+
+    const columns = [
+
+        columnHelper.accessor('id', {
+            cell: info => info.row.id,
+        }),
+        columnHelper.accessor((row, rowIndex) => {
+            // Utilisez le rowIndex pour obtenir l'ID de l'utilisateur dans la vraie data
+            const userData = data[rowIndex]; // Supposons que "data" contient les données réelles
+            return userData ? userData.id : 'N/A';
+        }, {
+            id: 'user_id', // Utilisez un ID différent pour cette colonne
+            cell: info => info.getValue(), // Affichez l'ID de l'utilisateur dans cette colonne
+            header: () => <div className="text-right">User ID</div>, // Nommez la colonne "User ID"
+        }),
+
+        columnHelper.accessor('email', {
+            cell: info => info.getValue(),
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    >
+                        Email
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                    </Button>
+                )
+            },
+        }),
+        columnHelper.accessor(row => row.emailVerifiedAt, {
+            id: 'emailVerifiedAt',
+            cell: ({ row }) => row.getValue('emailVerifiedAt') ? <i>{new Date(row.getValue('emailVerifiedAt')).toLocaleString()}</i> : null,
+            header: () => <div className="text-right">Email Verified At</div>,
+
+        }),
+        columnHelper.accessor(row => row.magicLinkToken, {
+            id: 'magicLinkToken',
+            cell: info => info.getValue() ? info.getValue() : 'N/A',
+            header: () => <div className="text-right">Magic Link TokenNo</div>,
+
+        }),
+        columnHelper.accessor(row => row.magicLinkTokenExpiresAt, {
+            id: 'magicLinkTokenExpiresAt',
+            cell: info => info.row.getValue('magicLinkTokenExpiresAt') ? new Date(info.row.getValue('magicLinkTokenExpiresAt')).toLocaleString() : null,
+            header: () => <span>Magic Link Token Expires At</span>,
+        }),
+        columnHelper.accessor(row => row.subscriptionActive, {
+            id: 'subscriptionActive',
+            cell: info => info.getValue() ? 'Active' : 'Inactive',
+            header: () => <span>Subscription Active</span>,
+        }),
+        columnHelper.accessor(row => row.planId, {
+            id: 'planId',
+            cell: info => info.getValue() !== null ? info.getValue() : 'N/A',
+            header: () => <span>Plan ID</span>,
+        }),
+        columnHelper.accessor(row => row.rememberToken, {
+            id: 'rememberToken',
+            cell: info => info.getValue() ? info.getValue() : 'N/A',
+            header: () => <span>Remember Token</span>,
+        }),
+        columnHelper.accessor(row => row.createdAt, {
+            id: 'createdAt',
+            cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
+            header: () => <span>Created At</span>,
+        }),
+        columnHelper.accessor(row => row.updatedAt, {
+            id: 'updatedAt',
+            cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
+            header: () => <span>Updated At</span>,
+        }),
+    ];
+
+
+
     const table = useReactTable({
         data,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
+        onColumnFiltersChange: setColumnFilters,
+        getFilteredRowModel: getFilteredRowModel(),
+        state: {
+            sorting,
+            columnFilters,
+        },
     })
 
     return (
-        <div className="w-full">
+        <div className="w-full pl-4 pr-4">
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter emails..."
@@ -139,7 +170,9 @@ const Page: React.FC = () => {
                     <DropdownMenuContent align="end">
                         {table
                             .getAllColumns()
-                            .filter((column) => column.getCanHide())
+                            .filter(
+                                (column) => column.getCanHide()
+                            )
                             .map((column) => {
                                 return (
                                     <DropdownMenuCheckboxItem
@@ -157,7 +190,7 @@ const Page: React.FC = () => {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="rounded-xl border bg-card text-card-foreground shadow col-span-3">
+            <div className="rounded-md border-0">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -211,7 +244,8 @@ const Page: React.FC = () => {
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem
                                                     onClick={() => {
-                                                        // Mettez ici la logique de l'action que vous souhaitez effectuer
+                                                        // Logique de suppression ici
+                                                        console.log("Supprimer l'utilisateur avec l'ID : " + row.original.id);
                                                     }}
                                                 >
                                                     Supprimer
@@ -236,22 +270,18 @@ const Page: React.FC = () => {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    Previous
-                </Button>
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    Next
-                </Button>
+                <div className="flex-1 text-sm text-muted-foreground">
+                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
+                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                </div>
+                <div className="space-x-2">
+                    <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+                        Previous
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+                        Next
+                    </Button>
+                </div>
             </div>
         </div>
     );
