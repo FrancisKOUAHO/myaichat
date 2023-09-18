@@ -8,14 +8,14 @@ import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/
 type User = {
     id: number;
     email: string;
-    email_verified_at: Date | null;
-    magic_link_token: string | null;
-    magic_link_token_expires_at: Date | null;
-    subscription_active: boolean;
-    plan_id: number | null;
-    remember_token: string | null;
-    created_at: Date | null;
-    updated_at: Date | null;
+    emailVerifiedAt: Date | null;
+    magicLinkToken: string | null;
+    magicLinkTokenExpiresAt: Date | null;
+    subscriptionActive: boolean;
+    planId: number | null;
+    rememberToken: string | null;
+    createdAt: Date | null;
+    updatedAt: Date | null;
 };
 
 const columnHelper = createColumnHelper<User>()
@@ -29,44 +29,44 @@ const columns = [
     columnHelper.accessor('email', {
         cell: info => info.getValue(),
     }),
-    columnHelper.accessor(row => row.email_verified_at, {
-        id: 'email_verified_at',
-        cell: ({ row }) => row.getValue('email_verified_at') ? <i>{new Date(row.getValue('email_verified_at')).toLocaleString()}</i> : null,
+    columnHelper.accessor(row => row.emailVerifiedAt, {
+        id: 'emailVerifiedAt',
+        cell: ({ row }) => row.getValue('emailVerifiedAt') ? <i>{new Date(row.getValue('emailVerifiedAt')).toLocaleString()}</i> : null,
         header: () => <span>Email Verified At</span>,
     }),
-    columnHelper.accessor(row => row.magic_link_token, {
-        id: 'magic_link_token',
+    columnHelper.accessor(row => row.magicLinkToken, {
+        id: 'magicLinkToken',
         cell: info => info.getValue() ? info.getValue() : 'N/A',
         header: () => <span>Magic Link Token</span>,
     }),
-    columnHelper.accessor(row => row.magic_link_token_expires_at, {
-        id: 'magic_link_token_expires_at',
-        cell: info => info.row.getValue('magic_link_token_expires_at') ? new Date(info.row.getValue('magic_link_token_expires_at')).toLocaleString() : null,
+    columnHelper.accessor(row => row.magicLinkTokenExpiresAt, {
+        id: 'magicLinkTokenExpiresAt',
+        cell: info => info.row.getValue('magicLinkTokenExpiresAt') ? new Date(info.row.getValue('magicLinkTokenExpiresAt')).toLocaleString() : null,
         header: () => <span>Magic Link Token Expires At</span>,
     }),
-    columnHelper.accessor(row => row.subscription_active, {
-        id: 'subscription_active',
+    columnHelper.accessor(row => row.subscriptionActive, {
+        id: 'subscriptionActive',
         cell: info => info.getValue() ? 'Active' : 'Inactive',
         header: () => <span>Subscription Active</span>,
     }),
-    columnHelper.accessor(row => row.plan_id, {
-        id: 'plan_id',
+    columnHelper.accessor(row => row.planId, {
+        id: 'planId',
         cell: info => info.getValue() !== null ? info.getValue() : 'N/A',
         header: () => <span>Plan ID</span>,
     }),
-    columnHelper.accessor(row => row.remember_token, {
-        id: 'remember_token',
+    columnHelper.accessor(row => row.rememberToken, {
+        id: 'rememberToken',
         cell: info => info.getValue() ? info.getValue() : 'N/A',
         header: () => <span>Remember Token</span>,
     }),
-    columnHelper.accessor(row => row.created_at, {
-        id: 'created_at',
-        cell: info => info.row.getValue('created_at') ? new Date(info.row.getValue('created_at')).toLocaleString() : null,
+    columnHelper.accessor(row => row.createdAt, {
+        id: 'createdAt',
+        cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
         header: () => <span>Created At</span>,
     }),
-    columnHelper.accessor(row => row.updated_at, {
-        id: 'updated_at',
-        cell: info => info.row.getValue('updated_at') ? new Date(info.row.getValue('updated_at')).toLocaleString() : null,
+    columnHelper.accessor(row => row.updatedAt, {
+        id: 'updatedAt',
+        cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
         header: () => <span>Updated At</span>,
     }),
 ];
@@ -80,6 +80,7 @@ const Page: React.FC = () => {
                 const response = await axios.get('http://localhost:8080/api/users'); // Remplacez par votre URL d'API
                 setData(response.data);
                 console.log("Données récupérées :", response.data);  // Ajout d'un console.log ici pour afficher les données récupérées
+                console.log("donnees " + response.data)
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
             }
@@ -114,7 +115,7 @@ const Page: React.FC = () => {
             </TableHead>
             <TableBody>
             {table.getRowModel().rows.map(row => (
-                <TableRow key={row.id}>
+                <TableRow key={row.id + 1}>
                     {row.getVisibleCells().map(cell => (
                         <TableCell key={cell.id}>
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
