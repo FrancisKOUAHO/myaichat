@@ -16,12 +16,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import {
-    CaretSortIcon,
     ChevronDownIcon,
-    DotsHorizontalIcon,
-} from "@radix-ui/react-icons"
+} from "@radix-ui/react-icons";
 
+import {
+    AlertDialog,
+    AlertDialogTrigger,
+    AlertDialogContent,
+    AlertDialogHeader,
+    AlertDialogFooter,
+    AlertDialogTitle,
+    AlertDialogDescription,
+    AlertDialogAction,
+    AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 import { MoreHorizontal,ArrowUpDown } from "lucide-react";
+import {info} from "autoprefixer";
 
 
 const Page: React.FC = () => {
@@ -29,6 +39,8 @@ const Page: React.FC = () => {
     const columnHelper = createColumnHelper<User>();
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [selectedRowId, setSelectedRowId] = useState(null);
+    const [selectedUserIdToDelete, setSelectedUserIdToDelete] = useState<number | null>(null);
 
 
     useEffect(() => {
@@ -216,6 +228,14 @@ const Page: React.FC = () => {
                                 <TableRow
                                     key={row.id}
                                     data-state={row.getIsSelected() && "selected"}
+                                    className={selectedRowId === row.id ? "selected-row" : ""}
+                                    onClick={() => {
+                                        if (selectedRowId === row.id) {
+                                            setSelectedRowId(null); // Déselectionnez la ligne si elle est déjà sélectionnée
+                                        } else {
+                                            setSelectedRowId(row.id); // Sélectionnez la ligne si elle n'est pas encore sélectionnée
+                                        }
+                                    }}
                                 >
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell key={cell.id}>
@@ -238,19 +258,54 @@ const Page: React.FC = () => {
                                                 <DropdownMenuItem
                                                     onClick={() => {
                                                         // Mettez ici la logique de l'action que vous souhaitez effectuer
+                                                        setSelectedRowId(null);
+
                                                     }}
                                                 >
                                                     Modifier
                                                 </DropdownMenuItem>
-                                                <DropdownMenuItem
-                                                    onClick={() => {
-                                                        // Logique de suppression ici
-                                                        console.log("Supprimer l'utilisateur avec l'ID : " + row.original.id);
-                                                    }}
-                                                >
-                                                    Supprimer
-                                                </DropdownMenuItem>
-                                                {/* Ajoutez d'autres éléments de menu si nécessaire */}
+                                                <AlertDialog>
+                                                    <AlertDialogTrigger asChild>
+                                                        <Button variant="outline"
+                                                                onClick={() => {
+                                                                    setSelectedRowId(null);
+                                                                    setSelectedUserIdToDelete(row.original.id);
+                                                                }}
+                                                        >
+                                                                Supprimer
+                                                        </Button>
+                                                    </AlertDialogTrigger>
+                                                    <AlertDialogContent>
+                                                        <AlertDialogHeader>
+                                                            <AlertDialogTitle>
+                                                                Confirmation
+                                                            </AlertDialogTitle>
+                                                            <AlertDialogDescription>
+                                                                Êtes-vous sûr de vouloir supprimer cet utilisateur {" "}
+                                                                {selectedRowId !== null &&
+                                                                    data.find((user) => user.id === selectedUserIdToDelete)?.email}
+                                                                ?
+                                                            </AlertDialogDescription>
+                                                        </AlertDialogHeader>
+                                                        <AlertDialogFooter>
+                                                            <AlertDialogCancel>Annuler</AlertDialogCancel>
+                                                            <AlertDialogAction  onClick={() => {
+                                                                if (selectedUserIdToDelete !== null) {
+                                                                    axios.delete(`http://localhost:8080/api/users/${selectedUserIdToDelete}`)
+                                                                        .then((response) => {
+                                                                            console.log('Suppression réussie');
+                                                                        })
+                                                                        .catch((error) => {
+                                                                            console.error('Erreur lors de la suppression :', error);
+                                                                        });
+                                                                }
+                                                                setSelectedUserIdToDelete(null);
+                                                            }}>
+                                                                Supprimer
+                                                            </AlertDialogAction>
+                                                        </AlertDialogFooter>
+                                                    </AlertDialogContent>
+                                                </AlertDialog>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>

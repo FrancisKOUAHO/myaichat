@@ -64,3 +64,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.selected-row {
+  background-color: hsl(var(--muted) / 0.5); /* Couleur de fond pour la ligne sélectionnée */
+}
+/*.table-row:nth-child(even) {*/
+/*  background-color: hsl(var(--muted) / 0.5); !* Couleur pour les lignes paires *!*/
+/*}*/
+
+/*.table-row:nth-child(odd) {*/
+/*  background-color: black; !* Couleur pour les lignes impaires *!*/
+/*}*/
