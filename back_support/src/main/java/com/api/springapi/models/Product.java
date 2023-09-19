@@ -12,6 +12,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+
     @Column(name = "user_id", nullable = false)
     private Long userId;
 

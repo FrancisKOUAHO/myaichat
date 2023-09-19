@@ -2,36 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {createColumnHelper, flexRender, getCoreRowModel, useReactTable,  getPaginationRowModel,  SortingState,  getSortedRowModel,  ColumnFiltersState,  getFilteredRowModel,
-} from '@tanstack/react-table';
+import {createColumnHelper, flexRender, getCoreRowModel, useReactTable,  getPaginationRowModel,  SortingState,  getSortedRowModel,  ColumnFiltersState,  getFilteredRowModel,} from '@tanstack/react-table';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import {
-    ChevronDownIcon,
-} from "@radix-ui/react-icons";
-
-import {
-    AlertDialog,
-    AlertDialogTrigger,
-    AlertDialogContent,
-    AlertDialogHeader,
-    AlertDialogFooter,
-    AlertDialogTitle,
-    AlertDialogDescription,
-    AlertDialogAction,
-    AlertDialogCancel,
-} from "@/components/ui/alert-dialog";
+import {ChevronDownIcon,} from "@radix-ui/react-icons";
+import {AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,} from "@/components/ui/alert-dialog";
 import { MoreHorizontal,ArrowUpDown } from "lucide-react";
-import {info} from "autoprefixer";
 
 
 const Page: React.FC = () => {
@@ -86,7 +64,6 @@ const Page: React.FC = () => {
             cell: info => info.getValue(), // Affichez l'ID de l'utilisateur dans cette colonne
             header: () => <div className="text-right">User ID</div>, // Nommez la colonne "User ID"
         }),
-
         columnHelper.accessor('email', {
             cell: info => info.getValue(),
             header: ({ column }) => {
@@ -144,7 +121,6 @@ const Page: React.FC = () => {
             header: () => <span>Updated At</span>,
         }),
     ];
-
 
 
     const table = useReactTable({
@@ -233,6 +209,7 @@ const Page: React.FC = () => {
                                         if (selectedRowId === row.id) {
                                             setSelectedRowId(null); // Déselectionnez la ligne si elle est déjà sélectionnée
                                         } else {
+                                            // @ts-ignore
                                             setSelectedRowId(row.id); // Sélectionnez la ligne si elle n'est pas encore sélectionnée
                                         }
                                     }}
@@ -255,15 +232,6 @@ const Page: React.FC = () => {
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end">
                                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                                <DropdownMenuItem
-                                                    onClick={() => {
-                                                        // Mettez ici la logique de l'action que vous souhaitez effectuer
-                                                        setSelectedRowId(null);
-
-                                                    }}
-                                                >
-                                                    Modifier
-                                                </DropdownMenuItem>
                                                 <AlertDialog>
                                                     <AlertDialogTrigger asChild>
                                                         <Button variant="outline"
@@ -341,7 +309,6 @@ const Page: React.FC = () => {
         </div>
     );
 };
-
 
 export default Page;
 
