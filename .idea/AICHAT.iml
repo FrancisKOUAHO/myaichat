@@ -244,6 +244,16 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/maatwebsite/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/maennchen/zipstream-php" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/markbaker/complex" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/markbaker/matrix" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/phpoffice/phpspreadsheet" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/deprecation-contracts 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/event-dispatcher-contracts 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-intl-idn 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/theseer/tokenizer 2" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

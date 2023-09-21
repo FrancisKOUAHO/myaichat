@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('price', 7);
             $table->string('interval');
             $table->integer('trial_period_days');
+            $table->integer('allowed_responses')->nullable();
             $table->string('lookup_key', 255);
             $table->string('st_plan_id', 255);
             $table->timestamps();
