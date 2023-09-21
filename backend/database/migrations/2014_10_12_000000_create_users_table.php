@@ -10,11 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('page', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('magic_link_token')->nullable();
+            $table->date('last_reset_date')->nullable();
             $table->timestamp('magic_link_token_expires_at')->nullable();
             $table->boolean('subscription_active')->default(false);
             $table->foreignId('plan_id')->nullable();
@@ -28,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('page');
+        Schema::dropIfExists('users');
     }
 };

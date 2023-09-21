@@ -18,11 +18,18 @@ class CreateOrdersTable extends Migration
             $table->string('status');
             $table->decimal('total_price', 15, 2);
             $table->string('session_id');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('payment_id')->nullable()->constrained();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreignId('payment_id')
+                ->nullable()
+                ->constrained()
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -33,3 +40,4 @@ class CreateOrdersTable extends Migration
         Schema::dropIfExists('orders');
     }
 }
+

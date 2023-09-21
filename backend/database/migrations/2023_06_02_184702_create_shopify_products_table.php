@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('shopify_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('title')->nullable();
             $table->string('domain')->nullable();
             $table->string('full_url')->nullable();

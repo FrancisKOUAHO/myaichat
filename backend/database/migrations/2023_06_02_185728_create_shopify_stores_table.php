@@ -14,7 +14,7 @@ class CreateShopifyStoresTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->longText('content')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('page')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

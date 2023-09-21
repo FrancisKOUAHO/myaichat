@@ -99,7 +99,6 @@ class PlanSeeder extends Seeder
     }*/
 
     // development
-
     public function run(): void
     {
         $plans = [

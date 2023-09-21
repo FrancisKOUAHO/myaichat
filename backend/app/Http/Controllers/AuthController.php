@@ -40,7 +40,7 @@ class AuthController extends Controller
         });
     }
 
-    public function loginWithToken(Request $request, $token): JsonResponse
+    public function loginWithToken($token): JsonResponse
     {
         try {
             $user = User::where('magic_link_token', $token)
