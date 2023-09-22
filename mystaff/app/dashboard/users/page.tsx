@@ -26,8 +26,6 @@ const Page: React.FC = () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/users'); // Remplacez par votre URL d'API
                 setData(response.data);
-                console.log("Données récupérées :", response.data);  // Ajout d'un console.log ici pour afficher les données récupérées
-                console.log("donnees " + response.data)
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
             }
@@ -62,7 +60,7 @@ const Page: React.FC = () => {
         }, {
             id: 'user_id', // Utilisez un ID différent pour cette colonne
             cell: info => info.getValue(), // Affichez l'ID de l'utilisateur dans cette colonne
-            header: () => <div className="text-right">User ID</div>, // Nommez la colonne "User ID"
+            header: () => <div >User ID</div>, // Nommez la colonne "User ID"
         }),
         columnHelper.accessor('email', {
             cell: info => info.getValue(),
@@ -81,13 +79,13 @@ const Page: React.FC = () => {
         columnHelper.accessor(row => row.emailVerifiedAt, {
             id: 'emailVerifiedAt',
             cell: ({ row }) => row.getValue('emailVerifiedAt') ? <i>{new Date(row.getValue('emailVerifiedAt')).toLocaleString()}</i> : null,
-            header: () => <div className="text-right">Email Verified At</div>,
+            header: () => <div>Email_Verified_At</div>,
 
         }),
         columnHelper.accessor(row => row.magicLinkToken, {
             id: 'magicLinkToken',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <div className="text-right">Magic Link TokenNo</div>,
+            header: () => <div>Magic_Link_TokenNo</div>,
 
         }),
         columnHelper.accessor(row => row.magicLinkTokenExpiresAt, {
@@ -142,7 +140,7 @@ const Page: React.FC = () => {
         <div className="w-full pl-4 pr-4">
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter emails..."
+                    placeholder="Filtrer email..."
                     value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
                         table.getColumn("email")?.setFilterValue(event.target.value)

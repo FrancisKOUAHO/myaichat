@@ -22,8 +22,6 @@ const Page: React.FC = () => {
             try {
                 const response = await axios.get('http://localhost:8080/api/orders'); // Remplacez par votre URL d'API
                 setData(response.data);
-                console.log("Données récupérées :", response.data);  // Ajout d'un console.log ici pour afficher les données récupérées
-                console.log("donnees " + response.data)
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
             }
@@ -51,12 +49,12 @@ const Page: React.FC = () => {
             cell: info => info.row.id,
         }),
         columnHelper.accessor((row, rowIndex) => {
-            const userData = data[rowIndex];
-            return userData ? userData.id : 'N/A';
+            const paimentData = data[rowIndex];
+            return paimentData ? paimentData.id : 'N/A';
         }, {
             id: 'commande_id', // Utilisez un ID différent pour cette colonne
             cell: info => info.getValue(),
-            header: () => <div className="text-right">Commande ID</div>,
+            header: () => <div>Commande ID</div>,
         }),
         columnHelper.accessor(row => row.paymentId, {
             id: 'paymentId',
@@ -81,20 +79,19 @@ const Page: React.FC = () => {
         columnHelper.accessor(row => row.sessionId, {
             id: 'sessionId',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>SessionId</span>,
+            header: () => <span>Session_Id</span>,
         }),
         columnHelper.accessor(row => row.createdAt, {
             id: 'createdAt',
             cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
-            header: () => <span>Created At</span>,
+            header: () => <span>Created_At</span>,
         }),
         columnHelper.accessor(row => row.updatedAt, {
             id: 'updatedAt',
             cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
-            header: () => <span>Updated At</span>,
+            header: () => <span>Updated_At</span>,
         }),
     ];
-
 
 
     const table = useReactTable({
@@ -115,11 +112,11 @@ const Page: React.FC = () => {
     return (
         <div className="w-full pl-4 pr-4">
             <div className="flex items-center py-4">
-                <Input
-                    placeholder="Filter commande..."
-                    value={(table.getColumn("orderId")?.getFilterValue() as string) ?? ""}
+                <Input aria-disabled={true}
+                    placeholder="Filtrer commande..."
+                    value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("orderId")?.setFilterValue(event.target.value)
+                        table.getColumn("id")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
