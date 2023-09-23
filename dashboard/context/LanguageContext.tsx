@@ -22,7 +22,7 @@ interface LanguageProviderProps {
 
 export const LanguageLangProvider: FunctionComponent<LanguageProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<any>('fr');
-  const translations = language === 'en' ? enTranslations : (language === 'fr' ? frTranslations : esTranslations);
+  const translations = language === 'en' ? enTranslations : (language === 'fr' && frTranslations);
 
   useEffect(() => {
     const browserLang = navigator.language
