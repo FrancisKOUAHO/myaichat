@@ -4,9 +4,7 @@ import React, { createContext, FunctionComponent, useContext, useEffect, useStat
 
 import { getLanguageName } from 'browser-language-auto-detector'
 
-import enTranslations from '../locales/en.json'
 import frTranslations from '../locales/fr.json'
-import esTranslations from '../locales/es.json'
 import Translations from '@/types/Translations'
 
 type LanguageContextType = {
@@ -24,7 +22,7 @@ interface LanguageProviderProps {
 export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ children }) => {
 
   const [language, setLanguage] = useState<any>('fr')
-  const translations = language === 'en' ? enTranslations : (language === 'fr' ? frTranslations : language === 'es' ? esTranslations : frTranslations)
+  const translations: any = language === 'fr' && frTranslations
 
   useEffect(() => {
     const getLanguage = getLanguageName()?.origin.toLowerCase().substring(0, 2)
