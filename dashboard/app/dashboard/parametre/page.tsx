@@ -56,7 +56,7 @@ const Page = () => {
   })
 
   const deleteStoreMutation = useMutation({
-    mutationFn: (id: any) => api.delete(`stores/${id}`),
+    mutationFn: (id: any) => api.delete(`stores/stores/${id}`),
     onSuccess: (data) => {
       toast(`Boutique supprimée`, { position: toast.POSITION.BOTTOM_CENTER })
       queryClient.invalidateQueries(['shopifyStore'])
