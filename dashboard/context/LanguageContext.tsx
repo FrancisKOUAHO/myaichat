@@ -4,7 +4,6 @@ import React, { createContext, FunctionComponent, useContext, useEffect, useStat
 
 import enTranslations from '../locales/en.json'
 import frTranslations from '../locales/fr.json'
-import esTranslations from '../locales/es.json'
 
 import Translations from '@/types/Translations'
 

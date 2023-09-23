@@ -134,18 +134,6 @@ const Page = () => {
     shopMutation.mutateAsync(createUrlData)
   }
 
-  const fetchShopMutation = useMutation(
-    (data: any) => api.post('stores/shopify-store', data),
-    {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries(['shopifyStore'])
-      },
-      onError: (error): void => {
-        console.log('error', error)
-      },
-    },
-  )
-
   const getScrapeMutation = useMutation(
     (data: any) => api.get(`stores/user/${data}/stores`),
     {
@@ -165,7 +153,7 @@ const Page = () => {
   })
 
   const deleteShopifyStoreMutation = useMutation({
-    mutationFn: (id: any) => api.delete(`stores/${id}`),
+    mutationFn: (id: any) => api.delete(`stores/stores/${id}`),
     onSuccess: (data) => {
       toast(`Boutique supprimé`, { position: toast.POSITION.BOTTOM_CENTER })
       queryClient.invalidateQueries(['shopifyStore'])
