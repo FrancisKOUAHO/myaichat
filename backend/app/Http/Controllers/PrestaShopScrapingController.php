@@ -23,7 +23,7 @@ class PrestaShopScrapingController extends Controller
 
             $import = new ProductsImport($user->id);
 
-            $importedData = Excel::toArray($import, $request->file('csv_file'), null, \Maatwebsite\Excel\Excel::CSV);
+            $importedData = Excel::import($import, $request->file('csv_file'), null, \Maatwebsite\Excel\Excel::CSV)->toArray();
 
             if (empty($importedData)) {
                 return response()->json(['message' => 'Aucune donnée importée'], 400);

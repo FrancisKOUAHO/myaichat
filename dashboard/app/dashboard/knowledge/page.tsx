@@ -1,20 +1,27 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import LayoutCustom from '@/layouts/layoutCustom'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/config/api'
 import { getCookie } from 'cookies-next'
 import { useLanguage } from '@/context/LanguageContext'
 import { AiOutlineDelete, AiOutlinePlus } from 'react-icons/ai'
 import { toast } from 'react-toastify'
+import { Dialog, Transition } from '@headlessui/react'
 
 const Page = () => {
   const { translations } = useLanguage()
 
+  const queryClient = useQueryClient()
+
   const [userId, setUserId] = useState(null)
   const [selectedFile, setSelectedFile] = useState(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isOpenSupprimerChatBots, setIsOpenSupprimerChatBots] = useState(false)
+
+  const openModalSupprimerChatBots = () => setIsOpenSupprimerChatBots(true)
+  const closeModalSupprimerChatBots = () => setIsOpenSupprimerChatBots(false)
 
   useEffect(() => {
     const userIdFromCookie: any = getCookie('userId')
@@ -33,6 +40,18 @@ const Page = () => {
     },
   )
 
+  const deleteShopifyProductMutation = useMutation({
+    mutationFn: (id) => api.delete(`products/products/${id}`), // Remarquez la correction ici
+    onSuccess: () => {
+      toast(`produit supprimé`, { position: toast.POSITION.BOTTOM_CENTER })
+      queryClient.invalidateQueries(['userProducts', userId])
+      closeModalSupprimerChatBots()
+    },
+    onError: (error) => {
+      console.error('error', error)
+    },
+  })
+
   const mutation = useMutation<void, Error, FormData>(
     async (formData) => {
       await api.post(`import/${userId}`, formData, {
@@ -40,35 +59,35 @@ const Page = () => {
           'Content-Type': 'multipart/form-data',
           'Access-Control-Allow-Origin': '*',
         },
-      });
+      })
     },
     {
       onSuccess: () => {
-        console.log('success');
-        toast(`Importation réussie`, { position: toast.POSITION.BOTTOM_CENTER });
-        setIsLoaded(false);
+        console.log('success')
+        toast(`Importation réussie`, { position: toast.POSITION.BOTTOM_CENTER })
+        setIsLoaded(false)
       },
       onError: () => {
-        setIsLoaded(false);
-        toast(`Une erreur est survenue lors de l'importation`, { position: toast.POSITION.BOTTOM_CENTER });
+        setIsLoaded(false)
+        toast(`Une erreur est survenue lors de l'importation`, { position: toast.POSITION.BOTTOM_CENTER })
       },
-    }
-  );
+    },
+  )
 
   const handleFileChange = (e: any) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
 
-    console.log('file', file);
+    console.log('file', file)
 
     if (file) {
-      setIsLoaded(true);
+      setIsLoaded(true)
 
-      const formData = new FormData();
-      formData.append('csv_file', file);
+      const formData = new FormData()
+      formData.append('csv_file', file)
 
-      mutation.mutate(formData);
+      mutation.mutate(formData)
     }
-  };
+  }
   return (
     <LayoutCustom>
       <div className='w-full overflow-y-auto'>
@@ -81,7 +100,7 @@ const Page = () => {
               className='inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-[0.775rem] shadow-[0px_0px_24px_rgba(0,_0,_0,_0.04)] bg-[linear-gradient(76.35deg,_#801AE6_15.89%,_#A21AE6_89.75%)] font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
             >
               {isLoaded ? (
-                <p className="text-white">Loading...</p>
+                <p className='text-white'>Loading...</p>
               ) : (
                 <>
                   <AiOutlinePlus className='-ml-0.5 mr-1.5 h-5 w-5' />
@@ -146,6 +165,9 @@ const Page = () => {
                               <div className='text-black'>
                                 <AiOutlineDelete
                                   className='-ml-0.5 mr-1.5 h-5 w-5 text-red-400'
+                                  onClick={() => {
+                                    deleteShopifyProductMutation.mutate(product.id)
+                                  }}
                                 />
                               </div>
                             </div>
