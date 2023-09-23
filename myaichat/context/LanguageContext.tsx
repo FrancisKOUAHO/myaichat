@@ -23,7 +23,7 @@ export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ chi
     const locale: string | undefined | any = router?.locale
 
     const [language, setLanguage] = useState(locale)
-    const translations = language === 'en' ? enTranslations : (language === 'fr' && frTranslations)
+    const translations = language === 'en' ? enTranslations : (language === 'fr' ? frTranslations : frTranslations);
 
     return (
         <LanguageContext.Provider value={{ language, setLanguage, translations }}>
