@@ -23,7 +23,6 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ children }) => {
 
-
   const [language, setLanguage] = useState<any>('fr')
   const translations = language === 'en' ? enTranslations : (language === 'fr' ? frTranslations : language === 'es' ? esTranslations : frTranslations)
 

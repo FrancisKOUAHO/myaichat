@@ -14,38 +14,40 @@ class PrestaShopScrapingController extends Controller
 {
     public function import(Request $request, $user_id): JsonResponse
     {
-        $user = User::find($user_id);
+        try {
+            $user = User::find($user_id);
 
-        if (!$user) {
-            return response()->json(['message' => 'Utilisateur non trouvé'], 404);
-        }
-
-        // Utilisez le constructeur pour transmettre l'`user_id`
-        $import = new ProductsImport($user->id);
-
-        // Utilisez la méthode `get` pour obtenir les données importées sous forme de tableau
-        $importedData = Excel::import($import, $request->file('csv_file'), null, \Maatwebsite\Excel\Excel::CSV)->toArray();
-
-        if (empty($importedData)) {
-            return response()->json(['message' => 'Aucune donnée importée'], 400);
-        }
-
-        $importedProducts = [];
-
-        // Commencez à l'index 1 pour sauter la première ligne (en-têtes de colonnes)
-        for ($i = 1; $i < count($importedData); $i++) {
-            $rowData = $importedData[$i];
-            // Assurez-vous que $rowData est un tableau
-            if (is_array($rowData)) {
-                $rowData['user_id'] = $user->id;
-                $product = ShopifyProduct::create($rowData);
-                $importedProducts[] = $product;
+            if (!$user) {
+                return response()->json(['message' => 'Utilisateur non trouvé'], 404);
             }
-        }
 
-        return response()->json([
-            'message' => 'Importation réussie',
-            'imported_products' => $importedProducts,
-        ]);
+            $import = new ProductsImport($user->id);
+
+            $importedData = Excel::toArray($import, $request->file('csv_file'), null, \Maatwebsite\Excel\Excel::CSV);
+
+            if (empty($importedData)) {
+                return response()->json(['message' => 'Aucune donnée importée'], 400);
+            }
+
+            $importedProducts = [];
+
+            for ($i = 0; $i < count($importedData[0]); $i++) {
+                $rowData = $importedData[0][$i];
+
+                if (is_array($rowData)) {
+                    $rowData['user_id'] = $user->id;
+                    $product = ShopifyProduct::create($rowData);
+                    $importedProducts[] = $product;
+                }
+            }
+
+            return response()->json([
+                'message' => 'Importation réussie',
+                'imported_products' => $importedProducts,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Une erreur est survenue lors de l\'importation : ' . $e->getMessage()], 500);
+        }
     }
 }
+

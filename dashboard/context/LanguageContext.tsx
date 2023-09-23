@@ -21,7 +21,7 @@ interface LanguageProviderProps {
 }
 
 export const LanguageLangProvider: FunctionComponent<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<any>('en');
+  const [language, setLanguage] = useState<any>('fr');
   const translations = language === 'en' ? enTranslations : (language === 'fr' ? frTranslations : esTranslations);
 
   useEffect(() => {

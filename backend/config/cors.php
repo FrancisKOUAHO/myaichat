@@ -19,11 +19,11 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:3000', '*'],
 
     'allowed_origins_patterns' => [],
 
-    'Access-Control-Allow-Origin' => ['*'],
+    'Access-Control-Allow-Origin' => ['http://localhost:3000', '*'],
 
     'allowed_headers' => ['*'],
 
