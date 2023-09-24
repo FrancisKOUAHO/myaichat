@@ -112,7 +112,8 @@ const Page: React.FC = () => {
     return (
         <div className="w-full pl-4 pr-4">
             <div className="flex items-center py-4">
-                <Input aria-disabled={true}
+                <Input
+                    disabled={true}
                     placeholder="Filtrer commande..."
                     value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
@@ -150,7 +151,7 @@ const Page: React.FC = () => {
                 </DropdownMenu>
             </div>
             <div className="rounded-md border-0">
-                <Table>
+                <Table className="">
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
@@ -209,6 +210,10 @@ const Page: React.FC = () => {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
+                <div className="flex-1 text-sm text-muted-foreground">
+                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
+                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                </div>
                 <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
                         Previous

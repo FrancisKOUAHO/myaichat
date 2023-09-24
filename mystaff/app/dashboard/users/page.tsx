@@ -60,7 +60,7 @@ const Page: React.FC = () => {
         }, {
             id: 'user_id', // Utilisez un ID différent pour cette colonne
             cell: info => info.getValue(), // Affichez l'ID de l'utilisateur dans cette colonne
-            header: () => <div >User ID</div>, // Nommez la colonne "User ID"
+            header: () => <div >User_ID</div>, // Nommez la colonne "User ID"
         }),
         columnHelper.accessor('email', {
             cell: info => info.getValue(),
@@ -85,38 +85,39 @@ const Page: React.FC = () => {
         columnHelper.accessor(row => row.magicLinkToken, {
             id: 'magicLinkToken',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <div>Magic_Link_TokenNo</div>,
+            header: () => <div>TokenNo</div>,
 
         }),
         columnHelper.accessor(row => row.magicLinkTokenExpiresAt, {
             id: 'magicLinkTokenExpiresAt',
             cell: info => info.row.getValue('magicLinkTokenExpiresAt') ? new Date(info.row.getValue('magicLinkTokenExpiresAt')).toLocaleString() : null,
-            header: () => <span>Magic Link Token Expires At</span>,
+            header: () => <span>Token_Expires_At</span>,
         }),
         columnHelper.accessor(row => row.subscriptionActive, {
             id: 'subscriptionActive',
             cell: info => info.getValue() ? 'Active' : 'Inactive',
-            header: () => <span>Subscription Active</span>,
+            header: () => <span>Abonnement</span>,
         }),
         columnHelper.accessor(row => row.planId, {
             id: 'planId',
             cell: info => info.getValue() !== null ? info.getValue() : 'N/A',
-            header: () => <span>Plan ID</span>,
+            header: () => <span>Abonnement_ID</span>,
         }),
         columnHelper.accessor(row => row.rememberToken, {
             id: 'rememberToken',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>Remember Token</span>,
+            header: () => <span>Remember_Token</span>,
         }),
         columnHelper.accessor(row => row.createdAt, {
             id: 'createdAt',
             cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
-            header: () => <span>Created At</span>,
+            header: () => <span>Created_At</span>,
         }),
         columnHelper.accessor(row => row.updatedAt, {
             id: 'updatedAt',
             cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
-            header: () => <span>Updated At</span>,
+            header: () => <span>Updated_At</span>,
+
         }),
     ];
 
@@ -292,8 +293,8 @@ const Page: React.FC = () => {
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                    {/*{table.getFilteredSelectedRowModel().rows.length} of{" "}*/}
+                    {table.getFilteredRowModel().rows.length} ligne(s) au total.
                 </div>
                 <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
