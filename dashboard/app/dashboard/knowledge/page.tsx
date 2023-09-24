@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LayoutCustom from '@/layouts/layoutCustom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/config/api'
@@ -8,7 +8,6 @@ import { getCookie } from 'cookies-next'
 import { useLanguage } from '@/context/LanguageContext'
 import { AiOutlineDelete, AiOutlinePlus } from 'react-icons/ai'
 import { toast } from 'react-toastify'
-import { Dialog, Transition } from '@headlessui/react'
 
 const Page = () => {
   const { translations } = useLanguage()
@@ -28,20 +27,8 @@ const Page = () => {
     setUserId(userIdFromCookie)
   }, [])
 
-  const {
-    data: scrapeData,
-    isLoading,
-    isError,
-  } = useQuery(
-    ['userProducts', userId],
-    () => api.get(`products/user/${userId}/products`),
-    {
-      enabled: !!userId,
-    },
-  )
-
   const deleteShopifyProductMutation = useMutation({
-    mutationFn: (id) => api.delete(`products/products/${id}`), // Remarquez la correction ici
+    mutationFn: (id) => api.delete(`products/products/${id}`),
     onSuccess: () => {
       toast(`produit supprimé`, { position: toast.POSITION.BOTTOM_CENTER })
       queryClient.invalidateQueries(['userProducts', userId])
@@ -63,13 +50,13 @@ const Page = () => {
     },
     {
       onSuccess: () => {
-        console.log('success')
+        queryClient.invalidateQueries(['userProducts', userId])
         toast(`Importation réussie`, { position: toast.POSITION.BOTTOM_CENTER })
         setIsLoaded(false)
       },
       onError: () => {
-        setIsLoaded(false)
         toast(`Une erreur est survenue lors de l'importation`, { position: toast.POSITION.BOTTOM_CENTER })
+        setIsLoaded(false)
       },
     },
   )
@@ -88,6 +75,20 @@ const Page = () => {
       mutation.mutate(formData)
     }
   }
+
+  const {
+    data: scrapeData,
+    isLoading,
+    isError,
+  } = useQuery(
+    ['userProducts', userId],
+    () => api.get(`products/user/${userId}/products`),
+    {
+      enabled: !!userId,
+    },
+  )
+
+
   return (
     <LayoutCustom>
       <div className='w-full overflow-y-auto'>
