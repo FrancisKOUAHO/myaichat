@@ -9,10 +9,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Importer;
+use Maatwebsite\Excel\Readers\ReadChunkFilter;
+
 
 class PrestaShopScrapingController extends Controller
 {
-    public function import(Request $request, $user_id): JsonResponse
+    public function import(Request $request, $user_id)
     {
         try {
             $user = User::find($user_id);
@@ -23,29 +25,24 @@ class PrestaShopScrapingController extends Controller
 
             $import = new ProductsImport($user->id);
 
-            $importedData = Excel::import($import, $request->file('csv_file'), null, \Maatwebsite\Excel\Excel::CSV, ['heading_row' => false])->toArray();
+            $file = $request->file('csv_file');
 
-            if (empty($importedData)) {
-                return response()->json(['message' => 'Aucune donnée importée'], 400);
-            }
-
-            $importedProducts = [];
-
-            for ($i = 0; $i < count($importedData[0]); $i++) {
-                $rowData = $importedData[0][$i];
-
-                if (is_array($rowData)) {
-                    $rowData['user_id'] = $user->id;
-                    $product = ShopifyProduct::create($rowData);
-                    $importedProducts[] = $product;
+            Excel::filter('chunk')->load($file)->chunk(500, function ($results) use ($import) {
+                foreach ($results->toArray() as $row) {
+                    try {
+                        $importedProduct = $import->model($row);
+                        Log::info('Produit importé avec succès: ' . json_encode($importedProduct->toArray()));
+                    } catch (\Exception $e) {
+                        Log::error('Erreur lors de l\'importation d\'un produit: ' . $e->getMessage());
+                    }
                 }
-            }
+            }, ReadChunkFilter::CHUNK_ROW_COUNT);
 
-            return response()->json([
-                'message' => 'Importation réussie',
-                'imported_products' => $importedProducts,
-            ]);
+            Log::info('Importation réussie pour l\'utilisateur: ' . $user->id);
+
+            return response()->json(['message' => 'Importation réussie']);
         } catch (\Exception $e) {
+            Log::error('Une erreur est survenue lors de l\'importation : ' . $e->getMessage());
             return response()->json(['message' => 'Une erreur est survenue lors de l\'importation : ' . $e->getMessage()], 500);
         }
     }

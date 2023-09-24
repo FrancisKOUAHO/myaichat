@@ -1,7 +1,8 @@
 import React, { createContext, FunctionComponent, useContext, useEffect, useState } from 'react'
-import enTranslations from '../locales/en.json'
+
 import frTranslations from '../locales/fr.json'
 import TranslationsEnFr from '../types/TranslationsEnFr'
+
 import { useRouter } from 'next/router'
 
 type LanguageContextType = {
@@ -21,14 +22,14 @@ export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ chi
 
     const locale: string | undefined = router?.locale
 
-    const defaultLanguage = 'fr';
+    const defaultLanguage = 'fr'
 
     useEffect(() => {
         setLanguage(locale || defaultLanguage)
     }, [locale])
 
     const [language, setLanguage] = useState<string>(defaultLanguage)
-    const translations = language === 'en' ? enTranslations : (language === 'fr' && frTranslations);
+    const translations = frTranslations
 
     return (
         <LanguageContext.Provider value={{ language, setLanguage, translations }}>
