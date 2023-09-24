@@ -25,17 +25,13 @@ class PrestaShopScrapingController extends Controller
 
             $importedData = Excel::import($import, $request->file('csv_file'), null, \Maatwebsite\Excel\Excel::CSV);
 
-            dump("importedData", $importedData);
-
             if (empty($importedData)) {
                 return response()->json(['message' => 'Aucune donnée importée'], 400);
             }
 
             $importedProducts = [];
 
-            for ($i = 0; $i < count($importedData[0]); $i++) {
-                $rowData = $importedData[0][$i];
-
+            foreach ($importedData as $rowData) {
                 if (is_array($rowData)) {
                     $rowData['user_id'] = $user->id;
                     $product = ShopifyProduct::create($rowData);
