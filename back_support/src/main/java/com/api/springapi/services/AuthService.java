@@ -50,4 +50,18 @@ public class AuthService {
 
         return false;
     }
+
+    public boolean updateMagicLinkExpiration(String token, LocalDateTime newExpirationTime) {
+        User user = userRepository.findByMagicLinkToken(token);
+
+        if (user != null) {
+            user.setMagicLinkTokenExpiresAt(newExpirationTime);
+            userRepository.save(user);
+            return true;
+        }
+
+        return false;
+    }
+
+
 }

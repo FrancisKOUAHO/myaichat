@@ -22,7 +22,7 @@ const VerifyTokenPage = () => {
         }
 
         try {
-            const { data: { access_token, user } } = await api.post(`auth/login/${token}`);
+            const { data: { access_token, user } } = await api.post(`auth/loginWithToken/${token}`);
 
             setCookie(undefined, 'access_token', access_token, {
                 maxAge: 30 * 24 * 60 * 60,

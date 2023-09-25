@@ -30,7 +30,7 @@ public class AutControllers {
         return ResponseEntity.ok("Veuillez consulter votre boîte de réception pour vous connecter.");
     }
 
-    @GetMapping("/login-with-token/{token}")
+    @GetMapping("/loginWithToken/{token}")
     public ResponseEntity<String> loginWithToken(@PathVariable String token) {
         boolean isValid = authService.verifyMagicLink(token);
         if (!isValid) {

@@ -11,6 +11,7 @@ import axios from "axios";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
+import {api} from "@/config/api";
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
@@ -25,7 +26,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8080/auth/requestLoginLink", {
+      const response = await api.post("/auth/requestLoginLink", {
         email: email
       });
 
