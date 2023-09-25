@@ -10,6 +10,7 @@ import Plans from  "./plans/page"
 import Paiement from  "./paiements/page"
 import Orders from  "./oders/page"
 import Apercu from  "./apercu/page"
+import Facturations from "@/app/dashboard/facturations/page"
 
 
 export default function DashboardPage() {
@@ -17,6 +18,9 @@ export default function DashboardPage() {
          <CustomLayout>
              <TabsContent value="apercu" className="space-y-4">
                  <Apercu/>
+             </TabsContent>
+             <TabsContent value="facturations" className="space-y-4">
+                 <Facturations/>
              </TabsContent>
              <TabsContent value="utilisateurs" className="space-y-4">
                  <Users/>

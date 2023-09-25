@@ -19,7 +19,7 @@ const Page = () => {
     return (
         <LayoutCustom>
             <div className="p-20 mx-auto w-full overflow-y-auto">
-                <h3 className="text-base font-semibold leading-6 text-gray-900">{"Abonnement et facturation"}</h3>
+                <h3 className="text-base font-semibold leading-6 text-gray-900">{"Abonnement et facturations"}</h3>
                 <dl
                     className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
                     <div className="px-6 py-5 sm:p-8">
