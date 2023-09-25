@@ -1,4 +1,4 @@
-import {useLanguage} from "../../contexts/LanguageContext";
+import {useLanguage} from "../../context/LanguageContext";
 
 const Features = () => {
     const {translations} = useLanguage();

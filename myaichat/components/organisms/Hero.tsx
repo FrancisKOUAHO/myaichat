@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import {useSelector} from "react-redux";
 import {IRootState} from "../../store";
-import {useLanguage} from "../../contexts/LanguageContext";
+import {useLanguage} from "../../context/LanguageContext";
 
 const Hero = () => {
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

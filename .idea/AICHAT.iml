@@ -8,7 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/backend/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/backend/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/zzz/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/zzz/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/zzz/vendor/darkaonline/l5-swagger" />
@@ -244,6 +243,39 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/maatwebsite/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/maennchen/zipstream-php" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/markbaker/complex" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/markbaker/matrix" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/phpoffice/phpspreadsheet" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/deprecation-contracts 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/event-dispatcher-contracts 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-intl-idn 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/theseer/tokenizer 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/console 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/css-selector 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/event-dispatcher 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/finder 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/http-kernel 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/mime 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-ctype 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-intl-grapheme 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-intl-normalizer 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-mbstring 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-php72 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-php80 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-php83 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/polyfill-uuid 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/process 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/service-contracts 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/string 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/translation 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/translation-contracts 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/uid 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/var-dumper 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/yaml 2" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/webmozart/assert 2" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -6,7 +6,6 @@ import { CornerDownLeft, Loader2 } from 'lucide-react'
 import { MessagesContext } from '@/context/messages'
 import { toast } from 'react-hot-toast'
 import { cn } from '@/lib/utils'
-import axios from 'axios'
 import { api } from '@/config/api'
 
 interface ChatInputProps extends React.HTMLAttributes<HTMLDivElement> {}

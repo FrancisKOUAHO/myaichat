@@ -7,6 +7,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\Providerontroller;
 use App\Http\Controllers\ShopifyProductController;
 use App\Http\Controllers\ShopifyScraperController;
+use App\Http\Controllers\PrestaShopScrapingController;
 use App\Http\Controllers\ShopifyStoreController;
 use App\Http\Controllers\SignalerBugController;
 use App\Http\Controllers\UserController;
@@ -43,13 +44,9 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::post('/messages', [MessageController::class, 'store']);
     Route::get('/messages/{url}/message-count', [MessageController::class, 'getMessageCount']);
 
+    Route::post('/import/{user_id}', [PrestaShopScrapingController::class, 'import']);
 
     Route::post('rapport', [SignalerBugController::class, 'SendBugEmail']);
-
-    Route::get('/plans', [PlanController::class, 'getPlans']);
-    Route::post('/checkout/{id}', [PaymentController::class, 'checkout']);
-    Route::post('/plan', [PlanController::class, 'createPlan']);
-
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/me', function (Request $request) {
@@ -79,6 +76,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('/user/{user_id}/products', [ShopifyProductController::class, 'getUserProducts']);
             Route::get('{url}', [ShopifyScraperController::class, 'getProductUrl']);
         });
+
+        Route::get('/plans', [PlanController::class, 'getPlans']);
+        Route::post('/checkout/{id}', [PaymentController::class, 'checkout']);
+        Route::post('/plan', [PlanController::class, 'createPlan']);
 
         Route::get('/check-payment', [PaymentController::class, 'getPaymentStatus']);
     });
