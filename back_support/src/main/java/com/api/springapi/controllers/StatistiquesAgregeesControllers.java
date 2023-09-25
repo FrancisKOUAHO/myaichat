@@ -28,7 +28,7 @@ public class StatistiquesAgregeesControllers {
         return ResponseEntity.ok(statistiquesAgregeesService.getTotalChatbots());
     }
 
-    @GetMapping("/total-page")
+    @GetMapping("/total-users")
     public ResponseEntity<Long> getTotalUsers() {
         return ResponseEntity.ok(statistiquesAgregeesService.getTotalUsers());
     }

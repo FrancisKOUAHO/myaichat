@@ -1,6 +1,5 @@
 "use client"
 
-import CustomLayout from "@/layouts/customLayout";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Overview} from "@/components/overview";
 import {RecentSales} from "@/components/recent-sales";
@@ -9,7 +8,7 @@ import axios from "axios";
 import {useState, useEffect} from "react";
 
 
-const page = () => {
+const Page = () => {
     const [totalRevenue, setTotalRevenue] = useState<number | null>(null);
     const [totalUsers, setTotalUsers] = useState<number | null>(null);
     const [totalOrders, setTotalOrders] = useState<number | null>(null);
@@ -20,40 +19,35 @@ const page = () => {
 
     useEffect(() => {
 
-        // Récupérer le revenu total
-        axios.get("https://api-admin.myaichat.io/api/payments/total-revenue")
+        // Récupérer le revenu total https://api-admin.myaichat.io
+        axios.get("http://localhost:8080/api/payments/total-revenue")
             .then(response => {
                 setTotalRevenue(response.data.totalRevenue);
             });
         // Récupérer le total des utilisateurs
-        axios.get("https://api-admin.myaichat.io/api/stats/total-users").then(response => {
+        axios.get("http://localhost:8080/api/stats/total-users").then(response => {
             setTotalUsers(response.data);
         });
 
         // Récupérer le total des chatbots actifs
-        axios.get("https://api-admin.myaichat.io/api/stats/total-chatbots").then(response => {
+        axios.get("http://localhost:8080/api/stats/total-chatbots").then(response => {
             setTotalChatbots(response.data);
         });
 
         // Récupérer le total des orders
-        axios.get("https://api-admin.myaichat.io/api/payments/total-orders").then(response => {
+        axios.get("http://localhost:8080/api/payments/total-orders").then(response => {
             setTotalOrders(response.data);
         });
 
-        // // Récupérer les abonnements
-        // axios.get("https://api-admin.myaichat.io/api/stats/subscriptions").then(response => {
-        //     setTotalChatbots(response.data);
-        // });
-
         // Récupérer le revenu mensuel
-        axios.get("https://api-admin.myaichat.io/api/payments/monthly-revenue").then(response => {
+        axios.get("http://localhost:8080/api/payments/monthly-revenue").then(response => {
             setMonthlyRevenue(response.data.monthlyRevenue);
             setCurrentMonth(response.data.currentMonth);
 
         });
 
         // Récupérer le revenu annuel
-        axios.get("https://api-admin.myaichat.io/api/payments/annual-revenue").then(response => {
+        axios.get("http://localhost:8080/api/payments/annual-revenue").then(response => {
             setAnnualRevenue(response.data);
         });
     }, []);
@@ -175,4 +169,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

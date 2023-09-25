@@ -47,7 +47,6 @@ public class RevenueService {
         List<Object[]> results = paymentRepository.calculateMonthlyRevenue();
         if (results != null && !results.isEmpty()) {
             Object[] result = results.get(0);
-            System.out.println("zola :  " + Arrays.toString(result));
             if (result[0] != null && result[1] != null) {
                 revenueDTO.setMonthlyRevenue((BigDecimal) result[0]);
 

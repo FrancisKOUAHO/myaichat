@@ -7,6 +7,9 @@ const tableNav = () => {
             <TabsTrigger value="apercu">
                 Apercu
             </TabsTrigger>
+            <TabsTrigger value="facturations">
+                Facturations
+            </TabsTrigger>
             <TabsTrigger value="utilisateurs">
                 Utilisateurs
             </TabsTrigger>

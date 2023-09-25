@@ -53,10 +53,9 @@ public class UserService {
         return updatedUserDTO;
     }
 
-
+    @Transactional
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
-
 
 }

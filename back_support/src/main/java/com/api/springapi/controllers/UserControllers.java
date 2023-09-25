@@ -12,9 +12,9 @@ import java.util.Optional;
 
 @CrossOrigin(origins = {"http://localhost:3000/", "https://admin.myaichat.io/", "https://www.myaichat.io/", "*"})
 @RestController
-@RequestMapping("/api/page")
-public class UserControllers {
+@RequestMapping("/api/users")
 
+public class UserControllers {
     @Autowired
     private UserService userService;
 
