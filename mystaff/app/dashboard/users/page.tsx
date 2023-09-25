@@ -11,7 +11,6 @@ import {ChevronDownIcon,} from "@radix-ui/react-icons";
 import {AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,} from "@/components/ui/alert-dialog";
 import { MoreHorizontal,ArrowUpDown } from "lucide-react";
 
-
 const Page: React.FC = () => {
     const [data, setData] = useState<User[]>([]);
     const columnHelper = createColumnHelper<User>();
@@ -64,7 +63,9 @@ const Page: React.FC = () => {
         }),
         columnHelper.accessor('email', {
             cell: info => info.getValue(),
-            header: ({ column }) => {
+            header: () => <div>Email</div>,
+
+/*            header: ({ column }) => {
                 return (
                     <Button
                         variant="ghost"
@@ -74,7 +75,7 @@ const Page: React.FC = () => {
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 )
-            },
+            },*/
         }),
         columnHelper.accessor(row => row.emailVerifiedAt, {
             id: 'emailVerifiedAt',
@@ -221,7 +222,7 @@ const Page: React.FC = () => {
                                             )}
                                         </TableCell>
                                     ))}
-                                    <TableCell>
+                                   {/* <TableCell>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" className="h-8 w-8 p-0">
@@ -275,7 +276,7 @@ const Page: React.FC = () => {
                                                 </AlertDialog>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
-                                    </TableCell>
+                                    </TableCell>*/}
                                 </TableRow>
                             ))
                         ) : (
@@ -284,7 +285,7 @@ const Page: React.FC = () => {
                                     colSpan={columns.length}
                                     className="h-24 text-center"
                                 >
-                                    No results.
+                                    Pas de resultats.
                                 </TableCell>
                             </TableRow>
                         )}
@@ -293,15 +294,14 @@ const Page: React.FC = () => {
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="flex-1 text-sm text-muted-foreground">
-                    {/*{table.getFilteredSelectedRowModel().rows.length} of{" "}*/}
                     {table.getFilteredRowModel().rows.length} ligne(s) au total.
                 </div>
                 <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                        Previous
+                        Precedent
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                        Next
+                        Suivant
                     </Button>
                 </div>
             </div>
