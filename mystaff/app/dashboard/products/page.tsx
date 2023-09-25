@@ -69,11 +69,13 @@ const Page: React.FC = () => {
         columnHelper.accessor(row => row.userId, {
             id: 'userId',
             cell: info => info.getValue() !== null ? info.getValue() : 'N/A',
-            header: () => <span>User_ID</span>,
+            header: () => <div>User_ID</div>,
         }),
         columnHelper.accessor('domain', {
             cell: info => info.getValue(),
-            header: ({ column }) => {
+            header: () => <div>Domain</div>,
+
+/*            header: ({ column }) => {
                 return (
                     <Button
                         variant="ghost"
@@ -83,7 +85,7 @@ const Page: React.FC = () => {
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 )
-            },
+            },*/
         }),
         columnHelper.accessor(row => row.fullUrl, {
             id: 'fullUrl',
@@ -113,29 +115,24 @@ const Page: React.FC = () => {
         columnHelper.accessor(row => row.publishDate, {
             id: 'publishDate',
             cell: ({ row }) => row.getValue('publishDate') ? <i>{new Date(row.getValue('publishDate')).toLocaleString()}</i> : null,
-            header: () => <div>PublishDate</div>,
+            header: () => <div>Publish_Date</div>,
 
         }),
         columnHelper.accessor(row => row.updatedDate, {
             id: 'updatedDate',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <div>UpdatedDate</div>,
+            header: () => <div>Updated_Date</div>,
 
-        }),
-        columnHelper.accessor(row => row.updatedDate, {
-            id: 'updatedDate',
-            cell: info => info.row.getValue('updatedDate') ? new Date(info.row.getValue('updatedDate')).toLocaleString() : null,
-            header: () => <span>UpdatedDate</span>,
         }),
         columnHelper.accessor(row => row.createdAt, {
             id: 'createdAt',
             cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
-            header: () => <span>Created At</span>,
+            header: () => <div>Created At</div>,
         }),
         columnHelper.accessor(row => row.updatedAt, {
             id: 'updatedAt',
             cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
-            header: () => <span>Updated At</span>,
+            header: () => <div>Updated_At</div>,
         }),
     ];
 
@@ -156,7 +153,7 @@ const Page: React.FC = () => {
     })
 
     return (
-        <div className="w-full pl-4 pr-4">
+        <div className="w-full pl-4 pr-4 ">
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filter domain..."
@@ -239,7 +236,7 @@ const Page: React.FC = () => {
                                             )}
                                         </TableCell>
                                     ))}
-                                    <TableCell>
+                                    {/*<TableCell>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" className="h-8 w-8 p-0">
@@ -274,20 +271,20 @@ const Page: React.FC = () => {
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
                                                             <AlertDialogCancel>Annuler</AlertDialogCancel>
-                                                            {/*<AlertDialogAction  onClick={() => {*/}
-                                                            {/*    if (selectedProductIdToDelete !== null) {*/}
-                                                            {/*        axios.create(`http://localhost:8080/api/products`)*/}
-                                                            {/*            .then((response) => {*/}
-                                                            {/*                console.log('Creation réussie');*/}
-                                                            {/*            })*/}
-                                                            {/*            .catch((error) => {*/}
-                                                            {/*                console.error('Erreur lors de la suppression :', error);*/}
-                                                            {/*            });*/}
-                                                            {/*    }*/}
-                                                            {/*    setSelectedProductIdToDelete(null);*/}
-                                                            {/*}}>*/}
-                                                            {/*    Creation*/}
-                                                            {/*</AlertDialogAction>*/}
+                                                            <AlertDialogAction  onClick={() => {
+                                                                if (selectedProductIdToDelete !== null) {
+                                                                    axios.create(`http://localhost:8080/api/products`)
+                                                                        .then((response) => {
+                                                                            console.log('Creation réussie');
+                                                                        })
+                                                                        .catch((error) => {
+                                                                            console.error('Erreur lors de la suppression :', error);
+                                                                        });
+                                                                }
+                                                                setSelectedProductIdToDelete(null);
+                                                            }}>
+                                                                Creation
+                                                            </AlertDialogAction>
                                                             <AlertDialogAction  onClick={() => {
                                                                 if (selectedProductIdToDelete !== null) {
                                                                     axios.delete(`http://localhost:8080/api/products/${selectedProductIdToDelete}`)
@@ -307,7 +304,7 @@ const Page: React.FC = () => {
                                                 </AlertDialog>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
-                                    </TableCell>
+                                    </TableCell>*/}
                                 </TableRow>
                             ))
                         ) : (
@@ -330,10 +327,10 @@ const Page: React.FC = () => {
                 </div>
                 <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                        Previous
+                        Precedent
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                        Next
+                        Suivant
                     </Button>
                 </div>
             </div>

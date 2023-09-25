@@ -53,42 +53,42 @@ const Page: React.FC = () => {
         }, {
             id: 'commande_id', // Utilisez un ID différent pour cette colonne
             cell: info => info.getValue(),
-            header: () => <div>Commande ID</div>,
+            header: () => <div>Commande_ID</div>,
         }),
         columnHelper.accessor(row => row.paymentId, {
             id: 'paymentId',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>PaymentId</span>,
+            header: () => <div>PaymentId</div>,
         }),
         columnHelper.accessor(row => row.totalPrice, {
             id: 'totalPrice',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>TotalPrice</span>,
+            header: () => <div>Total_Price</div>,
         }),
         columnHelper.accessor(row => row.userId, {
             id: 'userId',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>UserId</span>,
+            header: () => <div>User_Id</div>,
         }),
         columnHelper.accessor(row => row.status, {
             id: 'status',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>Status</span>,
+            header: () => <div>Status</div>,
         }),
         columnHelper.accessor(row => row.sessionId, {
             id: 'sessionId',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>Session_Id</span>,
+            header: () => <div>Session_Id</div>,
         }),
         columnHelper.accessor(row => row.createdAt, {
             id: 'createdAt',
             cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
-            header: () => <span>Created_At</span>,
+            header: () => <div>Created_At</div>,
         }),
         columnHelper.accessor(row => row.updatedAt, {
             id: 'updatedAt',
             cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
-            header: () => <span>Updated_At</span>,
+            header: () => <div>Updated_At</div>,
         }),
     ];
 
@@ -215,10 +215,10 @@ const Page: React.FC = () => {
                 </div>
                 <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                        Previous
+                        Precedent
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                        Next
+                        Suivant
                     </Button>
                 </div>
             </div>

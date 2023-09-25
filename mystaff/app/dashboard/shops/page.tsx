@@ -62,7 +62,7 @@ const Page: React.FC = () => {
         columnHelper.accessor(row => row.userId, {
             id: 'userId',
             cell: info => info.getValue() !== null ? info.getValue() : 'N/A',
-            header: () => <span>User_ID</span>,
+            header: () => <div>User_ID</div>,
         }),
         columnHelper.accessor('url', {
             cell: info => info.getValue(),
@@ -88,12 +88,12 @@ const Page: React.FC = () => {
         columnHelper.accessor(row => row.createdAt, {
             id: 'createdAt',
             cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
-            header: () => <span>Created At</span>,
+            header: () => <div>Created At</div>,
         }),
         columnHelper.accessor(row => row.updatedAt, {
             id: 'updatedAt',
             cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
-            header: () => <span>Updated At</span>,
+            header: () => <div>Updated At</div>,
         }),
     ];
 
@@ -288,10 +288,10 @@ const Page: React.FC = () => {
                 </div>
                 <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                        Previous
+                        Precedent
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                        Next
+                        Suivant
                     </Button>
                 </div>
             </div>

@@ -92,32 +92,32 @@ const Page: React.FC = () => {
         columnHelper.accessor(row => row.magicLinkTokenExpiresAt, {
             id: 'magicLinkTokenExpiresAt',
             cell: info => info.row.getValue('magicLinkTokenExpiresAt') ? new Date(info.row.getValue('magicLinkTokenExpiresAt')).toLocaleString() : null,
-            header: () => <span>Token_Expires_At</span>,
+            header: () => <div>Token_Expires_At</div>,
         }),
         columnHelper.accessor(row => row.subscriptionActive, {
             id: 'subscriptionActive',
             cell: info => info.getValue() ? 'Active' : 'Inactive',
-            header: () => <span>Abonnement</span>,
+            header: () => <div>Abonnement</div>,
         }),
         columnHelper.accessor(row => row.planId, {
             id: 'planId',
             cell: info => info.getValue() !== null ? info.getValue() : 'N/A',
-            header: () => <span>Abonnement_ID</span>,
+            header: () => <div>Abonnement_ID</div>,
         }),
         columnHelper.accessor(row => row.rememberToken, {
             id: 'rememberToken',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>Remember_Token</span>,
+            header: () => <div>Remember_Token</div>,
         }),
         columnHelper.accessor(row => row.createdAt, {
             id: 'createdAt',
             cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
-            header: () => <span>Created_At</span>,
+            header: () => <div>Created_At</div>,
         }),
         columnHelper.accessor(row => row.updatedAt, {
             id: 'updatedAt',
             cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
-            header: () => <span>Updated_At</span>,
+            header: () => <div>Updated_At</div>,
 
         }),
     ];
