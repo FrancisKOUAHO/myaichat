@@ -219,10 +219,10 @@ const Page: React.FC = () => {
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                        Previous
+                        Precedent
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                        Next
+                        Suivant
                     </Button>
                 </div>
             </div>

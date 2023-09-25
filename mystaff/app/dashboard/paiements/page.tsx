@@ -73,7 +73,8 @@ const Page: React.FC = () => {
         }),
         columnHelper.accessor('orderId', {
             cell: info => info.getValue(),
-            header: ({ column }) => {
+            header: () => <span>order_Id</span>,
+/*            header: ({ column }) => {
                 return (
                     <Button
                         variant="ghost"
@@ -83,52 +84,52 @@ const Page: React.FC = () => {
                         <ArrowUpDown className="ml-2 h-4 w-4" />
                     </Button>
                 )
-            },
+            },*/
         }),
         columnHelper.accessor(row => row.stCusId, {
             id: 'stCusId',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>stCusId</span>,
+            header: () => <div>stCusId</div>,
         }),
         columnHelper.accessor(row => row.stSubId, {
             id: 'stSubId',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>stSubId</span>,
+            header: () => <div>stSubId</div>,
         }),
         columnHelper.accessor(row => row.stPaymentIntentId, {
             id: 'stPaymentIntentId',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>stPaymentIntentId</span>,
+            header: () => <div>stPaymentIntentId</div>,
         }),
         columnHelper.accessor(row => row.stPaymentMethod, {
             id: 'stPaymentMethod',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>stPaymentMethod</span>,
+            header: () => <div>stPaymentMethod</div>,
         }),
         columnHelper.accessor(row => row.stPaymentStatus, {
             id: 'stPaymentStatus',
             cell: info => info.getValue() ? info.getValue() : 'N/A',
-            header: () => <span>stPaymentStatus</span>,
+            header: () => <div>stPaymentStatus</div>,
         }),
         columnHelper.accessor(row => row.date, {
             id: 'date',
             cell: info => info.row.getValue('date') ? new Date(info.row.getValue('date')).toLocaleString() : null,
-            header: () => <span>Date</span>,
+            header: () => <div>Date</div>,
         }),
         columnHelper.accessor(row => row.trial_end, {
             id: 'trial_end',
             cell: info => info.row.getValue('trial_end') ? new Date(info.row.getValue('trial_end')).toLocaleString() : null,
-            header: () => <span>Trial End</span>,
+            header: () => <div>Trial End</div>,
         }),
         columnHelper.accessor(row => row.createdAt, {
             id: 'createdAt',
             cell: info => info.row.getValue('createdAt') ? new Date(info.row.getValue('createdAt')).toLocaleString() : null,
-            header: () => <span>Created At</span>,
+            header: () => <div>Created At</div>,
         }),
         columnHelper.accessor(row => row.updatedAt, {
             id: 'updatedAt',
             cell: info => info.row.getValue('updatedAt') ? new Date(info.row.getValue('updatedAt')).toLocaleString() : null,
-            header: () => <span>Updated At</span>,
+            header: () => <div>Updated At</div>,
         }),
     ];
 
@@ -251,10 +252,10 @@ const Page: React.FC = () => {
             <div className="flex items-center justify-end space-x-2 py-4">
                 <div className="space-x-2">
                     <Button variant="outline" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                        Previous
+                        Precedent
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                        Next
+                        Suivant
                     </Button>
                 </div>
             </div>
