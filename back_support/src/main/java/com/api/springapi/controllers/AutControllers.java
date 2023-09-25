@@ -2,6 +2,9 @@ package com.api.springapi.controllers;
 
 import com.api.springapi.dto.EmailRequest;
 import com.api.springapi.services.AuthService;
+
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +36,10 @@ public class AutControllers {
         if (!isValid) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Jeton de connexion invalide ou expiré.");
         }
+
+
+         // Update the expiration time for the token (assuming a similar method exists in your AuthService)
+        authService.updateMagicLinkExpiration(token, LocalDateTime.now().plusHours(1));
 
         return ResponseEntity.ok("Connecté avec succès.");
     }
