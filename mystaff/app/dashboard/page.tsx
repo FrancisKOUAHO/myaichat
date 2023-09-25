@@ -3,14 +3,14 @@
 import * as React from "react"
 import {TabsContent} from "@/components/ui/tabs"
 import CustomLayout from "@/layouts/customLayout"
-import Users from  "./users/page"
-import Shops from  "./shops/page"
-import Products from  "./products/page"
-import Plans from  "./plans/page"
-import Paiement from  "./paiements/page"
-import Orders from  "./oders/page"
-import Apercu from  "./apercu/page"
-import Facturations from "@/app/dashboard/facturations/page"
+import Users from "@/components/pages/users/page"
+import Shops from "@/components/pages/shops/page"
+import Products from "@/components/pages/products/page"
+import Plans from "@/components/pages/plans/page"
+import Paiement from "@/components/pages/paiements/page"
+import Orders from "@/components/pages/oders/page"
+import Apercu from "@/components/pages/apercu/page"
+import Facturations from "@/components/pages/facturations/page"
 
 
 export default function DashboardPage() {
