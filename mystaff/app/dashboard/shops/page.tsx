@@ -66,17 +66,18 @@ const Page: React.FC = () => {
         }),
         columnHelper.accessor('url', {
             cell: info => info.getValue(),
-            header: ({ column }) => {
-                return (
-                    <Button
-                        variant="ghost"
-                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                    >
-                        Url
-                        <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
-                )
-            },
+            header: () => <div>Url</div>,
+            // header: ({ column }) => {
+            //     return (
+            //         <Button
+            //             variant="ghost"
+            //             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            //         >
+            //             Url
+            //             <ArrowUpDown className="ml-2 h-4 w-4" />
+            //         </Button>
+            //     )
+            // },
         }),
         columnHelper.accessor(row => row.content, {
             id: 'content',
@@ -196,7 +197,7 @@ const Page: React.FC = () => {
                                             )}
                                         </TableCell>
                                     ))}
-                                    <TableCell>
+                                    {/*<TableCell>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" className="h-8 w-8 p-0">
@@ -231,20 +232,20 @@ const Page: React.FC = () => {
                                                         </AlertDialogHeader>
                                                         <AlertDialogFooter>
                                                             <AlertDialogCancel>Annuler</AlertDialogCancel>
-                                                            {/*<AlertDialogAction  onClick={() => {*/}
-                                                            {/*    if (selectedProductIdToDelete !== null) {*/}
-                                                            {/*        axios.create(`http://localhost:8080/api/products`)*/}
-                                                            {/*            .then((response) => {*/}
-                                                            {/*                console.log('Creation réussie');*/}
-                                                            {/*            })*/}
-                                                            {/*            .catch((error) => {*/}
-                                                            {/*                console.error('Erreur lors de la suppression :', error);*/}
-                                                            {/*            });*/}
-                                                            {/*    }*/}
-                                                            {/*    setSelectedProductIdToDelete(null);*/}
-                                                            {/*}}>*/}
-                                                            {/*    Creation*/}
-                                                            {/*</AlertDialogAction>*/}
+                                                            <AlertDialogAction  onClick={() => {
+                                                                if (selectedProductIdToDelete !== null) {
+                                                                    axios.create(`http://localhost:8080/api/products`)
+                                                                        .then((response) => {
+                                                                            console.log('Creation réussie');
+                                                                        })
+                                                                        .catch((error) => {
+                                                                            console.error('Erreur lors de la suppression :', error);
+                                                                        });
+                                                                }
+                                                                setSelectedProductIdToDelete(null);
+                                                            }}>
+                                                                Creation
+                                                            </AlertDialogAction>
                                                             <AlertDialogAction  onClick={() => {
                                                                 if (selectedChatbotIdToDelete !== null) {
                                                                     axios.delete(`http://localhost:8080/api/chatbots/${selectedChatbotIdToDelete}`)
@@ -264,7 +265,7 @@ const Page: React.FC = () => {
                                                 </AlertDialog>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
-                                    </TableCell>
+                                    </TableCell>*/}
                                 </TableRow>
                             ))
                         ) : (

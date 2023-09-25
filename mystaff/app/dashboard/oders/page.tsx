@@ -19,7 +19,7 @@ const Page: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/orders'); // Remplacez par votre URL d'API
+                const response = await axios.get('http://localhost:8080/api/orders');
                 setData(response.data);
             } catch (error) {
                 console.error('Erreur lors de la récupération des données:', error);
