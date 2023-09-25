@@ -37,7 +37,7 @@ const VerifyTokenPage = () => {
             router.push('/dashboard');
         } catch (error: any) {
             if (error.response && error.response.status === 404) {
-                router.push('/dashboard/subscription');
+                router.push('/');
             } else {
                 toast(`Une erreur inattendue s'est produite.`, { position: toast.POSITION.BOTTOM_CENTER });
             }
