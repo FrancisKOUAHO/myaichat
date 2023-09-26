@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface UserRepository  extends JpaRepository<User, Long> {
         Optional<User> findByEmail(String email);
         Optional<User> findByMagicLinkTokenAndMagicLinkTokenExpiresAtAfter(String token, LocalDateTime time);
+        User findByMagicLinkToken(String magicLinkToken);
 
         //Requête pour calculer le cnombre total de client
         @Query("SELECT COUNT(u) FROM User u")

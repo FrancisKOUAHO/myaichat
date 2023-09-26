@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import com.api.springapi.models.User;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @Service
 public class EmailService {
 
@@ -21,7 +25,7 @@ public class EmailService {
     }
 
     public void sendLoginEmail(User user) {
-        String magicLinkToken = dashboardUrl + "/verify/?magic_link_token=" + user.getMagicLinkToken();
+        String magicLinkToken = dashboardUrl + "/verify?magic_link_token=" + user.getMagicLinkToken();
         String messageBody = "Cliquez sur le lien ci-dessous pour vous connecter :\n\n" + magicLinkToken;
 
         SimpleMailMessage message = new SimpleMailMessage();
