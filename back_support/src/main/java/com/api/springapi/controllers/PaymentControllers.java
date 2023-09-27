@@ -2,7 +2,6 @@ package com.api.springapi.controllers;
 
 import com.api.springapi.dto.AnnualRevenueDTO;
 import com.api.springapi.dto.MonthlyRevenueDTO;
-import com.api.springapi.dto.PaymentDTO;
 import com.api.springapi.dto.RevenueDTO;
 import com.api.springapi.models.Payment;
 import com.api.springapi.services.PaymentService;

@@ -1,10 +1,8 @@
 package com.api.springapi.services;
 
-import com.api.springapi.dto.OrderDTO;
 import com.api.springapi.models.Order;
 import com.api.springapi.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

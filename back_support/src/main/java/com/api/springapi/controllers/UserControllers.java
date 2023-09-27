@@ -1,7 +1,6 @@
 package com.api.springapi.controllers;
 
 import com.api.springapi.dto.UserDTO;
-import com.api.springapi.models.User;
 import com.api.springapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -33,7 +33,7 @@ class PaymentController extends Controller
             'line_items' => $lineItems,
             'mode' => 'subscription',
             'subscription_data' => [
-                'trial_period_days' => 15,
+                'trial_period_days' => 7,
             ],
             'allow_promotion_codes' => true,
             'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
