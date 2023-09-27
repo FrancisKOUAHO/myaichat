@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {createColumnHelper, flexRender, getCoreRowModel, useReactTable,  getPaginationRowModel,  SortingState,  getSortedRowModel,  ColumnFiltersState,  getFilteredRowModel,} from '@tanstack/react-table';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
@@ -10,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import {ChevronDownIcon,} from "@radix-ui/react-icons";
 import {AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,} from "@/components/ui/alert-dialog";
 import { MoreHorizontal,ArrowUpDown } from "lucide-react";
+import {api} from "@/config/api";
 
 
 const Page: React.FC = () => {
@@ -21,16 +21,16 @@ const Page: React.FC = () => {
     const [selectedChatbotIdToDelete, setSelectedChatbotIdToDelete] = useState<number | null>(null);
 
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/chatbots');
-                setData(response.data);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données:', error);
-            }
-        };
+    const fetchData = async () => {
+        try {
+            const response = await api.get('chatbots');
+            setData(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, []);
 

@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import {ChevronDownIcon,} from "@radix-ui/react-icons";
 import {AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,} from "@/components/ui/alert-dialog";
 import { MoreHorizontal,ArrowUpDown } from "lucide-react";
+import {api} from "@/config/api";
 
 const Page: React.FC = () => {
     const [data, setData] = useState<User[]>([]);
@@ -20,16 +21,16 @@ const Page: React.FC = () => {
     const [selectedUserIdToDelete, setSelectedUserIdToDelete] = useState<number | null>(null);
 
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/users'); // Remplacez par votre URL d'API
-                setData(response.data);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données:', error);
-            }
-        };
+    const fetchData = async () => {
+        try {
+            const response = await api.get('users'); // Remplacez par votre URL d'API
+            setData(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, []);
 

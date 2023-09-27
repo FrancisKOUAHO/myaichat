@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {createColumnHelper, flexRender, getCoreRowModel, useReactTable,  getPaginationRowModel,  SortingState,  getSortedRowModel,  ColumnFiltersState,  getFilteredRowModel,
 } from '@tanstack/react-table';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
@@ -10,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import {ChevronDownIcon,} from "@radix-ui/react-icons";
 import {ArrowUpDown} from "lucide-react";
 import {Input} from "@/components/ui/input";
+import {api} from "@/config/api";
 
 
 
@@ -20,19 +20,16 @@ const Page: React.FC = () => {
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [selectedRowId, setSelectedRowId] = useState(null);
 
+    const fetchData = async () => {
+        try {
+            const response = await api.get('payments'); // Remplacez par votre URL d'API
+            setData(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/payments'); // Remplacez par votre URL d'API
-                setData(response.data);
-                console.log("Données récupérées :", response.data);  // Ajout d'un console.log ici pour afficher les données récupérées
-                console.log("donnees " + response.data)
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données:', error);
-            }
-        };
-
         fetchData();
     }, []);
 

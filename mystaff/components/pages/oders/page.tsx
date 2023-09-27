@@ -8,6 +8,7 @@ import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMen
 import {Button} from "@/components/ui/button";
 import {ChevronDownIcon} from "@radix-ui/react-icons";
 import {Input} from "@/components/ui/input";
+import {api} from "@/config/api";
 
 const Page: React.FC = () => {
     const [data, setData] = useState<Paiement[]>([]);
@@ -16,16 +17,16 @@ const Page: React.FC = () => {
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [selectedRowId, setSelectedRowId] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/orders');
-                setData(response.data);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données:', error);
-            }
-        };
+    const fetchData = async () => {
+        try {
+            const response = await api.get('orders');
+            setData(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, []);
 

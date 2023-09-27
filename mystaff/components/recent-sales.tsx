@@ -3,29 +3,35 @@ import {
     AvatarFallback,
 } from "@/components/ui/avatar"
 import {useEffect, useState} from "react";
-import axios from "axios";
+import {api} from "@/config/api";
+
 
 export function RecentSales() {
     const [LastOrders, setLastOrders] = useState<any>(null);
 
-
-    useEffect(() => {
-        // Récupérer les derniers des abonnements
-        axios.get("http://localhost:8080/api/stats/subscriptions").then(response => {
+    const fetchLastOrders = async () => {
+        try {
+            const response = await api.get("stats/subscriptions");
             const data = response.data;
 
-            // Trier les données
-            const sortedData = data.sort((a: { userCreatedAt: string | number | Date | null; }, b: { userCreatedAt: string | number | Date | null; }) => {
+            const sortedData = data.sort((a : any, b : any) => {
                 if (a.userCreatedAt === null) return 1;
                 if (b.userCreatedAt === null) return -1;
                 return new Date(b.userCreatedAt).getTime() - new Date(a.userCreatedAt).getTime();
             });
 
-            // Mettre à jour l'état avec les données triées
-            setLastOrders(sortedData);
-        });
+            return sortedData;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des données des abonnements :", error);
+            throw error;
+        }
+    }
+
+    useEffect(() => {
+        fetchLastOrders();
     }, []);
-    return (
+
+        return (
         <div className="space-y-8 overflow-y-auto" style={{ maxHeight: '400px' }}>
             {
                 LastOrders && LastOrders.map((LastOrder: any, index: number) => (
