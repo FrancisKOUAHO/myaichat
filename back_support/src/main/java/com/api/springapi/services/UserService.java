@@ -21,7 +21,7 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private OrderRepository orderRepository; // Injectez le dépôt OrderRepository
+    private OrderRepository orderRepository;
 
     public List<UserDTO> findAll() {
         List<User> page = userRepository.findAll();
