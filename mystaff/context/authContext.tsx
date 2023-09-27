@@ -7,9 +7,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 import { useRouter } from "next/navigation";
 import { api } from '@/config/api';
 
-interface User {
-  // Define the properties of the user object.
-}
+interface User {}
 
 export const AuthContext = createContext<any>({});
 
