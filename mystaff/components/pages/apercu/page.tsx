@@ -6,6 +6,7 @@ import {RecentSales} from "@/components/recent-sales";
 import * as React from "react";
 import axios from "axios";
 import {useState, useEffect} from "react";
+import {api} from "@/config/api";
 
 
 const Page = () => {
@@ -17,39 +18,42 @@ const Page = () => {
     const [currentMonth, setCurrentMonth] = useState(null);
     const [annualRevenue, setAnnualRevenue] = useState<number | null>(null);
 
-    useEffect(() => {
 
+    const fetchData = () => {
         // Récupérer le revenu total https://api-admin.myaichat.io
-        axios.get("http://localhost:8080/api/payments/total-revenue")
-            .then(response => {
+        api.get("payments/total-revenue")
+            .then((response) => {
                 setTotalRevenue(response.data.totalRevenue);
             });
+
         // Récupérer le total des utilisateurs
-        axios.get("http://localhost:8080/api/stats/total-users").then(response => {
+        api.get("stats/total-users").then((response) => {
             setTotalUsers(response.data);
         });
 
         // Récupérer le total des chatbots actifs
-        axios.get("http://localhost:8080/api/stats/total-chatbots").then(response => {
+        api.get("stats/total-chatbots").then((response) => {
             setTotalChatbots(response.data);
         });
 
         // Récupérer le total des orders
-        axios.get("http://localhost:8080/api/payments/total-orders").then(response => {
+        api.get("payments/total-orders").then((response) => {
             setTotalOrders(response.data);
         });
 
         // Récupérer le revenu mensuel
-        axios.get("http://localhost:8080/api/payments/monthly-revenue").then(response => {
+        api.get("payments/monthly-revenue").then((response) => {
             setMonthlyRevenue(response.data.monthlyRevenue);
             setCurrentMonth(response.data.currentMonth);
-
         });
 
         // Récupérer le revenu annuel
-        axios.get("http://localhost:8080/api/payments/annual-revenue").then(response => {
+        api.get("payments/annual-revenue").then((response) => {
             setAnnualRevenue(response.data);
         });
+    };
+    useEffect(() => {
+        fetchData();
     }, []);
 
     return(

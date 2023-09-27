@@ -7,7 +7,6 @@ import { Icons } from "@/components/ui/icons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import axios from "axios";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
@@ -26,7 +25,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true);
 
     try {
-      const response = await api.post("/auth/requestLoginLink", {email: email});
+      const response = await api.post("auth/requestLoginLink", {email: email});
 
       router.push('/checkmail')
     } catch (error) {

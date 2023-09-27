@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {createColumnHelper, flexRender, getCoreRowModel, useReactTable,  getPaginationRowModel,  SortingState,  getSortedRowModel,  ColumnFiltersState,  getFilteredRowModel,
 } from '@tanstack/react-table';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
@@ -9,6 +8,7 @@ import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMen
 import { Button } from "@/components/ui/button";
 import {ChevronDownIcon,} from "@radix-ui/react-icons";
 import {Input} from "@/components/ui/input";
+import {api} from "@/config/api";
 
 
 
@@ -20,18 +20,16 @@ const Page: React.FC = () => {
     const [selectedRowId, setSelectedRowId] = useState(null);
 
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/plans'); // Remplacez par votre URL d'API
-                setData(response.data);
-                console.log("Données récupérées :", response.data);  // Ajout d'un console.log ici pour afficher les données récupérées
-                console.log("donnees " + response.data)
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données:', error);
-            }
-        };
+    const fetchData = async () => {
+        try {
+            const response = await api.get('plans'); // Remplacez par votre URL d'API
+            setData(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données:', error);
+        }
+    };
 
+    useEffect(() => {
         fetchData();
     }, []);
 
@@ -99,7 +97,6 @@ const Page: React.FC = () => {
             header: () => <span>Updated At</span>,
         }),
     ];
-
 
 
     const table = useReactTable({

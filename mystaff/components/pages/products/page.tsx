@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import {ChevronDownIcon,} from "@radix-ui/react-icons";
 import {AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,} from "@/components/ui/alert-dialog";
 import { MoreHorizontal,ArrowUpDown } from "lucide-react";
+import {api} from "@/config/api";
 
 
 const Page: React.FC = () => {
@@ -20,17 +21,16 @@ const Page: React.FC = () => {
     const [selectedRowId, setSelectedRowId] = useState(null);
     const [selectedProductIdToDelete, setSelectedProductIdToDelete] = useState<number | null>(null);
 
+    const fetchData = async () => {
+        try {
+            const response = await api.get('products'); // Remplacez par votre URL d'API
+            setData(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des données:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/products'); // Remplacez par votre URL d'API
-                setData(response.data);
-            } catch (error) {
-                console.error('Erreur lors de la récupération des données:', error);
-            }
-        };
-
         fetchData();
     }, []);
 
