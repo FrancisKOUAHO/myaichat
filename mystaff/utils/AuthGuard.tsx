@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import React from 'react'
-import { useAuth } from '@/context/authContext'
 
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuth()
