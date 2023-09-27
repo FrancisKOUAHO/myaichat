@@ -26,13 +26,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true);
 
     try {
-      const response = await api.post("/auth/requestLoginLink", {email: email}, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-      });
+      const response = await api.post("/auth/requestLoginLink", {email: email});
 
       router.push('/checkmail')
     } catch (error) {
