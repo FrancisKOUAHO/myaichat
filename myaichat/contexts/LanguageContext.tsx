@@ -33,8 +33,6 @@ export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ chi
 
     }, [language])
 
-    console.log('language', language)
-
     return (
         <LanguageContext.Provider value={{ language, setLanguage, translations }}>
             {children}
