@@ -5,7 +5,7 @@ import {Suspense} from 'react';
 import {Provider} from 'react-redux';
 import DefaultLayout from "../components/Layouts/DefaultLayout";
 import store from "../store";
-import {LanguageProvider} from "../context/LanguageContext";
+import { LanguageProvider } from '../contexts/LanguageContext'
 
 export default function App({Component, pageProps}: AppProps) {
     return (

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {useLanguage} from "../../context/LanguageContext";
+import { useLanguage } from '../../contexts/LanguageContext'
 
 const Footer = () => {
     const {translations} = useLanguage();

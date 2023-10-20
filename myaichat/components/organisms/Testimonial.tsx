@@ -5,12 +5,13 @@ import {Autoplay, Navigation} from 'swiper';
 import Link from 'next/link';
 import {useSelector} from 'react-redux';
 import {IRootState} from '../../store';
-import {useLanguage} from "../../context/LanguageContext";
+import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from 'react';
+import { useLanguage } from '../../contexts/LanguageContext'
 
-const Testimonial = ({showTitle = true, type = 'common', className = ''}) => {
-    const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
+const Testimonial = ({ showTitle = true, type = 'common', className = '' }) => {
+    const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false
 
-    const {translations} = useLanguage();
+    const { translations } = useLanguage()
 
 
     return (
@@ -21,7 +22,7 @@ const Testimonial = ({showTitle = true, type = 'common', className = ''}) => {
             {type.toLowerCase() === 'marketing' ? (
                 <Swiper
                     loop={true}
-                    slidesPerView="auto"
+                    slidesPerView='auto'
                     spaceBetween={30}
                     autoplay={{
                         delay: 3000,
@@ -35,10 +36,15 @@ const Testimonial = ({showTitle = true, type = 'common', className = ''}) => {
                     dir={isRtl ? 'rtl' : 'ltr'}
                     key={isRtl ? 'true' : 'false'}
                 >
-                    {translations.testimonials.map((feedback: any) => {
+                    {translations.testimonials.map((feedback: {
+                        thumbnail: string | undefined;
+                        message: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined;
+                        name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined;
+                        role: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined;
+                    }, index: Key | null | undefined) => {
                         return (
-                            <SwiperSlide key={feedback.id}>
-                                <div
+                            <SwiperSlide>
+                                <div key={index}
                                     className="flex flex-col items-center gap-7 pb-3 sm:pb-[70px] lg:flex-row xl:gap-12">
                                     <div className="relative pl-10 pt-[30px] rtl:rotate-y-180">
                                         <span className="absolute top-0 left-0">

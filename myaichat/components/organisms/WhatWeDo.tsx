@@ -1,5 +1,5 @@
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, Key } from "react";
-import {useLanguage} from "../../context/LanguageContext";
+import { useLanguage } from '../../contexts/LanguageContext'
 
 const WhatWeDo = () => {
     const {translations} = useLanguage();

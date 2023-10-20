@@ -26,7 +26,7 @@ const TopBar = () => {
           <div className=''>
             <div className='flex gap-2 justify-center items-center'>
               <AiOutlineGlobal className='text-white w-100 h-100 text-2xl ml-2' />
-              <span className="text-l font-semibold">{language}</span>
+              <span className="text-l font-semibold">{language.toUpperCase()}</span>
             </div>
           </div>
         </div>

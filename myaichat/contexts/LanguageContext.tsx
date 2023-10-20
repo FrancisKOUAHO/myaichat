@@ -24,7 +24,7 @@ interface LanguageProviderProps {
 export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ children }) => {
     const userLocale = getUserLocale().toLowerCase().substring(0, 2)
 
-    const [language, setLanguage] = useState<any>(userLocale)
+    const [language, setLanguage] = useState<any>(getUserLocale)
 
     const translations = language === 'fr' ? frTranslations : enTranslations
 
@@ -32,6 +32,8 @@ export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ chi
         setLanguage(userLocale)
 
     }, [language])
+
+    console.log('language', language)
 
     return (
         <LanguageContext.Provider value={{ language, setLanguage, translations }}>
