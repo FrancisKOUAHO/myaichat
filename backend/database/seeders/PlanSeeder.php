@@ -20,77 +20,42 @@ class PlanSeeder extends Seeder
     {
         $plans = [
             [
-                'name'=>'Lite',
-                'price'=> 15,
-                'interval'=>'month',
-                'trial_period_days'=> 7,
-                'allowed_responses'=> 150,
-                'lookup_key'=>'Lite',
-                'st_plan_id'=>'price_1NhYlyFdQvV9SdYX19x5YRWy'
-            ],
-            [
                 'name'=>'Starter',
-                'price'=> 39,
+                'price'=> 49,
                 'interval'=>'month',
                 'trial_period_days'=> 7,
                 'allowed_responses'=> 500,
                 'lookup_key'=>'Starter',
-                'st_plan_id'=>'price_1NVXvfFdQvV9SdYXSGsPeiep'
+                'st_plan_id'=>'price_1O3FqVFdQvV9SdYXGMhD2QXi'
             ],
             [
                 'name'=>'Growth',
-                'price'=> 79,
+                'price'=> 129,
                 'interval'=>'month',
                 'trial_period_days'=> 7,
                 'allowed_responses'=> 1500,
                 'lookup_key'=>'Growth',
-                'st_plan_id'=>'price_1NVXvPFdQvV9SdYXYO49ndDl'
+                'st_plan_id'=>'price_1O3Fs0FdQvV9SdYXqw3M0TFk'
             ],
             [
                 'name'=>'Pro',
-                'price'=> 99,
+                'price'=> 249,
                 'interval'=>'month',
                 'trial_period_days'=> 7,
                 'allowed_responses'=> 3000,
                 'lookup_key'=>'Pro',
-                'st_plan_id'=>'price_1NVXvbFdQvV9SdYXXxdHArtW'
+                'st_plan_id'=>'price_1O3FsoFdQvV9SdYXMqHun3bC'
             ],
             [
-                'name'=>'Lite',
-                'price'=> 132,
-                'interval'=>'year',
+                'name'=>'Scale',
+                'price'=> 499,
+                'interval'=>'month',
                 'trial_period_days'=> 7,
-                 'allowed_responses'=> 150,
-                'lookup_key'=>'Lite',
-                'st_plan_id'=>'price_1NhYlpFdQvV9SdYXEkqej8ai'
+                'allowed_responses'=> 36000,
+                'lookup_key'=>'Scale',
+                'st_plan_id'=>'price_1O3FggFdQvV9SdYXelfOpEZI'
             ],
-            [
-                'name'=>'Starter',
-                'price'=> 348,
-                'interval'=>'year',
-                'trial_period_days'=> 7,
-                'allowed_responses'=> 500,
-                'lookup_key'=>'Starter',
-                'st_plan_id'=>'price_1NVXvIFdQvV9SdYXoDRFqLRC'
-            ],
-            [
-                'name'=>'Growth',
-                'price'=> 708,
-                'interval'=>'year',
-                'trial_period_days'=> 7,
-                'allowed_responses'=> 1500,
-                'lookup_key'=>'Growth',
-                'st_plan_id'=>'price_1NVXv7FdQvV9SdYXzRKXk2yn'
-            ],
-            [
-                'name'=>'Pro',
-                'price'=> 828,
-                'interval'=>'year',
-                'trial_period_days'=> 7,
-                'allowed_responses'=> 3000,
-                'lookup_key'=>'Pro',
-                'st_plan_id'=>'price_1NVXvDFdQvV9SdYXufunLNJs'
-            ],
+
         ];
 
         foreach ($plans as $plan) {
@@ -103,76 +68,40 @@ class PlanSeeder extends Seeder
     {
         $plans = [
             [
-                'name'=>'Lite',
-                'price'=> 15,
-                'interval'=>'month',
-                'trial_period_days'=> 7,
-                'allowed_responses'=> 150,
-                'lookup_key'=>'Lite',
-                'st_plan_id'=>'price_1NgqMlFdQvV9SdYXyE2UuLzz'
-            ],
-            [
                 'name'=>'Starter',
-                'price'=> 39,
+                'price'=> 49,
                 'interval'=>'month',
                 'trial_period_days'=> 7,
                 'allowed_responses'=> 500,
                 'lookup_key'=>'Starter',
-                'st_plan_id'=>'price_1NQWl9FdQvV9SdYXccsEVLV9'
+                'st_plan_id'=>'price_1O3Fw1FdQvV9SdYXFdQRKbPE'
             ],
             [
                 'name'=>'Growth',
-                'price'=> 79,
+                'price'=> 129,
                 'interval'=>'month',
                 'trial_period_days'=> 7,
                 'allowed_responses'=> 1500,
                 'lookup_key'=>'Growth',
-                'st_plan_id'=>'price_1NQWnDFdQvV9SdYXPhX9GnCW'
+                'st_plan_id'=>'price_1O3Fx9FdQvV9SdYX6bvlT2PE'
             ],
             [
                 'name'=>'Pro',
-                'price'=> 99,
+                'price'=> 249,
                 'interval'=>'month',
                 'trial_period_days'=> 7,
                 'allowed_responses'=> 3000,
                 'lookup_key'=>'Pro',
-                'st_plan_id'=>'price_1NQWmVFdQvV9SdYXhF7oPphl'
+                'st_plan_id'=>'price_1O3FyXFdQvV9SdYX2UXL5Mrw'
             ],
             [
-                'name'=>'Lite',
-                'price'=> 132,
-                'interval'=>'year',
+                'name'=>'Scale',
+                'price'=> 499,
+                'interval'=>'month',
                 'trial_period_days'=> 7,
-                'allowed_responses'=> 150,
-                'lookup_key'=>'Lite',
-                'st_plan_id'=>'price_1NgqOwFdQvV9SdYX5PLQyBR8'
-            ],
-            [
-                'name'=>'Starter',
-                'price'=> 348,
-                'interval'=>'year',
-                'trial_period_days'=> 7,
-                'allowed_responses'=> 500,
-                'lookup_key'=>'Starter',
-                'st_plan_id'=>'price_1NQzfQFdQvV9SdYXpDBY8Wtl'
-            ],
-            [
-                'name'=>'Growth',
-                'price'=> 708,
-                'interval'=>'year',
-                'trial_period_days'=> 7,
-                'allowed_responses'=> 1500,
-                'lookup_key'=>'Growth',
-                'st_plan_id'=>'price_1NQzkaFdQvV9SdYXYlbRbGyK'
-            ],
-            [
-                'name'=>'Pro',
-                'price'=> 828,
-                'interval'=>'year',
-                'trial_period_days'=> 7,
-                'allowed_responses'=> 3000,
-                'lookup_key'=>'Pro',
-                'st_plan_id'=>'price_1NQzjVFdQvV9SdYXU9CMdM79'
+                'allowed_responses'=> 36000,
+                'lookup_key'=>'Scale',
+                'st_plan_id'=>'price_1O3FfmFdQvV9SdYXG0ZVpNNd'
             ],
         ];
 
