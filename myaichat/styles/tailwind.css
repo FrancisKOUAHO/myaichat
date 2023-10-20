@@ -1,13 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
     font-family: 'reey';
     src: url('/assets/fonts/reey-regular-webfont.woff2') format('woff2'), url('/assets/fonts/reey-regular-webfont.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @layer components {
     .btn {

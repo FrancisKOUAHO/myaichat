@@ -65,6 +65,11 @@ const Header = (props: any) => {
                                         {translations.links.home}
                                     </Link>
                                 </li>
+                               {/* <li>
+                                    <Link href="/tarifs" className={router.pathname === '/tarifs' ? 'active' : ''}>
+                                        Tarifs
+                                    </Link>
+                                </li>*/}
                                 <li>
                                     <Link href="https://app.myaichat.io/">
                                         {translations.links.login}
