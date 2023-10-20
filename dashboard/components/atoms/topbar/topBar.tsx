@@ -13,10 +13,6 @@ const TopBar = () => {
 
   const { language, setLanguage, translations } = useLanguage()
 
-  const handleLanguageChange = (newLanguage: string) => {
-    setLanguage(newLanguage)
-  }
-
   return (
     <nav className='c-topbar'>
       <div className='c-below-topbar'></div>
@@ -28,27 +24,10 @@ const TopBar = () => {
         </div>
         <div className='absolute right-20 text-white'>
           <div className=''>
-            <Dropdown
-              list={[
-                {
-                  label: `${translations.FRENCH}`,
-                  onclick: () => handleLanguageChange('fr'),
-                },
-                {
-                  label: `${translations.ENGLISH}`,
-                  onclick: () => handleLanguageChange('en'),
-                },
-                {
-                  label: `${translations.SPANISH}`,
-                  onclick: () => handleLanguageChange('es'),
-                },
-              ]}
-            >
-              <div className='flex gap-2 justify-center items-center'>
-                <AiOutlineGlobal className='text-white w-100 h-100 text-2xl ml-2' />
-                <span>{language.toUpperCase()}</span>
-              </div>
-            </Dropdown>
+            <div className='flex gap-2 justify-center items-center'>
+              <AiOutlineGlobal className='text-white w-100 h-100 text-2xl ml-2' />
+              <span className="text-l font-semibold">{language.toUpperCase()}</span>
+            </div>
           </div>
         </div>
         <div className='c-above-topbar-right'>

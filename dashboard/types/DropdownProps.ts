@@ -8,7 +8,7 @@ type Item = {
 };
 
 type DropdownProps = {
-    list: Item[];
+    list?: Item[];
     children?: React.ReactNode;
 };
 
