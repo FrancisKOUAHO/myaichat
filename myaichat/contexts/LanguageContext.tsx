@@ -1,9 +1,13 @@
+'use client'
+
 import React, { createContext, FunctionComponent, useContext, useEffect, useState } from 'react'
 
-import frTranslations from '../locales/fr.json'
-import TranslationsEnFr from '../types/TranslationsEnFr'
+import getUserLocale from 'get-user-locale'
 
-import { useRouter } from 'next/router'
+import frTranslations from '../locales/fr.json'
+import enTranslations from '../locales/en.json'
+
+import TranslationsEnFr from '../types/TranslationsEnFr'
 
 type LanguageContextType = {
     language: string;
@@ -18,18 +22,16 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ children }) => {
-    const router = useRouter()
+    const userLocale = getUserLocale().toLowerCase().substring(0, 2)
 
-    const locale: string | undefined = router?.locale
+    const [language, setLanguage] = useState<any>(userLocale)
 
-    const defaultLanguage = 'fr'
+    const translations = language === 'fr' ? frTranslations : enTranslations
 
     useEffect(() => {
-        setLanguage(locale || defaultLanguage)
-    }, [locale])
+        setLanguage(userLocale)
 
-    const [language, setLanguage] = useState<string>(defaultLanguage)
-    const translations = frTranslations
+    }, [language])
 
     return (
         <LanguageContext.Provider value={{ language, setLanguage, translations }}>

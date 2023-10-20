@@ -2,7 +2,10 @@
 
 import React, { createContext, FunctionComponent, useContext, useEffect, useState } from 'react'
 
+import getUserLocale from 'get-user-locale'
+
 import frTranslations from '../locales/fr.json'
+import enTranslations from '../locales/en.json'
 
 import Translations from '@/types/Translations'
 
@@ -19,12 +22,15 @@ interface LanguageProviderProps {
 }
 
 export const LanguageLangProvider: FunctionComponent<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<any>('fr');
-  const translations = frTranslations
+  const userLocale = getUserLocale().toLowerCase().substring(0, 2)
+
+  const [language, setLanguage] = useState<any>(userLocale)
+
+  const translations = language === 'fr' ? frTranslations : enTranslations
 
   useEffect(() => {
-    const browserLang = navigator.language
-    setLanguage(browserLang)
+    setLanguage(userLocale)
+
   }, [language])
 
   return (

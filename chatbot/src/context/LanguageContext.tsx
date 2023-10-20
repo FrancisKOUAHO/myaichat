@@ -7,7 +7,6 @@ import getUserLocale from 'get-user-locale'
 import frTranslations from '../locales/fr.json'
 import enTranslations from '../locales/en.json'
 
-
 import Translations from '@/types/Translations'
 
 type LanguageContextType = {
