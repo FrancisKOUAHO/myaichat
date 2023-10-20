@@ -22,7 +22,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
                 leaveTo="transform opacity-0 scale-95"
             >
                 <Menu.Items as="div" className="c-dropdown__items" style={{zIndex: 1}}>
-                    {list.map((item, index) => (
+                    {list && list.map((item, index) => (
                         <Menu.Item key={index} as="div" className="c-dropdown__item flex">
                             <a
                                 className="c-dropdown__item__link"
