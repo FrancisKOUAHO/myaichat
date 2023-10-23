@@ -38,7 +38,7 @@ const Hero = () => {
                         data-aos={isRtl ? 'fade-right' : 'fade-left'}
                         data-aos-duration="1000"
                     >
-                        <img src="/assets/images/modern-saas/banner-img.png" alt=""/>
+                        <img src="/assets/images/myaichat/home.png" alt=""/>
                     </div>
                 </div>
             </div>
