@@ -17,7 +17,8 @@ const Tarifs = () => {
                     height: '95vh',
                 }}
             >
-                <div className='container lg:pt-7'>
+
+                <div className="">
 
                 </div>
             </section>

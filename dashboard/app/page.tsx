@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import  React from 'react'
 import { api } from '@/config/api'
 import { useRouter } from 'next/navigation'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
@@ -102,8 +102,7 @@ const Home = () => {
                 />
               </div>
               <div>
-                <button
-                  type='submit'
+                <button type='submit'
                   className='flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-3'
                   style={{ backgroundColor: '#7F56D9' }}
                 >
