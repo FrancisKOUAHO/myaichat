@@ -24,7 +24,7 @@ const FirstClass = () => {
                         </p>
                     </div>
                     <div className="lg:ltr:pl-24 lg:rtl:pr-24">
-                        <img src="/assets/images/modern-saas/optimization.png" alt="" className="rounded-2xl"/>
+                        <img src="/assets/images/myaichat/conversation.png" alt="" className="rounded-2xl"/>
                     </div>
                 </div>
                 <div
@@ -40,7 +40,7 @@ const FirstClass = () => {
                         </p>
                     </div>
                     <div className="lg:ltr:pl-24 lg:rtl:pr-24">
-                        <img src="/assets/images/modern-saas/migrate-modernize.png" alt="" className="rounded-2xl"/>
+                        <img src="/assets/images/myaichat/exemple.png" alt="" className="rounded-2xl"/>
                     </div>
                 </div>
             </div>

@@ -49,7 +49,7 @@ const WhatWeDo = () => {
                                 </ul>
                             </div>
                             <div className="pb-20 lg:pt-20 lg:pb-8" data-aos="fade-up" data-aos-duration="1000">
-                                <img src="/assets/images/modern-saas/perfomance-img.png" alt="" className="w-full"/>
+                                <img src="/assets/images/myaichat/stats.png" alt="" className="w-full"/>
                             </div>
                         </div>
                     </div>
