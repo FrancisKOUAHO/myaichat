@@ -3,9 +3,14 @@ import {LineWave} from 'react-loader-spinner'
 
 const LoadingSpinner: NextPage = () => {
     return (
-        <p className="text-center">
-            <LineWave color="#000"/>
-        </p>
+        <LineWave
+            height='200'
+            width='200'
+            wrapperClass='c-loading-spinner'
+            color="white"
+            ariaLabel="line-wave"
+            visible={true}
+        />
     );
 };
 
