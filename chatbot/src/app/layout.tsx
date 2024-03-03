@@ -7,7 +7,6 @@ import Providers from '@/components/Providers'
 import Chat from '@/components/Chat'
 
 import '../styles/_main.scss'
-import { LanguageProvider } from '@/context/LanguageContext'
 
 export default function RootLayout({
                                      children,
