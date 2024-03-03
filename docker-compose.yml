@@ -21,7 +21,6 @@ services:
       local_bridge:
         ipv4_address: 172.20.2.2
 
-
   myaichat:
     build:
       context: ./myaichat
@@ -62,25 +61,14 @@ services:
       local_bridge:
         ipv4_address: 172.20.2.4
 
-  mystaff:
-    build:
-      context: ./mystaff
-      dockerfile: Dockerfile
-    container_name: mystaff
-    restart: unless-stopped
-    volumes:
-      - ./mystaff:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/.next
-      - /usr/src/app/.next/cache
+  database:
+    image: postgres:14
     ports:
-      - "3034:3034"
+      - "5432:5432"
     environment:
-      NODE_ENV: development
-    tty: true
-    networks:
-      local_bridge:
-        ipv4_address: 172.20.2.5
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: myaichat
 
 networks:
   local_bridge:
@@ -93,3 +81,6 @@ networks:
         - subnet: 172.20.0.0/16
           ip_range: 172.20.2.0/24
           gateway: 172.20.0.1
+
+volumes:
+  psql-data:
