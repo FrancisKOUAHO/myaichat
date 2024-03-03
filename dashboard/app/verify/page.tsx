@@ -3,7 +3,6 @@
 import { api } from "@/config/api";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import LoadingSpinner from "@/components/atoms/loadingspinner/loadingSpinner";
 import { setCookie } from "nookies";
 import { toast } from "react-toastify";
 
@@ -66,7 +65,7 @@ const VerifyTokenPage = () => {
         }}
       >
           <div className="m-auto justify-center">
-              <LoadingSpinner />
+              please wait ...
           </div>
       </div>
     );
