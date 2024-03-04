@@ -48,10 +48,9 @@ const Page = () => {
 
     const [isLoading, setIsLoading] = useState<{ [key: number]: boolean }>({})
 
-    const Starter = plans?.data.data.find((plan: any) => plan.id === 1)
-    const Growth = plans?.data.data.find((plan: any) => plan.id === 2)
-    const Pro = plans?.data.data.find((plan: any) => plan.id === 3)
-    const Scale = plans?.data.data.find((plan: any) => plan.id === 4)
+    const Growth = plans?.data.data.find((plan: any) => plan.id === 1)
+    const Pro = plans?.data.data.find((plan: any) => plan.id === 2)
+    const Scale = plans?.data.data.find((plan: any) => plan.id === 3)
 
     return (
         <LayoutSubscription>
