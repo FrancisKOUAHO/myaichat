@@ -1,24 +1,12 @@
-import {Menu} from '@headlessui/react'
-
-import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useState } from 'react';
 import Link from 'next/link';
-import {useRouter} from 'next/router';
-import {IRootState} from "../../store";
-import { useLanguage } from '../../contexts/LanguageContext'
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const Header = (props: any) => {
-    const router = useRouter();
-    const {language, setLanguage, translations} = useLanguage();
-
-    const handleLanguageChange = (newLanguage: string) => {
-        setLanguage(newLanguage);
-    };
-
-    const themeConfig = useSelector((state: IRootState) => state.themeConfig);
-    const dispatch = useDispatch();
+    const { translations } = useLanguage();
 
     const [showMenu, setShowMenu] = useState(false);
+
     const toggleMenu = () => {
         if (window.innerWidth < 1024) {
             setShowMenu(!showMenu);
@@ -27,25 +15,20 @@ const Header = (props: any) => {
         }
     };
 
-    const [showSearch, setShowSearch] = useState(false);
-    const toggleSearch = () => {
-        setShowSearch(!showSearch);
-    };
-
     return (
         <header className={`top-0 z-50 bg-black/10 duration-300 ${props.className}`}>
             <div className="container">
                 <div className="flex items-center justify-between py-5 lg:py-0">
-                    <Link href="/" className="flex gap-2 items-center justify-center">
-                        <img src="/assets/images/myaichat.png" alt="myaichat" className="h-10 w-10"/>
-                        <span className="ml-4 text-xl font-bold"
-                              style={{color: 'white'}}>{translations.home.title}</span>
+                    <Link href="/" className="flex items-center justify-center gap-2">
+                        <img src="/assets/images/myaichat.png" alt="myaichat" className="h-10 w-10" />
+                        <span className="ml-4 text-xl font-bold" style={{ color: 'white' }}>
+                            {translations.home.title}
+                        </span>
                     </Link>
                     <div className="flex items-center">
-                        <div onClick={() => toggleMenu()}
-                             className={`overlay fixed inset-0 z-[51] bg-black/60 lg:hidden ${showMenu ? '' : 'hidden'}`}></div>
+                        <div onClick={() => toggleMenu()} className={`overlay fixed inset-0 z-[51] bg-black/60 lg:hidden ${showMenu ? '' : 'hidden'}`}></div>
                         <div className={`menus ${showMenu ? 'overflow-y-auto ltr:!right-0 rtl:!left-0' : ''}`}>
-                            <div className="border-b border-gray/10 ltr:text-right rtl:text-left lg:hidden">
+                            <div className="border-b border-gray/10 lg:hidden ltr:text-right rtl:text-left">
                                 <button onClick={() => toggleMenu()} type="button" className="p-4">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -55,43 +38,13 @@ const Header = (props: any) => {
                                         stroke="currentColor"
                                         className="h-6 w-6 text-black dark:text-white"
                                     >
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
                             </div>
                             <ul onClick={() => toggleMenu()}>
                                 <li>
-                                    <Link href="/" className={router.pathname === '/' ? 'active' : ''}>
-                                        {translations.links.home}
-                                    </Link>
-                                </li>
-                               {/* <li>
-                                    <Link href="/tarifs" className={router.pathname === '/tarifs' ? 'active' : ''}>
-                                        Tarifs
-                                    </Link>
-                                </li>*/}
-                                <li>
-                                    <Link href="https://app.myaichat.io/">
-                                        {translations.links.login}
-                                    </Link>
-                                </li>
-                                <li>
-                                    <div>
-                                        <Menu as="div" className="relative inline-block text-left">
-                                            <div>
-                                                <Menu.Button
-                                                    className=" flex justify-center items-center gap-2 bg-transparent px-4 py-2 text-sm font-medium text-white">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                         viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-                                                         className="w-6 h-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round"
-                                                              d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/>
-                                                    </svg>
-                                                    <p className="text-l font-semibold">{language.toUpperCase()}</p>
-                                                </Menu.Button>
-                                            </div>
-                                        </Menu>
-                                    </div>
+                                    <Link href="https://app.myaichat.io/">{translations.links.login}</Link>
                                 </li>
                             </ul>
                         </div>
@@ -100,8 +53,7 @@ const Header = (props: any) => {
                             className="flex h-10 w-10 items-center justify-center rounded-full bg-[#7F1AE6] lg:hidden"
                             onClick={() => toggleMenu()}
                         >
-                            <svg width="22" height="18" viewBox="0 0 22 18" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg" className="text-white">
+                            <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                                 <path
                                     d="M2 15H11C11.552 15 12 15.447 12 16C12 16.553 11.552 17 11 17H2C1.448 17 1 16.553 1 16C1 15.447 1.448 15 2 15Z"
                                     fill="currentColor"
