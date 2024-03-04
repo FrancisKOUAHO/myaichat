@@ -23,7 +23,7 @@ return [
 
     'allowed_origins_patterns' => [],
 
-    'Access-Control-Allow-Origin' => ['*'],
+    'Access-Control-Allow-Origin' => ['http://localhost:3000', '*'],
 
     'allowed_headers' => ['*'],
 

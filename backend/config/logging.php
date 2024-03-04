@@ -105,8 +105,6 @@ return [
             'processors' => [PsrLogMessageProcessor::class],
         ],
 
-        'channels' => ['single' => ['driver' => 'single', 'path' => storage_path('logs/laravel.log'), 'level' => 'debug', 'permission' => 0664,]],
-
         'syslog' => [
             'driver' => 'syslog',
             'level' => env('LOG_LEVEL', 'debug'),
