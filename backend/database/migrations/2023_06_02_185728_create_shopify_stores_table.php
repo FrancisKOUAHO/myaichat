@@ -13,6 +13,7 @@ class CreateShopifyStoresTable extends Migration
             $table->string('url');
             $table->unsignedBigInteger('user_id');
             $table->longText('content')->nullable();
+            $table->string('role')->default('support-chat');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
