@@ -53,7 +53,7 @@ class ShopifyStoreController extends Controller
         $store = ShopifyStore::findOrFail($id);
 
         $validatedData = $request->validate([
-            'role' => 'required|string',
+            'role' => 'string',
         ]);
 
         $store->update($validatedData);

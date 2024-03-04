@@ -17,6 +17,15 @@ const getScrapeMutation = async (data: any) => {
     return response
 }
 
+const prompts = [
+    {value: 'support-chat', label: 'Support chat'},
+    {value: 'ventes', label: 'Ventes'},
+    {value: 'marketing', label: 'Marketing'},
+    {value: 'ressources-humaines', label: 'Ressources humaines'},
+    {value: 'blogueur', label: 'Blogueur'},
+    {value: 'comptable', label: 'Comptable'},
+]
+
 const Page = () => {
     const queryClient: QueryClient = useQueryClient()
     const {translations} = useLanguage()
@@ -25,16 +34,6 @@ const Page = () => {
     const [isOpenModifier, setIsOpenModifier] = useState(false)
     const [isOpenSupprimer, setIsOpenSupprimer] = useState(false)
     const [content, setContent] = useState('')
-
-
-    const prompts = [
-        {value: 'support-chat', label: 'Support chat'},
-        {value: 'ventes', label: 'Ventes'},
-        {value: 'marketing', label: 'Marketing'},
-        {value: 'ressources-humaines', label: 'Ressources humaines'},
-        {value: 'blogueur', label: 'Blogueur'},
-        {value: 'comptable', label: 'Comptable'},
-    ]
 
     const openModalVisualiser = () => setIsOpenVisualiser(true)
     const closeModalVisualiser = () => setIsOpenVisualiser(false)
@@ -56,18 +55,19 @@ const Page = () => {
         },
     )
 
-    const updateSelectChangeMutation = useMutation(
-        (data: any) => api.put(`stores/update-role/${data.id}`, {role: data.value}),
-        {
-            onSuccess: (data: any) => {
-                queryClient.invalidateQueries(['shopifyStore'])
-                toast(`Le rôle a été ajouté`, {position: toast.POSITION.BOTTOM_CENTER})
-            },
-            onError: (error: any) => {
-                throw new Error('error', error)
-            },
-        },
-    )
+    const updateSelectChangeMutation = async (data: any) => {
+        const response = await api.put(`stores/update-role/${data.id}`, {role: data.role})
+
+        if (response.status !== 200) {
+            throw new Error('error', response.data)
+        }
+
+        console.log('response', response.data)
+
+        toast(`Le rôle du chatbot a été modifié par ${data.role}.`, {position: toast.POSITION.BOTTOM_CENTER})
+        await queryClient.invalidateQueries(['shopifyStore'])
+        return response
+    }
 
     const {data: shopifyStore, isLoading} = useQuery({
         queryKey: ['shopifyStore', getCookie('userId')],
@@ -83,7 +83,8 @@ const Page = () => {
             closeModalSupprimer()
         },
         onError: (error: any): void => {
-            throw new Error('error', error)        },
+            throw new Error('error', error)
+        },
     })
 
     return (
@@ -248,11 +249,12 @@ const Page = () => {
                                                     </button>
 
                                                     <div className="w-full">
-                                                        <Select options={prompts} defaultValue={prompts[0]} name='prompt'
-                                                                onChange={(selectedOption, event) => {
-                                                                    event.preventDefault()
+                                                        <Select options={prompts}
+                                                                defaultValue={prompts.find((prompt) => prompt.value === shop.role)}
+                                                                name='prompt'
+                                                                onChange={async (selectedOption) => {
                                                                     if (selectedOption) {
-                                                                        updateSelectChangeMutation.mutate({
+                                                                        await updateSelectChangeMutation({
                                                                             id: shop.id,
                                                                             role: selectedOption.value,
                                                                         });

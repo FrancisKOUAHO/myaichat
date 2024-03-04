@@ -12,7 +12,8 @@ class ShopifyStore extends Model
     protected $fillable = [
         'url',
         'user_id',
-        'content'
+        'content',
+        'role',
     ];
 
     // Relation avec le modèle User
