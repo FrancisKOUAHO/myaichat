@@ -94,8 +94,8 @@ const Page = () => {
         toast(`Boutique ajouté`, { position: toast.POSITION.BOTTOM_CENTER })
         closeModalSecond()
       },
-      onError: (error): void => {
-        console.log('error', error)
+      onError: (error: any): void => {
+          throw new Error('error', error)
       },
     },
   )
@@ -106,8 +106,8 @@ const Page = () => {
       onSuccess: (data) => {
         toast(`Boutique creer`, { position: toast.POSITION.BOTTOM_CENTER })
       },
-      onError: (error): void => {
-        console.log('error', error)
+      onError: (error: any): void => {
+          throw new Error('error', error)
       },
     },
   )
@@ -141,7 +141,7 @@ const Page = () => {
         queryClient.invalidateQueries(['shopifyStore'])
       },
       onError: (error: any): void => {
-        console.log('error', error)
+          throw new Error('error', error)
       },
     },
   )
@@ -159,8 +159,8 @@ const Page = () => {
       queryClient.invalidateQueries(['shopifyStore'])
       closeModalSupprimerChatBots()
     },
-    onError: (error): void => {
-      console.log('error', error)
+    onError: (error: any): void => {
+        throw new Error('error', error)
     },
   })
 

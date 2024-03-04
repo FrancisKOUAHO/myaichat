@@ -36,7 +36,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
     };
 
     const handleLogout = () => {
-        api.post('logout').then( (res) => {
+        api.post('logout').then((res) => {
             destroyCookie(undefined, 'access_token', {
                 path: '/',
             })
@@ -45,7 +45,7 @@ export const AuthContextProvider = ({children}: { children: ReactNode }) => {
             })
             router.push('/');
         }).catch((err) => {
-            console.log('err', err);
+            throw new Error('error', err)
         });
     }
 

@@ -41,8 +41,6 @@ export async function POST(req: Request): Promise<Response> {
       `,
 		});
 
-		console.log('outboundMessages', outboundMessages);
-
 		const payload: OpenAIStreamPayload = {
 			model: 'gpt-3.5-turbo',
 			messages: outboundMessages,

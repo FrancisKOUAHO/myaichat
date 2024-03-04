@@ -51,7 +51,7 @@ const Page = () => {
                 toast(`Boutique créée`, {position: toast.POSITION.BOTTOM_CENTER})
             },
             onError: (error: any) => {
-                console.log('error', error)
+                throw new Error('error', error)
             },
         },
     )
@@ -69,9 +69,8 @@ const Page = () => {
             queryClient.invalidateQueries(['shopifyStore'])
             closeModalSupprimer()
         },
-        onError: (error): void => {
-            console.log('error', error)
-        },
+        onError: (error: any): void => {
+            throw new Error('error', error)        },
     })
 
     const updateSelectChangeMutation = useMutation(
@@ -82,7 +81,7 @@ const Page = () => {
                 toast(`Le rôle a été ajouté`, {position: toast.POSITION.BOTTOM_CENTER})
             },
             onError: (error: any) => {
-                console.log('error', error)
+                throw new Error('error', error)
             },
         },
     )
@@ -252,7 +251,6 @@ const Page = () => {
                                                         <Select options={prompts} defaultValue={prompts[0]} name='prompt'
                                                                 onChange={(selectedOption, actionMeta) => {
                                                                     if (selectedOption) {
-                                                                        console.log('selectedOption', selectedOption)
                                                                         updateSelectChangeMutation.mutate({
                                                                             id: shop.id,
                                                                             role: selectedOption.value,

@@ -64,8 +64,6 @@ const Page = () => {
   const handleFileChange = (e: any) => {
     const file = e.target.files[0]
 
-    console.log('file', file)
-
     if (file) {
       setIsLoaded(true)
 
