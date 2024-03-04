@@ -20,10 +20,7 @@ const getScrapeMutation = async (data: any) => {
 const prompts = [
     {value: 'support-chat', label: 'Support chat'},
     {value: 'ventes', label: 'Ventes'},
-    {value: 'marketing', label: 'Marketing'},
-    {value: 'ressources-humaines', label: 'Ressources humaines'},
-    {value: 'blogueur', label: 'Blogueur'},
-    {value: 'comptable', label: 'Comptable'},
+    {value: 'marketing', label: 'Marketing'}
 ]
 
 const Page = () => {

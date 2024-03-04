@@ -61,60 +61,6 @@ export async function POST(req: Request): Promise<Response> {
             case 'marketing':
                 console.log('Le rôle est Marketing');
                 break;
-            case 'ressources-humaines':
-                outboundMessages.unshift({
-                    role: 'system',
-                    content: `
-                    Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
-                    Vous êtes également capable de répondre aux questions.
-                    
-                    Utilisez ces métadonnées pour répondre aux questions des clients :
-                    
-                    ${JSON.stringify(store)}
-                    ${JSON.stringify(data)}
-                         
-                    Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
-                    Fournissez des réponses courtes et concises.
-                    Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
-                  `,
-                });
-                break;
-            case 'blogueur':
-                outboundMessages.unshift({
-                    role: 'system',
-                    content: `
-                    Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
-                    Vous êtes également capable de répondre aux questions.
-                    
-                    Utilisez ces métadonnées pour répondre aux questions des clients :
-                    
-                    ${JSON.stringify(store)}
-                    ${JSON.stringify(data)}
-                         
-                    Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
-                    Fournissez des réponses courtes et concises.
-                    Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
-                  `,
-                });
-                break;
-            case 'comptable':
-                outboundMessages.unshift({
-                    role: 'system',
-                    content: `
-                    Vous êtes un chatbot de support client. Vous êtes capable de répondre aux questions sur le site web et son contenu.
-                    Vous êtes également capable de répondre aux questions.
-                    
-                    Utilisez ces métadonnées pour répondre aux questions des clients :
-                    
-                    ${JSON.stringify(store)}
-                    ${JSON.stringify(data)}
-                         
-                    Refusez toute réponse qui n'a rien à voir avec le site web ou son contenu.
-                    Fournissez des réponses courtes et concises.
-                    Ne fournissez pas de réponses qui ne sont pas pertinentes pour le site web ou son contenu.
-                  `,
-                });
-                break;
             default:
                 console.log("Le rôle n'est pas défini.");
                 break;
