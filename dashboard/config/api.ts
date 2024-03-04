@@ -8,6 +8,10 @@ let api: AxiosInstance = axios.create({
 
 api.defaults.headers.post['Content-Type'] = 'application/json';
 api.defaults.headers.post['Accept'] = 'application/json';
+api.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+api.defaults.headers.post['Access-Control-Allow-Headers'] = '*';
+api.defaults.headers.post['Access-Control-Allow-Methods'] = '*';
+api.defaults.headers.post['Access-Control-Allow-Credentials'] = 'true';
 
 export {
     api,
