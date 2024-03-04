@@ -19,11 +19,11 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:3000', '*'],
+    'allowed_origins' => ['http://localhost:3000', 'https://app.myaichat.io/'],
 
     'allowed_origins_patterns' => [],
 
-    'Access-Control-Allow-Origin' => ['http://localhost:3000', '*'],
+    'Access-Control-Allow-Origin' => ['http://localhost:3000', 'https://app.myaichat.io/'],
 
     'allowed_headers' => ['*'],
 
