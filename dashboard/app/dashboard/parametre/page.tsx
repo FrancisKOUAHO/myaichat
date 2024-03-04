@@ -56,6 +56,19 @@ const Page = () => {
         },
     )
 
+    const updateSelectChangeMutation = useMutation(
+        (data: any) => api.put(`stores/update-role/${data.id}`, {role: data.value}),
+        {
+            onSuccess: (data: any) => {
+                queryClient.invalidateQueries(['shopifyStore'])
+                toast(`Le rôle a été ajouté`, {position: toast.POSITION.BOTTOM_CENTER})
+            },
+            onError: (error: any) => {
+                throw new Error('error', error)
+            },
+        },
+    )
+
     const {data: shopifyStore, isLoading} = useQuery({
         queryKey: ['shopifyStore', getCookie('userId')],
         queryFn: () => getScrapeMutation(getCookie('userId')),
@@ -72,19 +85,6 @@ const Page = () => {
         onError: (error: any): void => {
             throw new Error('error', error)        },
     })
-
-    const updateSelectChangeMutation = useMutation(
-        (data: any) => api.put(`stores/update-role/${data.id}`, {role: data.value}),
-        {
-            onSuccess: (data: any) => {
-                queryClient.invalidateQueries(['shopifyStore'])
-                toast(`Le rôle a été ajouté`, {position: toast.POSITION.BOTTOM_CENTER})
-            },
-            onError: (error: any) => {
-                throw new Error('error', error)
-            },
-        },
-    )
 
     return (
         <LayoutCustom>
@@ -249,7 +249,8 @@ const Page = () => {
 
                                                     <div className="w-full">
                                                         <Select options={prompts} defaultValue={prompts[0]} name='prompt'
-                                                                onChange={(selectedOption, actionMeta) => {
+                                                                onChange={(selectedOption, event) => {
+                                                                    event.preventDefault()
                                                                     if (selectedOption) {
                                                                         updateSelectChangeMutation.mutate({
                                                                             id: shop.id,
