@@ -74,7 +74,7 @@ const Page = () => {
     })
 
     const updateSelectChangeMutation = useMutation(
-        (data: any) => api.put(`stores/${data.id}`, {role: data.value}),
+        (data: any) => api.put(`stores/update-role/${data.id}`, {role: data.value}),
         {
             onSuccess: (data: any) => {
                 queryClient.invalidateQueries(['shopifyStore'])

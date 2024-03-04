@@ -61,6 +61,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('/stores/{id}', [ShopifyStoreController::class, 'show']);
             Route::post('/stores', [ShopifyStoreController::class, 'store']);
             Route::put('/{id}', [ShopifyStoreController::class, 'update']);
+            Route::put('update-role/{id}', [ShopifyStoreController::class, 'updateRole']);
             Route::delete('/stores/{id}', [ShopifyStoreController::class, 'destroy']);
             Route::get('/user/{userId}/stores', [ShopifyStoreController::class, 'getUserStores']);
             Route::get('/get-chatbot-number/{userId}', [ShopifyStoreController::class, 'getChatbotNumber']);

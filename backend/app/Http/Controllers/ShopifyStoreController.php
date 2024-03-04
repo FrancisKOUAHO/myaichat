@@ -48,6 +48,19 @@ class ShopifyStoreController extends Controller
         return response()->json($store);
     }
 
+    public function updateRole(Request $request, $id): JsonResponse
+    {
+        $store = ShopifyStore::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'role' => 'required|string',
+        ]);
+
+        $store->update($validatedData);
+
+        return response()->json($store);
+    }
+
     public function destroy($id): JsonResponse
     {
         $store = ShopifyStore::findOrFail($id);
