@@ -41,7 +41,6 @@ class ShopifyStoreController extends Controller
 
         $validatedData = $request->validate([
             'content' => 'required|string',
-            'role' => 'required|string'
         ]);
 
         $store->update($validatedData);
