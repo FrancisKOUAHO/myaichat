@@ -32,7 +32,7 @@ export const LanguageProvider: FunctionComponent<LanguageProviderProps> = ({ chi
   useEffect(() => {
     setLanguage(userLocale)
 
-  }, [language])
+  }, [language, userLocale])
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, translations }}>

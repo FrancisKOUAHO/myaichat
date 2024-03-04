@@ -80,7 +80,6 @@ export async function POST(req: Request): Promise<Response> {
 
         const stream = await OpenAIStream(payload);
 
-
         return new Response(stream);
     } catch (error) {
         console.error('Error:', error);
