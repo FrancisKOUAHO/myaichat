@@ -20,6 +20,15 @@ class PlanSeeder extends Seeder
     {
         $plans = [
             [
+                'name'=>'Starter',
+                'price'=> 49,
+                'interval'=>'month',
+                'trial_period_days'=> 7,
+                'allowed_responses'=> 500,
+                'lookup_key'=>'Starter',
+                'st_plan_id'=>'price_1Os22eIpkptxAK2agbw0PwPZ'
+            ],
+            [
                 'name'=>'Growth',
                 'price'=> 129,
                 'interval'=>'month',
@@ -58,6 +67,15 @@ class PlanSeeder extends Seeder
     public function run(): void
     {
         $plans = [
+            [
+                'name'=>'Starter',
+                'price'=> 49,
+                'interval'=>'month',
+                'trial_period_days'=> 7,
+                'allowed_responses'=> 500,
+                'lookup_key'=>'Starter',
+                'st_plan_id'=>'price_1Os22CIpkptxAK2aPgGU6nBb'
+            ],
             [
                 'name'=>'Growth',
                 'price'=> 129,

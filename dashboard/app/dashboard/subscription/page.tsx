@@ -1,9 +1,9 @@
 'use client'
 
-import {Tab} from '@headlessui/react'
-import React, {useState} from 'react'
-import {useMutation, useQuery} from '@tanstack/react-query'
-import {api} from '@/config/api'
+import { Tab } from '@headlessui/react'
+import React, { useState } from 'react'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { api } from '@/config/api'
 import LayoutSubscription from '@/layouts/layoutSubscription'
 
 const Page = () => {
@@ -15,7 +15,7 @@ const Page = () => {
     const tabClasses = (index: number) =>
         `w-[50%] p-1 rounded-lg focus:outline-none ${index === selectedTab ? 'bg-indigo-100' : 'bg-gray-50'}`
 
-    const {data: plans} = useQuery(['plans'], () => api.get(`plans`))
+    const { data: plans } = useQuery(['plans'], () => api.get(`plans`))
 
     const handlePlanSubscribeAsync = useMutation(
         (planId: number) => api.post(`checkout/${planId}`),
@@ -48,9 +48,10 @@ const Page = () => {
 
     const [isLoading, setIsLoading] = useState<{ [key: number]: boolean }>({})
 
-    const Growth = plans?.data.data.find((plan: any) => plan.id === 1)
-    const Pro = plans?.data.data.find((plan: any) => plan.id === 2)
-    const Scale = plans?.data.data.find((plan: any) => plan.id === 3)
+    const Starter = plans?.data.data.find((plan: any) => plan.id === 1)
+    const Growth = plans?.data.data.find((plan: any) => plan.id === 2)
+    const Pro = plans?.data.data.find((plan: any) => plan.id === 3)
+    const Scale = plans?.data.data.find((plan: any) => plan.id === 4)
 
     return (
         <LayoutSubscription>
@@ -77,6 +78,30 @@ const Page = () => {
                                 <Tab.Panels>
                                     <Tab.Panel>
                                         <div className='grid grid-cols-1 md:grid-cols-4'>
+                                            <div className='px-6 py-5 sm:p-8'>
+                                                <div className='flex items-baseline gap-x-1'>
+                                                    <dt className='text-lg font-semibold  text-gray-800'>Starter</dt>
+                                                </div>
+                                                <dd className='mt-1 flex items-baseline justify-between md:block lg:flex'>
+                                                    <div
+                                                        className='flex items-baseline text-2xl font-semibold text-gray-600'>
+                                                        €49
+                                                        <span className='text-sm font-semibold'>/mois</span>
+                                                    </div>
+                                                </dd>
+                                                <button
+                                                    onClick={() => handlePlanSubscribe(Starter && Starter.id)}
+                                                    type='button'
+                                                    disabled={isLoading[Starter && Starter.id]}
+                                                    className=' w-full h-10 px-4 mt-3 rounded shadow-md focus:shadow-outline focus:outline-none bg-indigo-50 hover:bg-indigo-100'>
+                                                    <span
+                                                        className=' text-sm font-medium text-indigo-500'>{isLoading[Starter && Starter.id] ? 'Loading...' : 'S\'abonner'}</span>
+                                                </button>
+                                                <div
+                                                    className='text-xs text-indigo-500 font-semibold mt-2 text-center'>
+                                                    7 jours d'essai gratuit
+                                                </div>
+                                            </div>
                                             <div className='px-6 py-5 sm:p-8'>
                                                 <div className='flex items-baseline gap-x-1'>
                                                     <dt className='text-lg font-semibold  text-gray-800'>Growth</dt>
@@ -170,6 +195,30 @@ const Page = () => {
                                 <Tab.Panels>
                                     <Tab.Panel>
                                         <div className='grid grid-cols-1 md:grid-cols-4'>
+                                            <div className='px-6 py-5 sm:p-8 border border-gray-200'>
+                                                <div className='flex items-center gap-x-1 mb-4'>
+                                                    <dt className='text-xs font-medium text-gray-500'>500
+                                                        réponses/mois
+                                                    </dt>
+                                                </div>
+                                                <div className='flex items-center gap-x-1 mb-4'>
+                                                    <dt className='text-xs font-medium text-gray-500'>2 Chatbots
+                                                    </dt>
+                                                </div>
+                                                <div className='flex items-center gap-x-1 mb-4'>
+                                                    <dt className='text-xs font-medium text-gray-500'>1 Membre</dt>
+                                                </div>
+                                                <div className='flex items-center gap-x-1 mb-4'>
+                                                    <dt className='text-xs font-medium text-gray-500'>Support
+                                                        Standard
+                                                    </dt>
+                                                </div>
+
+                                                <div className='flex items-center gap-x-1 mb-4'>
+                                                    <dt className='text-xs font-medium text-gray-500'>{'Formation à l\'IA'}</dt>
+                                                </div>
+                                            </div>
+
                                             <div className='px-6 py-5 sm:p-8 border border-gray-200'>
                                                 <div className='flex items-center gap-x-1 mb-4'>
                                                     <dt className='text-xs font-medium text-gray-500'>1 500
