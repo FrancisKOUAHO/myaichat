@@ -242,3 +242,21 @@ header .menus.open-menus {
         @apply !h-[300px];
     }
 }
+
+
+.container-price{
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+}
+
+.app-page {
+    background: linear-gradient(to bottom,
+    #301128 0%,
+    #2A1124 14.28%,
+    #241120 28.57%,
+    #1E111C 42.85%,
+    #181118 57.14%,
+    #121114 71.42%,
+    #0C1110 85.71%,
+    #13111C 100%);
+}

@@ -7,14 +7,14 @@ import Prices from '../components/organisms/prices';
 
 const Index = () => {
     return (
-        <div className="overflow-x-hidden">
+        <div className="overflow-x-hidden app-page">
             <Hero />
 
             <Features />
 
             <FirstClass />
 
-            <WhatWeDo />
+            {/*<WhatWeDo />*/}
 
             <Prices />
 
