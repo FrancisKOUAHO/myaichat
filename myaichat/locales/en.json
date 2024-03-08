@@ -1,8 +1,8 @@
 {
   "home": {
     "title": "MyaiChat",
-    "content": "Boost Your Sales: Up to 35%",
-    "subContent": "Conversion with our Chatbot",
+    "content": "Revolutionize Your Customer Support \uD83D\uDE80",
+    "subContent": "Transform into a Personalized AI Chatbot!",
     "subContent2": "Personalized Shopping Guide for Every Visitor",
     "button": "Try the chatbot now"
   },
@@ -46,6 +46,10 @@
   "instantResponses": {
     "title": "Instant Responses",
     "content": "90% of customers demand immediate answers to their questions. With fast responses and personalized recommendations, the shopping experience becomes smooth, conducive to closing the sale."
+  },
+    "boostPerf": {
+    "title": "Boost your performance",
+    "content": "Our Commitment: Maximize Your Success. At Myaichat, our mission is to transform your customer experience and amplify your conversions by providing you with a revolutionary chatbot."
   },
   "welcome": {
     "title": "WELCOME TO MYAICHAT - YOUR CHATBOT PARTNER",

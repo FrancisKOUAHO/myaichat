@@ -6,9 +6,10 @@ const Footer = () => {
 
 
     return (
-        <footer className="mt-auto dark:bg-transparent dark:bg-gradient-to-b dark:from-white/[0.03] dark:to-transparent"
+        <footer className="mt-auto"
                 style={{
-                    background: `linear-gradient(327.21deg, rgba(98, 19, 255, 0.01) 29.79%, rgba(58, 19, 255, 0) 85.72%), linear-gradient(245.93deg, rgba(209, 25, 80, 0) 0%, rgba(209, 21, 111, 0.16) 36.63%), linear-gradient(147.6deg, rgba(209, 0, 136, 0) 3.65%, rgba(33, 0, 75, 0.24) 40.32%), #301128`,
+                    background: `linear-gradient(to bottom, #13111C 0%, #0f0d17 100%);;
+`,
                 }}>
             <div className="container">
                 <div className="grid gap-y-10 gap-x-4 py-14 sm:grid-cols-3 lg:grid-cols-5 lg:py-[100px]">
@@ -26,10 +27,10 @@ const Footer = () => {
                     </div>
                     <div>
                         <ul className="flex flex-col gap-3 font-bold"
-                            style={{color: '#655373'}}
+                            style={{color: '#ffffff'}}
                         >
                             <li className="mb-3 text-lg font-extrabold text-black dark:text-white"
-                                style={{color: '#655373'}}>{translations.footer.legal.legal}</li>
+                                style={{color: '#ffffff'}}>{translations.footer.legal.legal}</li>
                             <li>
                                 <Link href="" className="inline-block transition hover:scale-110 hover:text-secondary">
                                     {translations.footer.legal.termsAndConditions}
@@ -50,13 +51,13 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <div className="py-5 dark:border-t-2 dark:border-white/5 dark:bg-none"
+            <div className="py-5"
                  style={{
-                     color: '#655373',
-                     background: `linear-gradient(327.21deg, rgba(98, 19, 255, 0.01) 29.79%, rgba(58, 19, 255, 0) 85.72%), linear-gradient(245.93deg, rgba(209, 25, 80, 0) 0%, rgba(209, 21, 111, 0.16) 36.63%), linear-gradient(147.6deg, rgba(209, 0, 136, 0) 3.65%, rgba(33, 0, 75, 0.24) 40.32%), #301128`,
+                     color: '#ffffff',
+                     background: `linear-gradient(to bottom, #0f0d17 0%, #0e0b10 100%);`,
                  }}>
                 <div className="container">
-                    <div className="items-center justify-between text-center font-bold dark:text-white md:flex">
+                    <div className="items-center justify-between text-center font-boldmd:flex">
                         <div>
                             {translations.footer.blog} {new Date().getFullYear() + ' '}
                             {translations.footer.myaichat}
