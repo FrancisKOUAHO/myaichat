@@ -6,8 +6,8 @@ const WhatWeDo = () => {
 
     return (
         <section
-            style={{background: 'hsl(250, 24%, 9%)'}}
-            className="bg-gradient-to-t from-white/[55%] to-transparent py-8 dark:bg-white/[0.03] dark:bg-none lg:py-20 px-5">
+            // style={{background: 'hsl(250, 24%, 9%)'}}
+            className="lg:py-20 px-5">
             <div className="relative mx-auto max-w-[1440px] bg-black pt-14 rounded-[32px]">
                 <img src="/assets/images/modern-saas/perfomance-design.svg" alt=""
                      className="absolute bottom-0 ltr:right-0 rtl:left-0"/>

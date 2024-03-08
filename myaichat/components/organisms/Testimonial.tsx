@@ -17,7 +17,7 @@ const Testimonial = ({ showTitle = true, type = 'common', className = '' }) => {
     return (
         <section className={`relative py-14 lg:py-[100px] ${className}`}
                  style={{
-                     background: `linear-gradient(327.21deg, rgba(98, 19, 255, 0.01) 29.79%, rgba(58, 19, 255, 0) 85.72%), linear-gradient(245.93deg, rgba(209, 25, 80, 0) 0%, rgba(209, 21, 111, 0.16) 36.63%), linear-gradient(147.6deg, rgba(209, 0, 136, 0) 3.65%, rgba(33, 0, 75, 0.24) 40.32%), #301128`,
+                     // background: `linear-gradient(327.21deg, rgba(98, 19, 255, 0.01) 29.79%, rgba(58, 19, 255, 0) 85.72%), linear-gradient(245.93deg, rgba(209, 25, 80, 0) 0%, rgba(209, 21, 111, 0.16) 36.63%), linear-gradient(147.6deg, rgba(209, 0, 136, 0) 3.65%, rgba(33, 0, 75, 0.24) 40.32%), #301128`,
                  }}>
             {type.toLowerCase() === 'marketing' ? (
                 <Swiper

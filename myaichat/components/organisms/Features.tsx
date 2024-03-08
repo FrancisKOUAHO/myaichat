@@ -4,8 +4,9 @@ const Features = () => {
     const {translations} = useLanguage();
 
     return (
-        <section className="py-14 dark:bg-none lg:py-20"
-                 style={{background: 'hsl(250, 24%, 9%)'}}>
+        <section className="py-14 lg:py-20"
+                 // style={{background: 'hsl(250, 24%, 9%)'}}
+        >
             <div className="container sm:mt-10">
                 <div className="lg:w-1/2">
                     <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right">

@@ -2,7 +2,7 @@ const ThousandsOfBeninits = () => {
     return (
         <section className="py-14 lg:py-20"
                  style={{
-                     background: 'linear-gradient(180deg, #13111C 0%, #39112D 100%)',
+                     // background: 'linear-gradient(180deg, #13111C 0%, #39112D 100%)',
                  }}>
             <div className="container">
                 <div className="relative">
