@@ -13,6 +13,11 @@ const Hero = () => {
         <section className="mobile pt-20 lg:pt-[106px]">
             <div className="container mt-[70px] lg:mt-[150px]">
                 <div className="relative text-center">
+                    <div className="mx-auto my-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-1">
+                        <p className="font-display font-display text-pink text-sm font-medium">AI powered by</p>
+                        <img className="w-16" src="/assets/images/openAI_logo.svg" alt="OpenAI logo" />
+                    </div>
+
                     <div className="mx-auto w-full px-4 lg:w-4/5">
                         <h2 className="text-[40px] font-extrabold leading-normal text-white sm:text-[40px] lg:text-[40px] lg:leading-[64px]">
                             <span>
