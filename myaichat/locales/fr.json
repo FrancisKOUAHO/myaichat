@@ -67,7 +67,30 @@
       }
     ]
   },
-  "Testimony": "Témoignage",
+
+"termsAndConditions": {
+    "title": "Conditions Générales d'Utilisation",
+    "introduction": "Bienvenue sur MyAIChat. Ces conditions générales régissent votre utilisation de notre site web et de nos services.",
+    "section1": {
+        "title": "Utilisation de Notre Service",
+        "content": "Lorsque vous utilisez notre service, vous acceptez de suivre nos directives et de ne pas utiliser nos services à des fins illégales."
+    },
+    "section2": {
+        "title": "Création de Compte",
+        "content": "Pour utiliser certaines fonctionnalités de notre service, vous devrez créer un compte, en fournissant des informations véridiques et à jour."
+    },
+    "section3": {
+        "title": "Confidentialité",
+        "content": "Votre vie privée est importante pour nous. Votre information est collectée et utilisée conformément à notre Politique de Confidentialité."
+    },
+    "section4": {
+        "title": "Droits de Propriété Intellectuelle",
+        "content": "Tous les contenus présents sur le site, incluant les textes, graphiques, logos, sont notre propriété ou celle de nos fournisseurs de contenu et sont protégés par les lois sur les droits d'auteur."
+    },
+    "returnHome": "Retour à l'accueil"
+},
+
+"Testimony": "Témoignage",
   "comment": "Commentaires de nos clients",
   "testimonials": [
     {
@@ -86,7 +109,38 @@
       "message": "La fonctionnalité de chat en direct de MyAIChat a transformé la manière dont nous interagissons avec nos clients. C'est comme avoir un support 24/7 à portée de main."
     }
   ],
-  "footer": {
+    "privacyPolicy": {
+        "title": "Politique de Confidentialité",
+        "introduction": "MyAIChat s'engage à protéger votre vie privée et à vous assurer une expérience positive sur notre site web et lors de l'utilisation de nos services. Cette politique décrit nos pratiques de gestion et comment nous collectons et utilisons les données personnelles que vous fournissez pendant votre interaction avec nous.",
+        "section1": {
+            "title": "Collecte d'informations",
+            "content": "Nous recueillons des informations vous concernant lorsque vous vous inscrivez sur notre site, passez une commande, vous abonnez à notre newsletter, répondez à une enquête ou remplissez un formulaire."
+        },
+        "section2": {
+            "title": "Utilisation des informations",
+            "content": "Les informations que nous recueillons auprès de vous peuvent être utilisées de l'une des manières suivantes : Pour personnaliser votre expérience, pour améliorer notre site web, pour améliorer le service client, et pour traiter les transactions."
+        },
+        "section3": {
+            "title": "Protection de vos informations",
+            "content": "Nous mettons en œuvre une variété de mesures de sécurité pour maintenir la sécurité de vos informations personnelles lorsque vous passez une commande ou entrez, soumettez ou accédez à vos informations personnelles."
+        },
+        "section4": {
+            "title": "Cookies",
+            "content": "Nous utilisons des cookies pour améliorer votre expérience sur notre plateforme en mémorisant vos préférences et vos visites répétées."
+        },
+        "section5": {
+            "title": "Divulgation à des tiers",
+            "content": "Nous ne vendons, n'échangeons et ne transférons pas à des tiers vos informations personnelles identifiables. Cela ne comprend pas les tiers de confiance qui nous aident à exploiter notre site web, à mener nos activités ou à vous servir."
+        },
+        "section6": {
+            "title": "Votre consentement",
+            "content": "En utilisant notre site, vous consentez à notre politique de confidentialité du site web."
+        },
+        "returnHome": "Retour à l'accueil"
+    },
+
+
+"footer": {
     "legal": {
       "legal": "Légal",
       "termsAndConditions": "Termes et conditions",

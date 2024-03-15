@@ -67,7 +67,57 @@
       }
     ]
   },
-  "Testimony": "Testimony",
+    "privacyPolicy": {
+        "title": "Privacy Policy",
+        "introduction": "MyAIChat is committed to protecting your privacy and ensuring you have a positive experience on our website and in using our services. This policy outlines our handling practices and how we collect and use the personal data you provide during your interaction with us.",
+        "section1": {
+            "title": "Collection of Information",
+            "content": "We collect information about you when you register on our site, place an order, subscribe to our newsletter, respond to a survey, or fill out a form."
+        },
+        "section2": {
+            "title": "Use of Information",
+            "content": "The information we collect from you may be used in one of the following ways: To personalize your experience, to improve our website, to improve customer service, and to process transactions."
+        },
+        "section3": {
+            "title": "Protection of Your Information",
+            "content": "We implement a variety of security measures to maintain the safety of your personal information when you place an order or enter, submit, or access your personal information."
+        },
+        "section4": {
+            "title": "Cookies",
+            "content": "We use cookies to enhance your experience on our platform by remembering your preferences and repeat visits."
+        },
+        "section5": {
+            "title": "Disclosure to Third Parties",
+            "content": "We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information. This does not include trusted third parties who assist us in operating our website, conducting our business, or servicing you."
+        },
+        "section6": {
+            "title": "Your Consent",
+            "content": "By using our site, you consent to our web site privacy policy."
+        },
+        "returnHome": "Return to Home"
+    },
+    "termsAndConditions": {
+        "title": "Terms and Conditions",
+        "introduction": "Welcome to MyAIChat. These terms and conditions govern your use of our website and services.",
+        "section1": {
+            "title": "Use of Our Service",
+            "content": "When using our service, you agree to adhere to our guidelines and not to use our services for any unlawful purposes."
+        },
+        "section2": {
+            "title": "Account Creation",
+            "content": "To use certain features of our service, you will need to create an account, providing truthful and up-to-date information."
+        },
+        "section3": {
+            "title": "Privacy",
+            "content": "Your privacy is important to us. Your information is collected and used in accordance with our Privacy Policy."
+        },
+        "section4": {
+            "title": "Intellectual Property Rights",
+            "content": "All content on the site, including text, graphics, logos, is our property or the property of our content suppliers and is protected by copyright laws."
+        },
+        "returnHome": "Return to Home"
+    },
+"Testimony": "Testimony",
   "comment": "Customer Comments",
   "testimonials": [
     {

@@ -14,7 +14,7 @@ const FirstClass = () => {
                 <div
                     className="mt-14 grid gap-4 rounded-2xl py-8 px-4 sm:p-10 lg:mt-20 lg:grid-cols-2 lg:h-[389px]"
                     style={{
-                        background: 'radial-gradient(193.33% 779.99% at 81.67% -6.05%, rgba(71, 189, 255, 0.3) 0%, rgba(71, 189, 255, 0) 100%)',
+                        background: "radial-gradient(193.33% 779.99% at 81.67% -6.05%, rgba(71, 189, 255, 0.3) 0%, rgba(71, 189, 255, 0) 100%)",
                     }}
                 >
                     <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right">
@@ -30,7 +30,7 @@ const FirstClass = () => {
                 <div
                     className="mt-10 grid gap-4 rounded-2xl py-8 px-4 sm:p-10 lg:mt-16 lg:grid-cols-2 lg:h-[389px]"
                     style={{
-                        background: 'radial-gradient(193.33% 779.99% at 81.67% -6.05%, rgba(180, 118, 229, 0.3) 0%, rgba(180, 118, 229, 0) 100%)',
+                        background:"radial-gradient(193.33% 779.99% at 81.67% -6.05%, rgba(180, 118, 229, 0.3) 0%, rgba(180, 118, 229, 0) 100%)",
                     }}
                 >
                     <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right">
@@ -45,7 +45,7 @@ const FirstClass = () => {
                 </div>
                 <div
                     className="mt-10 grid gap-4 rounded-2xl py-8 px-4 sm:p-10 lg:mt-16 lg:grid-cols-2 lg:h-[389px] lg:flex lg:items-center lg:justify-center"
-                    style={{ background: 'radial-gradient(193.33% 779.99% at 81.67% -6.05%, rgba(71, 189, 255, 0.3) 0%, rgba(71, 189, 255, 0) 100%);', }}>
+                    style={{ background: "radial-gradient(193.33% 779.99% at 81.67% -6.05%, rgba(71, 189, 255, 0.3) 0%, rgba(71, 189, 255, 0) 100%);", }}>
                     <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right lg:flex lg:flex-col lg:justify-center">
                         <h4 style={{color: 'white', fontSize: '26px'}}>{translations.boostPerf.title}</h4>
                         <p className="mt-6 text-lg font-semibold" style={{color: 'white'}}>{translations.boostPerf.content}</p>
